@@ -68,3 +68,76 @@ go
 
 insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) values('Wanhu ezOFFICE','11.3.0.05_SP_20151127','11.3.0.05',getdate());
 go
+
+
+
+
+
+-----修改收文表备用字段长度
+alter table gov_receivefile  alter column   field5 nvarchar(1000);
+go
+alter table gov_receivefile  alter column   field6 nvarchar(1000);
+go
+alter table gov_receivefile  alter column   field7 nvarchar(1000);
+go
+alter table gov_receivefile  alter column   field8 nvarchar(1000);
+go
+alter table gov_receivefile  alter column   field9 nvarchar(2000);
+go
+alter table gov_receivefile  alter column   field10 nvarchar(2000);
+go
+
+-------修改发文表字段长度
+alter table gov_documentsendfile  alter column   field5 nvarchar(1000);
+go
+alter table gov_documentsendfile  alter column   field6 nvarchar(1000);
+go
+alter table gov_documentsendfile  alter column   field7 nvarchar(1000);
+go
+alter table gov_documentsendfile  alter column   field8 nvarchar(1000);
+go
+alter table gov_documentsendfile  alter column   field9 nvarchar(2000);
+go
+alter table gov_documentsendfile  alter column   field10 nvarchar(2000);
+go
+
+
+-------修改文件送审签字段长度
+alter table gov_sendfilecheckwithworkflow  alter column   field2 nvarchar(1000);
+go
+alter table gov_sendfilecheckwithworkflow  alter column   field3 nvarchar(1000);
+go
+alter table gov_sendfilecheckwithworkflow  alter column   field4 nvarchar(1000);
+go
+alter table gov_sendfilecheckwithworkflow  alter column   field5 nvarchar(1000);
+go
+alter table gov_sendfilecheckwithworkflow  alter column   field6 nvarchar(1000);
+go
+alter table gov_sendfilecheckwithworkflow  alter column   field7 nvarchar(1000);
+go
+alter table gov_sendfilecheckwithworkflow  alter column   field8 nvarchar(1000);
+go
+alter table gov_sendfilecheckwithworkflow  alter column   field9 nvarchar(2000);
+go
+alter table gov_sendfilecheckwithworkflow  alter column   field10 nvarchar(2000);
+go
+
+
+
+
+-------修改自定义字段表中 字段大小 modify by gexiang 
+update tfield set field_len = 1000 where  field_table in (select table_id from ttable where wf_module_id in (2,3))
+and field_code in ('field5','field6','field7','field8','field9','field10')
+go
+
+update tfield set field_len = 1000 where  field_table in (select table_id from ttable where wf_module_id in (34))
+and field_code in ('field2','field3','field4','field5','field6','field7','field8','field9','field10')
+go
+
+insert into  EZ_SECU_PAGELIST(SECU_URL,LIST_TYPE)values('/public/iWebOfficeSign/OfficeServer.jsp',1);
+go
+insert into  EZ_SECU_PAGELIST(SECU_URL,LIST_TYPE)values('/public/iWebOfficeSign/OfficeServer.jsp',3);
+go
+
+insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) values('Wanhu ezOFFICE','11.3.0.06_SP_20151207','11.3.0.06',getdate());
+go

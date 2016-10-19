@@ -62,3 +62,72 @@ commit;
 
 insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.05_SP_20151127','11.3.0.05',sysdate);
 commit;
+
+
+
+
+
+-----修改收文表备用字段长度
+alter table GOV_RECEIVEFILE modify  field5 varchar2(1000);
+commit;
+alter table GOV_RECEIVEFILE modify  field6 varchar2(1000);
+commit;
+alter table GOV_RECEIVEFILE modify  field7 varchar2(1000);
+commit;
+alter table GOV_RECEIVEFILE modify  field8 varchar2(1000);
+commit;
+alter table GOV_RECEIVEFILE modify  field9 varchar2(2000);
+commit;
+alter table GOV_RECEIVEFILE modify  field10 varchar2(2000);
+commit;
+
+-------修改发文表字段长度
+alter table gov_documentsendfile modify  field5 varchar2(1000);
+commit;
+alter table gov_documentsendfile modify  field6 varchar2(1000);
+commit;
+alter table gov_documentsendfile modify  field7 varchar2(1000);
+commit;
+alter table gov_documentsendfile modify  field8 varchar2(1000);
+commit;
+alter table gov_documentsendfile modify  field9 varchar2(2000);
+commit;
+alter table gov_documentsendfile modify  field10 varchar2(2000);
+commit;
+
+-------修改文件送审签字段长度
+alter table gov_sendfilecheckwithworkflow modify  field2 varchar2(1000);
+commit;
+alter table gov_sendfilecheckwithworkflow modify  field3 varchar2(1000);
+commit;
+alter table gov_sendfilecheckwithworkflow modify  field4 varchar2(1000);
+commit;
+alter table gov_sendfilecheckwithworkflow modify  field5 varchar2(1000);
+commit;
+alter table gov_sendfilecheckwithworkflow modify  field6 varchar2(1000);
+commit;
+alter table gov_sendfilecheckwithworkflow modify  field7 varchar2(1000);
+commit;
+alter table gov_sendfilecheckwithworkflow modify  field8 varchar2(1000);
+commit;
+alter table gov_sendfilecheckwithworkflow modify  field9 varchar2(2000);
+commit;
+alter table gov_sendfilecheckwithworkflow modify  field10 varchar2(2000);
+commit;
+
+-------修改自定义字段表中 字段大小 modify by gexiang 
+update tfield set field_len = 1000 where  field_table in (select table_id from ttable where wf_module_id in (2,3))
+and field_code in ('field5','field6','field7','field8','field9','field10');
+commit;
+
+update tfield set field_len = 1000 where  field_table in (select table_id from ttable where wf_module_id in (34))
+and field_code in ('field2','field3','field4','field5','field6','field7','field8','field9','field10');
+commit;
+
+insert into  EZ_SECU_PAGELIST(SECU_URL,LIST_TYPE)values('/public/iWebOfficeSign/OfficeServer.jsp',1);
+commit;
+insert into  EZ_SECU_PAGELIST(SECU_URL,LIST_TYPE)values('/public/iWebOfficeSign/OfficeServer.jsp',3);
+commit;
+
+insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.06_SP_20151207','11.3.0.06',sysdate);
+commit;

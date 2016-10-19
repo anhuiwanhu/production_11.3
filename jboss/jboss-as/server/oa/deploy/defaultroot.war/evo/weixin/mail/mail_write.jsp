@@ -17,6 +17,9 @@
   		<c:when test="${param.openType eq 'sendAgain'}">
   			发送邮件
   		</c:when>
+  		<c:when test="${param.openType eq 'replyAll'}">
+  			回复全部
+  		</c:when>
   		<c:otherwise>写邮件</c:otherwise>
   	</c:choose>  
     </title>
@@ -38,10 +41,14 @@
 	                    	<input onclick="selectUser('1','empName','empId');"  class="edit-ipt-r edit-ipt-arrow" readonly type="text" 
 	                    	id="empName" name="mailto" <c:if test="${param.openType eq 'reply'}">value="${requestScope.userName}"</c:if>
 	                    	<c:if test="${param.openType eq 'personSend'}">value="${param.empName},"</c:if>
-	                    	<c:if test="${param.openType eq 'sendAgain'}">value="${mailTo}"</c:if>  placeholder="请选择"/>
+	                    	<c:if test="${param.openType eq 'sendAgain'}">value="${mailTo}"</c:if>  
+	                    	<c:if test="${param.openType eq 'replyAll'}">value="${requestScope.userName}"</c:if>
+	                    	placeholder="请选择"/>
 	                    	<input type="hidden" name="mailtoid" <c:if test="${param.openType eq 'reply'}">value="${requestScope.userId}"</c:if> 
 	                    	<c:if test="${param.openType eq 'personSend'}">value="${param.personId}"</c:if>
-	                    	<c:if test="${param.openType eq 'sendAgain'}">value="${mailToId}"</c:if> id="empId"/>
+	                    	<c:if test="${param.openType eq 'sendAgain'}">value="${mailToId}"</c:if> 
+	                    	<c:if test="${param.openType eq 'replyAll'}">value="${requestScope.userId}"</c:if>
+	                    	id="empId"/>
 	                    </td>
 	                </tr>
 	                <tr>

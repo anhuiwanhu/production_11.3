@@ -33,7 +33,7 @@ if(list.size()>1){
     %>
     	<li>
             <div class="wh-portal-pic-slide-box">
-                <a class="wh-portal-pic-slide-img"><img width="<%=mWidth %>" height="<%=mHeight %>" id="<%=fpo.getId()%>" src="<%=fileServer%>/upload/portal/<%=fpo.getSavename().substring(0,6)%>/<%=fpo.getSavename()%>" alt="<%=fpo.getRealname()%>" /></a>
+                <a class="wh-portal-pic-slide-img"><img width="<%=mWidth %>" height="<%=mHeight %>" id="<%=fpo.getId()%>" src="<%=fileServer%>/upload/portal/<%=fpo.getSavename().substring(0,6)%>/<%=fpo.getSavename()%>" alt="<%=fpo.getRealname()%>" <%=fpo.getUrl()!=null?"onclick=\"window.open('"+fpo.getUrl()+"');\"":""%>/></a>
             </div>
         </li>
     <%}%>
@@ -46,7 +46,7 @@ if(list.size()>1){
     <%} %>
     </ul>
     <%}else{ PortalPortletFilePO fpo = (PortalPortletFilePO)list.get(0);%>
-    <p class="wh-portal-pic-simg"><img width="<%=mWidth %>" height="<%=mHeight %>" id="<%=fpo.getId()%>" src="<%=fileServer%>/upload/portal/<%=fpo.getSavename().substring(0,6)%>/<%=fpo.getSavename()%>" alt="<%=fpo.getRealname()%>" /></p>
+    <p class="wh-portal-pic-simg"><img width="<%=mWidth %>" height="<%=mHeight %>" id="<%=fpo.getId()%>" src="<%=fileServer%>/upload/portal/<%=fpo.getSavename().substring(0,6)%>/<%=fpo.getSavename()%>" alt="<%=fpo.getRealname()%>" <%=fpo.getUrl()!=null?"onclick=\"window.open('"+fpo.getUrl()+"');\"":""%>/></p>
 <%} %>
 </div>
 <%}%>

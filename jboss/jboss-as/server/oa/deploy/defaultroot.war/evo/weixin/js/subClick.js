@@ -1,7 +1,9 @@
-//无需下载附件类型
+// 无需下载附件类型
 var allFileType = "";
-var iosOpenFileType = ".doc.ppt.docx.pptx.jpg.png.gif.pdf.txt.xls.xlsx";
-var androidFileType = ".doc.docx.xls.xlsx";
+// IOS客户端可预览附件类型
+var iosOpenFileType = ".doc.ppt.docx.pptx.jpg.png.gif.jpeg.pdf.txt.xls.xlsx";
+// ANDROID客户端可预览附件类型
+var androidFileType = ".doc.docx.xls.xlsx.txt.jpg.png.gif.jpeg";
 /**
 *
 *  Base64 encode / decode
@@ -220,23 +222,32 @@ function clickSub(url,obj,saveFileName,moduleName,smartInUse){
 									if(jsonData.data0){
 										window.open(jsonData.data0);
 									}else{
-										alert('打开文件失败！');
+										alert('打开文件失败，请尝试使用浏览器打开下载！');
 									}
 								}else if('fail' == result){
 									alert(jsonData.data0);
 								}else{
-									alert('打开文件失败！');
+									alert('打开文件失败，请尝试使用浏览器打开下载！');
 								}
 								dialog.close();
 							}
 						},
 						error : function(){
 							dialog.close();
-							alert('打开文件失败！');
+							alert('打开文件失败，请尝试使用浏览器打开下载！');
 						}
 					});
 				}else if(fileType.toLowerCase() == '.xls' || fileType.toLowerCase() == '.xlsx'){
 					window.open('/defaultroot/convertFile/xls2Html.controller?saveFileName='+saveFileName+'&moduleName='+moduleName);
+				}else if(fileType.toLowerCase() == '.ppt' || fileType.toLowerCase() == '.pptx'){
+					//window.open('/defaultroot/evo/weixin/common/ppt_img.jsp?saveFileName='+saveFileName+'&moduleName='+moduleName);
+				}else if(fileType.toLowerCase() == '.txt'){
+					window.open('/defaultroot/convertFile/text2Html.controller?saveFileName='+saveFileName+'&moduleName='+moduleName);
+				}else if(fileType.toLowerCase() == '.pdf'){
+					// TODO
+				}else if(fileType.toLowerCase() == '.png' || fileType.toLowerCase() == '.jpg' || fileType.toLowerCase() == '.gif'
+					|| fileType.toLowerCase() == '.jpeg'){
+					window.open('/defaultroot/evo/weixin/common/img_view.jsp?saveFileName='+saveFileName+'&moduleName='+moduleName);
 				}
 			}
 		}

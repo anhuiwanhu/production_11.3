@@ -409,21 +409,42 @@ function chSearch(obj){
 //渲染标题
 function infoTitle(po,i){
 	var html = "", goodImg="", redTitle="", isNew="", channelName="";
+	//全文检索改造20151205 -by jqq 
+	var key = $("#retrievalKey").val();
+	var retrivalflag = "0";
+	if(key == null || key == '' || key == ""){
+		retrivalflag = "0";
+	}else{
+		retrivalflag = "1";
+	}
 	//是否精华信息
 	if(po.informationIsCommend==1){
 		goodImg = "<img src='<%=rootPath%>/images/addgood.gif' >&nbsp;"
 	}
 	//是否红色标题
 	if(po.titleColor==1){
-		redTitle = '<a onclick="openWin({url:\'Information!view.action?informationId='+po.informationId+'&informationType='+po.informationType+'&userChannelName='+$("#userChannelName").val()+'&channelId='+po.channelId+'&userDefine='+$('#userDefine').val()+'&channelType='+$('#channelType').val()+'&gdType=infomation&checkdepart='+$('#checkdepart').val()+'\',winName:\'viewInfo'+po.informationId+'\',isFull:true});" style="cursor:pointer"><font color="red">'+HtmlEncode(po.informationTitle)+'</font></a>';
+		//全文检索使用的查询方法变更，查询的sql语句返回json结果中，id名称改变了
+		if(retrivalflag == "1"){
+			redTitle = '<a onclick="openWin({url:\'Information!view.action?informationId='+po.information_id+'&informationType='+po.informationType+'&userChannelName='+$("#userChannelName").val()+'&channelId='+po.channel_id+'&userDefine='+$('#userDefine').val()+'&channelType='+$('#channelType').val()+'&gdType=infomation&checkdepart='+$('#checkdepart').val()+'\',winName:\'viewInfo'+po.information_id+'\',isFull:true});" style="cursor:pointer"><font color="red">'+HtmlEncode(po.informationTitle)+'</font></a>';
+		}else{
+			redTitle = '<a onclick="openWin({url:\'Information!view.action?informationId='+po.informationId+'&informationType='+po.informationType+'&userChannelName='+$("#userChannelName").val()+'&channelId='+po.channelId+'&userDefine='+$('#userDefine').val()+'&channelType='+$('#channelType').val()+'&gdType=infomation&checkdepart='+$('#checkdepart').val()+'\',winName:\'viewInfo'+po.informationId+'\',isFull:true});" style="cursor:pointer"><font color="red">'+HtmlEncode(po.informationTitle)+'</font></a>';
+		}
 	}else{
-		redTitle = '<a onclick="openWin({url:\'Information!view.action?informationId='+po.informationId+'&informationType='+po.informationType+'&userChannelName='+$("#userChannelName").val()+'&channelId='+po.channelId+'&userDefine='+$('#userDefine').val()+'&channelType='+$('#channelType').val()+'&gdType=infomation&checkdepart='+$('#checkdepart').val()+'\',winName:\'viewInfo'+po.informationId+'\',isFull:true});" style="cursor:pointer">'+HtmlEncode(po.informationTitle)+'</a>';
+		if(retrivalflag == "1"){
+			redTitle = '<a onclick="openWin({url:\'Information!view.action?informationId='+po.information_id+'&informationType='+po.informationType+'&userChannelName='+$("#userChannelName").val()+'&channelId='+po.channel_id+'&userDefine='+$('#userDefine').val()+'&channelType='+$('#channelType').val()+'&gdType=infomation&checkdepart='+$('#checkdepart').val()+'\',winName:\'viewInfo'+po.information_id+'\',isFull:true});" style="cursor:pointer">'+HtmlEncode(po.informationTitle)+'</a>';
+		}else{
+			redTitle = '<a onclick="openWin({url:\'Information!view.action?informationId='+po.informationId+'&informationType='+po.informationType+'&userChannelName='+$("#userChannelName").val()+'&channelId='+po.channelId+'&userDefine='+$('#userDefine').val()+'&channelType='+$('#channelType').val()+'&gdType=infomation&checkdepart='+$('#checkdepart').val()+'\',winName:\'viewInfo'+po.informationId+'\',isFull:true});" style="cursor:pointer">'+HtmlEncode(po.informationTitle)+'</a>';
+		}
 	}
 	//栏目信息列表中有效期限为短期并且不包括当前时间的信息标题显示灰色(只有信息维护的权限并且权限范围为全部的用户可见)
 	//if($("#channelId").val()!=""){
 		if(po.informationValidType==1){
 			if(compareWithNow(po.validBeginTime)=='>' || compareWithNow(po.validEndTime)=='<'){
-				redTitle = '<a onclick="openWin({url:\'Information!view.action?informationId='+po.informationId+'&informationType='+po.informationType+'&userChannelName='+$("#userChannelName").val()+'&channelId='+po.channelId+'&userDefine='+$('#userDefine').val()+'&channelType='+$('#channelType').val()+'&gdType=infomation&checkdepart='+$('#checkdepart').val()+'\',winName:\'viewInfo'+po.informationId+'\',isFull:true});" style="cursor:pointer"><font color="gray">'+HtmlEncode(po.informationTitle)+'</font></a>';
+				if(retrivalflag == "1"){
+					redTitle = '<a onclick="openWin({url:\'Information!view.action?informationId='+po.information_id+'&informationType='+po.informationType+'&userChannelName='+$("#userChannelName").val()+'&channelId='+po.channel_id+'&userDefine='+$('#userDefine').val()+'&channelType='+$('#channelType').val()+'&gdType=infomation&checkdepart='+$('#checkdepart').val()+'\',winName:\'viewInfo'+po.information_id+'\',isFull:true});" style="cursor:pointer"><font color="gray">'+HtmlEncode(po.informationTitle)+'</font></a>';
+				}else{
+					redTitle = '<a onclick="openWin({url:\'Information!view.action?informationId='+po.informationId+'&informationType='+po.informationType+'&userChannelName='+$("#userChannelName").val()+'&channelId='+po.channelId+'&userDefine='+$('#userDefine').val()+'&channelType='+$('#channelType').val()+'&gdType=infomation&checkdepart='+$('#checkdepart').val()+'\',winName:\'viewInfo'+po.informationId+'\',isFull:true});" style="cursor:pointer"><font color="gray">'+HtmlEncode(po.informationTitle)+'</font></a>';
+				}
 			}
 		}
 	//}
@@ -442,7 +463,11 @@ function infoTitle(po,i){
 	<s:if test="#request.relationModule=='information'">
 		isRelation = "&relationModule=information"
 	</s:if>
-	channelName = "<a onclick='location_href(\"InfoList!allList.action?channelId="+po.channelId+"&channelName="+po.channelName+"&checkdepart="+$('#checkdepart').val()+"&channelType="+$('#channelType').val()+"&userChannelName="+$('#userChannelName').val()+"&userDefine="+$('#userDefine').val()+isRelation+"\");' style='cursor:pointer'>["+po.channelName+"]</a>&nbsp;";
+	if(retrivalflag == "1"){
+		channelName = "<a onclick='location_href(\"InfoList!allList.action?channelId="+po.channel_id+"&channelName="+po.channelName+"&checkdepart="+$('#checkdepart').val()+"&channelType="+$('#channelType').val()+"&userChannelName="+$('#userChannelName').val()+"&userDefine="+$('#userDefine').val()+isRelation+"\");' style='cursor:pointer'>["+po.channelName+"]</a>&nbsp;";
+	}else{
+		channelName = "<a onclick='location_href(\"InfoList!allList.action?channelId="+po.channelId+"&channelName="+po.channelName+"&checkdepart="+$('#checkdepart').val()+"&channelType="+$('#channelType').val()+"&userChannelName="+$('#userChannelName').val()+"&userDefine="+$('#userDefine').val()+isRelation+"\");' style='cursor:pointer'>["+po.channelName+"]</a>&nbsp;";
+	}
 	html = goodImg+channelName+redTitle+isNew;
 	return html;
 }
@@ -484,7 +509,15 @@ function batchSetCommend(url){
 
 //全文检索
 function retrievalAllser(){
-	refreshListForm('queryForm');
+	var key = $("#retrievalKey").val();
+	if(key == null || key == '' || key == ""){
+		$("#queryForm").attr("action","InfoList!list.action");
+		//whir_alert(bbs.pleaseEnterKeyword, null, null);
+		refreshListForm('queryForm');
+	}else{
+		$("#queryForm").attr("action","InfoList!retrieval_new.action");
+		refreshListForm('queryForm');
+	}
 }
 
 //批量转移
@@ -551,13 +584,16 @@ function changeChannel_url(val){
     dataType: 'json',
     success: function(data){
       if(data!=null && data!=""){
-        if(data.processId=="0"){
+		//是否易播栏目
+		var isYiBoChannel = data.isYiBoChannel != null && data.isYiBoChannel != "" && data.isYiBoChannel != '' ? data.isYiBoChannel : "0";
+		//whir_alert(isYiBoChannel);
+		if(data.processId=="0"){
           //非流程
           url_flow =
-            'Information!add.action?original=1'+'&p_wf_pool_processId='+data.processId;
+            'Information!add.action?original=1'+'&p_wf_pool_processId='+data.processId+'&isyiboflag='+isYiBoChannel;
         }else{
         	url_flow =
-            'Information!start.action?original=1'+'&p_wf_pool_processId='+data.processId;
+            'Information!start.action?original=1'+'&p_wf_pool_processId='+data.processId+'&isyiboflag='+isYiBoChannel;
         }
       } //if data != null
     }
