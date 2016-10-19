@@ -131,3 +131,12 @@ commit;
 
 insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.06_SP_20151207','11.3.0.06',sysdate);
 commit;
+
+
+
+
+
+update wf_needFlowModule a set a.module_packrighttype = '26*08*26',a.module_procright=1,a.module_procrighttype = '26*08*26',a.module_channowrite=1 where a.wf_module_id = 36;
+commit;
+insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.07_SP_20151211','11.3.0.07',sysdate);
+commit;

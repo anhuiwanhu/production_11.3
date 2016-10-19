@@ -141,3 +141,12 @@ go
 
 insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) values('Wanhu ezOFFICE','11.3.0.06_SP_20151207','11.3.0.06',getdate());
 go
+
+
+
+
+
+update wf_needFlowModule set module_packrighttype = '26*08*26',module_procright=1,module_procrighttype = '26*08*26',module_channowrite=1 where wf_module_id = 36;
+go
+insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) values('Wanhu ezOFFICE','11.3.0.07_SP_20151211','11.3.0.07',getdate());
+go

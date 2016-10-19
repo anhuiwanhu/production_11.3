@@ -1260,7 +1260,7 @@ function initListFormToAjax(formJson){
                                     tr += appendTd;
                                 }
                             }else{	
-                                field_value = renderer.call(renderer, po, i);//renderer
+                                field_value = renderer.call(renderer, po, i ,field);//renderer
                                 if(field_value == "") field_value = "&nbsp;";
                                 var temp_value = $.trim(field_value);
                                 if(temp_value.indexOf('<script>')!=-1 && temp_value.indexOf('<\/script>')!=-1){

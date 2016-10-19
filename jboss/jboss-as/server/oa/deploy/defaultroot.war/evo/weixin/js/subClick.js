@@ -3,7 +3,7 @@ var allFileType = "";
 // IOS客户端可预览附件类型
 var iosOpenFileType = ".doc.ppt.docx.pptx.jpg.png.gif.jpeg.pdf.txt.xls.xlsx";
 // ANDROID客户端可预览附件类型
-var androidFileType = ".doc.docx.xls.xlsx.txt.jpg.png.gif.jpeg";
+var androidFileType = ".doc.docx.xls.xlsx.txt.jpg.png.gif.jpeg.pptx.ppt.pdf";
 /**
 *
 *  Base64 encode / decode
@@ -185,7 +185,7 @@ function clickSub(url,obj,saveFileName,moduleName,smartInUse){
 	// 全客户端支持打开文件类型 
 	/*
 		if(allFileType.indexOf(fileType) != -1){
-			window.open(url);a
+			window.open(url);
 			return;
 		}
 	*/
@@ -239,12 +239,10 @@ function clickSub(url,obj,saveFileName,moduleName,smartInUse){
 					});
 				}else if(fileType.toLowerCase() == '.xls' || fileType.toLowerCase() == '.xlsx'){
 					window.open('/defaultroot/convertFile/xls2Html.controller?saveFileName='+saveFileName+'&moduleName='+moduleName);
-				}else if(fileType.toLowerCase() == '.ppt' || fileType.toLowerCase() == '.pptx'){
-					//window.open('/defaultroot/evo/weixin/common/ppt_img.jsp?saveFileName='+saveFileName+'&moduleName='+moduleName);
+				}else if(fileType.toLowerCase() == '.ppt' || fileType.toLowerCase() == '.pptx' || fileType.toLowerCase() == '.pdf'){
+					window.open('/defaultroot/evo/weixin/common/ppt_img.jsp?saveFileName='+saveFileName+'&moduleName='+moduleName);
 				}else if(fileType.toLowerCase() == '.txt'){
 					window.open('/defaultroot/convertFile/text2Html.controller?saveFileName='+saveFileName+'&moduleName='+moduleName);
-				}else if(fileType.toLowerCase() == '.pdf'){
-					// TODO
 				}else if(fileType.toLowerCase() == '.png' || fileType.toLowerCase() == '.jpg' || fileType.toLowerCase() == '.gif'
 					|| fileType.toLowerCase() == '.jpeg'){
 					window.open('/defaultroot/evo/weixin/common/img_view.jsp?saveFileName='+saveFileName+'&moduleName='+moduleName);
