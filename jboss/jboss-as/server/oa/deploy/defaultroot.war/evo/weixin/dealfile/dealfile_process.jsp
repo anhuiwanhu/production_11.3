@@ -43,6 +43,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 <c:set var="workcurstep"><x:out select="$doc//workInfo/workcurstep/text()"/></c:set>
 <c:set var="worktitle"><x:out select="$doc//workInfo/worktitle/text()"/></c:set>
 <c:set var="worksubmittime"><x:out select="$doc//workInfo/worksubmittime/text()"/></c:set>
+<c:set var="commentmustnonull"><x:out select="$doc//workInfo/commentmustnonull/text()"/></c:set>
 <form id="sendForm" class="dialog" action="/defaultroot/workflow/sendnew.controller" method="post">
 <section class="wh-section wh-section-bottomfixed" id="mainContent">
     <article class="wh-edit wh-edit-document">
@@ -323,7 +324,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 													<span>常用审批语</span>
 												</div>    
 												<select class="btn-bottom-pop" onchange="selectComment(this);">
-													<option value="">常用审批语</option> 
+													<option value="0">常用审批语</option> 
 													<option value="同意">同意</option>
 													<option value="已阅">已阅</option>
 												</select>
@@ -383,7 +384,11 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 						<c:set var="actiCommFieldType" ><x:out select="$doc//workInfo/actiCommFieldType/text()"/></c:set>
 						<c:if test="${actiCommFieldType != '-1' && (commentField == '-1' || commentField == 'nullCommentField' || commentField == 'autoCommentField' || commentField == 'null') }">
 						<tr>
-							<th>审批意见：</th>
+							<th>审批意见：
+								<c:if test="${commentmustnonull eq true}">
+									<i class="fa fa-asterisk"></i>
+								</c:if>
+							</th>
 							<td>
 	                            <textarea class="edit-txta edit-txta-l" placeholder="请输入文字" name="comment_input" id="comment_input" maxlength="50"></textarea>
 								<%--<a href="#" class="edit-slt-r">常用语审批</a>--%>
@@ -393,7 +398,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 											<span>常用审批语</span>
 										</div>    
 										<select class="btn-bottom-pop" onchange="selectComment(this);">
-											<option value="">常用审批语</option> 
+											<option value="0">常用审批语</option> 
 											<option value="同意">同意</option>
 											<option value="已阅">已阅</option>
 										</select>
@@ -485,11 +490,11 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
                 </div>
                 <c:choose>
 	                <c:when test="${ hasbackbutton == 'true' }">
-		               	<a href="javascript:$('#backForm').submit();" class="fbtn-cancel col-xs-5"><i class="fa fa-arrow-left"></i>退回</a>
-		                <a href="javascript:if(formCheck()){$('#sendForm').submit();}" class="fbtn-matter col-xs-5"><i class="fa fa-check-square"></i>发送</a>
+		               	<a href="javascript:subBackForm();" class="fbtn-cancel col-xs-5"><i class="fa fa-arrow-left"></i>退回</a>
+		                <a href="javascript:if(formCheck()){subForm();}" class="fbtn-matter col-xs-5"><i class="fa fa-check-square"></i>发送</a>
 	                </c:when>
 	                <c:otherwise>
-		                <a href="javascript:$('#sendForm').submit();" class="fbtn-matter col-xs-10"><i class="fa fa-check-square"></i>发送</a>
+		                <a href="javascript:subForm();" class="fbtn-matter col-xs-10"><i class="fa fa-check-square"></i>发送</a>
 	                </c:otherwise>
                 </c:choose>
                 <span id="fbtnMore" class="fbtn-matter col-xs-2"><i class="fa fa-bars"></i></span>
@@ -564,6 +569,22 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 <%--<script type="text/javascript" src="/defaultroot/evo/weixin/template/js/mobiscroll/mobiscroll.scroller.ios7.js"></script>--%>
 <script type="text/javascript">
     var dialog = null;
+    var flag = 1;//防止重复提交
+    var backFlag = 1//防止退回重复提交
+    function subForm(){
+    	if(flag == 0){
+    		return;
+    	}
+    	flag = 0;
+    	$('#sendForm').submit();
+    }
+    function subBackForm(){
+    	if(backFlag == 0){
+    		return;
+    	}
+    	backFlag = 0;
+    	$('#backForm').submit();
+    }      
     function pageLoading(){
         dialog = $.dialog({
             content:"页面加载中...",
@@ -628,6 +649,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
     
     //表单必填项验证
     function formCheck(){
+        var commentmustnonull = ${commentmustnonull};
 		return confirmForm();
     	var tipsName = '';
     	var checkOk = true;
@@ -639,7 +661,16 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
     			checkOk = false;
     			return false;
     		}
-    	});
+    	});    	
+    	if(commentmustnonull == 'true'){
+	       	if($('comment_input') != null){
+	            var comment = $('comment_input').value;
+	            if(comment == ''){ 
+	            	alert('批示意见不能为空！')
+	            	checkOk = false;
+	            }
+	        }
+        }
     	return checkOk;
     }
     
@@ -647,6 +678,9 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
     function selectComment(obj){
     	var $selectObj = $(obj);
     	var selectVal = $selectObj.val();
+    	if(selectVal == '0'){
+        	selectVal = '';
+        }
     	var $textarea = $selectObj.parent().parent().siblings();
     	setSpanHtml(obj,selectVal);
     	$textarea.val($textarea.val() + selectVal);

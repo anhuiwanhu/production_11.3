@@ -1237,11 +1237,11 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
             <div class="wh-footer-btn">
                <c:choose>
                 <c:when test="${hasbackbutton == 'true' }">
-	               	<a href="javascript:$('#backForm').submit();" class="fbtn-cancel col-xs-6"><i class="fa fa-arrow-left"></i>退回</a>
-	                <a href="javascript:$('#sendForm').submit();" class="fbtn-matter col-xs-6"><i class="fa fa-check-square"></i>发送</a>
+	               	<a href="javascript:subBackForm();" class="fbtn-cancel col-xs-6"><i class="fa fa-arrow-left"></i>退回</a>
+	                <a href="javascript:subForm();" class="fbtn-matter col-xs-6"><i class="fa fa-check-square"></i>发送</a>
                 </c:when>
                 <c:otherwise>
-	                <a href="javascript:$('#sendForm').submit();" class="fbtn-matter col-xs-12"><i class="fa fa-check-square"></i>发送</a>
+	                <a href="javascript:subForm();" class="fbtn-matter col-xs-12"><i class="fa fa-check-square"></i>发送</a>
                 </c:otherwise>
                </c:choose>
             </div>
@@ -1332,6 +1332,22 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 <script type="text/javascript" src="/defaultroot/evo/weixin/js/subClick.js"></script>
 <script type="text/javascript">
     var dialog = null;
+    var flag = 1;//防止重复提交
+    var backFlag = 1//防止退回重复提交
+    function subForm(){
+    	if(flag == 0){
+    		return;
+    	}
+    	flag = 0;
+    	$('#sendForm').submit();
+    }
+    function subBackForm(){
+    	if(backFlag == 0){
+    		return;
+    	}
+    	backFlag = 0;
+    	$('#backForm').submit();
+    }         
     function pageLoading(){
         dialog = $.dialog({
             content:"页面加载中...",

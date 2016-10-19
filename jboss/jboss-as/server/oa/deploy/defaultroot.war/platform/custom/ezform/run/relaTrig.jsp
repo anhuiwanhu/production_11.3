@@ -584,7 +584,10 @@ if(relaSet!=null && relaSet.size()>0){
         }else if("212"==d_showId || "214"==d_showId || "404"==d_showId || "405"==d_showId){
             $("div[id$='-<%=d_oldFieldName%>'] > a.openSelectIco").css('display', '');
         }else if("212"!=d_showId && "214"!=d_showId && "404"!=d_showId && "405"!=d_showId){
-            _setFieldReadonly(_d_oldFieldName, false);
+            var modifyField = $("#p_wf_cur_ModifyField").val();
+        	if(modifyField.indexOf("<%=d_oldFieldName%>")!=-1){//当流程设置里面设置了该字段可写时,该字段才能可写
+	            _setFieldReadonly(_d_oldFieldName, false);
+        	}
         }
     }
 <%
