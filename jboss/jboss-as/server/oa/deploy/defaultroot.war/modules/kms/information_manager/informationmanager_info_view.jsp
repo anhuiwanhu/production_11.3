@@ -8,11 +8,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<%@ include file="/public/include/meta_base.jsp"%>
 	<%@ include file="/public/include/meta_detail.jsp"%>
-	<s:if test="information.forbidCopy==1">
-    <style type="text/css">
-		html{ overflow:hidden;}
+	<style type="text/css">
+		html{ overflow:auto;}
 	</style>
-	<script type="text/javascript"> 
+	<s:if test="information.forbidCopy==1">
+    <script type="text/javascript"> 
 	<!-- 
 	document.oncontextmenu=function(e){return false;} 
 	// -->

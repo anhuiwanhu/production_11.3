@@ -311,6 +311,9 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 								</c:when>
 								<%--批示意见 401--%>
 								<c:when test="${showtype =='401' }">
+									<x:forEach select="$fd//dataList/comment" var="ct" >
+										<x:out select="$ct//content/text()"/>&nbsp;&nbsp;<x:out select="$ct//person/text()"/>(<x:out select="$ct//date/text()"/>)<br/>
+									</x:forEach>
 									<c:if test="${readwrite =='1' }">
 										<textarea class="edit-txta edit-txta-l" placeholder="请输入" name="comment_input" id="comment_input" maxlength="50"></textarea>
 										<div class="examine" style="text-align:right;">
@@ -325,11 +328,6 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 												</select>
 											</a>
 										</div>
-									</c:if>
-									<c:if test="${readwrite =='0' }">
-										<x:forEach select="$fd//dataList/comment" var="ct" >
-											<x:out select="$ct//content/text()"/>&nbsp;&nbsp;<x:out select="$ct//person/text()"/>(<x:out select="$ct//date/text()"/>)
-										</x:forEach>
 									</c:if>
 								</c:when>
 								<%--单选人 本组织 704--%>
@@ -869,7 +867,11 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 	}
     
     function selectCallBack(obj1,obj2){
-		obj2.val( obj1.val() + ";" + obj2.val());
+    	if(obj1.val() && obj2.val()){
+			obj2.val(obj1.val() + ";" + obj2.val());
+    	}else{
+    		obj2.val('');
+    	}
 	}
 
     //打开子表 

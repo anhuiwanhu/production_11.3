@@ -498,9 +498,13 @@ function getNatural (DOMelement) {
  重复登入踢人，   刷新session
  usedPortal: 0 从登录页 进来     1： 从portal 进来
 */
-function initIframe(usedPortal){
-    $("#iframe1").attr("src", "public/desktop/getfestival.jsp?usedPortal="+usedPortal);
-	$("#iframe2").attr("src", "public/desktop/topiframeNewNew.jsp?usedPortal="+usedPortal);
+function initIframe(usedPortal){  
+	if($("#iframe2").length>0){		
+         $("#iframe1").attr("src", "public/desktop/getfestival.jsp?usedPortal="+usedPortal);
+	     $("#iframe2").attr("src", "public/desktop/topiframeNewNew.jsp?usedPortal="+usedPortal);
+	}else{
+	    setTimeout('initIframe('+usedPortal+')',300);
+	}
 };
 
 

@@ -79,14 +79,24 @@ location.href="login.jsp";
 			<%}%>
 			//class="current"
 
-			$("#mainFrame").attr("src",portalURL);  
+			//$("#mainFrame").attr("src",portalURL);
+			 
+			yanchiSetIframe(portalURL);
 			$("#desktop_leftTh").hide();  
 			//initPortalNew(layoutId);
 			//设置选中的样式 ，没有选中删除样式
             $("#gateway_div a[id^=Layout]").removeClass("current");
 			$("#Layout"+layoutId).addClass("current");//.siblings().removeClass("current");
-
 			addDesktopBJ();
+		}
+         
+		//有可能没mainFrame 没渲染完毕 就执行了 打开首页。
+		function yanchiSetIframe(portalURL){
+		   if($("#mainFrame").length>0){
+			   $("#mainFrame").attr("src",portalURL);  
+		   }else{
+			   setTimeout('yanchiSetIframe(\''+portalURL+'\')',300);
+		   } 
 		}
 		 
     </script>

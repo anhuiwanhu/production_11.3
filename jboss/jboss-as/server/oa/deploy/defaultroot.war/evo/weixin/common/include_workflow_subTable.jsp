@@ -57,7 +57,9 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 				                <div class="wh-r-tbbox">        
 				                    <table class="wh-table-edit">
 				                    	<c:set var="index" value="0" />
+				                    	<c:set var="subFieldCount" value="0"/>
 										<x:forEach select="$ct//field" var="field" >
+											<c:set var="subFieldCount" value="${subFieldCount+1}"/>
 											<c:set var="showtype"><x:out select="$field/showtype/text()"/></c:set>
 											<c:set var="readwrite"><x:out select="$field/readwrite/text()"/></c:set>
 											<c:set var="fieldtype"><x:out select="$field/fieldtype/text()"/></c:set>
@@ -112,12 +114,13 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 																<c:set var="curvalue">,<x:out select="$selectvalue/hiddenval/text()"/>,</c:set>
 																<li>
 																	<a>
-																		<input type="checkbox" name='_sub_<x:out select="$field/sysname/text()"/>' id='checkIput<x:out select="$field/id/text()"/><x:out select="$selectvalue/hiddenval/text()"/>' value='<x:out select="$selectvalue/hiddenval/text()"/>,' <c:if test="${fn:indexOf(selectedvalue, curvalue) > -1}">checked="true"</c:if> />
+																		<input onclick="setCheckBoxVal(this);" type="checkbox" value='<x:out select="$selectvalue/hiddenval/text()"/>,' <c:if test="${fn:indexOf(selectedvalue, curvalue) > -1}">checked="true"</c:if> />
 																		<label for='checkIput<x:out select="$field/id/text()"/><x:out select="$selectvalue/hiddenval/text()"/>'><x:out select="$selectvalue/showval/text()"/></label>
 																	</a>
 																</li>
 																</x:forEach>
 															</ul>
+															<input type="hidden" name='_sub_<x:out select="$field/sysname/text()"/>' id='checkIput<x:out select="$field/id/text()"/>${selectedvalue}' value='<x:out select="$field/hiddenval/text()"/>' />
 														</c:when>
 						
 														<%--下拉框 105--%>
@@ -165,8 +168,10 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 						
 														<%--多行文本 110--%>
 														<c:when test="${showtype =='110' && readwrite =='1'}">
-															<textarea name='_sub_<x:out select="$field/sysname/text()"/>'  onkeyup="$(this).next('.edit-txta-num').html($(this).attr('maxlength')-$(this).val().length );"   class="edit-txta edit-txta-l" maxlength="300"><x:out select="$field/value/text()"/></textarea>
-															<span class="edit-txta-num"><script>document.write(300-"<x:out select="$field/value/text()"/>".length);</script></span>
+															<c:set var="fvalue"><x:out select="$field/value/text()"/></c:set>
+															<c:set var="showNum">${300-fn:length(fvalue)}</c:set>
+															<textarea name='_sub_<x:out select="$field/sysname/text()"/>' onkeyup="$(this).next('.edit-txta-num').html($(this).attr('maxlength')-$(this).val().length );" onchange="$(this).next('.edit-txta-num').html($(this).attr('maxlength')-$(this).val().length );"   class="edit-txta edit-txta-l" maxlength="300"><x:out select="$field/value/text()"/></textarea>
+															<span class="edit-txta-num">${showNum}</span>
 														</c:when>
 						
 														<%--自动编号 111--%>
@@ -177,7 +182,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 														<%--html编辑 113--%>
 														<c:when test="${showtype =='113' && readwrite =='1'}">
 															<textarea name='_sub_<x:out select="$field/sysname/text()"/>'  onkeyup="$(this).next('.edit-txta-num').html($(this).attr('maxlength')-$(this).val().length );"   class="edit-txta edit-txta-l" maxlength="300"><x:out select="$field/value/text()"/></textarea>
-															<span class="edit-txta-num"><script>document.write(300-"<x:out select="$field/value/text()"/>".length);</script></span>
+															<span class="edit-txta-num">300</span>
 														</c:when>
 						
 														<%--附件上传 115--%>
@@ -187,6 +192,9 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 										                            <li class="edit-upload-in" onclick="addSubTableImg('<x:out select="$field/sysname/text()"/>',this);"><span><i class="fa fa-plus"></i></span></li>
 											                        <input name="_sub_file_<x:out select="$field/sysname/text()"/>" id="_subfile_<x:out select="$field/sysname/text()"/>" type="hidden"/>
 										                        </ul>
+															</c:if>
+															<c:if test="${readwrite == '0'}">
+																<c:set var="index" value="${index+1}"/>
 															</c:if>
 															<c:set var="values"><x:out select="$field/value/text()"/></c:set>
 															<c:if test="${not empty values}">
@@ -218,6 +226,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 						
 														<%--Word编辑 116--%>
 														<c:when test="${showtype =='116'}">
+															<c:set var="index" value="${index+1}"/>
 															<c:set var="filename"><x:out select="$field/value/text()"/></c:set>
 															<c:if test="${not empty filename}">
 																<%
@@ -241,6 +250,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 														<%--Excel编辑 117--%>
 														<c:when test="${showtype =='117'}">
 															<c:set var="filename"><x:out select="$field/value/text()"/></c:set>
+															<c:set var="index" value="${index+1}"/>
 															<c:if test="${not empty filename}">
 																<%
 																String realFileNames ="";
@@ -263,6 +273,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 														<%--WPS编辑 118--%>
 														<c:when test="${showtype =='118'}">
 															<c:set var="filename"><x:out select="$field/value/text()"/></c:set>
+															<c:set var="index" value="${index+1}"/>
 															<c:if test="${not empty filename}">
 																<%
 																String realFileNames ="";
@@ -350,6 +361,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 																</div>
 															</c:if>
 															<c:if test="${readwrite =='0' }">
+																<c:set var="index" value="${index+1}"/>
 																<x:forEach select="$field//dataList/comment" var="ct" >
 																	<x:out select="$ct//content/text()"/>&nbsp;&nbsp;<x:out select="$ct//person/text()"/>(<x:out select="$ct//date/text()"/>)
 																</x:forEach>
@@ -380,6 +392,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 														</c:when>
 														<%--日期时间计算 808--%>
 														<c:when test="${showtype =='808' && readwrite =='1'}">
+															<c:set var="index" value="${index+1}"/>
 															该字段暂不支持手机办理，请于电脑端操作。
 														</c:when>
 														<c:otherwise>
@@ -400,8 +413,8 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
     </article>
 </section>
 <footer class="wh-footer wh-footer-forum" id="subFooter_${tableName}" style="display:none">
-<%--    <c:choose>--%>
-<%--    	<c:when test="${index eq '0'}">--%>
+    <c:choose>
+    	<c:when test="${index lt subFieldCount}">
 		    <div class="wh-wrapper">
 		        <div class="wh-container">
 		            <div class="wh-footer-btn">
@@ -411,19 +424,19 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 		            </div>
 		        </div>
 		    </div>
-<%--    	</c:when>--%>
-<%--    	<c:otherwise>--%>
-<%--		    <div class="wh-wrapper">--%>
-<%--		        <div class="wh-container">--%>
-<%--		            <div class="wh-footer-btn">--%>
-<%--		                <a href="javascript:finishSubTableForm2();" class="fbtn-matter col-xs-12">--%>
-<%--		                	<i class="fa fa-check-square"></i>完成--%>
-<%--		                </a>--%>
-<%--		            </div>--%>
-<%--		        </div>--%>
-<%--		    </div>--%>
-<%--    	</c:otherwise>--%>
-<%--    </c:choose>--%>
+    	</c:when>
+    	<c:otherwise>
+		    <div class="wh-wrapper">
+		        <div class="wh-container">
+		            <div class="wh-footer-btn">
+		                <a href="javascript:finishSubTableForm2();" class="fbtn-matter col-xs-12">
+		                	<i class="fa fa-check-square"></i>完成
+		                </a>
+		            </div>
+		        </div>
+		    </div>
+    	</c:otherwise>
+    </c:choose>
 </footer>
 </x:forEach>
 </c:if>
@@ -467,6 +480,14 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 		$('[id="subSection_'+subTableNameParam+'"]').show();
 		$('[id="subFooter_'+subTableNameParam+'"]').show();
 		showSubOperate();
+		//绑定头部点击效果事件
+    	var $swiperLis = $('[id="swiper_ul_'+subTableName+'"] li');
+    	$swiperLis.unbind('click');
+    	$swiperLis.click(function(){
+    		var $swiperLi = $(this);
+    		$swiperLis.not(this).removeClass('nav-active').data("checkbox","uncheck");
+            $swiperLi.addClass('nav-active').data("checkbox","check");
+    	});
 		var $firstDataId = $('[id="subTableTemplate_'+subTableNameParam+'"] input').eq(0);
 		var dataIdVal = $firstDataId.val();
 		$firstDataId.val('');
@@ -653,6 +674,20 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 				alert("文件上传失败！");
 			}
 		});
+	}
+	
+	//设置多选框的选中值
+	function setCheckBoxVal(obj){
+		var $checkBox = $(obj);
+		var isChecked = $checkBox.is(':checked');
+		var checkVal = $checkBox.val();
+		var $hideInput = $checkBox.parent().parent().parent().next('input');
+		var hideInputVal = $hideInput.val();
+		if(isChecked){
+			$hideInput.val(hideInputVal + checkVal);
+		}else{
+			$hideInput.val(hideInputVal.replace(checkVal,''));
+		}
 	}
 </script>
 

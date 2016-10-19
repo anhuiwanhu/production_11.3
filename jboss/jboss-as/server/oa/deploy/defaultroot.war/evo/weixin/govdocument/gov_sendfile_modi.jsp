@@ -904,15 +904,15 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</td>
 							</tr>
 						</x:if>
-						<tr>
-							<c:set var="commentField"><x:out select="$doc//workInfo/commentField/text()"/></c:set>
-							<th>批示意见</th>
-							<td> 
-								<c:if test="${not empty commentField}">
+						<c:set var="commentField"><x:out select="$doc//workInfo/commentField/text()"/></c:set>
+						<c:if test="${not empty commentField && '-1' ne commentField && 'nullCommentField' ne commentField}">
+							<tr>
+								<th>批示意见</th>
+								<td> 
 									<textarea name='comment_input' class="edit-txta edit-txta-l" maxlength="300" placeholder="请输入文字"></textarea>
-								</c:if>
-							</td>
-						</tr>
+								</td>
+							</tr>
+						</c:if>
 						<x:if select="$govDoc//comment/documentSendFileAssumeUnit">
 						 <c:set var="content" ><x:out select="$govDoc//comment/documentSendFileAssumeUnit/text()"/></c:set>
 						<tr>

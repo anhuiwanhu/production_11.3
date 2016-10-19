@@ -352,6 +352,7 @@ String workStatus = request.getParameter("workStatus")==null?"":request.getParam
           	 			$('#userName').val('');
           	 			$('#scopeId').val('<x:out select="$n/scopeId/text()"/>');
           	 			$('#userName').prev('span').html('');
+          	 			$('#userName').css("display","");
 					}
 				}
 			</x:forEach>

@@ -1,6 +1,7 @@
 //无需下载附件类型
 var allFileType = "";
-var iosOpenFileType = ".doc.ppt.docx.pptx.jpg.png.gif.pdf.txt";
+var iosOpenFileType = ".doc.ppt.docx.pptx.jpg.png.gif.pdf.txt.xls.xlsx";
+var androidFileType = ".doc.docx.xls.xlsx";
 /**
 *
 *  Base64 encode / decode
@@ -120,7 +121,6 @@ $(function(){
 	$('body').append("<div id='subBg' style='position:fixed; left:0; top:0; background:rgba(0,0,0,0.8);z-index:9999; cursor:default;width:100%;height:100%;display:none;'><p style='text-align:center; color:#fff;font-size:16px;font-family:microsoft yahei; display:block;line-height:2em;padding-top:70px;background:url(/defaultroot/evo/weixin/images/subDot.png) no-repeat right center;'>非常抱歉，由于微信不支持直接打开该类型文件，请点击此处，并选择在浏览器中打开</p></div>");
 	$('#subBg').width(sw);
 	$('#subBg').height(sh);
-	
 	$('.active').mousedown(function(){
 		$(this).css('background','#f5f5f5');
 	})
@@ -168,20 +168,28 @@ function clickSub_backup(url,event){
 }
 
 //点击下载附件
-function clickSub(url,obj){
+function clickSub(url,obj,saveFileName,moduleName,smartInUse){
+	// 非微信环境直接下载（可禁用）
 	if(!is_weixin()){
 		window.open(url);
 		return;
 	}
+	// 获取文件类型
 	var fileType = "";
 	var fileName = $(obj).find('strong').text().trim();
 	if(fileName){
 		fileType = fileName.substr(fileName.lastIndexOf(".")).replace(/<[^>]+>/g,'').toLowerCase();
 	}
-	if(allFileType.indexOf(fileType) != -1){
-		window.open(url);
-		return;
-	}
+	// 全客户端支持打开文件类型 
+	/*
+		if(allFileType.indexOf(fileType) != -1){
+			window.open(url);a
+			return;
+		}
+	*/
+	// 是否需要打开 点击浏览器提示页面标识
+	var isOpenTip = true;
+	// 判断客户端环境是否为ios
 	var userAgent = navigator.userAgent.toLowerCase();
 	if(!((userAgent.indexOf("android") != -1) || (
 		(userAgent.indexOf("linux") != -1) && (((userAgent.indexOf("chrome") != -1) || (userAgent.indexOf("safari") != -1)))))){
@@ -189,9 +197,55 @@ function clickSub(url,obj){
 			window.open(url);
 			return;
 		}
+	}else{
+		// 暂时支持http上传方式的文件读取
+		if(smartInUse != '0'){
+			// android客户端环境
+			if(androidFileType.indexOf(fileType) != -1){
+				isOpenTip = false;
+				if(fileType.toLowerCase() == '.doc' || fileType.toLowerCase() == '.docx'){
+					var dialog = $.dialog({
+			            content:"正在打开，请稍候...",
+			            title : "ok"
+			        });
+					$.ajax({
+						url : '/defaultroot/convertFile/doc2Html.controller',
+						type : 'post',
+						data : {'saveFileName': saveFileName, 'moduleName' : moduleName},
+						success : function(data){
+							if(data){
+								var jsonData = eval('('+data+')');
+								var result = jsonData.result;
+								if('success' == result){
+									if(jsonData.data0){
+										window.open(jsonData.data0);
+									}else{
+										alert('打开文件失败！');
+									}
+								}else if('fail' == result){
+									alert(jsonData.data0);
+								}else{
+									alert('打开文件失败！');
+								}
+								dialog.close();
+							}
+						},
+						error : function(){
+							dialog.close();
+							alert('打开文件失败！');
+						}
+					});
+				}else if(fileType.toLowerCase() == '.xls' || fileType.toLowerCase() == '.xlsx'){
+					window.open('/defaultroot/convertFile/xls2Html.controller?saveFileName='+saveFileName+'&moduleName='+moduleName);
+				}
+			}
+		}
 	}
-	$('#subBg').show();
-	$('#subBg').click(function(){
-		$(this).hide();
-	});
+	// 显示打开浏览器提示
+	if(isOpenTip){
+		$('#subBg').show();
+		$('#subBg').click(function(){
+			$(this).hide();
+		});
+	}
 }

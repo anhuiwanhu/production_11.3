@@ -138,7 +138,7 @@ function confirmForm(){
 	$('table tr th i').each(function(){
 		$parentObj = $(this).parent();
 		tipsName = $parentObj.text().replace('：','');
-		$parentObj.next('td').find('input,textarea,select').each(function(){
+		$parentObj.next('td').find('input[type!="file"],textarea,select').each(function(){
 			$childrenObj = $(this);
 			objValue = $childrenObj.val();
 			if($childrenObj.attr('type') != 'checkbox'){

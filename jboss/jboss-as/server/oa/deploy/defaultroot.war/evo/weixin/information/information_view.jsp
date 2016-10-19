@@ -15,6 +15,7 @@
 	    <link rel="stylesheet" href="/defaultroot/evo/weixin/template/css/template.icon.css" />
 	    <link rel="stylesheet" href="/defaultroot/evo/weixin/template/css/template.style.css" />
 	    <link rel="stylesheet" href="/defaultroot/evo/weixin/template/css/template.swiper.css" />
+	    <link rel="stylesheet" href="/defaultroot/evo/weixin/template/css/alert/template.alert.css" />
 	</head>
 	<body>
 	<c:if test="${not empty docXml}">
@@ -139,7 +140,7 @@
 						%>
 			            <div class="wh-article-atta">
 			                <i class="fa fa-paperclip"></i>
-			                <a href="javascript:void();" onclick="clickSub('<%=downloadFileLink%>',this);">
+			                <a href="javascript:void();" onclick="clickSub('<%=downloadFileLink%>',this,'${filename}','information','<%=smartInUse %>');">
 			                    <strong class="atta-name">${appName}</strong>
 			                </a>
 			                <span class="atta-size"><%=fileSizeStr%></span>
@@ -186,6 +187,7 @@
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/touch.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/fx.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/swiper.min.js"></script>
+<script type="text/javascript" src="/defaultroot/evo/weixin/template/js/alert/zepto.alert.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/js/subClick.js"></script>
 <script type="text/javascript">
     //跳转到对应栏目页面

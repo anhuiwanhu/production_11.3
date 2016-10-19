@@ -415,15 +415,15 @@ function infoTitle(po,i){
 	}
 	//是否红色标题
 	if(po.titleColor==1){
-		redTitle = '<a href="javascript:void(0);" onclick="openWin({url:\'Information!view.action?informationId='+po.informationId+'&informationType='+po.informationType+'&userChannelName='+$("#userChannelName").val()+'&channelId='+po.channelId+'&userDefine='+$('#userDefine').val()+'&channelType='+$('#channelType').val()+'&gdType=infomation&checkdepart='+$('#checkdepart').val()+'\',winName:\'viewInfo'+po.informationId+'\',isFull:true});" style="cursor:hand"><font color="red">'+HtmlEncode(po.informationTitle)+'</font></a>';
+		redTitle = '<a onclick="openWin({url:\'Information!view.action?informationId='+po.informationId+'&informationType='+po.informationType+'&userChannelName='+$("#userChannelName").val()+'&channelId='+po.channelId+'&userDefine='+$('#userDefine').val()+'&channelType='+$('#channelType').val()+'&gdType=infomation&checkdepart='+$('#checkdepart').val()+'\',winName:\'viewInfo'+po.informationId+'\',isFull:true});" style="cursor:pointer"><font color="red">'+HtmlEncode(po.informationTitle)+'</font></a>';
 	}else{
-		redTitle = '<a href="javascript:void(0);" onclick="openWin({url:\'Information!view.action?informationId='+po.informationId+'&informationType='+po.informationType+'&userChannelName='+$("#userChannelName").val()+'&channelId='+po.channelId+'&userDefine='+$('#userDefine').val()+'&channelType='+$('#channelType').val()+'&gdType=infomation&checkdepart='+$('#checkdepart').val()+'\',winName:\'viewInfo'+po.informationId+'\',isFull:true});" style="cursor:hand">'+HtmlEncode(po.informationTitle)+'</a>';
+		redTitle = '<a onclick="openWin({url:\'Information!view.action?informationId='+po.informationId+'&informationType='+po.informationType+'&userChannelName='+$("#userChannelName").val()+'&channelId='+po.channelId+'&userDefine='+$('#userDefine').val()+'&channelType='+$('#channelType').val()+'&gdType=infomation&checkdepart='+$('#checkdepart').val()+'\',winName:\'viewInfo'+po.informationId+'\',isFull:true});" style="cursor:pointer">'+HtmlEncode(po.informationTitle)+'</a>';
 	}
 	//栏目信息列表中有效期限为短期并且不包括当前时间的信息标题显示灰色(只有信息维护的权限并且权限范围为全部的用户可见)
 	//if($("#channelId").val()!=""){
 		if(po.informationValidType==1){
 			if(compareWithNow(po.validBeginTime)=='>' || compareWithNow(po.validEndTime)=='<'){
-				redTitle = '<a href="javascript:void(0);" onclick="openWin({url:\'Information!view.action?informationId='+po.informationId+'&informationType='+po.informationType+'&userChannelName='+$("#userChannelName").val()+'&channelId='+po.channelId+'&userDefine='+$('#userDefine').val()+'&channelType='+$('#channelType').val()+'&gdType=infomation&checkdepart='+$('#checkdepart').val()+'\',winName:\'viewInfo'+po.informationId+'\',isFull:true});" style="cursor:hand"><font color="gray">'+HtmlEncode(po.informationTitle)+'</font></a>';
+				redTitle = '<a onclick="openWin({url:\'Information!view.action?informationId='+po.informationId+'&informationType='+po.informationType+'&userChannelName='+$("#userChannelName").val()+'&channelId='+po.channelId+'&userDefine='+$('#userDefine').val()+'&channelType='+$('#channelType').val()+'&gdType=infomation&checkdepart='+$('#checkdepart').val()+'\',winName:\'viewInfo'+po.informationId+'\',isFull:true});" style="cursor:pointer"><font color="gray">'+HtmlEncode(po.informationTitle)+'</font></a>';
 			}
 		}
 	//}
@@ -442,7 +442,7 @@ function infoTitle(po,i){
 	<s:if test="#request.relationModule=='information'">
 		isRelation = "&relationModule=information"
 	</s:if>
-	channelName = "<a href='javascript:void(0);' onclick='location_href(\"InfoList!allList.action?channelId="+po.channelId+"&channelName="+po.channelName+"&checkdepart="+$('#checkdepart').val()+"&channelType="+$('#channelType').val()+"&userChannelName="+$('#userChannelName').val()+"&userDefine="+$('#userDefine').val()+isRelation+"\");' style='cursor:hand'>["+po.channelName+"]</a>&nbsp;";
+	channelName = "<a onclick='location_href(\"InfoList!allList.action?channelId="+po.channelId+"&channelName="+po.channelName+"&checkdepart="+$('#checkdepart').val()+"&channelType="+$('#channelType').val()+"&userChannelName="+$('#userChannelName').val()+"&userDefine="+$('#userDefine').val()+isRelation+"\");' style='cursor:pointer'>["+po.channelName+"]</a>&nbsp;";
 	html = goodImg+channelName+redTitle+isNew;
 	return html;
 }
@@ -539,11 +539,11 @@ function showInfo(){
 }
 //20151012 -by jqq 判断是否走审核流程，分别跳转到不同的页面链接
 function changeChannel_url(val){
-  var channelId = val.trim();
-  var url_flow = '';
-  if(channelId == null || channelId == ""){
-    return 'Information!add.action?';
+  if(val == null || val == "" || val == ''){
+    return 'Information!add.action?original=0';
   }
+  var channelId = $.trim(val);
+  var url_flow = '';
   $.ajax({
     type: 'POST',
     url: whirRootPath+"/Information!changeChannel.action?channelId="+channelId,
