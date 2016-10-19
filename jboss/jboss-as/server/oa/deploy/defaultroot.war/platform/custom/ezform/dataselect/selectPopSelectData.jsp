@@ -75,9 +75,9 @@ String field="";
         String[][] listFields = (String[][])request.getAttribute("listFields");
         if(listFields != null && listFields.length > 0){
             for(int i=0; i<listFields.length; i++){
-            	if(!showField.equals(listFields[i][2])){
+            	//if(!showField.equals(listFields[i][2])){
 					field += listFields[i][2]+",";
-				}
+				//}
     %>
         <td whir-options="field:'<%=listFields[i][2]%>',width:'<%=listFields[i][3]%>%', allowSort:true"><%=listFields[i][1]%></td>
     <%}}%>
@@ -116,24 +116,36 @@ attrnName = replaceDollar(attrName);//attrName.replace(/\$/igm, '\\$');
 function initData(){
     //var openerVal = "," + opener.document.getElementsByName("<%=fieldName%>")[<%=popIndex%>].value + ",";
     var openerVal = "," + opener.document.getElementsByName("<%=fieldName%>")[<%=popIndex%>].getAttribute("data-val") + ",";
-    $('input[name="'+attrnName+'"]').each(function(i){
-        var val = "," + $(this).attr('hiddenval') + ",";
-        if(openerVal != ',,' && openerVal.indexOf(val)!=-1){
-            $(this).attr("checked",true);	
-		    //$(this).parent().addClass("checked");
-        }
-    });
+    if(openerVal!=',,'){
+	    $('input[name="'+attrnName+'"]').each(function(i){
+	        var val = "," + $(this).attr('hiddenval') + ",";
+	        if(openerVal != ',,' && openerVal.indexOf(val)!=-1){
+	            $(this).attr("checked",true);	
+			    //$(this).parent().addClass("checked");
+	        }
+	    });
+    }else{
+    	openerVal = "," + opener.document.getElementsByName("<%=fieldName%>")[<%=popIndex%>].value + ",";
+    	$('input[name="'+attrnName+'"]').each(function(i){
+	        var val = "," + $(this).attr('showval') + ",";
+	        if(openerVal != ',,' && openerVal.indexOf(val)!=-1){
+	            $(this).attr("checked",true);	
+			    //$(this).parent().addClass("checked");
+	        }
+	    });
+    }
 }
 
 function renderBox(po, i){
     var val="";
 	<%
-		field = field.substring(0,field.length()-1);
-		String[] fields = field.split(",");
-		for(int i=0;i<fields.length;i++){
+		if(!"".equals(field)){
+			field = field.substring(0,field.length()-1);
+			String[] fields = field.split(",");
+			for(int i=0;i<fields.length;i++){
 	%>
 		val += po.<%=fields[i]%>+",";
-	<%}%>
+	<%}}%>
 
 	val = val.substring(0,val.length-1);
     var html = '';
@@ -179,9 +191,9 @@ function save(tag){
 		var checks = $("input[name='"+attrName+"']");//document.getElementsByName("batchDel");
         var radio_type = false;
         var radio_id='';
-        var val3='';
 		if (checks) {
 			var pVal1="";
+			var val3='';
 			//var pVal2="";
 			var j=0;
 			for(var i = 0 ; i < checks.length ; i++ ) {
@@ -196,10 +208,11 @@ function save(tag){
 				if(chkObj.checked){
 					var val1 = checks[i].getAttribute('showval');//document.getElementsByName('<%=showField%>_h')[i].value;
 					var val2 = checks[i].getAttribute('<s:property value="sysTableName" escape="false"/>_id');
-					val3 = checks[i].getAttribute('hiddenval');
+					var val4 = checks[i].getAttribute('hiddenval');
                     radio_id = val2;
 
 					pVal1 += (j>0?",":"")+val1;
+					val3 += (j>0?",":"")+val4;
 					//pVal2 += (j>0?",":"")+val2;
 					j++;
 				}

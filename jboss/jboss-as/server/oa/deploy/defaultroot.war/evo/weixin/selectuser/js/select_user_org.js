@@ -17,6 +17,7 @@ var selectNameVal = $("#selectNameVal").val();
 //已选择的用户id
 var selectIdVal = $("#selectIdVal").val();
 var idValArray = selectIdVal.split(',');
+var range = $("#range").val();
 var selectIndex = 0;
 $(function() {
     var headerBtn = $("#headerBtn a");
@@ -143,7 +144,7 @@ function loadNextEmpData(){
 		$(".wh-load-tap").html("正在加载...");
 		$.ajax({
 			url : '/defaultroot/person/searchUser.controller',
-			data : {'pageSize' : offset,'nomore' : nomore,'title' : searchTitle},
+			data : {'pageSize' : offset,'nomore' : nomore,'title' : searchTitle,'range' : range},
 			type : 'post',
 			success : function(data){
 				offset = $($(data)[10]).val();

@@ -140,3 +140,10 @@ update wf_needFlowModule a set a.module_packrighttype = '26*08*26',a.module_proc
 commit;
 insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.07_SP_20151211','11.3.0.07',sysdate);
 commit;
+
+
+
+
+
+insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.08_SP_20151218','11.3.0.08',sysdate);
+commit;

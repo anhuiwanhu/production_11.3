@@ -150,3 +150,10 @@ update wf_needFlowModule set module_packrighttype = '26*08*26',module_procright=
 go
 insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) values('Wanhu ezOFFICE','11.3.0.07_SP_20151211','11.3.0.07',getdate());
 go
+
+
+
+
+
+insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) values('Wanhu ezOFFICE','11.3.0.08_SP_20151218','11.3.0.08',getdate());
+go

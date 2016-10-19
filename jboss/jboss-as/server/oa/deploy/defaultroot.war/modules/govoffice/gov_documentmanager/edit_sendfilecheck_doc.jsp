@@ -423,7 +423,7 @@ function gd(){
 	//			
 	//		}
 			//gdform.pageContent.value = document.body.innerHTML;
-				gdform.pageContent.value = "<br><br><div style=\"padding:20px\">"+document.getElementById("docinfo0").outerHTML+"</div>";
+				gdform.pageContent.value = "<br><br><div style=\"padding:20px\"><input type=\"hidden\" name= \"workflow_thisIsInGDpage\" id = \"workflow_thisIsInGDpage\" >"+document.getElementById("docinfo0").outerHTML+"</div>";
 			//gdform.fileId.value = GovSendFileCheckWithWorkFlowActionForm.editId.value;
 			//gdform.fileTitle.value = GovSendFileCheckWithWorkFlowActionForm.sendFileCheckTitle.value;
 			

@@ -46,7 +46,7 @@ List list = bd.getPortalPortletFileList(portletSettingId);
 </table>
 </form>
 <div style="padding:5px 0 0 5px;">
-	<input type="button" class="btnButton4font" style="cursor:pointer" onclick="javascript:window.close();" value="退出"/>
+	<input type="button" class="btnButton4font" style="cursor:pointer" onclick="javascript:window.close();" value="退&nbsp;&nbsp;&nbsp;&nbsp;出"/>
 </div>
 </body>
 </html>

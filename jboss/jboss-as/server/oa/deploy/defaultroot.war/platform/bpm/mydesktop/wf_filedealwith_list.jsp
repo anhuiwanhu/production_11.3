@@ -186,6 +186,8 @@
  <script type="text/javascript">  
     /**
 	切换页签
+
+	0:列表  1：类型   2 ：缓急   3：暂不处理
 	*/
     function  changePanle(flag){
 		 var openType=$("#openType").val();
@@ -201,8 +203,7 @@
 			 }
 			 $("#noTreatmentButton").hide();
 			 $("#resetNoTreatmentButton").show(); 
-		 }else{
-			 
+		 }else{ 
 			 $("#noTreatmentButton").show();
 			  $("#resetNoTreatmentButton").hide(); 
 			 if(flag=="0"&&$("#noTreatment").val()=='1'){
@@ -212,6 +213,8 @@
 			 $("#noTreatment").val("0");
 		     $("#docinfo"+flag).show();
 		 } 
+
+
 		 if(flag=='1'||flag=='2'){
 		     //if($("#docinfo"+flag).html()!=""){
 			 if(false){

@@ -251,11 +251,16 @@ if(trigSet!=null && trigSet.size()>0){
                             $(objSelect).css(styleVal);
                         }else{//single
                             var destVal ='';
-							for(var j=0;j< dd.length;j++){
-								if(document.getElementById(param_field).getAttribute("data-val").indexOf(dd[j][i].value)!=-1){
-							    	destVal = dd[j][i].value;
-							    }
+	                        if(code=='404' && dd.length>1){
+								for(var j=0; j< dd.length; j++){
+									if(document.getElementById(param_field).getAttribute("data-val").indexOf(dd[j][i].value)!=-1){
+								    	destVal = dd[j][i].value;
+								    }
+								}
+							}else{
+								destVal = dd[0][i].value;
 							}
+							
                             if(destVal=='null'||destVal=='NULL'){
                                 destVal = '';
                             }else{

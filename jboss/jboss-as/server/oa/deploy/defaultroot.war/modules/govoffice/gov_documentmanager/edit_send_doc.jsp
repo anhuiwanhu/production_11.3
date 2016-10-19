@@ -809,7 +809,7 @@ function gd(){
 	gdform.zwurl.value=url;//查看正文的url
 
 	//gdform.pageContent.value = document.body.innerHTML;
-	gdform.pageContent.value = "<br><br><div style=\"padding:20px\">"+document.getElementById("docinfo0").outerHTML+"</div>";
+	gdform.pageContent.value = "<br><br><div style=\"padding:20px\"><input type=\"hidden\" name= \"workflow_thisIsInGDpage\" id = \"workflow_thisIsInGDpage\" >"+document.getElementById("docinfo0").outerHTML+"</div>";
 
 	gdform.pageContent.value += "<"+"script>var newNode = document.createElement('a');newNode.href='#';newNode.onclick=function(){window.open('"+url+"','','TOP=0,LEFT=0, resizable=yes,width=800,height=600')};newNode.innerHTML ='<table width=100% ><tr><td align=left>&nbsp;&nbsp;&nbsp;&nbsp;查看正文</td></tr></table>';document.getElementById('docinfo0').insertBefore(newNode,document.getElementById('docinfo0').firstChild);<"+"/script>";
 

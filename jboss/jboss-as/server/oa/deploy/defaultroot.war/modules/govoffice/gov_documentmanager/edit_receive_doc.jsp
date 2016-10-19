@@ -389,7 +389,7 @@ function gd(){
 //		}
 //		
 //	}
-	gdform.pageContent.value = "<br><br><div style=\"padding:20px\">"+document.getElementById("docinfo0").outerHTML+"</div>";
+	gdform.pageContent.value = "<br><br><div style=\"padding:20px\"><input type=\"hidden\" name= \"workflow_thisIsInGDpage\" id = \"workflow_thisIsInGDpage\" >"+document.getElementById("docinfo0").outerHTML+"</div>";
    // gdform.pageContent.value = document.body.innerHTML;
     gdform.fileTitle.value = document.getElementsByName("receiveFileTitle")[0].value;
     gdform.fileId.value = document.getElementsByName("p_wf_recordId")[0].value;
