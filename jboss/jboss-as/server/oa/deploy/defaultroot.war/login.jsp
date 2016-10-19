@@ -142,7 +142,7 @@ int inputPwdErrorNum = Integer.parseInt(request.getAttribute("inputPwdErrorNum")
 int inputPwdErrorNumMax = Integer.parseInt(request.getAttribute("inputPwdErrorNumMax")!=null?(String)request.getAttribute("inputPwdErrorNumMax"):"6");
 String useCaptcha = com.whir.org.common.util.SysSetupReader.getInstance().getSysValueByName("captcha", "0");
 %>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang='zh-cn' id = "loginHtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -172,7 +172,7 @@ String useCaptcha = com.whir.org.common.util.SysSetupReader.getInstance().getSys
           	  <img src="<%=logopicacc%>" id = "loginPic" data-pich="80" />
             </h1>
             <ul class="wh-login-tips">
-                <li> <a href="allocx.exe" class="widget"><i class="fa fa-cog2"></i><span><%=Resource.getValue(localeCode,"common","comm.Controlinstallation")%></span></a></li>
+                <li> <a href="/defaultroot/public/edit/logindownload/Logindownload.jsp?fileName=activex.msi"  class="widget"><i class="fa fa-cog2"></i><span><%=Resource.getValue(localeCode,"common","comm.Controlinstallation")%></span></a></li>
                 <li><a href="javascript:addFavorite()" class="collect"><i class="fa fa-plus-circle"></i><span><%=Resource.getValue(localeCode,"common","comm.Favorite")%></span></a></li>
                 <li><a href="<%=rootPath%>/help/help_set.html" class="help"><i class="fa fa-question-circle"></i><span><%=Resource.getValue(localeCode,"common","comm.setupHelp")%></span></a></li>
             </ul>
@@ -359,6 +359,7 @@ String useCaptcha = com.whir.org.common.util.SysSetupReader.getInstance().getSys
 </div>
 </body>
 <SCRIPT LANGUAGE="JavaScript">
+/**
 var oaV = getVersion();
 //获取操作系统版本，只针对window
 function getVersion(){
@@ -371,7 +372,7 @@ function getVersion(){
 	}
 	return osV;
 }
-
+*/
 //判断系统，在判断版本 若是xp的则。。若是win7的则。。
 /** var ver=navigator.appVersion.substring(navigator.appVersion.indexOf("MSIE ")+5, navigator.appVersion.indexOf("MSIE ")+8);
 //对ie6,7,8的处理
@@ -390,19 +391,34 @@ function getVersion(){
 	}
 //}
 */
+
 //关闭div层
 function closeIewarning(){
 	$("#iewarning").hide();
 }
 
-
+/**
 //获取图片高度，宽度
 function getNatural (DOMelement) {
     var img = new Image();
     img.src = DOMelement.src;
     return {width: img.width, height: img.height};
   }
+*/
 
+function initLang(localeCode){
+	var language = "zh-cn";
+	if(localeCode == 'zh_TW'){
+		language = "zh-tw";
+	}else if(localeCode == 'en_US'){
+		language = "en-us";
+	}else if(localeCode == 'ko_KR'){
+		language = "ko-kr";
+	}else if(localeCode == 'ja_JP'){
+		language = "ja-jp";
+	}
+	$("#loginHtml").attr("lang",language);
+}
 $(function(){
 	 var ver=navigator.appVersion.substring(navigator.appVersion.indexOf("MSIE ")+5, navigator.appVersion.indexOf("MSIE ")+8);
 	//对log图片赋值，暂时去掉
@@ -423,6 +439,10 @@ $(function(){
 	$("#loginPic").height(picHeight);
 	$("#loginPic").css({"height":picHeight, "margin-top":picMarginTop});
 	*/
+	//对语言赋值
+	var localeCode = '<%=localeCode%>';
+	initLang(localeCode);
+	
 	//不同浏览器时需要隐藏
 	var srcName = '<%=logopicacc%>';
 	if(srcName == "" || srcName == "undefined" || srcName == null){

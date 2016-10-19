@@ -164,7 +164,7 @@ MetaNode.prototype.editActivity = function () {
 	 //http://localhost:7001/CommonJSResource.rootPath/ActivityAction.do?action=modify&activityId=97834600&processId=97834528&tableId=97829949&moduleId=1
 	 //window.open(encodeURI(url),'','TOP=0,LEFT=0,scrollbars=yes,resizable=yes,width=900,height=800');
  
-	 Toolkit.openWin({url:url,width:900,height:800,winName:'updateActivity'});
+	 Toolkit.openWin({url:url,width:950,height:800,winName:'updateActivity'});
 };
 //
 MetaNode.prototype._updatePosition = function () {

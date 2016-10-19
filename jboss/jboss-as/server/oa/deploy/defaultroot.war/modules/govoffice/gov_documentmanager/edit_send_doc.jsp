@@ -21,6 +21,10 @@ String local = session.getAttribute("org.apache.struts.action.LOCALE").toString(
     <%@ include file="/public/include/meta_base_bpm.jsp"%>  
 
 	<script src="<%=rootPath%>/modules/govoffice/gov_documentmanager/js/send.js"   type="text/javascript"></script>
+	<script language="javascript" src="/defaultroot/scripts/i18n/zh_CN/WorkflowResource.js" type="text/javascript"></script>
+	<script language="javascript" src="/defaultroot/platform/custom/ezform/js/ezform.js"></script>
+	<script language="javascript" src="/defaultroot/platform/custom/ezform/js/popselectdata.js"></script>
+	<script language="javascript" src="/defaultroot/scripts/util/textareaAutoHeight2.js"></script>
 	<style type="text/css">
 	<!--
 	.sw {
