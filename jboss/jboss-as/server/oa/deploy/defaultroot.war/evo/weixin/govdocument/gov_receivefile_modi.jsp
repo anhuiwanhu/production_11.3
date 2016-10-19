@@ -842,7 +842,6 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 								</tr>
 							</x:forEach>
 						</x:if>
-						<c:set var="commentField"><x:out select="$doc//workInfo/commentField/text()"/></c:set>
 						<!-- 批示意见内容 
 						<x:forEach select="$govDoc//commentList/custemComment" var="ct" >
 							<c:set var="isCurrent"><x:out select="$ct//current/text()" /></c:set>
@@ -865,6 +864,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</tr>
 						</x:forEach>
 						-->
+						<c:set var="commentField"><x:out select="$govDoc//curCommField/text()"/></c:set>
 						<x:forEach select="$govDoc//commentList/contentList" var="ct" >
 							<c:set var="isCurrent"><x:out select="$ct//current/text()" /></c:set>
 							<tr>

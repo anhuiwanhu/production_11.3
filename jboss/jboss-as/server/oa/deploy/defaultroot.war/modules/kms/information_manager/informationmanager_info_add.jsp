@@ -282,19 +282,6 @@ $(document).ready(function(){
 			$("#info_add_2").hide();
 			$("#selectAppend").hide();
 	}else{
-			$(":radio[name='information.informationType'][value=1]").attr("checked",true);
-			changeInfoType(1);
-			$(":radio[name='information.informationType'][value='1']").show().next().show();
-			$(":radio[name='information.informationType'][value='2']").show().next().show();
-			$(":radio[name='information.informationType'][value='4']").show().next().show();
-			$(":radio[name='information.informationType'][value='5']").show().next().show();
-			$(":radio[name='information.informationType'][value='6']").show().next().show();
-			$(document).attr("title",'<s:text name="info.newinfo"/>');
-			$("#info_add_center_1").show();
-			$("#info_add_1").show();
-			$("#temp").show();
-			$("#info_add_2").show();
-			$("#selectAppend").show();
 	}
 
 	$(":radio[name='information.informationType']").change(function(){
@@ -508,6 +495,7 @@ function changePanle(flag){
 }
 
 function changeChannel(val){
+	var infotype = $(':radio[name="information.informationType"]:checked').val();
 	var channelId = val.substring(0,val.indexOf(","));
 	$.ajax({
 		type: 'POST',
@@ -536,10 +524,12 @@ function changeChannel(val){
 					$("#temp").hide();
 					$("#info_add_2").hide();
 					$("#selectAppend").hide();
-					//$("#filecolumn").innerHTML = '视频文件<span class="MustFillColor">*</span>：';
 				}else{
-					$(":radio[name='information.informationType'][value=1]").attr("checked",true);
-					changeInfoType(1);
+					if(infotype == null || infotype == ""){
+						$(":radio[name='information.informationType'][value=1]").attr("checked",true);
+						infotype = 1;
+					}
+					changeInfoType(infotype);
 					$(":radio[name='information.informationType'][value='1']").show().next().show();
 					$(":radio[name='information.informationType'][value='2']").show().next().show();
 					$(":radio[name='information.informationType'][value='4']").show().next().show();
@@ -548,10 +538,17 @@ function changeChannel(val){
 					$(document).attr("title",'<s:text name="info.newinfo"/>');
 					$("#info_add_center_1").show();
 					$("#info_add_1").show();
-					$("#temp").show();
+					if(infotype == '1' || infotype == 1){
+						$("#temp").show();
+					}else{
+						$("#temp").hide();
+					}
 					$("#info_add_2").show();
-					$("#selectAppend").show();
-					//$("#filecolumn").innerHTML = '<s:text name="info.newinfofilelink" /><span class="MustFillColor">*</span>：';
+					if(infotype == '2' || infotype == '3'){
+						$("#selectAppend").hide();
+					}else{
+						$("#selectAppend").show();
+					}
 				}
 
 

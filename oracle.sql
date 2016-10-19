@@ -345,3 +345,13 @@ alter table SYS_CORP_SET
 commit;
 insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.11_SP_20160111','11.3.0.11',sysdate);
 commit;
+
+
+
+
+
+update wf_immobilityfield set immofield_pofield = CONCAT('information.',immofield_pofield) 
+where wf_immoform_id = (select wf_immoform_id from ezoffice.WF_IMMOBILITYFORM where WF_MODULE_ID = 4) and instr(immofield_pofield,'.')=0;
+commit;
+insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.12_SP_20160117','11.3.0.12',sysdate);
+commit;

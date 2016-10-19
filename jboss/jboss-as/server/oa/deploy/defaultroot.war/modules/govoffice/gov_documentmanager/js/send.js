@@ -298,8 +298,13 @@ function cmdWordWindowFirst(){
 		mystr=wordValue.split(";");      
 		departWord=mystr[1];               
 	}
-	
-	$("input[name='RecordID']")[0].value = $("input[name='content']")[0].value; // document.all.content.value;
+	var isAjainSend = $("#p_wf_openType").val();
+	if(isAjainSend == "startAgain"){
+		$("input[name='initRecordId']")[0].value = $("input[name='content']")[0].value;
+		$("input[name='RecordID']")[0].value = "";
+	}else{
+		$("input[name='RecordID']")[0].value = $("input[name='content']")[0].value; // document.all.content.value;
+	}
 	$("input[name='Template']")[0].value = "";
 	$("input[name='showSignButton']")[0].value="1";//显示/隐藏痕迹
 	$("input[name='ShowSign']")[0].value="-1";

@@ -38,7 +38,7 @@
 	                <tr>
 	                    <th>收件人<i class="fa fa-asterisk"></i>：</th>
 	                    <td><span class="fr" onclick="$(this).next('input').click()"></span>
-	                    	<input onclick="selectUser('1','empName','empId');"  class="edit-ipt-r edit-ipt-arrow" readonly type="text" 
+	                    	<input onclick="selectUser('1','empName','empId','*0*');"  class="edit-ipt-r edit-ipt-arrow" readonly type="text" 
 	                    	id="empName" name="mailto" <c:if test="${param.openType eq 'reply'}">value="${requestScope.userName}"</c:if>
 	                    	<c:if test="${param.openType eq 'personSend'}">value="${param.empName},"</c:if>
 	                    	<c:if test="${param.openType eq 'sendAgain'}">value="${mailTo}"</c:if>  
@@ -54,7 +54,7 @@
 	                <tr>
 	                    <th>抄送：</th>
 	                    <td><span class="fr" onclick="$(this).next('input').click()"></span>
-	                        <input onclick="selectUser('1','mailcc','mailccid');" class="edit-ipt-r edit-ipt-arrow" type="text" readonly value="${mailCc}" id="mailcc" name="mailcc" placeholder="请选择"/>
+	                        <input onclick="selectUser('1','mailcc','mailccid','*0*');" class="edit-ipt-r edit-ipt-arrow" type="text" readonly value="${mailCc}" id="mailcc" name="mailcc" placeholder="请选择"/>
 	                        <input type="hidden" value="${mailccId}" name="mailccid" id="mailccid"/>
 	                    </td>
 	                </tr>
@@ -132,9 +132,44 @@
 		                		//newContent = newContent.replaceAll("<.?((?i)a).*?>","");
 		                		newContent.replaceAll("<a href[^>]*>","").replaceAll("</a>","");
 		                		newContent = newContent.replaceAll("<br>","\n");
+		   
+		                		
 							%>
 							<c:set var="newContent"><%=newContent %></c:set> 
-	                            <textarea id="mailcontent" name="mailcontent" class="edit-txta edit-txta-l" placeholder="请输入文字" style="min-height:20rem">${newContent}</textarea>
+							<c:choose>
+							<c:when test="${param.openType eq 'reply'}">
+					  			<textarea id="mailcontent" name="mailcontent" class="edit-txta edit-txta-l" placeholder="请输入文字" style="min-height:20rem">
+								
+								
+								
+								
+								                         ${newContent}
+								</textarea>	
+					  		</c:when>					  		
+							<c:when test="${param.openType eq 'forward'}">
+					  		    <textarea id="mailcontent" name="mailcontent" class="edit-txta edit-txta-l" placeholder="请输入文字" style="min-height:20rem">
+								
+								
+								
+								
+								                          ${newContent}
+								</textarea>	
+					  		</c:when>
+						  	<c:when test="${param.openType eq 'replyAll'}">
+						  		<textarea id="mailcontent" name="mailcontent" class="edit-txta edit-txta-l" placeholder="请输入文字" style="min-height:20rem">
+								
+								
+								
+								
+								                          ${newContent}
+								</textarea>		
+						  	</c:when>
+					  		<c:otherwise>
+				                <textarea id="mailcontent" name="mailcontent" class="edit-txta edit-txta-l" placeholder="请输入文字" style="min-height:20rem">							
+								${newContent}
+							    </textarea>	
+							</c:otherwise>
+					  		</c:choose>
 	                        </div>
 	                    </td>
 	                </tr>
@@ -333,15 +368,15 @@
 	}
 
 	//打开选择人员页面
-	function selectUser(selectType,selectName,selectId){ 
+	function selectUser(selectType,selectName,selectId,range){ 
 		var dialog = openTipsDialog('正在加载...');
 		$.ajax({
 			url : '/defaultroot/person/newsearch.controller?flag=user',
 			type : "post",
 			data : {'selectType':selectType,'selectName':selectName,'selectId':selectId,
-					'selectNameVal':$('#'+selectName).val(),'selectIdVal':$('#'+selectId).val()},
+					'selectNameVal':$('#'+selectName).val(),'selectIdVal':$('#'+selectId).val(),'range':range},
 			success : function(data){
-				$("#selectContent").append(data);
+				$("#selectContent").append(data);   
 				hiddenContent(0);
 				if(dialog){
 					dialog.close();

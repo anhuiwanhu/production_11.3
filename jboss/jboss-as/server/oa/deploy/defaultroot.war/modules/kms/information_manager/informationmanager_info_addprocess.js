@@ -246,39 +246,6 @@ function banBackSpace(e){
 
 //初始化  
 function chushihua(titlename,fromGov,title,govId,docNo){     
-	//易播栏目页面初始化
-	//易播栏目新建信息页面，部分页面元素不展示
-	if("1" == $("#isyiboflag").val()){
-			//易播文件模式，默认普通输入
-			$(":radio[name='information.informationType'][value=0]").attr("checked",true);
-			changeInfoType(0,$("#isyiboflag").val());
-			$(":radio[name='information.informationType'][value='1']").hide().next().hide();
-			$(":radio[name='information.informationType'][value='2']").hide().next().hide();
-			$(":radio[name='information.informationType'][value='4']").hide().next().hide();
-			$(":radio[name='information.informationType'][value='5']").hide().next().hide();
-			$(":radio[name='information.informationType'][value='6']").hide().next().hide();
-			$(document).attr("title","新易播信息");//修改title
-			$("#info_add_center_1").hide();
-			$("#info_add_1").hide();
-			$("#temp").hide();
-			$("#info_add_2").hide();
-			$("#selectAppend").hide();
-	}else{
-			$(":radio[name='information.informationType'][value=1]").attr("checked",true);
-			changeInfoType(1,$("#isyiboflag").val());
-			$(":radio[name='information.informationType'][value='1']").show().next().show();
-			$(":radio[name='information.informationType'][value='2']").show().next().show();
-			$(":radio[name='information.informationType'][value='4']").show().next().show();
-			$(":radio[name='information.informationType'][value='5']").show().next().show();
-			$(":radio[name='information.informationType'][value='6']").show().next().show();
-			$(document).attr("title",titlename);
-			$("#info_add_center_1").show();
-			$("#info_add_1").show();
-			$("#temp").show();
-			$("#info_add_2").show();
-			$("#selectAppend").show();
-	}
-
 	//信息类型change事件
 	$(":radio[name='information.informationType']").change(function(){
 		changeInfoType(this.value,$("#isyiboflag").val());
@@ -358,10 +325,29 @@ function chushihua(titlename,fromGov,title,govId,docNo){
 			//document.getElementById("newedit").contentWindow.setHTML($("#_content").val());
 		}
 	}
+	//易播栏目页面初始化
+	//易播栏目新建信息页面，部分页面元素不展示
+	if("1" == $("#isyiboflag").val()){
+			//易播文件模式，默认普通输入
+			$(":radio[name='information.informationType'][value=0]").attr("checked",true);
+			changeInfoType(0,$("#isyiboflag").val());
+			$(":radio[name='information.informationType'][value='1']").hide().next().hide();
+			$(":radio[name='information.informationType'][value='2']").hide().next().hide();
+			$(":radio[name='information.informationType'][value='4']").hide().next().hide();
+			$(":radio[name='information.informationType'][value='5']").hide().next().hide();
+			$(":radio[name='information.informationType'][value='6']").hide().next().hide();
+			$(document).attr("title","新易播信息");//修改title
+			$("#info_add_center_1").hide();
+			$("#info_add_1").hide();
+			$("#temp").hide();
+			$("#info_add_2").hide();
+			$("#selectAppend").hide();
+	}else{
+	}
 }
-
 //选择栏目
 function changeChannel(val,isyibo,newinfo,noprocess,fromGov){
+	var infotype = $(':radio[name="information.informationType"]:checked').val();
 	var channelId = val.substring(0,val.indexOf(","));
 	$.ajax({
 		type: 'POST',
@@ -392,8 +378,11 @@ function changeChannel(val,isyibo,newinfo,noprocess,fromGov){
 					$("#info_add_2").hide();
 					$("#selectAppend").hide();
 				}else{
-					$(":radio[name='information.informationType'][value=1]").attr("checked",true);
-					changeInfoType(1,"0");
+					if(infotype == null || infotype == ""){
+						$(":radio[name='information.informationType'][value=1]").attr("checked",true);
+						infotype = 1;
+					}
+					changeInfoType(infotype,"0");
 					$(":radio[name='information.informationType'][value='1']").show().next().show();
 					$(":radio[name='information.informationType'][value='2']").show().next().show();
 					$(":radio[name='information.informationType'][value='4']").show().next().show();
@@ -402,12 +391,18 @@ function changeChannel(val,isyibo,newinfo,noprocess,fromGov){
 					$(document).attr("title",newinfo);
 					$("#info_add_center_1").show();
 					$("#info_add_1").show();
-					$("#temp").show();
+					if(infotype == '1' || infotype == 1){
+						$("#temp").show();
+					}else{
+						$("#temp").hide();
+					}
 					$("#info_add_2").show();
-					$("#selectAppend").show();
+					if(infotype == '2' || infotype == '3'){
+						$("#selectAppend").hide();
+					}else{
+						$("#selectAppend").show();
+					}
 				}
-
-
 				if(data.processId!="0"){
 					if(data.processId=="-1"){
 						whir_alert(noprocess);

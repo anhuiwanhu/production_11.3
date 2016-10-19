@@ -436,10 +436,32 @@ function  cmdSynToInfo(){
 
 
 	var pname=$("#p_wf_processName").val();
-	var _content="<a  href='"+$("#p_wf_mailviewUrl").val()+"\'  target='_blank' >"+pname+"<a>"; 
+	//收文
+	if(_moduleId == 3 && $("[name = 'receiveFileTitle']")){
+		pname = $("[name = 'receiveFileTitle']").val();
+	}
+	//发文
+	else if(_moduleId == 2 && $("[name = 'documentSendFileTitle']")){
+		pname = $("[name = 'documentSendFileTitle']").val();
+	}
+	//送审签
+	else if(_moduleId ==  34 && $("[name = 'sendFileCheckTitle']")){
+		pname = $("[name = 'sendFileCheckTitle']").val();
+	}
+	//var _content="<a  href='"+$("#p_wf_mailviewUrl").val()+"\'  target='_blank' >"+pname+"<a>";
+	var _content = $("input[name='content']")[0].value;
 	
-    var mianUrl=whirRootPath+'/Information!add.action?userDefine=0channelType=0&_type=1&informationType=1&module=2'+
-		          '&_title='+encodeURIComponent(pname)+'&_moduleId='+_moduleId+'&_fileId='+_recordid+'&_content='+encodeURIComponent(_content); 
+//  var mianUrl=whirRootPath+'/Information!add.action?userDefine=0channelType=0&_type=1&informationType=1&module=2'+
+//  '&_title='+encodeURIComponent(pname)+'&_moduleId='+_moduleId+'&_fileId='+_recordid+'&_content='+encodeURIComponent(_content);
+//同步到信息管理和办理查阅的同步保持一致。
+	var mianUrl=whirRootPath+'/Information!add.action?userDefine=0&channelType=0&_type=4&module=0'+
+	'&_title='+encodeURIComponent(pname)+'&_moduleId='+_moduleId+'&_fileId='+_recordid+'&_content='+encodeURIComponent(_content);
+	
+	if($("#accessoryName") && $("#accessorySaveName")){
+		var _accessName = $("#accessoryName").val();
+		var _accessSaveName = $("#accessorySaveName").val();
+		mianUrl	 += "&_accessName="+_accessName+"&_accessSaveName="+_accessSaveName;
+	}
     wf_openWin({url:mianUrl,width:850,height:750,isFull:true,winName:'printEzFlow'}); 
 }
  

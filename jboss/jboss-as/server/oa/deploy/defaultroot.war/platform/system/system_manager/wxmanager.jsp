@@ -55,8 +55,10 @@ List<CorpSetAppPO> csapppolist	= (List<CorpSetAppPO>)request.getAttribute("csapp
 					</td>
 					<td width="20%">
 						<s:hidden name="cspo.id" id="id" />
-						<s:textfield type="text" id="corpid" Class="inputText" name="cspo.corpid" 
-					 	 whir-options="vtype:['notempty',{},'spechar3']" class="inputText"/>  
+						<s:textfield type="text" id="corpid" cssClass="inputText" name="cspo.corpid" 
+					 	 whir-options="vtype:['notempty',{},'spechar3'],'promptText':'企业号后台-设置-账号信息'" class="inputText" 
+					 	 
+					 	/>  
 					</td>
 					<td width="3%"></td>
 					<td width="57%">
@@ -70,7 +72,7 @@ List<CorpSetAppPO> csapppolist	= (List<CorpSetAppPO>)request.getAttribute("csapp
 					</td>
 					<td width="30%">
 						<s:textfield type="text" id="corpsecret" Class="inputText" name="cspo.corpsecret" 
-					 	 whir-options="vtype:['notempty',{},'spechar3']" class="inputText"/>  
+					 	 whir-options="vtype:['notempty',{},'spechar3'],'promptText':'企业号后台-设置-权限管理-新建管理员组后即可查看'" class="inputText"/>  
 					</td>
 					<td width="47%">
 					</td>
@@ -82,7 +84,7 @@ List<CorpSetAppPO> csapppolist	= (List<CorpSetAppPO>)request.getAttribute("csapp
 					</td>
 					<td width="30%">
 						<s:textfield type="text" id="token" Class="inputText" name="cspo.token"  
-					 	 whir-options="vtype:['notempty',{},'spechar3']" class="inputText"/>  
+					 	 whir-options="vtype:['notempty',{},'spechar3'],'promptText':'企业号后台-应用中心-创建应用-回调模式-回调URL及密钥'" class="inputText"/>  
 					</td>
 					<td width="47%">
 					</td>
@@ -94,7 +96,7 @@ List<CorpSetAppPO> csapppolist	= (List<CorpSetAppPO>)request.getAttribute("csapp
 					</td>
 					<td width="30%">
 						<s:textfield type="text" id="encodingAESKey" Class="inputText" name="cspo.encodingAESKey"  
-					 	 whir-options="vtype:['notempty',{},'spechar3']" />  
+					 	 whir-options="vtype:['notempty',{},'spechar3'],'promptText':'企业号后台-应用中心-创建应用-回调模式-回调URL及密钥'" />  
 					</td>
 					<td width="45%">
 					</td>
@@ -219,8 +221,11 @@ List<CorpSetAppPO> csapppolist	= (List<CorpSetAppPO>)request.getAttribute("csapp
 
 //初始化列表页form表单,"queryForm"是表单id，可修改。  
 $(document).ready(function(){         
-    initListFormToAjax({formId:"sendMassageForm"});         
+    initListFormToAjax({formId:"sendMassageForm"});
+    
 });
+
+
 
 var result=0;
 function corpidcheck(){
@@ -355,7 +360,10 @@ function updatecorpset(){
  var encodingAESKey = $('#encodingAESKey').val();
  var id = $('#id').val();
 
- if(corpid==null||corpid==""||corpsecret==null||corpsecret==""||token==null||token==""||encodingAESKey==null||encodingAESKey==""){
+ if(corpid==null||corpid==""||corpid=="企业号后台-设置-账号信息"
+ ||corpsecret==null||corpsecret==""||corpsecret=="企业号后台-设置-权限管理-新建管理员组后即可查看"
+ ||token==null||token==""||token=="企业号后台-应用中心-创建应用-回调模式-回调URL及密钥"||
+ encodingAESKey==null||encodingAESKey==""||encodingAESKey=="企业号后台-应用中心-创建应用-回调模式-回调URL及密钥"){
  	whir_alert("必填项不能为空！");
  	return false;
  }

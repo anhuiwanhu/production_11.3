@@ -348,6 +348,7 @@ if((""+request.getAttribute("p_wf_modiButton")).indexOf("Savefile")>=0 ){
 
 <form name="form1" action="public/iWebOfficeSign/DocumentEdit.jsp" method="post">
 <input type="hidden" name="RecordID">
+<input type="hidden" name="initRecordId">
 <input type="hidden" name="remakehead">
 <input type="hidden" name="from" value="<%=request.getParameter("from")%>">
 <input type="hidden" name="EditType" value="1">
