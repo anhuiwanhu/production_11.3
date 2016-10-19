@@ -324,3 +324,12 @@ go
 
 insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) values('Wanhu ezOFFICE','11.3.0.21_SP_20160525','11.3.0.21',getdate());
 go
+
+
+
+
+
+delete from  ez_secu_pagelist  where    list_type=3  and   secu_url='/officeserverservlet';
+go
+insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) values('Wanhu ezOFFICE','11.3.0.22_SP_20160529','11.3.0.22',getdate());
+go
