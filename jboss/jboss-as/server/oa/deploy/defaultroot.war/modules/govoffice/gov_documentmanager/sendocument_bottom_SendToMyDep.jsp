@@ -19,9 +19,9 @@ String toPerson2=request.getParameter("toPerson2")==null?"":request.getParameter
 String toPersonBao=request.getParameter("toPersonBao")==null?"":request.getParameter("toPersonBao");
 String toPersonInner=request.getParameter("toPersonInner")==null?"":request.getParameter("toPersonInner");
 
-
 String allId=toPerson1Id+toPerson2Id+toPersonBaoId+toPersonInnerId;
 
+String canDownLoad = request.getParameter("canDownLoad")==null?"0":request.getParameter("canDownLoad");
 
 
 String allContent="";
@@ -77,10 +77,10 @@ com.whir.ezoffice.workflow.newBD.WorkFlowButtonBD workFlowButtonBD = new com.whi
 com.whir.ezoffice.workflow.newBD.WorkFlowBD workFlowBD = new com.whir.ezoffice.workflow.newBD.WorkFlowBD();
 com.whir.ezoffice.workflow.vo.WorkVO vo = new com.whir.ezoffice.workflow.vo.WorkVO();
 
-String[] nextUser = workFlowFormBD.getProcActiUser(tableId,recordId,activityId);
-tranType = nextUser[44];
-tranCustomExtent = nextUser[45];
-tranCustomExtentId = nextUser[46];
+//String[] nextUser = workFlowFormBD.getProcActiUser(tableId,recordId,activityId);
+tranType = "";//nextUser[44];
+tranCustomExtent = ""; //nextUser[45];
+tranCustomExtentId = "";// nextUser[46];
 //System.out.println("tranType---------------------------------------------"+tranType);
 //转本部门
 if(request.getParameter("tranType") != null && !"".equals(request.getParameter("tranType"))){
@@ -117,165 +117,7 @@ if(request.getParameter("tranType") != null && !"".equals(request.getParameter("
 
 	} else if("3".equals(tranType)){
 
-		  //本活动办理人
-		if(nextUser[0]!=null && nextUser[0].equals("3")){
-			range="";
-			//指定全部办理人
-			java.util.List candidate = workFlowFormBD.getCandidate(nextUser[1],nextUser[2]);
-			for(int i=0;i<candidate.size();i++){
-				Object[] tmp = (Object[])candidate.get(i); 
-				range +="$"+tmp[0]+"$";
-			
-			}		 
-			show = "userorggroup";
-
-		}
-
-		if(nextUser[0]!=null && nextUser[0].equals("2")){
-			//从候选人中指定
-			range="";
-			java.util.List candidate = workFlowFormBD.getCandidate(nextUser[1],nextUser[2]);
-			for(int i=0;i<candidate.size();i++){
-				Object[] tmp = (Object[])candidate.get(i); 
-				range +="$"+tmp[0]+"$";
-				 
-			}
-			show = "user";
-		}
-
-        ///----------------------暂时未确定
-		if(nextUser[0]!=null && nextUser[0].equals("4")){
-			  //由表单中的某个字段值决定
-			  participantUserField = nextUser[4];
-			  participantUserFieldType=nextUser[32];	 
-			  participantUserField = workFlowButtonBD.getFieldInfoByFieldId(participantUserField);
-		}
-
-		if(nextUser[0]!=null && nextUser[0].equals("8")){
-			//从指定范围中选定
-			range = nextUser[22].toString();
-			if(range != null && !range.equals("") && range.indexOf("@") < 0 && range.indexOf("*") < 0){
-				show = "user";
-			}else if(range != null && !range.equals("") && range.indexOf("@") < 0){
-				show = "userorg";
-			}else if(range != null && !range.equals("") && range.indexOf("*") < 0){
-				show = "usergroup";
-			}
-		}
-
-		if(nextUser[0]!=null && nextUser[0].equals("9")){
-			//由上一活动参与者从所在组织中选择
-			//range = "*"+session.getAttribute("orgId")+"*";
-			//show = "user";
-		}
-        
-		if(nextUser[0]!=null && nextUser[0].equals("10")){
-			//组织领导
-			//range = "*"+session.getAttribute("orgId")+"*";
-			//show = "org";
-		}
-         
-		if(nextUser[0]!=null && nextUser[0].equals("13")){
-			//由上一活动参与者从所有群组中选择
-			 //show += "group";
-			 range =  nextUser[22].toString();
-			 if(range != null){
-				show = "usergroup";
-			 }
-		}
-
-		if(nextUser[0]!=null && nextUser[0].equals("12")){
-			//由上一活动参与者从所有组织中选择
-			 show = "org";
-		}
-
-		if(nextUser[0]!=null && nextUser[0].equals("1")){
-			//由上一活动参与者从所有用户中选择
-			 show = "user";
-		}
-
-		if(nextUser[0]!=null && nextUser[0].equals("11")){
-			//上一活动所有参与者
-			vo.setProcessId(Long.valueOf(processId));
-			vo.setTableId(Long.valueOf(tableId));
-			vo.setRecordId(Long.valueOf(recordId));
-			vo.setActivity(Long.valueOf(curActivityId));
-			range="";
-
-			java.util.List candidate = workFlowButtonBD.getFrontActivityOper(vo);
-			for(int i=0;i<candidate.size();i++){
-				Object[] tmp = (Object[])candidate.get(i); 
-				range += "$"+tmp[0]+"$";
-			}
-			 
-			show = "user";
-		}
-
-		if(nextUser[0]!=null && nextUser[0].equals("7")){
-			//上一活动办理人的上级领导
-			range="";
-			String tranFromPersonId = request.getParameter("tranFromPersonId");
-			java.util.List leaderList = workFlowBD.getLeaderList(("-1".equals(tranFromPersonId)?session.getAttribute("userId").toString():tranFromPersonId));
-
-			for(int i=0;i<leaderList.size();i++){
-				Object[] tmp = (Object[])leaderList.get(i); 
-				range += "$"+tmp[0]+"$";
-			}
- 
-			show = "user";
-		}
-
-		if(nextUser[0]!=null && nextUser[0].equals("0")){
-			//流程启动人的上级领导 
-			range="";
-			java.util.List leaderList = workFlowBD.getLeaderList(request.getParameter("submitPersonId"));
-
-			for(int i=0;i<leaderList.size();i++){
-				Object[] tmp = (Object[])leaderList.get(i); 
-				range += "$"+tmp[0]+"$";
-			}
-			show = "user";
-		}
-
-		if(nextUser[0]!=null && nextUser[0].equals("5")){
-			//流程启动人
-			range = "$"+request.getParameter("submitPersonId")+"$";
-			show = "user";
-		}
-
-		if(nextUser[0]!=null && nextUser[0].equals("6")){
-			range="";
-			//从角色中指定 
-			java.util.List candidate = workFlowBD.getRoleUserIDAndName(nextUser[18], request.getParameter("submitPersonId"));
-			for(int i=0;i<candidate.size();i++){
-				Object[] tmp = (Object[])candidate.get(i); 
-				range += "$"+tmp[0]+"$";
-			} 
-			show = "user";
-		}
-
-
- 
-	       if(nextUser[0]!=null && nextUser[0].equals("20")){
-			  // 选中活动办理者
-				java.util.List candidate = workFlowButtonBD.getDealedActivityUserList(tableId,processId,recordId,""+nextUser[18]);
-		        range="";
-				for(int i=0;i<candidate.size();i++){
-					Object[] tmp = (Object[])candidate.get(i); 
-					range += "$"+tmp[0]+"$";
-					show = "userorg";
-				} 
-			}
-			if(nextUser[0]!=null && nextUser[0].equals("21")){
-				 // 选中活动办理者上级领导
-				java.util.List candidate = workFlowButtonBD.getDealedActivityUserLeaderList(tableId,processId,recordId,""+nextUser[18]);
-		         range="";
-				for(int i=0;i<candidate.size();i++){
-					Object[] tmp = (Object[])candidate.get(i); 
-					range += "$"+tmp[0]+"$";
-					show = "userorg";
-				}
-			}
+			show = "usergroup";
 		 
 	}
  
@@ -306,18 +148,11 @@ boolean smsright = true;
 		if(!managerBD.hasRight(String.valueOf(session.getAttribute("userId")), "09*01*01")){
 			smsright = false;
 		}
-boolean showorgassistant = false;
-java.util.List alist = new  com.whir.govezoffice.documentmanager.bd.DocAssistantBD().getDocAssistantList("","");
-if(alist.size() > 0){
-	showorgassistant = true;
-}
-//System.out.println("===============tranType==============="+tranType);
 %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-	<title>编号</title>
+	<title>转本部门</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 	<%@ include file="/public/include/meta_base.jsp"%>
 	<%@ include file="/public/include/meta_list.jsp"%>
@@ -327,29 +162,31 @@ if(alist.size() > 0){
 <body scroll="no" onload="initPage()">
   <div class="1BodyMargin_10">  
         <div class="docBoxNoPanel" style="padding:10;border:0">  
-		  <table class="Table_bottomline" border="0" cellpadding="0" cellspacing="0" width="600" height="180">  
+		  <table class="Table_bottomline" border="0" cellpadding="0" cellspacing="0" width="95%" height="95%">  
 		     <tr>  
-                    <td class="td_lefttitle" valign="top">发送到 <font style="color:red">*</font>：</td>  
-                    <td  valign="top" align="left">  
+                    <td style="width:80px" width="80px" valign="top"><label class="">&nbsp;&nbsp;发送到<font style="color:red">*</font>：</label></td>  
+                    <td  valign="top" style="height:80%;">  
                                 
-							
-						
-						<textarea  class="inputTextarea"  readonly=true name=candidate id=candidate><%=allContent%></textarea><a href="javascript:void(0);" class="selectIco textareaIco" <% if("0".equals(tranType) || tranType == null || "".equals(tranType) ){	%>onclick="openSelect({parent:frameElement.api,allowId:'candidateId', allowName:'candidate', select:'userorggroup', single:'no', show:showType.value, range:rangeType.value,iscontrolRange:iscontrolRange.value,winModalDialog:0});" <%}else{%> onclick="openSelect({parent:window,allowId:'candidateId', allowName:'candidate', select:'userorggroup', single:'no', show:showType.value, range:rangeType.value,winModalDialog:1});" <%}%>></a>
-								
 								<input type=hidden name=candidateId id=candidateId  value="<%=allId%>">
 								<input type="hidden" name="showType" id="showType" value="<%=show%>">
 								<input type="hidden" name="rangeType"  id="rangeType"  value="<%=range%>">
 								<input type="hidden" name="iscontrolRange" id="iscontrolRange" value="<%=iscontrolRange%>">
+								<textarea cols=35 rows=9 class="inputTextarea" style="height:90%;width:90%" readonly=true name=candidate id=candidate><%=allContent%></textarea><a href="#" class="selectIco textareaIco" <% if("0".equals(tranType) || tranType == null || "".equals(tranType) ){	%>onclick="openSelect({parent:frameElement.api,allowId:'candidateId', allowName:'candidate', select:'userorggroup', single:'no', show:showType.value, range:rangeType.value,iscontrolRange:iscontrolRange.value,winModalDialog:0});" <%}else{%> onclick="openSelect({parent:window,allowId:'candidateId', allowName:'candidate', select:'userorggroup', single:'no', show:showType.value, range:'<%=range%>',winModalDialog:1});" <%}%>/>	
 									
                     </td>  
-                </tr>
-				<tr ><td class="td_lefttitle">分发用户：</td><td align="left"><input type="radio" checked name="useOrgUsers" value="0">组织用户<%if(showorgassistant){%><input type="radio" name="useOrgUsers" value="1" a="useOrgAssistants">组织公文员<%}%></td></tr>
-				<tr ><td class="td_lefttitle">提醒方式：</td><td align="left"><%if(gggg1){%><input type="checkbox" name="sendFileNeedRTX" value="1" checked='true'>即时通讯提醒&nbsp;<%}%> <%if(gggg2&&smsright){%><input type="checkbox" name="sendFileNeedSendMsg2" value="1">短信提醒&nbsp;<%}%><input type="checkbox" name="sendFileNeedMail" value="1">邮件提醒<input type="checkbox" name="sendFileCanDownload" value="1"  checked='true'>允许下载正文</td></tr>
+                </tr>  
+				<tr class="toolbarBottomLine"><td></td><td align="left" >提醒方式：&nbsp;&nbsp;<%if(gggg1){%><input type="checkbox" name="sendFileNeedRTX" value="1" checked='true'>即时通讯提醒&nbsp;&nbsp;<%}%> <%if(gggg2&&smsright){%>
+                              <input type="checkbox" name="sendFileNeedSendMsg2" value="1">短信提醒
+                              <%}%><input type="checkbox" name="sendFileNeedMail" value="1">邮件提醒
+                              	<%if("1".equals(canDownLoad)){%>
+	                  				<input type="checkbox" name="sendFileCanDownload" value="1" checked='true'>允许下载正文
+	                  			<% }%>
+                              </td></tr>
 				<tr class="toolbarBottomLine">  
 				<td></td>
-                <td align="left" >   
-				    <input type="button" name="Submit" value="发送" class="btnButton4font" onclick="include_save();"/>
-					<input type="button" name="Cancel" value="取消" class="btnButton4font" onclick="api.close()" />
+                <td  align="left">   
+				    <input type="button" name="Submit" value="发　送" class="btnButton4font" onclick="include_save();"/>
+					<input type="button" name="Cancel" value="取　消" class="btnButton4font" onclick="window.close()" />
                 </td>  
               
 				</tr>  
@@ -362,7 +199,7 @@ if(alist.size() > 0){
 </html>
 
 <SCRIPT LANGUAGE="JavaScript">
-var api = frameElement.api, W = api.opener; 
+var  W = window.opener; 
 function initPage(){
 	var candidateIdStr = '';
 	var candidateStr ='';
@@ -371,20 +208,9 @@ function initPage(){
 		//toIds += W.document.all.toPerson1Id.value;
 		
 	//}
-	//alert(W.document.getElementById("toPerson2").value);
-	if(W.document.getElementsByName("toPerson1Id").length > 0  ){//主送
-		toIds += W.document.getElementsByName("toPerson1Id")[0].value;//W.document.all.toPerson1Id.value;
+	if($("*[name='toPerson1Id']",W.document).length > 0  && $("*[name='toPerson1Id']",W.document).val()!=null && $("*[name='toPerson1Id']",W.document).val() !=''){//主送
+		toIds += $("*[name='toPerson1Id']",W.document).val();//W.document.all.toPerson1Id.value;
 	}
-	if(W.document.getElementsByName("toPerson2Id").length > 0   ){//主送
-		toIds += W.document.getElementsByName("toPerson2Id")[0].value;//W.document.all.toPerson1Id.value;
-	}
-	if(W.document.getElementsByName("toPersonBaoId").length > 0   ){//主送
-		toIds += W.document.getElementsByName("toPersonBaoId")[0].value;//W.document.all.toPerson1Id.value;
-	}
-	
-
-
-
 
 	//if(W.document.all.toPerson2Id && W.document.all.toPerson2Id.value && W.document.all.toPerson2Id.value !=''){//抄送
 		//toIds += W.document.all.toPerson2Id.value;
@@ -394,26 +220,24 @@ function initPage(){
 	//if(W.document.all.toPersonBaoId && W.document.all.toPersonBaoId.value && W.document.all.toPersonBaoId.value !=''){//抄报
 		//toIds += W.document.all.toPersonBaoId.value;		
 	//}
-	//if($("*[name='toPerson2Id']",W.document).length > 0  && $("*[name='toPerson2Id']",W.document).val()!=null && $("*[name='toPerson2Id']",W.document).val() !=''){//主送
-	//	toIds += $("*[name='toPerson2Id']",W.document).val();//W.document.all.toPerson1Id.value;
-	//}
-	//if($("*[name='toPersonBaoId']",W.document).length > 0  && $("*[name='toPersonBaoId']",W.document).val()!=null && $("*[name='toPersonBaoId']",W.document).val() !=''){//主送
-	//	toIds += $("*[name='toPersonBaoId']",W.document).val();//W.document.all.toPerson1Id.value;
-	//}
-	//alert(toIds);
+	if($("*[name='toPerson2Id']",W.document).length > 0  && $("*[name='toPerson2Id']",W.document).val()!=null && $("*[name='toPerson2Id']",W.document).val() !=''){//主送
+		toIds += $("*[name='toPerson2Id']",W.document).val();//W.document.all.toPerson1Id.value;
+	}
+	if($("*[name='toPersonBaoId']",W.document).length > 0  && $("*[name='toPersonBaoId']",W.document).val()!=null && $("*[name='toPersonBaoId']",W.document).val() !=''){//主送
+		toIds += $("*[name='toPersonBaoId']",W.document).val();//W.document.all.toPerson1Id.value;
+	}
+	
 	if(toIds !=''){
 		$.post( '/defaultroot/modules/govoffice/gov_documentmanager/services/getData.jsp',{tag:'sendtomy',toIds:toIds},function(data){
-			//alert(data);
 			var str = data.replace(/(^\s*)|(\s*$)/g,'').split(';');
 			$("*[name='candidateId']").val(str[0]);
-			//alert(str[1]);
 			$("*[name='candidate']").val(str[1]);
 			//document.frm1.candidateId.value = str[0];
 			//document.frm1.candidate.value = str[1];
 		});
 	}
 
-	// 其它模块的工作流程
+	 // 其它模块的工作流程
 	// if($("*[name='<%=participantUserField%>Id']",window.parent.opener.document).length > 0){
 	 
 	// }
@@ -489,8 +313,6 @@ function include_save(){
 					if($("*[name='sendFileNeedSendMsg2']")[0].checked){
 						//$("*[name='sendFileNeedSendMsg2']",W.document).val("1");
 						W.document.getElementsByName("sendFileNeedSendMsg2")[0].value = "1";
-					}else{
-						W.document.getElementsByName("sendFileNeedSendMsg2")[0].value = "0";
 					}
 				}
 
@@ -498,8 +320,6 @@ function include_save(){
 					if($("*[name='sendFileNeedRTX']")[0].checked){
 						//$("*[name='sendFileNeedRTX']",W.document).val("1");
 						W.document.getElementsByName("sendFileNeedRTX")[0].value = "1";
-					}else{
-						W.document.getElementsByName("sendFileNeedRTX")[0].value = "0";
 					}
 				}
 				
@@ -509,13 +329,9 @@ function include_save(){
 						if(W.document.getElementsByName("sendFileNeedMail").length>0){
 							//$("*[name='sendFileNeedMail']",W.document).val("1");
 							W.document.getElementsByName("sendFileNeedMail")[0].value = "1";
-
 						}
-					}else{
-						W.document.getElementsByName("sendFileNeedMail")[0].value = "0";
 					}
 				}
-
 				if( $("*[name='sendFileCanDownload']").length>0){
 					if($("*[name='sendFileCanDownload']")[0].checked){
 						if(W.document.getElementsByName("sendFileCanDownload").length>0){
@@ -527,17 +343,11 @@ function include_save(){
 						W.document.getElementsByName("sendFileCanDownload")[0].value = "0";
 					}
 				}
-				if($("*[name='candidate']").val().length >700){
-					alert("您选择的组织/人员太多!");	
-					return;	
-				}
-				var useOrgUsers = $("input[name='useOrgUsers']:checked")[0].value;//组织用户
-
-				W.cmdSendToMy(useOrgUsers);
-
+				W.cmdSendToMyDep();
 				W.document.getElementsByName("sendToMyName")[0].value="";
 				W.document.getElementsByName("sendToMyId")[0].value="";
-				api.close();
+				alert("分发成功！");
+				window.close();
 
 			}else{
 				 // if(document.frm1.candidateId.value==""){
@@ -559,11 +369,7 @@ function include_save(){
 	if( $("*[name='sendFileNeedSendMsg2']").length>0){
 		if($("*[name='sendFileNeedSendMsg2']")[0].checked){
 			$("*[name='sendFileNeedSendMsg2']",W.document).val("1");
-		}else{
-			$("*[name='sendFileNeedSendMsg2']",W.document).val("0");
 		}
-	}else{
-		$("*[name='sendFileNeedSendMsg2']",W.document).val("0");
 	}
       //  if(document.all.frm1.sendFileNeedSendMsg2){
 		//   if(document.all.frm1.sendFileNeedSendMsg2.checked){
@@ -573,11 +379,7 @@ function include_save(){
 	if( $("*[name='sendFileNeedRTX']").length>0){
 		if($("*[name='sendFileNeedRTX']")[0].checked){
 			$("*[name='sendFileNeedRTX']",W.document).val("1");
-		}else{
-			$("*[name='sendFileNeedRTX']",W.document).val("0");
 		}
-	}else{
-		$("*[name='sendFileNeedRTX']",W.document).val("0");
 	}
 
 		//if(document.all.frm1.sendFileNeedRTX){
@@ -585,34 +387,23 @@ function include_save(){
 		     //W.document.all.sendFileNeedRTX.value="1";		
 		  //}
 		//}
-
 	if( $("*[name='sendFileNeedMail']").length>0){
 		if($("*[name='sendFileNeedMail']")[0].checked){
 			if( $("*[name='sendFileNeedMail']",W.document).length>0){
 				$("*[name='sendFileNeedMail']",W.document).val("1");
-		
 			}
-		}else{
-			$("*[name='sendFileNeedMail']",W.document).val("0");
 		}
-	}else{
-		$("*[name='sendFileNeedMail']",W.document).val("0");
 	}
-
 	if( $("*[name='sendFileCanDownload']").length>0){
 		if($("*[name='sendFileCanDownload']")[0].checked){
-			if( $("*[name='sendFileCanDownload']",W.document).length>0){
-				$("*[name='sendFileCanDownload']",W.document).val("1");
+			if(W.document.getElementsByName("sendFileCanDownload").length>0){
+				//$("*[name='sendFileNeedMail']",W.document).val("1");
+				W.document.getElementsByName("sendFileCanDownload")[0].value = "1";
+
 			}
 		}else{
-			$("*[name='sendFileCanDownload']",W.document).val("0");
+			W.document.getElementsByName("sendFileCanDownload")[0].value = "0";
 		}
-	}else{
-		$("*[name='sendFileCanDownload']",W.document).val("0");
-	}
-	if($("*[name='candidate']").val().length >700){
-		alert("您选择的组织/人员太多!");	
-		return;	
 	}
 		//if(document.all.frm1.sendFileNeedMail){
 		   //if(document.all.frm1.sendFileNeedMail.checked){
@@ -621,11 +412,12 @@ function include_save(){
 			  // }
 		  //}
 		//}
-	   	var useOrgUsers = $("input[name='useOrgUsers']:checked")[0].value;//组织用户
-		W.cmdSendToMy(useOrgUsers);
+
+		W.cmdSendToMyDep();
 			$("*[name='sendToMyName']",W.document).val("");
 				$("*[name='sendToMyId']",W.document).val("");
-					api.close();
+					alert("分发成功！");
+					window.close();
 		//W.document.all.sendToMyName.value="";
 		//W.document.all.sendToMyId.value="";
 			
@@ -635,5 +427,6 @@ function include_save(){
 		}
 	
 }
+
 //-->
 </SCRIPT>

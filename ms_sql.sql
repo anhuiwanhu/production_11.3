@@ -258,3 +258,14 @@ insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) va
 go
 
 
+
+
+
+alter table wf_work alter column workStepCount numeric(3,0);
+go
+alter table GOV_DOCUMENTSENDFILE alter column sendtomyname varchar(2000);
+go
+insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) values('Wanhu ezOFFICE','11.3.0.13_SP_20160129','11.3.0.13',getdate());
+go
+
+

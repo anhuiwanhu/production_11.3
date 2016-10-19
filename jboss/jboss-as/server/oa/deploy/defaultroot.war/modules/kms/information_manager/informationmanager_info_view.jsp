@@ -598,11 +598,16 @@ function save(flag,obj){
 
 $(document).ready(function(){
     var isfordbidCopy = '<s:property value="information.forbidCopy"/>';
+	var forbidcopy = isfordbidCopy;
 	if(isfordbidCopy == '1'){
 		isfordbidCopy="-1,1,0,0,0,0,0,0";
 	}else{
 		isfordbidCopy="-1,2,0,0,0,0,1,0";
 	}
+	var hasprintright = '0';
+	<s:if test="#request.canPrint==1">
+		hasprintright = '1';
+	</s:if>
 
 	<s:if test="information.informationType==4">
 		if(isSurface()){
@@ -618,12 +623,20 @@ $(document).ready(function(){
 			webform.WebOffice.UserName="<%=session.getAttribute("userName")%>";
 			webform.WebOffice.showMenu = "0";
 			webform.WebOffice.EnablePrint =isfordbidCopy;
+			if(isfordbidCopy == "-1,2,0,0,0,0,1,0"){
+			   if(hasprintright == '1'){
+			       webform.WebOffice.AppendTools("106","打印",5);
+			   }else{
+					//3：自定义工具栏=true,	Office工具栏=false
+					webform.WebOffice.ShowToolBar = 3;
+			   }
+			}else{
+				webform.WebOffice.ShowToolBar = 3;
+			}
 			webform.WebOffice.WebOpen();
             //webform.WebOffice.FullSize();全屏显示
 			webform.WebOffice.ShowType="1";
-			if(isfordbidCopy == "-1,2,0,0,0,0,1,0"){
-			   webform.WebOffice.AppendTools("106","打印",5);
-			}
+			
 			webform.WebOffice.WebToolsVisible('Standard',false);  //标准
 			webform.WebOffice.WebToolsVisible('Formatting',false);  //格式
 			webform.WebOffice.WebToolsVisible('Tables and Borders',false);  //表格和边框
@@ -670,8 +683,15 @@ $(document).ready(function(){
 			webform.WebOffice.UserName="<%=session.getAttribute("userName")%>";
 			webform.WebOffice.showMenu = "0";
 			webform.WebOffice.EnablePrint =isfordbidCopy;
-			if(isfordbidCopy == "1"){
-			   webform.WebOffice.AppendTools("106","打印",5);
+			if(forbidcopy != "1"){
+				//20160126 -by jqq 金格控件打印控制
+			   if(hasprintright == '1'){
+					webform.WebOffice.AppendTools("106","打印",5);
+			   }else{
+					webform.WebOffice.ShowToolBar = 3;
+			   }
+			}else{
+				webform.WebOffice.ShowToolBar = 3;
 			}
 			webform.WebOffice.WebOpen();  	//打开该文档    交互OfficeServer的OPTION="LOADTEMPLATE"
             //webform.WebOffice.FullSize();
@@ -722,8 +742,15 @@ $(document).ready(function(){
 			webform.WebOffice.UserName="<%=session.getAttribute("userName")%>";
 			webform.WebOffice.showMenu = "0";
 			webform.WebOffice.EnablePrint =isfordbidCopy;
-			if(isfordbidCopy == "1"){
-			   webform.WebOffice.AppendTools("106","打印",5);
+			if(forbidcopy != "1"){
+				//20160126 -by jqq 金格控件打印控制
+				if(hasprintright == '1'){
+					webform.WebOffice.AppendTools("106","打印",5);
+				}else{
+					webform.WebOffice.ShowToolBar = 3;
+			    }
+			}else{
+				webform.WebOffice.ShowToolBar = 3;
 			}
 			webform.WebOffice.WebOpen();  	//打开该文档    交互OfficeServer的OPTION="LOADTEMPLATE"
             //webform.WebOffice.FullSize();

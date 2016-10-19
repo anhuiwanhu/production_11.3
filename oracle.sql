@@ -355,3 +355,14 @@ where wf_immoform_id = (select wf_immoform_id from ezoffice.WF_IMMOBILITYFORM wh
 commit;
 insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.12_SP_20160117','11.3.0.12',sysdate);
 commit;
+
+
+
+
+
+alter table wf_work modify workStepCount number(3);
+commit;
+alter table GOV_DOCUMENTSENDFILE modify sendtomyname varchar2(2000);
+commit;
+insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.13_SP_20160129','11.3.0.13',sysdate);
+commit;

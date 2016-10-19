@@ -367,7 +367,8 @@ String    gd=request.getParameter("gd")==null?"":request.getParameter("gd").toSt
 						//文字
 						if(commentType.equals("0")){
 							  //内容
-							  jsContent+=com.whir.common.util.CharacterTool.escapeHTMLTags(dealContent);						 
+							  //jsContent+=com.whir.common.util.CharacterTool.escapeHTMLTags(dealContent);	
+							  jsContent+="<div style='text-align:left;word-break: break-all;'>"+com.whir.common.util.CharacterTool.escapeHTMLTags(dealContent)+"</div>";
 						}
  
 						if(commentType.equals("4")){

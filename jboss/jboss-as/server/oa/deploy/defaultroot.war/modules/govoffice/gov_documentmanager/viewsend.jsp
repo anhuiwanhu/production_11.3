@@ -115,7 +115,8 @@ request.setAttribute("p_wf_cur_ModifyField",null);
     modiButton = ",Viewacc";
    
    }*/
-
+   //是否可下载，是从列表中传入的参数
+   String canDownLoad = request.getParameter("canDownLoad")==null?"0":request.getParameter("canDownLoad").toString();
 %>
 <%if(sysMap != null && sysMap.get("附件上传") != null && sysMap.get("附件上传").toString().equals("0")){%>
 <!--<object classid="clsid:A7EE3B4B-DB6C-4957-A904-DD7EA2BB3DCB"
@@ -158,9 +159,6 @@ String editId=request.getParameter("editId");//发文记录ID
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><%if("1".equals(request.getParameter("showReceiveFile"))){%>收文查阅<%}else{%>收文查阅<%}%></title><!--发文查阅-->
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-	<style>
-		html,body {height:100%;}
-	</style>
 	<%@ include file="/public/include/meta_base_head.jsp"%>
 	<%@ include file="/public/include/meta_base.jsp"%>
 	<%@ include file="/public/include/meta_detail.jsp"%>
@@ -364,7 +362,7 @@ com.whir.ezoffice.information.infomanager.bd.NewInformationBD newInformationBD =
 		} 
 %>
 <iframe id="ifrm9" name="ifrm9" src="" style="display:none"></iframe>
-<div style="display:none">
+<div style="display='none'">
  <form name="sendToMyForm" id="sendToMyForm" method="post" action="modules/govoffice/gov_documentmanager/sendocument_bottom_SendToMy_range2.jsp" >
 	<input type="hidden" name="sendToMyRange3" value="<%=SendToMyRange%>">
 	<input type="hidden" name="p_wf_recordId" value="<%=request.getParameter("p_wf_recordId")==null?"":request.getParameter("p_wf_recordId")%>"/>
@@ -398,6 +396,8 @@ com.whir.ezoffice.information.infomanager.bd.NewInformationBD newInformationBD =
 <input type="hidden" name="accessorySaveName" value="<%=accessorySaveName%>">
 <input type="hidden" name="accessoryName1" value="<%=fileTitle%>.doc">
 <input type="hidden" name="accessorySaveName1" value="<%=mRecordID_1%>.doc">
+<!-- 是否可以下载正文，转本部门中看 -->
+<input type="hidden" id ="canDownLoad" value = "<%=canDownLoad%>" >
 <%//=request.getAttribute("javax.servlet.forward.query_string")%>
 <%java.util.List receivefilelist = new com.whir.ezoffice.workflow.newBD.ProcessBD().getUserProcess(session.getAttribute("userId").toString(), session.getAttribute("orgIdString").toString(), "3");%>
  <script language="javascript">
@@ -415,12 +415,13 @@ com.whir.ezoffice.information.infomanager.bd.NewInformationBD newInformationBD =
 <input type="hidden" name="sendToMyId" >
 <input type="hidden" name="sendToMyName">
 <input type="hidden" name="sendFileNeedMail" value="0">
+<input type="hidden" name="sendFileCanDownload" value="0">
 <input type="hidden" name="tableNameOrId" value="<%=read_tableId%>">
  <%
    if(!workStatus.equals("-3")){
  %>
-<div style="display:none">
-		<table style="display:none">
+<div style="display='none'">
+		<table style="display='none'">
 		<%
 		String cancelHref = "postWindowOpen('govezoffice/gov_documentmanager/workflow_cancelReason.jsp?workStatus=1&workId=workIdValue&search=searchValue&workTitle=workTitleValue&tableId=tableIdValue&processName=processName&processId=processIdValue&recordId=recordIdValue&fileType=GSF&fileTitle=fileTitleValue','','TOP=0,LEFT=0,scrollbars=no,resizable=no,width=480,height=250')";
 		String formName = "GovSendFileActionForm";//在包含页中指定form的名称
@@ -460,7 +461,7 @@ com.whir.ezoffice.information.infomanager.bd.NewInformationBD newInformationBD =
  
  
 
-	  <iframe id="ifrm1" name="ifrm1" src="" style="display:none"></iframe>
+	  <iframe id="ifrm1" name="ifrm1" src="" style="display='none'"></iframe>
 </body>
 <%
  String id1= request.getParameter("editId")==null?"":request.getParameter("editId").toString();

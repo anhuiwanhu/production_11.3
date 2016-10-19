@@ -150,6 +150,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 									<%--自动编号 111--%>
 									<c:when test="${showtype =='111' && readwrite =='1'}">
 										<x:out select="$fd/value/text()"/>
+										<input id='<x:out select="$fd/sysname/text()"/>' type="hidden" name='_main_<x:out select="$fd/sysname/text()"/>' value='<x:out select="$fd/value/text()"/>' />
 									</c:when>
 	
 									<%--html编辑 113--%>
@@ -518,8 +519,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
     //选择日期时间
     function selectDateTime(){
     	var dateType = '';
-    	var firstParam;
-    	$('input').each(function(){
+    	$('input[data-datetype=date],[data-datetype=datetime],[data-datetype=time]').each(function(){
     		dateType = $(this).data('datetype');
     		if(dateType){
 				$(this).mobiscroll(opt[dateType]);

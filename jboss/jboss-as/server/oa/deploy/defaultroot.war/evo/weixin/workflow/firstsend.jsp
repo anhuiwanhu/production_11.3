@@ -96,9 +96,15 @@
 						$('#scopeId').val('<x:out select="$n/scopeId/text()"/>');
 					}else if( '<x:out select="$n/scopeType/text()"/>' == 'scopes_user' ){
 						var scopeName = '<x:out select="$n/scopeName/text()"/>';
+						var scopeId_ = '<x:out select="$n/scopeId/text()"/>'
 						if(scopeName.split(',').length == 1){
-							$('#userId').val('<x:out select="$n/scopeId/text()"/>');
-							$('#userName').val('<x:out select="$n/scopeName/text()"/>');
+						    if(scopeId_.indexOf('*0*')> -1){
+						    	$('#userId').val('');
+	          	 				$('#userName').val('');
+						    }else{
+								$('#userId').val('<x:out select="$n/scopeId/text()"/>');
+								$('#userName').val('<x:out select="$n/scopeName/text()"/>');
+							}
 						}else{
 							$('#userId').val('');
 	          	 			$('#userName').val('');

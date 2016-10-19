@@ -82,7 +82,7 @@
 	                        <input type="hidden" id="fileSizeCount" name="fileSizeCount" value="0"/>
 	                    </td>
 	                </tr>
-                    <c:if test="${param.openType eq 'forward' || param.openType eq 'sendAgain'}">
+                    <c:if test="${param.openType eq 'forward' || param.openType eq 'sendAgain'} && !${realFileNames eq ''}">
 		                <tr>
 		                	<td colspan="2">
 			                        <c:set var="realFileNames">${realFileNames}</c:set> 
@@ -164,10 +164,17 @@
 								                          ${newContent}
 								</textarea>		
 						  	</c:when>
+						  	<c:when test="${param.openType eq 'sendAgain'}">
+						  		<textarea id="mailcontent" name="mailcontent" class="edit-txta edit-txta-l" placeholder="请输入文字" style="min-height:20rem">
+								
+								
+								
+								
+								                          ${newContent}
+								</textarea>		
+						  	</c:when>
 					  		<c:otherwise>
-				                <textarea id="mailcontent" name="mailcontent" class="edit-txta edit-txta-l" placeholder="请输入文字" style="min-height:20rem">							
-								${newContent}
-							    </textarea>	
+				                <textarea id="mailcontent" name="mailcontent" class="edit-txta edit-txta-l" placeholder="请输入文字" style="min-height:20rem">${newContent}</textarea>	
 							</c:otherwise>
 					  		</c:choose>
 	                        </div>
