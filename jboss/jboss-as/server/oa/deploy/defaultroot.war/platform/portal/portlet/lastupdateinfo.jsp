@@ -62,6 +62,7 @@ Portlet.setMoreLink('<%=portletSettingId%>',{});
         <ul class="clearfix">
 <%
     for(int i0=0; i0<len; i0++){
+    String morelink2 = (String)linkMap.get(cid[i0]);
 		
 %>	
 <%if(i0 == 0){%>
@@ -117,7 +118,7 @@ Portlet.setMoreLink('<%=portletSettingId%>',{});
 			<div class="wh-portal-i-item clearfix">
             	<a  href="#<%=ivo.getId()%>">
                 <i class="fa fa-file-o"></i>
-                <span class="wh-portal-a-cursor" onclick="<%=_link%>" title="<%=ivo.getPoptitle()%>"><%=ivo.getName()%></span>
+                <%=ivo.getChannelTitle()%><span class="wh-portal-a-cursor" onclick="<%=_link%>" title="<%=ivo.getPoptitle()%>"><%=ivo.getName()%></span>
                 <em><%=ivo.getTime()%></em><%=ivo.getTitle()%>
                 </a>
             </div>

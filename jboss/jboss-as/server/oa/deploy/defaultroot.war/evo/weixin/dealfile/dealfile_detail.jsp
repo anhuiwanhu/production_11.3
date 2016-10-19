@@ -166,23 +166,22 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 										<x:forEach select="$fd//dataList/comment" var="ct" >
 											<x:out select="$ct//content/text()"/>&nbsp;&nbsp;<x:out select="$ct//person/text()"/>(<x:out select="$ct//date/text()"/>)
 										</x:forEach>
-										<c:if test="${sysname == passRoundCommField}">
-										<textarea class="edit-txta edit-txta-r" placeholder="请输入" name="comment_input" id="comment_input" maxlength="50"></textarea>
-										<div class="examine">
-											<a class="edit-select edit-ipt-r">
-												<div class="edit-sel-show">
-													<span>常用审批语</span>
-												</div>    
-												<select id="sel" onchange="$('.edit-sel-show span').html(  $('#sel option:selected').text() )  ;selectComment(this);">
-													<option value="">常用审批语</option> 
-													<option value="同意">同意</option>
-													<option value="已阅">已阅</option>
-												</select>
-											</a>
-										</div>
-										</c:if>
+<%--										<c:if test="${sysname == passRoundCommField}">--%>
+											<textarea class="edit-txta edit-txta-l" placeholder="请输入" name="comment_input" id="comment_input" maxlength="50"></textarea>
+											<div class="examine" style="text-align:right;">
+												<a class="edit-select edit-ipt-r">
+													<div class="edit-sel-show">
+														<span>常用审批语</span>
+													</div>    
+													<select class="btn-bottom-pop" id="sel" onchange="selectComment(this);">
+														<option value="">常用审批语</option> 
+														<option value="同意">同意</option>
+														<option value="已阅">已阅</option>
+													</select>
+												</a>
+											</div>
+<%--										</c:if>--%>
 									</c:when>
-	
 									<c:otherwise>
 										<x:out select="$fd/value/text()"/>
 									</c:otherwise>
@@ -229,7 +228,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							<c:set var="commentType"><x:out select="$ct//type/text()"/></c:set>
 							<c:set var="commentContent"><x:out select="$ct//content/text()"/></c:set>
 							<tr>
-								<th><x:out select="$ct//step/text()"/><i class="fa fa-asterisk"></i>：</th>
+								<th><x:out select="$ct//step/text()"/>：</th>
 								<td><x:out select="$ct//content/text()"/>&nbsp;&nbsp;<x:out select="$ct//person/text()"/>(<x:out select="$ct//date/text()"/>)</td>
 							</tr>
 						</x:forEach>
@@ -303,7 +302,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 				if(data){
 					var jsonData = eval('('+data+')');
 					console.info(jsonData.result);
-					if(jsonData.result = 'success'){
+					if(jsonData.result == 'success'){
 						alert('发送成功！');
 						window.location = '/defaultroot/dealfile/list.controller?workStatus=0';
 					}
@@ -339,7 +338,23 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 			$("#subtableContent").empty();
 		}
 	}
-
+    
+    //选择批示意见
+    function selectComment(obj){
+    	var $selectObj = $(obj);
+    	var selectVal = $selectObj.val();
+    	var $textarea = $selectObj.parent().parent().siblings();
+    	setSpanHtml(obj,selectVal);
+    	$textarea.val($textarea.val() + selectVal);
+    }
+    
+   //设置span中的值
+	function setSpanHtml(obj,selectVal){
+    	if(!selectVal){
+    		selectVal = $(obj).find("option:selected").text();
+    	}
+		$(obj).parent().find('div>span').html(selectVal);
+	} 
 	 //打开子表 
     /*function addSubTable(workId){
 		pageLoading();

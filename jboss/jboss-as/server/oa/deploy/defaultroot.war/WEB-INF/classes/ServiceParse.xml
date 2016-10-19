@@ -195,6 +195,7 @@
 			<method>listInformation</method>
 			<method>getAccessory</method>
 			<method>getImageInfoList</method>
+			<method>getAllUserChannel</method>
 		</methods>
 	</service>
 	<service id="c9">

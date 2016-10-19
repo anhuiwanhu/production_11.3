@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.activiti.engine.impl.persistence.entity.WhirEzFlowCommentEntity">
+
+  <insert id="insertWhirEzFlowComment" parameterType="org.activiti.engine.impl.persistence.entity.WhirEzFlowCommentEntity">
+      insert into EZ_FLOW_RE_COMMENT (
+        ID,
+        DEALUSERID,
+        DEALUSERNAME,
+        DEALCONTENT,
+        DEALTIME,
+        COMMENTFIELD,
+        COMMENTTYPE,
+        ISSTANDFOR,
+        STANDFORUSERID,
+        STANDFORUSERNAME,
+        RECORDID,
+        PROCESSINSTANCEID,
+        ACTIVITYID,
+        ACTIVITYNAME,
+        REVISION,
+        ACCDISNAME,
+        ACCSAVENAME,
+        DEALUSER_DUTYLEVEL,
+        COMMENTSTATUS,
+        
+        DEALUSERORG,
+        RANGE_USER,
+        RANGE_ORG,
+        RANGE_GROUP,
+        
+        
+        ISTRANTASK,
+        TASKID,
+        TRANFROMTASKID,
+        TRANFORMUSERID,
+        TRANFORMUSERNAME,
+        TRANFORMUSERACCOUNT,
+        ATTITUDE_TYPE   
+               
+      ) values (
+        #{id,jdbcType=VARCHAR},
+        #{dealUserId, jdbcType=VARCHAR},
+        #{dealUserName, jdbcType=VARCHAR},
+        #{dealContent, jdbcType=VARCHAR},
+        #{dealTime,jdbcType=TIMESTAMP},
+        #{commentField,jdbcType=VARCHAR},
+        #{commentType,jdbcType=VARCHAR},
+        #{isStandFor,jdbcType=INTEGER},
+        #{standForUserId, jdbcType=VARCHAR}, 
+        #{standForUserName, jdbcType=VARCHAR},
+        #{recordId, jdbcType=VARCHAR},
+        #{processInstanceId, jdbcType=VARCHAR},
+        #{activityId, jdbcType=VARCHAR},
+        #{activityName, jdbcType=VARCHAR},
+        #{revision, jdbcType=VARCHAR},
+        #{accDisName, jdbcType=VARCHAR},
+        #{accSaveName,jdbcType=VARCHAR},
+        #{dealUserDutyLevel,jdbcType=DOUBLE},
+        #{commentStatus,jdbcType=INTEGER},
+        
+        #{dealUserOrg,jdbcType=VARCHAR},
+        #{rangUser,jdbcType=VARCHAR},
+        #{rangOrg,jdbcType=VARCHAR},
+        #{rangGroup,jdbcType=VARCHAR},
+        
+        
+        #{isTranTask,jdbcType=INTEGER},
+        #{taskId,jdbcType=VARCHAR},
+        #{tranFromTaskId,jdbcType=VARCHAR},
+        #{tranFormUserId,jdbcType=BIGINT},
+        #{tranFormUserName,jdbcType=VARCHAR},
+        #{tranFormUserAccount,jdbcType=VARCHAR},
+        #{attitudeType,jdbcType=INTEGER}
+ 
+	
+      )
+  </insert>
+    		
+   <update id="updateWhirEzFlowComment" parameterType="org.activiti.engine.impl.persistence.entity.WhirEzFlowCommentEntity">
+    update EZ_FLOW_RE_COMMENT
+    <set>
+      DEALUSERID = #{dealUserId, jdbcType=VARCHAR},
+      DEALUSERNAME = #{dealUserName, jdbcType=VARCHAR},
+      DEALCONTENT = #{dealContent, jdbcType=VARCHAR},
+      DEALTIME = #{dealTime, jdbcType=TIMESTAMP},
+      COMMENTFIELD = #{commentField, jdbcType=VARCHAR},
+      COMMENTTYPE = #{commentType, jdbcType=VARCHAR},
+      ACCDISNAME = #{accDisName, jdbcType=VARCHAR},
+      ACCSAVENAME = #{accSaveName, jdbcType=VARCHAR},
+      DEALUSER_DUTYLEVEL = #{dealUserDutyLevel, jdbcType=DOUBLE},
+      COMMENTSTATUS = #{commentStatus, jdbcType=INTEGER},
+      
+      DEALUSERORG = #{dealUserOrg, jdbcType=VARCHAR},
+      RANGE_USER = #{rangUser, jdbcType=VARCHAR},
+      RANGE_ORG = #{rangOrg, jdbcType=VARCHAR},
+      RANGE_GROUP = #{rangGroup, jdbcType=VARCHAR}
+    </set>
+    where ID = #{id, jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  <delete id="deleteWhirEzFlowComment" parameterType="string">
+    delete from EZ_FLOW_RE_COMMENT where ID = #{id}
+  </delete>
+  
+  
+  <delete id="deleteWhirEzFlowCommentByCriteria" parameterType="org.activiti.engine.impl.WhirEzFlowCommentQueryImpl" >
+    delete from EZ_FLOW_RE_COMMENT 
+    <where>
+      1=1 
+      <if test="revision != null">
+       and  REVISION = #{revision}
+      </if>
+      <if test="processInstanceId != null">
+       and  PROCESSINSTANCEID = #{processInstanceId}
+      </if>
+      <if test="recordId != null">
+       and  RECORDID = #{recordId}
+      </if>
+      <if test="activityId != null">
+       and  ACTIVITYID = #{activityId}
+      </if>
+      <if test="dealUserId != null">
+       and  DEALUSERID = #{dealUserId}
+      </if>
+      <if test="commentStatus != null">
+       and  COMMENTSTATUS = #{commentStatus}
+      </if>
+    </where>
+  </delete>
+  
+  <resultMap id="whirEzFlowCommentResultMap" type="org.activiti.engine.impl.persistence.entity.WhirEzFlowCommentEntity">
+    <id     property="id"                  column="ID"                  jdbcType="VARCHAR" />
+    <result property="dealUserId"          column="DEALUSERID"          jdbcType="VARCHAR" />
+    <result property="dealUserName"        column="DEALUSERNAME"        jdbcType="VARCHAR" />
+    <result property="dealContent"         column="DEALCONTENT"         jdbcType="VARCHAR" />
+    <result property="dealTime"            column="DEALTIME"            jdbcType="TIMESTAMP" />
+    <result property="commentField"        column="COMMENTFIELD"        jdbcType="VARCHAR" />
+    <result property="commentType"         column="COMMENTTYPE"         jdbcType="VARCHAR" />
+    <result property="isStandFor"          column="ISSTANDFOR"          jdbcType="INTEGER" />
+    <result property="standForUserId"      column="STANDFORUSERID"      jdbcType="VARCHAR" />
+    <result property="standForUserName"    column="STANDFORUSERNAME"    jdbcType="VARCHAR" />
+    <result property="recordId"            column="RECORDID"            jdbcType="VARCHAR" />
+    <result property="processInstanceId"   column="PROCESSINSTANCEID"   jdbcType="VARCHAR" />
+    <result property="activityId"          column="ACTIVITYID"          jdbcType="VARCHAR" />
+    <result property="activityName"        column="ACTIVITYNAME"        jdbcType="VARCHAR" />
+    <result property="revision"            column="REVISION"            jdbcType="VARCHAR" />
+    <result property="accDisName"          column="ACCDISNAME"          jdbcType="VARCHAR" />
+    <result property="accSaveName"         column="ACCSAVENAME"         jdbcType="VARCHAR" />
+    <result property="dealUserDutyLevel"   column="DEALUSER_DUTYLEVEL"  jdbcType="DOUBLE" />
+    <result property="commentStatus"       column="COMMENTSTATUS"       jdbcType="INTEGER" />
+
+    <result property="isTranTask"           column="ISTRANTASK"           jdbcType="INTEGER" />
+    <result property="taskId"               column="TASKID"               jdbcType="VARCHAR" />
+    <result property="tranFromTaskId"       column="TRANFROMTASKID"       jdbcType="VARCHAR" />
+    <result property="tranFormUserId"       column="TRANFORMUSERID"       jdbcType="BIGINT" />
+    <result property="tranFormUserName"     column="TRANFORMUSERNAME"     jdbcType="VARCHAR" />
+    <result property="tranFormUserAccount"  column="TRANFORMUSERACCOUNT"  jdbcType="VARCHAR" />
+    <result property="isoldComment"         column="ISOLDCOMMENT"         jdbcType="INTEGER" />
+    <result property="attitudeType"         column="ATTITUDE_TYPE"        jdbcType="INTEGER" />
+    <result property="s_orgId"              column="S_ORGID"              jdbcType="VARCHAR" />
+    <result property="s_orgName"            column="S_ORGNAME"            jdbcType="VARCHAR" />
+  </resultMap>
+ 	
+  
+  <select id="selectWhirEzFlowComment" parameterType="string" resultMap="whirEzFlowCommentResultMap">
+   select * from EZ_FLOW_RE_COMMENT where ID = #{id}
+  </select>
+
+  
+  <select id="selectCommentByQueryCriteria" parameterType="org.activiti.engine.impl.WhirEzFlowCommentQueryImpl" resultMap="whirEzFlowCommentResultMap">
+    select t.*,
+    <choose>
+       <when test="s_orgOrderBy != null">
+         o.ORG_ID  as S_ORGID,   o.ORGNAME as S_ORGNAME
+       </when>
+       <otherwise>
+            '' as S_ORGID, '' as S_ORGNAME 
+        </otherwise>
+    </choose>  
+    <include refid="selectWhirEzFlowCommentByQueryCriteriaSql"/>
+  </select>
+  
+ 
+  <sql id="selectWhirEzFlowCommentByQueryCriteriaSql">
+    from EZ_FLOW_RE_COMMENT t
+    <if test="s_orgOrderBy != null">
+       , ORG_ORGANIZATION_USER eo  ,ORG_ORGANIZATION  o   
+    </if>
+    <where>
+      <if test="s_orgOrderBy != null">
+         t.dealuserid=eo.emp_id  and  eo.org_id=o.org_id  and   
+      </if>
+      1=1 
+      <if test="revision != null">
+       and  t.REVISION = #{revision}
+      </if>
+      <if test="processInstanceId != null">
+       and  t.PROCESSINSTANCEID = #{processInstanceId}
+      </if>
+      <if test="recordId != null">
+       and  t.RECORDID = #{recordId}
+      </if>
+       <if test="activityId != null">
+       and  t.ACTIVITYID = #{activityId}
+      </if>
+      <if test="dealUserId != null">
+       and  t.DEALUSERID = #{dealUserId}
+      </if>
+      <if test="commentStatus != null">
+       and  t.COMMENTSTATUS = #{commentStatus}
+      </if>
+      
+      <if test="commentField != null">
+       and  t.COMMENTFIELD = #{commentField} 
+      </if>
+      
+       and ( ( RANGE_USER='-1'  and RANGE_ORG='-1' and  RANGE_GROUP='-1')
+       
+       <if test="nowUserId != null">
+          or  t.DEALUSERID = #{nowUserId} 
+       </if>
+
+       <if test="rangUsers != null || rangOrgs != null || rangGroups != null">
+         
+           <if test="rangUsers != null">
+               or
+              <foreach item="var" collection="rangUsers" index="index">
+                t.RANGE_USER like  #{var}
+                <if test="index!=(rangUsers.size()-1)">
+                   or
+                 </if>
+               </foreach>
+           </if>
+           
+            <if test="rangOrgs != null">
+               or
+               <foreach item="var" collection="rangOrgs" index="index">
+                 t.RANGE_ORG like  #{var} 
+                 <if test="index!=(rangOrgs.size()-1)">
+                   or
+                 </if>
+               </foreach>
+            </if>
+            
+            <if test="rangGroups != null">
+              or
+             <foreach item="var" collection="rangGroups" index="index">
+              t.RANGE_GROUP like  #{var}  
+              <if test="index!=(rangGroups.size()-1)">
+               or
+              </if>
+             </foreach>
+            </if>
+            
+      </if>
+       )
+       
+      <if test="orderBy != null">
+           ${orderBy}
+      </if> 
+       
+    </where>
+  </sql>
+</mapper>

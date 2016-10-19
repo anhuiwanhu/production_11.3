@@ -54,7 +54,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
                     		<img src="${EmpLivingPhoto eq '' || EmpLivingPhoto eq null ? '/defaultroot/evo/weixin/images/head.png' : EmpLivingPhoto}">
                     	</strong>
                     	<p>
-	                    	<a href="javascript:void(0);"><em class="not-over">未完成</em>${worktitle}</a>
+	                    	<a href="javascript:void(0);"><c:if test="${fn:indexOf(workcurstep,'办理完毕') == -1}"><em class="not-over">未完成</em></c:if>${worktitle}当前环节为${workcurstep}</a>
 	                    	<span>（${fn:substring(worksubmittime,0,16)}）</span>
                     	</p>
                     </li> 
@@ -905,8 +905,12 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</tr>
 						</x:if>
 						<tr>
+							<c:set var="commentField"><x:out select="$doc//workInfo/commentField/text()"/></c:set>
 							<th>批示意见</th>
 							<td> 
+								<c:if test="${not empty commentField}">
+									<textarea name='comment_input' class="edit-txta edit-txta-l" maxlength="300" placeholder="请输入文字"></textarea>
+								</c:if>
 							</td>
 						</tr>
 						<x:if select="$govDoc//comment/documentSendFileAssumeUnit">

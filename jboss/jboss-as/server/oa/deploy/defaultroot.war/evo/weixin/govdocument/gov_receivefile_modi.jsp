@@ -782,15 +782,19 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</tr>
 						</x:if>
 						<tr>
+							<c:set var="commentField"><x:out select="$doc//workInfo/commentField/text()"/></c:set>
 							<th>批示意见</th>
 							<td> 
+								<c:if test="${not empty commentField}">
+									<textarea name='comment_input' class="edit-txta edit-txta-l" maxlength="300" placeholder="请输入文字"></textarea>
+								</c:if>
 							</td>
 						</tr>
-						<x:if select="$govDoc//comment/documentSendFileAssumeUnit">
-						 <c:set var="content" ><x:out select="$govDoc//comment/documentSendFileAssumeUnit/text()"/></c:set>
+						<x:if select="$govDoc//comment/receiveFileLeaderComment">
+						 <c:set var="content" ><x:out select="$govDoc//comment/receiveFileLeaderComment/text()"/></c:set>
 						<tr>
 							<th>
-								<x:out select="$govDoc//comment/documentSendFileAssumeUnit/@name" />
+								<x:out select="$govDoc//comment/receiveFileLeaderComment/@name" />
 							</th>
 							<td> 
 								 <%
@@ -808,11 +812,11 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</td>
 							</tr>
 						</x:if> 
-					 <x:if select="$govDoc//comment/sendFileMassDraft">
-					 <c:set var="content" ><x:out select="$govDoc//comment/sendFileMassDraft/text()"/></c:set>
+					 <x:if select="$govDoc//comment/receiveFileSettleLeaderComment">
+					 <c:set var="content" ><x:out select="$govDoc//comment/receiveFileSettleLeaderComment/text()"/></c:set>
 					 <tr>
 					 		<th>
-								<x:out select="$govDoc//comment/sendFileMassDraft/@name" />
+								<x:out select="$govDoc//comment/receiveFileSettleLeaderComment/@name" />
 							</th>
 							<td> 
 								 <%
@@ -830,11 +834,11 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</td>
 					</tr>
 					 </x:if>
-					 <x:if select="$govDoc//comment/sendFileProveDraft">
-					  <c:set var="content" ><x:out select="$govDoc//comment/sendFileProveDraft/text()"/></c:set>
+					 <x:if select="$govDoc//comment/receiveFileSettleComment">
+					  <c:set var="content" ><x:out select="$govDoc//comment/receiveFileSettleComment/text()"/></c:set>
 					 	<tr>
 					 		<th>
-								<x:out select="$govDoc//comment/sendFileProveDraft/@name" /> 
+								<x:out select="$govDoc//comment/receiveFileSettleComment/@name" /> 
 							</th>
 							<td> 
 								<%
@@ -852,11 +856,11 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</td>
 					</tr>
 					 </x:if>
-					 <x:if select="$govDoc//comment/sendFileReadComment">
-					 <c:set var="content" ><x:out select="$govDoc//comment/sendFileReadComment/text()"/></c:set>
+					 <x:if select="$govDoc//comment/field9">
+					 <c:set var="content" ><x:out select="$govDoc//comment/field9/text()"/></c:set>
 					 	<tr>
 					 		<th>
-								<x:out select="$govDoc//comment/sendFileReadComment/@name" /> 
+								<x:out select="$govDoc//comment/field9/@name" /> 
 							</th>
 							<td> 
 								<%
@@ -874,11 +878,11 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</td>
 					</tr>
 					 </x:if>
-					 <x:if select="$govDoc//comment/documentSendFileCheckCommit">
-				   	 	<c:set var="content" ><x:out select="$govDoc//comment/documentSendFileCheckCommit/text()"/></c:set>
+					 <x:if select="$govDoc//comment/receiveFileTransAuditComment">
+				   	 	<c:set var="content" ><x:out select="$govDoc//comment/receiveFileTransAuditComment/text()"/></c:set>
 				 		<tr>
 					 		<th>
-								<x:out select="$govDoc//comment/documentSendFileCheckCommit/@name" /> 
+								<x:out select="$govDoc//comment/receiveFileTransAuditComment/@name" /> 
 							</th>
 							<td> 
 								<%
@@ -896,11 +900,11 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</td>
 						</tr>
 					 </x:if>
-					 <x:if select="$govDoc//comment/documentSendFileSendFile">
-						 <c:set var="content" ><x:out select="$govDoc//comment/documentSendFileSendFile/text()"/></c:set>
+					 <x:if select="$govDoc//comment/receiveFileMemo">
+						 <c:set var="content" ><x:out select="$govDoc//comment/receiveFileMemo/text()"/></c:set>
 						 <tr>
 					 		<th>
-								<x:out select="$govDoc//comment/documentSendFileSendFile/@name" /> 
+								<x:out select="$govDoc//comment/receiveFileMemo/@name" /> 
 							</th>
 							<td> 
 								<%

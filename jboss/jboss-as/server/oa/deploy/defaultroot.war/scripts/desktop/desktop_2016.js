@@ -236,10 +236,10 @@ function initdesktopEvent(){
         wh_hd_state.eq(index).slideToggle(100).siblings(".wh-hd-state").hide();
     });
     //点击个人中心出现的详细信息中的选项 添加样式
-    $(".wh-hd-state").find("a").click(function () {
-        $(this).addClass("current").siblings().removeClass("current");
-        return false;
-    });
+   /* $(".wh-hd-state").find("a").click(function () {
+       // $(this).addClass("current").siblings().removeClass("current");
+        //return false;
+    });*/
     //提醒
     $("#desktop_all_remindNum_a").click(function(){  
         var wh_hd_tips_dialog =  $.dialog({
@@ -614,7 +614,7 @@ function changeCurOrgInfo(orgId){
 };
 
 //切换当前组织信息
-function changeCurOrg(orgId,orgName,orgIdString,orgSelfName,orgEnglishName){
+function changeCurOrg(orgId,orgName,orgIdString,orgSelfName,orgEnglishName,obj){
     var curOrgId = $("#curOrgId").val();//document.getElementById("curOrgId").value;
     var msg = comm.confirm_tip1 + orgSelfName + comm.whir_confirmlast;
     if(orgId!=curOrgId){
@@ -628,6 +628,8 @@ function changeCurOrg(orgId,orgName,orgIdString,orgSelfName,orgEnglishName){
                
 				//$("#currentOrgName").html(orgSelfName); 
 			}
+
+			$(obj).addClass("current").siblings().removeClass("current");
     	}
     }
 };

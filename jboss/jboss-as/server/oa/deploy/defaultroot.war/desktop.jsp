@@ -149,7 +149,7 @@ location.href="login.jsp";
 								org_class="class=\"current\"";
 							}
 						%> 
-							 <a href="javascript:void(0)" <%=org_class%> onClick="changeCurOrg('<%=objSideOrg[0]%>','<%=objSideOrg[1]%>','<%=objSideOrg[2]%>','<%=objSideOrg[3]%>','<%=objSideOrg[4]%>');"><span title="<%=objSideOrg[3]%>"><%=_objSideOrg_name%></span><i class="fa"></i></a>
+							 <a href="javascript:void(0)" <%=org_class%> onClick="changeCurOrg('<%=objSideOrg[0]%>','<%=objSideOrg[1]%>','<%=objSideOrg[2]%>','<%=objSideOrg[3]%>','<%=objSideOrg[4]%>',this);"><span title="<%=objSideOrg[3]%>"><%=_objSideOrg_name%></span><i class="fa"></i></a>
 						<%}%> 
                         </div>
                     </div>

@@ -142,7 +142,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 														<%--日期 107--%>
 														<c:when test="${showtype =='107' && readwrite =='1'}">
 															<div class="edit-ipt-a-arrow">
-																<input data-dateType="date" class="edit-ipt-r edit-ipt-arrow" type="text" id='<x:out select="$field/sysname/text()"/>' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' placeholder="选择日期"/>
+																<input data-dateType="date" class="edit-ipt-r edit-ipt-arrow" type="text" id='<x:out select="$field/sysname/text()"/>_${subFieldsNum}' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' placeholder="选择日期"/>
 																<label class="edit-ipt-label" for="scroller"></label>
 															</div>
 														</c:when>
@@ -150,7 +150,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 														<%--时间 108--%>
 														<c:when test="${showtype =='108' && readwrite =='1'}">
 															<div class="edit-ipt-a-arrow">
-																<input data-dateType="time" class="edit-ipt-r edit-ipt-arrow" type="text" id='<x:out select="$field/sysname/text()"/>' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' placeholder="选择时间"/>
+																<input data-dateType="time" class="edit-ipt-r edit-ipt-arrow" type="text" id='<x:out select="$field/sysname/text()"/>_${subFieldsNum}' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' placeholder="选择时间"/>
 																<label class="edit-ipt-label" for="scroller"></label>
 															</div>
 														</c:when>
@@ -158,7 +158,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 														<%--日期 时间 109--%>
 														<c:when test="${showtype =='109' && readwrite =='1'}">
 															<div class="edit-ipt-a-arrow">
-																<input data-dateType="datetime" class="edit-ipt-r edit-ipt-arrow" type="text" id='<x:out select="$field/sysname/text()"/>' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' placeholder="选择日期时间"/>
+																<input data-dateType="datetime" class="edit-ipt-r edit-ipt-arrow" type="text" id='<x:out select="$field/sysname/text()"/>_${subFieldsNum}' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' placeholder="选择日期时间"/>
 																<label class="edit-ipt-label" for="scroller"></label>
 															</div>
 														</c:when>
@@ -166,7 +166,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 														<%--多行文本 110--%>
 														<c:when test="${showtype =='110' && readwrite =='1'}">
 															<textarea name='_sub_<x:out select="$field/sysname/text()"/>'  onkeyup="$(this).next('.edit-txta-num').html($(this).attr('maxlength')-$(this).val().length );"   class="edit-txta edit-txta-l" maxlength="300"><x:out select="$field/value/text()"/></textarea>
-															<span class="edit-txta-num">300</span>
+															<span class="edit-txta-num"><script>document.write(300-"<x:out select="$field/value/text()"/>".length);</script></span>
 														</c:when>
 						
 														<%--自动编号 111--%>
@@ -177,14 +177,15 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 														<%--html编辑 113--%>
 														<c:when test="${showtype =='113' && readwrite =='1'}">
 															<textarea name='_sub_<x:out select="$field/sysname/text()"/>'  onkeyup="$(this).next('.edit-txta-num').html($(this).attr('maxlength')-$(this).val().length );"   class="edit-txta edit-txta-l" maxlength="300"><x:out select="$field/value/text()"/></textarea>
-															<span class="edit-txta-num">300</span>
+															<span class="edit-txta-num"><script>document.write(300-"<x:out select="$field/value/text()"/>".length);</script></span>
 														</c:when>
 						
 														<%--附件上传 115--%>
 														<c:when test="${showtype =='115'}">
 															<c:if test="${readwrite =='1'}">
 																<ul class="edit-upload">
-										                            <li class="edit-upload-in" onclick="addImg('<x:out select="$field/sysname/text()"/>');"><span><i class="fa fa-plus"></i></span></li>
+										                            <li class="edit-upload-in" onclick="addSubTableImg('<x:out select="$field/sysname/text()"/>',this);"><span><i class="fa fa-plus"></i></span></li>
+											                        <input name="_sub_file_<x:out select="$field/sysname/text()"/>" id="_subfile_<x:out select="$field/sysname/text()"/>" type="hidden"/>
 										                        </ul>
 															</c:if>
 															<c:set var="values"><x:out select="$field/value/text()"/></c:set>
@@ -294,26 +295,26 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 						
 														<%--单选人 全部 210--%>
 														<c:when test="${showtype =='210' && readwrite =='1'}">
-															<input type="hidden" readonly="readonly" id='_sub_<x:out select="$field/sysname/text()"/>' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/hiddenval/text()"/>' />
-								           					<input type="text"   readonly="readonly" id='_mainShow_<x:out select="$field/sysname/text()"/>' name='_mainShow_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' class="edit-ipt-r edit-ipt-arrow" onclick='selectUser("0","_mainShow_<x:out select="$field/sysname/text()"/>","_sub_<x:out select="$field/sysname/text()"/>","*0*","user")' placeholder="请选择"/>
+															<input type="hidden" readonly="readonly" id='_sub_<x:out select="$field/sysname/text()"/>_${subFieldsNum}' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/hiddenval/text()"/>' />
+								           					<input type="text"   readonly="readonly" id='_mainShow_<x:out select="$field/sysname/text()"/>_${subFieldsNum}' name='_mainShow_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' class="edit-ipt-r edit-ipt-arrow" onclick='selectUser("0","_mainShow_<x:out select="$field/sysname/text()"/>_${subFieldsNum}","_sub_<x:out select="$field/sysname/text()"/>_${subFieldsNum}","*0*","user")' placeholder="请选择"/>
 														</c:when>
 						
 														<%--多选人 全部 211--%>
 														<c:when test="${showtype =='211' && readwrite =='1'}">
-															<input type="hidden" readonly="readonly" id='_sub_<x:out select="$field/sysname/text()"/>' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/hiddenval/text()"/>' />
-								           					<input type="text"   readonly="readonly" id='_mainShow_<x:out select="$field/sysname/text()"/>'  name='_mainShow_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' class="edit-ipt-r edit-ipt-arrow" onclick='selectUser("1","_mainShow_<x:out select="$field/sysname/text()"/>","_sub_<x:out select="$field/sysname/text()"/>","*0*","user");' placeholder="请选择"/>
+															<input type="hidden" readonly="readonly" id='_sub_<x:out select="$field/sysname/text()"/>_${subFieldsNum}' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/hiddenval/text()"/>' />
+								           					<input type="text"   readonly="readonly" id='_mainShow_<x:out select="$field/sysname/text()"/>_${subFieldsNum}'  name='_mainShow_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' class="edit-ipt-r edit-ipt-arrow" onclick='selectUser("1","_mainShow_<x:out select="$field/sysname/text()"/>_${subFieldsNum}","_sub_<x:out select="$field/sysname/text()"/>_${subFieldsNum}","*0*","user");' placeholder="请选择"/>
 														</c:when>
 						
 														<%--单选组织 212--%>
 														<c:when test="${showtype =='212' && readwrite =='1'}">
-															<input type="hidden" readonly="readonly" id='_sub_<x:out select="$field/sysname/text()"/>' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/hiddenval/text()"/>' />
-								           					<input type="text"   readonly="readonly" id='_mainShow_<x:out select="$field/sysname/text()"/>'  name='_mainShow_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' class="edit-ipt-r edit-ipt-arrow" onclick='selectUser("0","_mainShow_<x:out select="$field/sysname/text()"/>","_sub_<x:out select="$field/sysname/text()"/>","*0*","org");' placeholder="请选择"/> 
+															<input type="hidden" readonly="readonly" id='_sub_<x:out select="$field/sysname/text()"/>_${subFieldsNum}' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/hiddenval/text()"/>' />
+								           					<input type="text"   readonly="readonly" id='_mainShow_<x:out select="$field/sysname/text()"/>_${subFieldsNum}'  name='_mainShow_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' class="edit-ipt-r edit-ipt-arrow" onclick='selectUser("0","_mainShow_<x:out select="$field/sysname/text()"/>_${subFieldsNum}","_sub_<x:out select="$field/sysname/text()"/>_${subFieldsNum}","*0*","org");' placeholder="请选择"/> 
 														</c:when>
 						
 														<%--多选组织 214--%>
 														<c:when test="${showtype =='214' && readwrite =='1'}">
-															<input type="hidden" readonly="readonly" id='_sub_<x:out select="$field/sysname/text()"/>' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/hiddenval/text()"/>' />
-								           					<input type="text"   readonly="readonly" id='_mainShow_<x:out select="$field/sysname/text()"/>'  name='_mainShow_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' class="edit-ipt-r edit-ipt-arrow" onclick='selectUser("1","_mainShow_<x:out select="$field/sysname/text()"/>","_sub_<x:out select="$field/sysname/text()"/>","*0*","org");' placeholder="请选择"/>
+															<input type="hidden" readonly="readonly" id='_sub_<x:out select="$field/sysname/text()"/>_${subFieldsNum}' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/hiddenval/text()"/>' />
+								           					<input type="text"   readonly="readonly" id='_mainShow_<x:out select="$field/sysname/text()"/>_${subFieldsNum}'  name='_mainShow_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' class="edit-ipt-r edit-ipt-arrow" onclick='selectUser("1","_mainShow_<x:out select="$field/sysname/text()"/>_${subFieldsNum}","_sub_<x:out select="$field/sysname/text()"/>_${subFieldsNum}","*0*","org");' placeholder="请选择"/>
 														</c:when>
 						
 														<%--金额 301--%>
@@ -363,14 +364,14 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 						
 														<%--单选人 本组织 704--%>
 														<c:when test="${showtype =='704' && readwrite =='1'}">
-															<input type="hidden" readonly="readonly" id='_sub_<x:out select="$field/sysname/text()"/>' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/hiddenval/text()"/>' />
-															<input type="text"   readonly="readonly" id='_mainShow_<x:out select="$field/sysname/text()"/>' name='_mainShow_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' class="edit-ipt-r edit-ipt-arrow" placeholder="请选择" onclick='selectUser("0","_mainShow_<x:out select="$field/sysname/text()"/>","_sub_<x:out select="$field/sysname/text()"/>","*<%=orgId%>*","user");'/>
+															<input type="hidden" readonly="readonly" id='_sub_<x:out select="$field/sysname/text()"/>_${subFieldsNum}' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/hiddenval/text()"/>' />
+															<input type="text"   readonly="readonly" id='_mainShow_<x:out select="$field/sysname/text()"/>_${subFieldsNum}' name='_mainShow_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' class="edit-ipt-r edit-ipt-arrow" placeholder="请选择" onclick='selectUser("0","_mainShow_<x:out select="$field/sysname/text()"/>_${subFieldsNum}","_sub_<x:out select="$field/sysname/text()"/>_${subFieldsNum}","*<%=orgId%>*","user");'/>
 														</c:when>
 														
 														<%--多选人 本组织 705--%>
 														<c:when test="${showtype =='705' && readwrite =='1'}">
-															<input type="hidden" readonly="readonly" id='_sub_<x:out select="$field/sysname/text()"/>' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/hiddenval/text()"/>' />
-															<input type="text"   readonly="readonly" id='_mainShow_<x:out select="$field/sysname/text()"/>'  name='_mainShow_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' class="edit-ipt-r edit-ipt-arrow" placeholder="请选择" onclick='selectUser("1","_mainShow_<x:out select="$field/sysname/text()"/>","_sub_<x:out select="$field/sysname/text()"/>","*<%=orgId%>*","user");'/>
+															<input type="hidden" readonly="readonly" id='_sub_<x:out select="$field/sysname/text()"/>_${subFieldsNum}' name='_sub_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/hiddenval/text()"/>' />
+															<input type="text"   readonly="readonly" id='_mainShow_<x:out select="$field/sysname/text()"/>_${subFieldsNum}'  name='_mainShow_<x:out select="$field/sysname/text()"/>' value='<x:out select="$field/value/text()"/>' class="edit-ipt-r edit-ipt-arrow" placeholder="请选择" onclick='selectUser("1","_mainShow_<x:out select="$field/sysname/text()"/>_${subFieldsNum}","_sub_<x:out select="$field/sysname/text()"/>_${subFieldsNum}","*<%=orgId%>*","user");'/>
 														</c:when>
 						
 														<%--流程发起人 708--%>
@@ -399,8 +400,8 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
     </article>
 </section>
 <footer class="wh-footer wh-footer-forum" id="subFooter_${tableName}" style="display:none">
-    <c:choose>
-    	<c:when test="${index eq '0'}">
+<%--    <c:choose>--%>
+<%--    	<c:when test="${index eq '0'}">--%>
 		    <div class="wh-wrapper">
 		        <div class="wh-container">
 		            <div class="wh-footer-btn">
@@ -410,19 +411,19 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 		            </div>
 		        </div>
 		    </div>
-    	</c:when>
-    	<c:otherwise>
-		    <div class="wh-wrapper">
-		        <div class="wh-container">
-		            <div class="wh-footer-btn">
-		                <a href="javascript:finishSubTableForm2();" class="fbtn-matter col-xs-12">
-		                	<i class="fa fa-check-square"></i>完成
-		                </a>
-		            </div>
-		        </div>
-		    </div>
-    	</c:otherwise>
-    </c:choose>
+<%--    	</c:when>--%>
+<%--    	<c:otherwise>--%>
+<%--		    <div class="wh-wrapper">--%>
+<%--		        <div class="wh-container">--%>
+<%--		            <div class="wh-footer-btn">--%>
+<%--		                <a href="javascript:finishSubTableForm2();" class="fbtn-matter col-xs-12">--%>
+<%--		                	<i class="fa fa-check-square"></i>完成--%>
+<%--		                </a>--%>
+<%--		            </div>--%>
+<%--		        </div>--%>
+<%--		    </div>--%>
+<%--    	</c:otherwise>--%>
+<%--    </c:choose>--%>
 </footer>
 </x:forEach>
 </c:if>
@@ -481,11 +482,13 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
     	'<div class="wh-edit-lists wh-edit-list-d">'+subTableTemplate+'</div>');
     	$('.wh-l-ckbox').unbind('click');
     	//var menuLi = '<li class="col-xs-2 swiper-slide" data-checkbox="check">' +
-    				 //'<a href="#stp'+menuIndex+'_'+subTableName+'">' + menuIndex + '</a><em><i class="fa fa-check-circle"></i></em></li>';
+    	//'<a href="#stp'+menuIndex+'_'+subTableName+'">' + menuIndex + '</a><em><i class="fa fa-check-circle"></i></em></li>';
     	//$swiperUl.append(menuLi);
     	restructureLi($swiperUl);
     	bindSelect();
     	setNewId();
+    	//设置点击日期时间事件，解决添加后日期选择无事件的问题
+    	selectDateTime();
     	var $emNumber = $('[id="em_num_'+subTableName+'"]');
     	$emNumber.html(parseInt($emNumber.text())+parseInt(1));
     }
@@ -595,6 +598,62 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
             $swiperLi.addClass('nav-active').data("checkbox","check");
     	});
     }
+    
+   //图片数标记
+    var subIndex = 0;
+   
+    //添加图片
+    function addSubTableImg(name,obj){
+	   $(obj).before(       
+		   '<li class="edit-upload-ed" id="sub_imgli_'+subIndex+'" style="display:none">'+
+		       '<span>'+
+		       	   '<img src="" id="sub_imgShow_'+subIndex+'"/>'+
+			       '<em>'+
+			       	 '<i onclick="removeSubImg('+subIndex+');" class="fa fa-minus-circle"></i>'+
+			       '</em>'+
+		       '</span>'+
+		       '<input type="file" id="sub_up_img_'+subIndex+'" style="display:none" name="imgFile"/>'+
+		       '<input type="hidden" id="sub_img_name_'+subIndex+'" name="_subfile_'+name+'_'+subIndex+'"/>'+
+       	   '</li>');
+	   var img_li_id = "sub_imgli_"+subIndex;
+	   var up_img_id = "sub_up_img_"+subIndex;
+	   new uploadPreview({ UpBtn: up_img_id, DivShow: img_li_id, ImgShow: "sub_imgShow_"+subIndex, callback : function(){subCallBackFun(up_img_id,img_li_id,obj)} });
+	   $("#sub_up_img_"+subIndex).click();
+	   subIndex++;
+    }
+   
+	//删除缩略图
+    function removeSubImg(subIndex){
+	   $("#sub_imgli_"+subIndex).remove();
+	   $("#sub_up_img_"+subIndex).remove();
+    }
+	
+	//回调函数上传图片
+	function subCallBackFun(upImgId,imgliId,obj){
+		var loadingDialog = openTipsDialog('正在上传...');
+		var fileShowName = $("#"+upImgId).val();
+		$.ajaxFileUpload({
+			url: '/defaultroot/upload/fileUpload.controller?modelName=customform', //用于文件上传的服务器端请求地址
+			secureuri:false,
+			fileElementId: upImgId, //文件上传域的ID
+			dataType: 'json', //返回值类型 一般设置为json
+			success: function (msg, status){  //服务器成功响应处理函数---获取上传图片保存名
+				$("#sub_img_name_"+(subIndex-1)).val(msg.data+"|"+fileShowName);
+				$("#"+imgliId).show();
+				var $valInput = $(obj).next();
+				var value = $valInput.val();
+				if(value){
+					$valInput.val(value + ';' + msg.data+"|"+fileShowName);
+				}else{
+					$valInput.val(msg.data+"|"+fileShowName);
+				}
+				loadingDialog.close();
+			},
+			error: function (data, status, e){//服务器响应失败处理函数
+				alert("文件上传失败！");
+			}
+		});
+	}
 </script>
 
 

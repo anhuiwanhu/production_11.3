@@ -134,7 +134,7 @@ Portlet.setMoreLink('<%=portletSettingId%>',{});
 		<div class="wh-portal-i-item clearfix">
             <a href="javascript:void(0)">
             <i class="fa fa-file-o"></i>
-            <span class="wh-portal-a-cursor" onclick="<%=_link%>" title="<%=ivo.getPoptitle()%>"><%=ivo.getName()%></span>
+            <%=ivo.getChannelTitle()%><span class="wh-portal-a-cursor" onclick="<%=_link%>" title="<%=ivo.getPoptitle()%>"><%=ivo.getName()%></span>
             <em><%=ivo.getTime()%></em><%=ivo.getTitle()%>
             </a>
         </div>
