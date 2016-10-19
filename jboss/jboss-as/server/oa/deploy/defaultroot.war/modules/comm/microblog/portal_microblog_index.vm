@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>万户${microblog}</title>
+	<link rel="stylesheet" href="/defaultroot/templates/template_default/common/css/template.fa.css" />
+	<link rel="stylesheet" href="/defaultroot/templates/template_default/themes/2015/color_${whir_new_skin}/template.keyframe.${whir_new_skin}.css" />
+	<link rel="stylesheet" href="/defaultroot/templates/template_default/themes/2015/color_${whir_new_skin}/template.color.${whir_new_skin}.css" />
+	<link rel="stylesheet" href="/defaultroot/templates/template_system/common/css/template.reset.css" />
+    <link rel="stylesheet" href="/defaultroot/templates/template_default/common/css/template.portal.css" />
+	#if($whir_pageFontSize == "12")
+	<link rel="stylesheet" href="/defaultroot/templates/template_default/common/css/template.frame.small.css" />	
+	#else
+	<link rel="stylesheet" href="/defaultroot/templates/template_default/common/css/template.frame.big.css" />
+	#end
+	<link rel="stylesheet" href="/defaultroot/templates/template_default/common/css/template.ztree.css" type="text/css">
+    <script type="text/javascript" src="/defaultroot/scripts/plugins/zTree_v3/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="/defaultroot/scripts/plugins/zTree_v3/jquery.ztree.core-3.5.js"></script>
+    
+	<script type="text/javascript" src="/defaultroot/scripts/plugins/superslide/jquery.SuperSlide.2.1.1.js" ></script>
+    <script type="text/javascript" src="/defaultroot/scripts/plugins/flexslide/jquery.flexslider.js" ></script>
+    <script type="text/javascript" src="/defaultroot/scripts/plugins/foucs/jquery.foucs.js" ></script>
+	
+	<SCRIPT src="/defaultroot/modules/comm/microblog/script/jquery.min.js" type=text/javascript></SCRIPT>
+	<script src="/defaultroot/scripts/i18n/${whir_locale}/WeiboResource.js" type="text/javascript"></script>
+	<SCRIPT src="/defaultroot/modules/comm/microblog/script/jquery-powerFloat.js" type=text/javascript></SCRIPT>
+	<script src="/defaultroot/modules/comm/microblog/script/portal.emoticons.js" type="text/javascript"></script>
+	<script src="/defaultroot/modules/comm/microblog/script/jquery.mousewheel-3.0.4.pack.js" type="text/javascript"></script>
+	<script src="/defaultroot/modules/comm/microblog/script/portalWeibo.js" type="text/javascript"></script>
+	<script src="/defaultroot/modules/comm/microblog/script/ajaxfileupload.js" type="text/javascript"></script>
+	<link   rel="stylesheet" type="text/css" href="/defaultroot/modules/comm/microblog/css/powerFloat.css" />
+	<link   rel="stylesheet" type="text/css" href="/defaultroot/modules/comm/microblog/css/emoticon_portal.css" />
+	<script src="/defaultroot/modules/comm/microblog/script/jquery.artZoom.js"></script>
+	<link   href="/defaultroot/modules/comm/microblog/css/jquery.artZoom.css" rel="stylesheet" type="text/css">
+	<script src="/defaultroot/modules/comm/microblog/script/jquery.jscrollpane.min.js" type="text/javascript"></script>
+	<link type="text/css" href="/defaultroot/modules/comm/microblog/css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
+<script  type="text/javascript">
+window.onload = function () { 
+  //jQuery(".main_box").css("height",document.documentElement.clientHeight+"px");
+  //jQuery('.main_box').jScrollPane({showArrows:true}); 
+  jQuery(".wh-portal-blog-comment").find("a").each(function(){	
+
+	if(jQuery(this).attr("href")!=undefined && jQuery(this).attr("rel")!=undefined && jQuery(this).attr("rel")!=""){	 	  
+	   var href = jQuery(this).find("img").eq(0).attr("src");
+	   var type = href.substring(href.lastIndexOf(".")-7,href.lastIndexOf("."));
+	   if(type != '_middle'){
+		   var name = href.substring(0,href.lastIndexOf(".")-7);
+		   var suffix = href.substring(href.lastIndexOf("."),href.length);
+		   var small = name+"_small"+suffix;
+		   jQuery(this).find("img").eq(0).attr("src",small);
+		   jQuery(this).attr("href",href);
+	   }
+	}else{
+	   jQuery(this).attr("href","javascript:void(0)");
+	}	
+ });
+
+$("#content").val(weibo.say_tip);
+//$("#wb_fbbut").val(weibo.post);
+
+}
+
+
+
+/**function setScroll(){
+
+var pane = jQuery('.main_box');
+pane.jScrollPane({showArrows:true}); 
+var api = pane.data('jsp'); 
+api.reinitialise(); 
+
+}*/
+</script>
+<style>
+	html {overflow: auto; overflow-x:hidden; }
+</style>	
+</head>
+<body >
+<input type="hidden" id="weibo_user_id"  value="$weibo_user_id"/>
+<input type="hidden" id="uri"  value="index"/>
+<input type="hidden" id="start" size="3" value="0"/><input type="hidden" id="end" size="3" value="0"/>
+<input type="hidden" id="image_width" size="3" value=""/><input type="hidden" id="image_height" size="3" value=""/>
+<input type="hidden" id="middleFile"  value=""/><input type="hidden" id="bigFile" value=""/><input type="hidden" id="sourceFile"  value=""/>
+<div tabindex="-1" id="altxxx"></div>
+
+<a class="operateTrigger" href="javascript:void(0)" style="display:none">${forward_success}</a>
+<span id="targetFixed" class="target_fixed"></span>
+
+<div class="wh-portal-blog-content">
+	#if($oa_user_id == $weibo_user_id)
+	<div class="wh-portal-blog-release" id="add_weibo_div">
+        <div class="wh-portal-blog-form">
+        	<p>
+        		<textarea class="wh-portal-blog-text" id="content" onfocus="if(jQuery.trim(jQuery(this).val())==weibo.say_tip){this.value='';}savePos(this);"  onkeyup="checkContent(this,event);" onKeydown="savePos(this)" onmousedown="savePos(this)" onpaste="checkContent(this,event);" onmouseover="checkContent(this,event);" onmouseout="checkContent(this,event);" 
+						 onmouseover="jQuery(this).css('border-color','#C5EAFC');"  onmouseout="jQuery(this).css('border-color','#e3e9ef');"	onmouseup="checkContent(this,event);" onblur="if(jQuery.trim(jQuery(this).val())==''){this.value=weibo.say_tip;}savePos(this);" ></textarea>
+        		<span id="limit">140</span>
+        	</p>
+            <input type="button" class="wh-portal-blog-btn" value="发布" name="" id="wb_fbbut" onclick="addWeibo(this);" onmouseover="jQuery('#content').blur();"/>
+		</div>
+		<div class="wh-portal-blog-look">
+            <a href=""><i class="fa fa-at"></i></a>
+            <a href="javascript:void(0)" onclick="insertTopic(this);" onmouseover="jQuery('#content').blur();"><i class="fa fa-comments-o"></i>话题</a>
+            <a href="JavaScript:void(0)" onclick="showUpload();" onmouseover="jQuery('#content').blur();" class="wh-blog-fileup"><i class="fa fa-cloud-upload"></i>上传</a>
+            <a href="javascript:void(0)"  id="message_face" class="wh-blog-face" onmouseover="jQuery('#content').blur();"><i class="fa fa-smile-o"></i>表情</a>
+            <script type="text/javascript">
+				//${microblog}${emotion}
+				jQuery("#message_face").jqfaceedit({txtAreaObj:jQuery('#add_weibo_div').find("#content"),containerObj:jQuery('#add_weibo_div'),top:23,left:-5});
+			</script>
+            
+			<div class="blog-look-fileup" id="face_upload" style="display:none">
+                <div class="blog-look-file-con">
+					<span>${local_upload}</span>
+                    <div class="upload_box">
+						<div id="loading" style="display:none;width:100%;height:60px;text-align:center;margin-top:30px">
+						<img src="/defaultroot/modules/comm/microblog/images/loading.gif">
+								${uploading}
+						</div>
+
+                        <div id="upload_div">
+                            <div id="texttb">
+                                <a class="f_close fileupclose" title="关闭" href="javascript:void(0);" onclick="$('.blog-look-fileup').hide();"><i class="fa fa-times"></i></a>
+                            </div>
+                            <div id="facebox">
+                                <div id="face_detail" class="facebox clearfix">
+                                     <div class="wh-face-fileup">
+                                        <input type="file" onchange="fileupload()" name="filePath" id="filePath" class="wh-face-fileup-button"/>
+                                         <p><i class="fa fa-cloud-upload"></i><span>点击上传</span></p>
+                                     </div>
+                                    <p></p>
+                                    <p>${upload_limit}</p>
+                                </div>
+                            </div>
+                        </div>
+						
+						<div id="image_div" class="wh-upfile-image-show" style="display:none;">
+							<div id="file_name" class="wh-upfile-name"></div>
+							<img id="upload_img" src="" />
+							<div id="texttb" style="text-align:left;"><span onclick="deletePic();" style="CURSOR:hand;">${delete}</span></div>
+						</div>
+
+                     </div>
+                </div>
+            </div>
+
+			
+       	</div>
+	</div>
+	#end
+</div>
+
+<div class="wh-portal-blog-comment">
+	<div id="weibo_page_div">												
+		<div id="weibo_div">
+    <input type="hidden" name="current_latest_id" id="current_latest_id" value="$current_latest_id,$current_latest_id" >
+	#foreach($obj in $weibo_list)
+	<div class="wh-portal-b-comment-box">
+	<input type="hidden" name="send_time" id="send_time" value="$obj.get(0).send_time" >
+        <div class="wh-portal-blog-scroll">
+            <div class="wh-portal-blog-tab">
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tr>
+                        <th>
+                            <div class="wh-portal-blog-user">
+                                <a href="javascript:void(0)" title="$obj.get(2)"  class="user_photo" id="$obj.get(1)">
+								#if(!$null.isNull($obj.get(3)) && $obj.get(3) &&  $obj.get(3)!="" && $obj.get(3)!="null" )
+									<img  onload="DrawImg(this,40,40);" src="$fileServer/upload/peopleinfo/$obj.get(3)"  alt=""/>
+								#else
+									<img  onload="DrawImg(this,40,40);" src="/defaultroot/images/noliving.gif" alt=""/>
+								#end
+								</a>
+                            </div>
+						</th>
+                        <td valign="top">
+                            <div class="wh-blog-user-comment">
+                                <div class="wh-blog-user-title">
+                                    <span>$obj.get(4) $obj.get(5)</span>
+                                    <a href="javascript:void(0)" title="$obj.get(2)"  class="user_photo" id="$obj.get(1)">$obj.get(2)</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td>    
+                            <div class="wh-blog-user-text">
+                                <p>$obj.get(0).content</p>
+                            </div>
+								#foreach($obj2 in $slist) 
+										#if($obj2.get(4)==$obj.get(0).id)
+										
+										#if($obj2.get(5)==0)
+										   <div class="zf_boxshow">
+										       <div class="wb_content">
+										           <div class="wb_listbox">											
+											     <dl>
+											        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+												    <tr valign="top">
+													<td width="68">	
+												            ${weibodeleted}
+												        </td>
+												     </tr>
+											        </table>
+											     </dl>
+											   </div>
+											</div>
+									            </div>	
+									        #else 
+										<div class="zf_boxshow">
+										<div class="wb_content">
+										       <div class="wb_listbox">											
+											<dl>
+												<table width="100%" border="0" cellspacing="0" cellpadding="0">
+												 <tr valign="top">
+													<td >									
+													  <div class="wb_listcont">
+														<div class="wb_content a_color">
+															 <a href="/defaultroot/index.vm?method=list&type=2&weibo_user_id=$obj2.get(0).send_user_id"  title="$obj2.get(2)" class="user_photo" id="$obj2.get(1)" >
+															 #if(!$null.isNull($obj2.get(3)) && $obj2.get(3) &&  $obj2.get(3)!="" && $obj2.get(3)!="null" )
+															 <img  width="30" height="30" src="$fileServer/upload/peopleinfo/$obj2.get(3)" />
+															 #else
+															 <img  width="30" height="30" src="/defaultroot/images/noliving.gif" />
+															 #end	
+															 </a>
+													
+															 <a href="/defaultroot/index.vm?method=list&type=2&weibo_user_id=$obj2.get(0).send_user_id" title="$obj2.get(2)"  class="user_photo" id="$obj2.get(1)" >@$obj2.get(2)</a>: $obj2.get(0).content
+													</div>													
+													<div class="wb_form" style="display:none;">
+														<span>														
+														<a  href="/defaultroot/weibo_detail.vm?method=weibo_detail&weibo_id=$obj2.get(0).id&weibo_user_id=$obj2.get(0).send_user_id&type=forward"  >${forwardText}($obj2.get(0).forward_count)</a>
+														<a href="/defaultroot/weibo_detail.vm?method=weibo_detail&weibo_id=$obj2.get(0).id&weibo_user_id=$obj2.get(0).send_user_id&type=comment">${commentText}($obj2.get(0).comment_count)</a>
+														</span>														
+														 
+													</div>
+													<div style="margin-top:-8px;color:#3799e2;width:100%;display:none;">
+														<span><label>$obj2.get(6)</label></span>	
+													</div>
+												       </div>
+												     </td>
+												  </tr>
+												</table>									
+											</dl>
+											</div>
+										</div>
+										</div>	
+										#end
+										#end
+										#end 
+										
+										<div class="wb_form"  style="position:relative; z-index:1;display:none;">
+											<span>
+											</span>
+											<div id="cancelFavoriteDiv" class="favorite_panel"  style="width:200px"> 
+												<dl>
+												<div>${cancle_collect_confirm}</div> 
+												<input type="image" src="/defaultroot/modules/comm/microblog/${imgpath}/images/confirm2.gif" onclick="deleteFavorite(this,$obj.get(0).id);" ><input type="image" src="/defaultroot/modules/comm/microblog/${imgpath}/images/cancel2.gif" onclick="confirmFavorite(this,$obj.get(0).id);" >
+												</dl>
+											</div>
+										<div id="cancelFavoriteSucDiv" class="favorite_panel2"  style="width:200px"> 
+										<dl>
+											<div>${collect_success}</div> 			
+											</dl>																					
+										</div>	
+										</div>
+										
+										
+										<!--${commentText}开始-->
+										<div class="pl_box" id="pl_box">
+										<span id="loadCommentTip" style="display:none;"><img src="/defaultroot/modules/comm/microblog/images/loading.gif">${loading}</span>
+										</div>
+										<!--${commentText}结束-->
+								
+                            </div><!--------------- wh-blog-user-comment ------->
+						</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- 转发 评论 -->
+    </div>
+    #end
+	<input type="hidden" name="offset" id="offset" value="$offset" >
+	</div>
+	<input type="hidden" name="recordCount" id="recordCount" value="$recordCount" >						
+			<div id="page_index">
+				<div class="hit_more" id="loadMorediv">
+					<a href="javascript:void(0)"  onclick="getMoreWeibo(this,'$weibo_user_id');" ><span>${get_more}</span><i class="fa fa-color fa-angle-down"></i></a>
+				</div>
+				<span id="loadMoreTip" style="display:none;"><img src="/defaultroot/modules/comm/microblog/images/loading.gif">${loading}</span>
+			</div>
+		</div>
+
+</div>
+<script>
+$(function() {
+    $(document).click(function(){
+        $(".wh-hd-custom-switch",parent.document.body).hide();
+        $(".wh-hd-menu-btn",parent.document.body).removeClass("current");
+    });
+        
+});
+</script>
+<script>
+var offset = eval(jQuery("#offset").val())*1+0;
+var recordCount = eval(jQuery("#recordCount").val())*1+0;
+if(recordCount <= offset || recordCount<=15){
+	jQuery("#page_index").hide();
+}
+</script>
+<script type="text/javascript">
+        $(function(){
+            $(".wh-blog-fileup").click(function(){
+                $(".blog-look-fileup").slideDown(300);
+            });
+		})
+    </script>
+
+</body>
+</html>

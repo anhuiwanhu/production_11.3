@@ -1,0 +1,144 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+
+#set($weibo_id = "")
+#foreach($obj in $weibo_list)
+	<div class="wh-portal-b-comment-box">
+		<div class="wh-portal-blog-scroll">
+            <div class="wh-portal-blog-tab">
+    #set($weibo_id = $obj.get(0).id)
+	<dl>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr valign="top">
+				<th>
+					<div class="wh-portal-blog-user">
+                        <a href="/defaultroot/index.vm?method=list&type=2&weibo_user_id=$obj.get(0).send_user_id" title="$obj.get(2)"  class="user_photo" id="$obj.get(1)">
+						#if(!$null.isNull($obj.get(3)) && $obj.get(3) &&  $obj.get(3)!="" && $obj.get(3)!="null" )
+							<img  onload="DrawImg(this,40,40);" src="$fileServer/upload/peopleinfo/$obj.get(3)"  alt=""/>
+						#else
+							<img  onload="DrawImg(this,40,40);" src="/defaultroot/images/noliving.gif" alt=""/>
+						#end
+						</a>
+                    </div>
+				</th>
+				<td valign="top">
+					<div class="wh-blog-user-comment">
+                    	<div class="wh-blog-user-title">
+                        	<span>$obj.get(4) $obj.get(5)</span>
+                        	<a href="javascript:void(0)" title="$obj.get(2)"  class="user_photo" id="$obj.get(1)">$obj.get(2)</a>
+                    	</div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <div class="wh-blog-user-text">
+                        <p>$obj.get(0).content</p>
+                    </div>
+				#foreach($obj2 in $slist) 
+				#if($obj2.get(4)==$obj.get(0).id)	
+				<div class="zf_boxshow">
+				<div class="wb_content a_color">
+				       <div class="wb_listbox">											
+					<dl>
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						 <tr valign="top">
+							<td >									
+							  <div class="wb_listcont">
+								<div class="wb_content a_color">
+									 <a href="/defaultroot/index.vm?method=list&type=2&weibo_user_id=$obj2.get(0).send_user_id"  title="$obj2.get(2)" class="user_photo" id="$obj2.get(1)" >
+									 #if(!$null.isNull($obj2.get(3)) && $obj2.get(3) &&  $obj2.get(3)!="" && $obj2.get(3)!="null" )
+									 <img  width="30" height="30" src="$fileServer/upload/peopleinfo/$obj2.get(3)" />
+									 #else
+									 <img  width="30" height="30" src="/defaultroot/images/noliving.gif" />
+									 #end	
+									 </a>
+							
+									 <a href="/defaultroot/index.vm?method=list&type=2&weibo_user_id=$obj2.get(0).send_user_id" title="$obj2.get(2)"  class="user_photo" id="$obj2.get(1)" >@$obj2.get(2)</a>: $obj2.get(0).content
+							</div>													
+							<div class="wb_form" style="display:none;">
+								<span>														
+								<a  href="/defaultroot/weibo_detail.vm?method=weibo_detail&weibo_id=$obj2.get(0).id&weibo_user_id=$obj2.get(0).send_user_id&type=forward"  >${forwardText}($obj2.get(0).forward_count)</a>
+								<a href="/defaultroot/weibo_detail.vm?method=weibo_detail&weibo_id=$obj2.get(0).id&weibo_user_id=$obj2.get(0).send_user_id&type=comment">${commentText}($obj2.get(0).comment_count)</a>
+								</span>														
+								 
+							</div>
+							<div style="margin-top:-8px;color:#3799e2;width:100%;display:none;">
+								<span><label>$obj2.get(5)</label></span>	
+							</div>
+						       </div>
+						     </td>
+						  </tr>
+						</table>									
+					</dl>
+					</div>
+				</div>
+				</div>	
+				
+				#end
+				#end 		
+			
+				<div class="wb_form" style="position:relative; z-index:1;">
+					<span>											
+					<div id="cancelFavoriteDiv" class="favorite_panel"  style="width:200px;display:none;"> 
+					<dl><div>${cancle_collect_confirm}</div> 
+					<input type="image" src="/defaultroot/modules/comm/microblog/${imgpath}/images/confirm2.gif"  onclick="deleteFavorite(this,$weibo_id);" ><input type="image" src="/defaultroot/modules/comm/microblog/${imgpath}/images/cancel2.gif" onclick="confirmFavorite(this,$obj.get(0).id);" >
+					</dl>
+					</div>
+					<div id="cancelFavoriteSucDiv" class="favorite_panel"  style="width:200px;display:none;"> 
+						<dl><div>${collect_success}</div>	</dl>		
+					</div>
+					<div id="deleteWeibo" class="deleteWeibo"  style="width:200px;display:none;"> 
+							<dl><div>${delete_blog_confirm}</div> 
+							<input type="image" src="/defaultroot/modules/comm/microblog/${imgpath}/images/confirm2.gif" onclick="deleteWeibo(this,$weibo_id);" ><input type="image" src="/defaultroot/modules/comm/microblog/${imgpath}/images/cancel2.gif" onclick="confirmDeleteWeibo(this,$obj.get(0).id);" >
+							</dl>	
+						</div>
+				</div>
+				 <!--${commentText}开始-->
+				<div class="pl_box" id="pl_box">
+					<span id="loadCommentTip" style="display:none;"><img src="/defaultroot/modules/comm/microblog/images/loading.gif">${loading}</span>
+				</div>
+				<!--${commentText}结束-->
+			</div><!--------------- wh-blog-user-comment ------->
+			</td>
+		</tr>
+	</table>
+		</dl>
+	</div>
+	</div>
+</div>
+#end
+<input type="hidden" name="offset" id="offset" value="$offset" >
+
+
+
+<script>
+
+jQuery(".user_photo").each(function(){
+	jQuery(this).powerFloat({
+		    //eventType: 'click',
+		    target: "/defaultroot/user_card.vm?method=user_card&id="+jQuery(this).attr("id")+"&date="+Math.random(),
+		    targetMode: "ajax",
+		    showDelay:1000,
+		    hoverHold:true
+	});		
+});
+
+ jQuery(".wb_listbox").find("a").each(function(){	
+	if(jQuery(this).attr("rel")!=undefined && jQuery(this).attr("rel")!=""){	   
+	   var href = jQuery(this).find("img").eq(0).attr("src");
+	   var type = href.substring(href.lastIndexOf(".")-7,href.lastIndexOf("."));
+	   if(type != '_middle'){
+	   var name = href.substring(0,href.lastIndexOf(".")-7);
+	   var suffix = href.substring(href.lastIndexOf("."),href.length);
+	   var small = name+"_small"+suffix;
+	   jQuery(this).find("img").eq(0).attr("src",small);
+	   jQuery(this).attr("href",href);
+	   }
+	}else{
+	   jQuery(this).attr("href","javascript:void(0)");
+	}	
+ });
+</script>
+

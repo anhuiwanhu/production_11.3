@@ -1,0 +1,229 @@
+@import "../../../../less/template.global.less";
+@font-size: 12px;
+// Regular icon and text color is white, which suits any medium -> dark background
+@color-normal: #202020;
+// Background color
+@color-bg: #fff;
+// Highlight color
+@color-highlight: #808080;
+// Partially selected (checkboxes, radio buttons)
+@color-partial: #aaaaaa;
+// Partially selected and focused (checkboxes, radio buttons)
+@color-partfocus: #cad96c;
+// Disabled altogether
+@color-disabled: #808080;
+// Editing color
+@color-edit: #808080;
+@w: 24px;
+@h: 35px;
+@pad-left:10px;
+@pad-top: 18px;
+@pad-top-wid: 20px;
+
+
+/* End of Definitions ---------------*/
+/* Imports  -------------------------*/
+@import "../../../../less/fontless/variables-wh.less";
+@import "../../../../less/fontless/mixins.less";
+@import "../../../../less/fontless/path-wh.less";
+@import "../../../../less/fontless/core-wh.less";
+/* End of Imports  ------------------*/
+.ztree * {
+  padding:0;
+  margin:0;
+}
+.ztree {
+  margin:0;
+  color:@color-normal;
+  background-color: @color-bg;
+  li {
+    position: relative;
+    padding:0;
+    margin:0;
+    line-height:@h;
+    text-align:left;
+    white-space:nowrap;
+    outline:0;
+    ul{
+      &.level0{
+        a{
+          padding-left:@pad-top-wid;
+        }
+      }
+      &.level1{
+        a{
+          padding-left:(@pad-top-wid)*2;
+        }
+      }
+      &.level2{
+        a{
+          padding-left:(@pad-top-wid)*3;
+        }
+      }
+      &.level3{
+        a{
+          padding-left:(@pad-top-wid)*4;
+        }
+      }
+      &.level4{
+        a{
+          padding-left:(@pad-top-wid)*5;
+        }
+      }
+      &.level5{
+        a{
+          padding-left:(@pad-top-wid)*6;
+        }
+      }
+    }
+    a{
+      display: block;
+      cursor:pointer;
+      height:@h;
+      color:@color-normal;
+      background-color: transparent;
+      span{
+        display: block;  
+        /*margin-right: 20px; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;*/
+      }
+      span.button{
+        float:left;
+        height:35px;
+        line-height: 36px;
+        margin: 0 6px;
+        text-overflow:inherit;
+        white-space: inherit;
+      }
+    }
+    a.curSelectedNode {
+      padding-top:0;
+      height:@h;
+      opacity:0.8;
+      span{
+        &.fa_ico_open{
+          &:before{
+            content: "\f008";
+          }
+        }
+        &.fa_ico_close{
+          &:before{
+            content:"\f00b";
+          }
+        }
+        &.fa_ico_docu{
+          &:before{
+            content: "\f00c";
+          }
+        }
+      }
+    }
+    a.curSelectedNode_Edit {
+      padding-top:0;
+      background-color:transparent;
+      color:@color-highlight;
+      height:@h;
+      border:1px #666 solid;
+      opacity:0.8;
+    }
+    a.tmpTargetNode_inner {
+      padding-top:0;
+      background-color:#aaa;
+      color:@color-highlight;
+      height:@h;
+      border:1px #666 solid;
+      opacity:0.8; filter:alpha(opacity=80);
+    }
+    span {
+      line-height:@h;
+      margin-right:2px;
+      background-color:transparent;
+      vertical-align: middle;
+      /*display: inline-block;*/
+      &.button {
+        margin:0;
+        padding: 0;
+        display: inline-block;
+        border:0 solid;
+        cursor: pointer;
+        outline:none;
+        font-size:16px;
+        line-height: 1;
+        font-family: Fawanhu;
+        background-color:transparent;
+      }
+      &.fa_ico_open{
+        &:before{
+          content: "\f009";
+        }
+      }
+      &.fa_ico_close{
+        &:before{
+          content:"\f00a";
+        }
+      }
+      &.fa_ico_docu{
+        &:before{
+          content: "\f00d";
+        }
+      }
+
+
+      &.switch  {
+        position: absolute;
+        right:15px;
+        top:10px;
+        z-index: 10;
+        background-color: #fff;
+        border-radius: 5px;
+        &:before{
+        }
+        &.root_open,
+        &.roots_open,
+        &.center_open,
+        &.bottom_open{
+          &:before{
+            content: "\f010";
+          }
+        }
+        &.root_close,
+        &.roots_close,
+        &.center_close,
+        &.bottom_close{
+          &:before{
+            content: "\f00f";
+          }
+        }
+      }
+    }
+  }
+}
+
+
+ul.tmpTargetzTree {
+  background-color:#FFE6B0;
+  opacity:0.8;
+  filter:alpha(opacity=80);
+}
+
+
+ul.ztree.zTreeDragUL {
+  margin:0;
+  padding:0;
+  position:absolute;
+  width:auto;
+  height:auto;
+  overflow:hidden;
+  background-color:#cfcfcf;
+  border:1px @color-highlight dotted;
+  .opacity(.8);
+}
+.ztreeMask {
+  z-index:10000;
+  background-color:#cfcfcf;
+  .opacity(0);
+  position:absolute;
+}
+

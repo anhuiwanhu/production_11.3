@@ -1,0 +1,25 @@
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,menu{margin:0;padding:0;}
+header,footer,article,section,nav,menu,hgroup,aside,dialog,figure {display:block;}
+ol,ul,li{list-style-type:none;}
+button{overflow:visible;cursor:pointer}
+fieldset,img{border:none 0;}
+input,select{font:100% "Microsoft YaHei",arial,helvetica,clean,sans-serif;}
+input,select,form,img,button,textarea{vertical-align:middle; margin:0;padding:0;}
+em,strong,cite,i{font-style:normal;}
+table{empty-cells:show;border-collapse:collapse;}
+th,td{border-collapse:collapse;}
+a,a:link,a:visited,a:active{text-decoration:none;}
+a:hover{text-decoration:underline;}
+/*.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix{display:inline-block;}
+.clearfix{display:block;}*/
+.clearfix:before{content: " ";display: table;}
+.clearfix:after{clear: both;content: " ";display: table;}
+.clearfix{display:block;}
+.fr{float:right}
+.fl{float:left}
+.tc{text-align: center;}
+.tr{text-align: right;}
+
+/* for IOS Safari */
+input[type="submit"],input[type="reset"],input[type="button"],button {-webkit-appearance: none;}

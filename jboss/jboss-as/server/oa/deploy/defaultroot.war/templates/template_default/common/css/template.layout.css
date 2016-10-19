@@ -1,0 +1,13 @@
+/*-----end------*/
+html,
+body {
+  font-size: 12px;
+  line-height: 32px;
+}
+@media (min-width: (1200px)-250) {
+  html,
+  body {
+    font-size: 14px;
+    line-height: 36px;
+  }
+}

@@ -1,0 +1,24 @@
+1、停OA服务
+
+2、备份生产环境程序、数据库
+
+3、覆盖产品补丁包到OA安装目录d:\jboss
+
+4、修改配置文件..\defaultroot.war\WEB-INF\config\whconfig.xml,增加以下cocall整合配置信息
+
+   <!--华宇COCALL，使用cocall，请将即时通讯的type值改为：cocall，同步用户密码统一初始化为：888888-->
+   <COCALL>
+	<Property name="CocallServer" value="https://192.168.7.209:5300"/>   --cocall服务地址
+        <Property name="InterfaceId" value="whir"/>       --接口配置中系统标识
+        <Property name="InterfacePassword" value="111111"/>  --接口密码
+        <Property name="CorpId" value="1005"/>     --单位id
+        <Property name="LoginServer" value="192.168.7.209"/>   --cocall服务器
+    </COCALL>
+
+5、删除文件\defaultroot.war\WEB-INF\lib\ httpclient-4.5.1.jar、httpclient-4.0.1.jar、httpclient-4.2.1.jar、httpcore-4.4.3.jar、httpcore-4.0.1.jar
+
+6、执行数据库升级sql脚本（分为oralce、sqlserver两种类型数据库）
+
+7、清服务端缓存，启动OA服务
+
+8、验证系统功能

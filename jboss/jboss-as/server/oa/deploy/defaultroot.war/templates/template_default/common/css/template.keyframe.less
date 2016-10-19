@@ -1,0 +1,101 @@
+@import "../../../../less/template.global.less";
+
+.wh-hd-user-welcome-title a img,
+.wh-hd-user-info,
+.wh-r-nav-a{
+  .box-shadow(0 0 0 20px transparent);
+  .translate3d(0,0,0);
+  .transition(all .4s cubic-bezier(0.4, 0, 1, 1));
+  &:hover{
+    .box-shadow(0 0 0 0 rgba(33,150,243,0.5));
+    .transition(all .4s cubic-bezier(0.4, 0, 1, 1));
+  }
+}
+
+
+@keyframes moveFromTop {
+  0% {
+    .opacity(1);
+    .translate(0;0);
+  }
+  25%{
+    .opacity(0);
+    .translate(0;100%);
+  }
+  50%{
+    .opacity(0);
+    .translate(0;-100%);
+  }
+  100% {
+    .opacity(1);
+    .translate(0;0);
+  }
+}
+@-webkit-keyframes moveFromTop {
+  0% {
+    .opacity(1);
+    .translate(0;0);
+  }
+  25%{
+    .opacity(0);
+    .translate(0;100%);
+  }
+  50%{
+    .opacity(0);
+    .translate(0;-100%);
+  }
+  100% {
+    .opacity(1);
+    .translate(0;0);
+  }
+}
+@keyframes moveFromLeft {
+  from {
+    .opacity(0);
+    .translate(200%;0);
+  }
+  to {
+    .opacity(1);
+    .translate(0;0);
+  }
+}
+@-webkit-keyframes moveFromLeft {
+  from {
+    .opacity(0);
+    .translate(200%;0);
+  }
+  to {
+    .opacity(1);
+    .translate(0;0);
+  }
+}
+
+
+@keyframes moveFromRight {
+  from {
+    .translate(-200%;0);
+  }
+  to {
+    .translate(0;0);
+  }
+}
+@-webkit-keyframes moveFromRight {
+  from {
+    .translate(-200%;0);
+  }
+  to {
+    .translate(0;0);
+  }
+}
+.wh-hd-l-nav dd{
+  a{
+    &:hover{
+      i.fa:first-child{
+        .animation(moveFromTop 500ms ease-in-out);
+      }
+      span{
+        .animation(moveFromLeft 400ms ease-in-out);
+      }
+    }
+  }
+}

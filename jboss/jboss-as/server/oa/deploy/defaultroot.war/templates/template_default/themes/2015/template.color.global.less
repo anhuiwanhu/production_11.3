@@ -1,0 +1,1188 @@
+
+a{
+  &:hover,&:active{ color: @global-color; }
+}
+
+/* Scroll Bar for webkit */
+/* ---------------------------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height:6px;
+}
+::-webkit-scrollbar-track {
+  .border-top-radius(10px);
+  .border-bottom-radius(10px);
+  background: rgba(@webkit-scroll-color-r,@webkit-scroll-color-b,@webkit-scroll-color-g, 0.27);
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(@webkit-scroll-color-r,@webkit-scroll-color-b,@webkit-scroll-color-g,0.8);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(@webkit-scroll-color-r,@webkit-scroll-color-b,@webkit-scroll-color-g,0.8);
+}
+::-webkit-scrollbar-thumb:vertical:hover{
+  background-color: rgba(@webkit-scroll-color-r,@webkit-scroll-color-b,@webkit-scroll-color-g,0.8);
+}
+::-webkit-scrollbar-thumb:vertical:active{
+  background-color: rgba(@webkit-scroll-color-r,@webkit-scroll-color-b,@webkit-scroll-color-g,0.9);
+}
+
+/* Default 10 color */
+//Background
+.bgcolor-acd598{
+  background-color: #acd598;
+}
+.bgcolor-8f82bc{
+  background-color: #8f82bc;
+}
+.bgcolor-84ccc9{
+  background-color: #84ccc9;
+}
+.bgcolor-c989be{
+  background-color: #c989be;
+}
+.bgcolor-f29c9f{
+  background-color: #f29c9f;
+}
+.bgcolor-facd89{
+  background-color: #facd89;
+}
+.bgcolor-d5b798{
+  background-color: #d5b798;
+}
+.bgcolor-7ecef4{
+  background-color: #7ecef4;
+}
+.bgcolor-82bc90{
+  background-color: #82bc90;
+}
+.bgcolor-c6c1ba{
+  background-color: #c6c1ba;
+}
+
+//Font Color
+.facolor-acd598{
+  color: #acd598;
+}
+.facolor-8f82bc{
+  color: #8f82bc;
+}
+.facolor-84ccc9{
+  color: #84ccc9;
+}
+.facolor-c989be{
+  color: #c989be;
+}
+.facolor-f29c9f{
+  color: #f29c9f;
+}
+.facolor-facd89{
+  color: #facd89;
+}
+.facolor-d5b798{
+  color: #d5b798;
+}
+.facolor-7ecef4{
+  color: #7ecef4;
+}
+.facolor-82bc90{
+  color: #82bc90;
+}
+.facolor-c6c1ba{
+  color: #c6c1ba;
+}
+
+.wh-hd-l-nav{
+  .wh-hd-menu-btn{
+     &.current,&:hover{
+      background: @global-color;
+      a{
+        color: @global-color-white;
+        .fa{
+          color: @global-color-white;
+        }
+      }
+    }
+  }
+  dd{
+    &:hover{
+      border-bottom: 2px solid @global-color;
+    }
+    &.wh-hd-l-gateway{
+      &:hover{
+        border: none;
+      }
+    }
+    a{
+      .fa{
+        color: @global-color;
+      }
+      &.current{
+        .fa{
+          color: @global-color-white;
+        }
+      }
+      &:hover{
+        color: @global-color; 
+      }
+    }
+
+    .wh-hd-custom-menu-d{
+      a{
+        .fa{
+          color: @global-color-white;
+        }
+      }
+    }
+  }
+
+}
+.btn-switch-hide{
+  border-width: 1px 0 1px 1px;
+}
+.btn-switch-show{
+  border-width: 1px 1px 1px 0;
+}
+.btn-switch-hide,
+.btn-switch-show{
+  border-style: solid;
+  border-color:@global-color;
+  i.fa{
+    color:@global-color;
+  }
+}
+.wh-l-msg{
+  border-bottom: 1px solid @global-color;
+  a{
+    color: @global-color;
+  }
+}
+.wh-left-menuList{
+  border-top: 2px solid @global-color;
+}
+.wh-l-all-list{
+  &.on,&:hover{
+    background: @global-color-l;
+    span{
+      a{
+        color: @global-color;
+      }
+    }
+  }
+  i{
+    color: @global-color;
+  }
+}
+.wh-l-set-two{
+  .fa-color{
+    color: @global-color;
+  }
+  &:hover{
+    a{
+      color: @global-color;
+    }
+  }
+}
+.wh-l-set-three{
+  a{
+    &:hover{
+      padding-left: 72px;
+      color: @global-color;
+      border-left: 3px solid @global-color;
+    }
+    &.on{
+      padding-left: 72px;
+      color: @global-color;
+      border-left: 3px solid @global-color;
+    }
+  }
+}
+.wh-l-list{
+  li{
+    &:hover{
+      .wh-l-list{
+        color: @global-color;
+      }
+    }
+  }
+}
+.wh-hd-user-detail{
+  .wh-hd-user-welcome{
+    a{
+      em,.fa{
+        color: @global-color;
+      }
+      em.noselect{
+        color: @global-color-gray;
+      } 
+      span{
+        color:@global-color-black;
+      } 
+      &:hover{
+        color:@global-color-black;
+      } 
+    }
+  }
+}
+.wh-hd-user-state{
+  a{
+    &.fa:hover{
+      color: @global-color;
+    }
+    &.fa.on{
+      &:after{
+        color: @global-color;
+      }
+    }
+  }
+}
+.wh-hd-r-nav{
+  li{
+    &:hover{
+      .wh-r-nav-a{
+        background: @global-color;
+        .fa{
+          color: @global-color-white;
+        }
+      }
+    }
+  }
+  .wh-r-nav-a{
+    .fa-color{
+      color: @global-color;
+    }
+    &.on{
+      background: @global-color;
+      .fa-color{
+        color:@global-color-white;
+      }
+    }
+  }
+  .wh-sys-notice-list,.wh-sys-quicksetting-list {
+    i {
+      color: @global-color;
+    }
+    span{
+      color: @important-color;
+    }
+  }
+}
+.wh-hd-group-num{
+  .wh-hd-group-a{
+    .fa{
+      color: @global-color;
+    }
+    em,b{
+      color: @global-color;
+    } 
+  }
+}
+.wh-hd-search-form,
+.wh-sys-notice-list-form{
+  .wh-hd-search-btn{
+    color: @global-color-white;
+    background: @global-color;;
+  }
+}
+.wh-hd-search-box{
+  a{
+    color: @global-color;
+  }
+}
+
+/* Portal */
+
+.wh-portal-info{
+  border:1px solid @global-color-gray; /*边框色*/
+  background-color: @global-color-white; /*背景色*/
+  .box-shadow(0 0 3px @global-color-gray); /*合阴影*/
+}
+.wh-portal-tools{
+  .fa-color{
+    color:@global-color;
+    font-size:14px;
+    &.fa-times{
+      color:@important-color;
+    }
+  }
+}
+.wh-portal-i-title{
+  .wh-portal-i-title-left{
+    .wh-portal-title-li{
+      &.on,&:hover{
+        border-bottom: 2px solid @global-color;
+      }
+    }
+    i.fa{
+      color:@global-color;
+    }
+  }
+  .wh-portal-title-more{
+    color: @global-color;
+    border-color:@global-color;
+  }
+  h3{
+    color: @global-color-black-l;
+  }
+}
+.wh-portal-pic-slide-circle{
+  li{
+    background: @global-color-gray;
+    &:hover,&.flex-active{
+      background: @global-color;
+    }
+  }
+}
+.flex-control-nav{
+  li{
+    a{
+      &.flex-active{
+        background: @global-color;
+      }
+    }
+  }
+}
+
+.ztree{
+  li{
+    a{
+      border-left:2px solid @global-color-white;
+      //border-top:1px solid @global-color-white;
+      //border-bottom:1px solid @global-color-white;
+      &:hover,
+      &.curSelectedNode{
+        background: @global-color-l;
+        border-left:2px solid @global-color;
+        //border-top:1px solid #efefef;
+        //border-bottom:1px solid #efefef;
+        span{
+          color: @global-color;
+        }
+      }
+    }
+    span.button{
+      &:before{
+        color: @global-color;
+      }
+    }
+  }
+}
+.wh-portal-blog-form{
+  .wh-portal-blog-btn{
+    background: @global-color;
+  }
+}
+.wh-portal-blog-look{
+  .fa{
+    color: @global-color;
+  }
+  .blog-look-face,.blog-look-fileup{
+    background:@global-color-gray-d;
+    .box-shadow( 1px 1px 2px @global-color-gray-d);
+    table,.blog-look-file-con{
+      background: @global-color-white;
+      p{
+        color: @global-color-black-l;
+      }
+    }
+  }
+  .blog-look-fileup{
+    .wh-face-fileup{
+      background: @global-color;
+      color: @global-color-white;
+      p{
+        color: @global-color-white;
+        .fa{
+          color: @global-color-white;
+        }
+      }
+    }
+    a{
+      color: @global-color;
+    }
+  }
+
+}
+.wh-portal-blog-repeat{
+  li{
+    a{
+      &:hover{
+        color: @global-color;
+      }
+    }
+  }
+}
+.wh-blog-user-img{
+  a{
+    color: @global-color;
+  }
+}
+
+
+.wh-portal-one-title{
+  .fa-pencil{
+    &:hover{
+      color: @global-color;
+      border: 1px dashed @global-color;
+    }
+  }
+  h3{
+    &.on,&:hover{
+      height: 36px;
+      border-bottom: 2px solid @global-color;
+    }
+  }
+}
+.wh-system-warn{
+  li{
+    a{
+      .fa{
+        color: @global-color;
+      }
+    }
+  }
+}
+/*backstage*/
+.wh-control-panel-menu h2,
+.wh-control-save-btn a{
+  background: @global-color;
+  color: @global-color-white;
+}
+.wh-control-panel-list{
+  border-top: 3px solid @global-color;
+  background-color: @global-color-white;
+  h3{
+    color: @global-color;
+    border-bottom: 1px solid @global-color;
+  }
+}
+.wh-display-item{
+  a{
+    .fa{
+      color: @control-panel-color;
+    }
+  }
+}
+.wh-save-btn{
+  background: @global-color;
+}
+.wh-control-btn-blue,.wh-control-btn-blue:visited{
+  color:@global-color;
+  border: 1px solid @global-color;
+}
+
+.wh-online-vote{
+  h3{
+    color: @global-color;
+  }
+}
+.wh-meeting-content{
+  .wh-m-content-date{
+    &:hover,&.on{
+      color: @global-color-white;
+      background: @global-color;
+    }
+  }
+}
+.wh-meeting-arrow{
+  a{
+    border: 1px solid @global-color;
+    .fa{
+      color: @global-color;
+    }
+  }
+}
+.wh-meeting-join{
+  a{
+    color: @global-color;
+  }
+  span{
+    border: 1px solid @global-color;
+    i{
+      color: @global-color;
+    }
+
+  }
+}
+.wh-meeting-button{
+  text-align: center;
+}
+.wh-meeting-look-more,.wh-meeting-sure{
+  color: @global-color;
+  border: 1px solid @global-color;
+  &:visited{
+    color: @global-color;
+  }
+}
+.wh-portal-i-item{
+  .wh-work-report-name{
+    color: @global-color;
+  }
+}
+.wh-p-person-info{
+  em{
+    a{
+      &:hover{
+        color: @global-color;
+      }
+    }
+  }
+}
+
+.wh-portal-pic-slide-text,.wh-portal-pic-slide-txt{
+  &:hover{
+    color: @global-color;
+  }
+}
+.wh-portal-i-item{
+  a{
+    &:hover{
+      span{
+        color: @global-color;
+      }
+      color: @global-color;
+    }
+  }
+  i.fa.fa-circle{
+    color: @global-color;
+  }
+  i.fa.fa-circle-o{
+    color: @global-color-gray;
+  }
+}
+.wh-portal-info-content{
+  .wh-portal-info-title{
+    .wh-portal-infocon{
+      p{
+        a{
+          &:hover{
+            color: @global-color;
+          }
+        }
+      }
+    }
+  }
+}
+.wh-blog-user-title{
+  a{
+     color: @global-color;
+  } 
+}
+.wh-portal-know-list{
+  li{
+    .wh-portal-personal-info{
+      .wh-p-person-header{
+        .wh-p-person-ask{
+          &:hover{
+            color: @global-color;
+          }
+        }
+      }
+    }
+  }
+}
+.wh-hd-custom-switch{
+  background:@global-color;
+}
+.wh-hd-custom-menu{
+  background: @global-color;
+}
+.wh-hd-menu-add-cut{
+  background-color: @global-color;
+  .wh-hd-menu-cut,
+  .wh-hd-menu-add{
+    background: @global-color;
+    li{
+      .wh-hd-custom-menu-d-add{
+        border: 1px dotted @global-color;  
+      }
+      .wh-hd-custom-menu-d{ 
+        &:hover{
+          background-color: @global-color-d;
+        }
+      }
+      .wh-hd-custom-menu-d-del{ 
+        border: 1px dotted @global-color-white; 
+        background-color: @global-color-d;
+      }  
+    } 
+  }
+} 
+.wh-hd-custom-menu{
+  .wh-hd-custom-menu-btn{
+    color: @global-color;
+  }
+  .wh-hd-custom-menu-d{
+    background-color: @global-color;
+    &:hover{
+      background-color: @global-color-d;
+      .fa{
+        color: @global-color-white;
+      }
+      a{
+        span{
+          color: @global-color-light-gray;
+
+        }
+      }
+    }
+    a{
+      color: @global-color-white;
+    }
+  }
+}
+.wh-my-notes{
+  li{
+    background-color: @global-color-l;
+  }
+  .wh-my-notes-box{
+    background: @global-color;
+  } 
+}
+
+.wh-hd-menu-add{
+  ul{
+    li{
+      .wh-hd-custom-menu-d{ 
+        a{
+          color: @global-color-white;
+        }
+      }
+    }
+  }
+}
+.wh-hd-bell-pop-list{
+  .wh-hd-pop-li-border{
+    .wh-hd-pop-ico{
+      border: 1px solid @global-color;
+      .fa{
+
+        color: @global-color;
+      }
+    }
+  }
+}
+.wh-hd-pop-edit-li{
+  .wh-hd-p-btn-show{
+    color:@global-color-white;
+    background-color: @global-color;
+    border: 1px solid @global-color;
+  }
+  li{
+    .fa{
+      color: @global-color;
+      border: 1px solid @global-color;
+    }
+  }
+}
+.wh-personal-card-content{
+  .fa-th-large{
+    color: @global-color-white;
+  }
+  .wh-personal-date,.wh-personal-card-pos{
+    color: @global-color-white;
+  }
+}
+.wh-personal-card-setting{
+  .fa{
+    color: @global-color-white;
+  }
+}
+.wh-web-search-box{
+  .wh-web-search-go{
+    background: @global-color;
+  }
+}
+.wh-personal-card-btn,.wh-personal-card-setting-btn{
+  a{
+    &:hover{
+      color: @global-color;
+    }
+  }
+}
+.wh-web-search-list{
+  li{
+    a{
+      &:hover{
+        color: @global-color;
+      }
+    }
+    &.active{
+      a{
+        color: @global-color;
+      }
+    }
+  }
+}
+.wh-sys-query-btn{
+  color: @global-color;
+  border: 1px solid @global-color;
+  &:hover{
+    background: @global-color;
+    color: @global-color-white;
+  }
+}
+.wh-common-process-li{
+  .wh-common-p-text{
+    &:hover{
+      span{
+        color: @global-color;
+      }
+    }
+  }
+}
+.wh-vote-ques-li{
+  li{
+    &:hover{
+      span{
+        color: @global-color;
+      }
+    }
+  }
+}
+.wh-meeting-content{
+  .wh-m-meeting-text{
+    dd{
+      &:hover{
+        color: @global-color;
+      }
+    }
+  }
+}
+.wh-expert-consult-box{
+  .wh-expert-look{
+    .wh-p-person-ask,.wh-expert-position{
+        &:hover{
+          color: @global-color;
+        }
+    }
+  }
+}
+.wh-my-meeting-address-time{
+  background: @global-color;
+  table{
+    color: @global-color-white; 
+  }
+}
+.wh-my-s-meeting-day{
+  .wh-my-meeting-day-ul{
+    li{
+      border: 1px solid @global-color;
+    }
+  }
+  .flex-next{
+    &:before{
+      color: @global-color;
+    }
+  }
+}
+.wh-my-s-meeting-day{
+  .next{
+    .fa{
+      color: @global-color;
+    }
+  }
+  .flex-next,.next{
+    border: 1px solid @global-color;
+
+  }
+}
+.wh-choose-info-text{
+  .fa{
+    color: @global-color;
+  }
+}
+.wh-my-s-date-list{
+  .wh-my-s-date-li{
+    li{
+      &.flex-active-slide{
+        color: @global-color-white;
+        background: @global-color;
+      }
+    }
+  }
+  .flex-direction-nav{
+    .flex-prev,.flex-next,.flex-nav-next,.flex-nav-prev{
+      &:hover{
+        color: inherit;
+      }
+    }
+  }
+}
+
+.setting-contents {
+  div{
+    i{
+      border: 1px solid @global-color;
+      color: @global-color;
+    }
+    &.edit-notice{
+      i{
+        border: 1px dashed @global-color;
+      }
+    }
+  }
+}
+.wh-sys-notice-list-setting-edit{
+  .setting-contents-edit{
+    div{
+      span{
+        &.show{
+          background: @global-color;
+          border: 1px solid @global-color;
+        }
+      }
+      i{
+        color: @global-color;
+        border: 1px solid @global-color;
+      }
+    }
+  }
+}
+.wh-hd-user-detail {
+  .wh-hd-user-welcome{
+    .wh-hd-user-welcome-title{ 
+      color: @global-color;
+      a {  
+        color: @global-color;
+      }
+    }
+  }
+}
+.wh-hd-state,
+.wh-hd-l-gateway-info{
+  a{
+    color:@global-color-black;
+    i.fa{
+      color:@global-color-black;
+    }
+    &.current,&:hover{
+      color: @global-color;
+      i.fa{
+        color: @global-color;
+      }
+    }
+  }
+}
+.wh-hd-search{
+  .wh-hd-user-state{
+    a{
+      color:  ;
+      &.current{
+        color: @global-color;
+        .fa {
+          color: @global-color;
+        }
+      }
+    }
+  }
+}
+.wh-sys-notice-list,.wh-sys-quicksetting-list{
+  p{
+    a{
+      color: @global-color-black;
+      &:hover{ color: @global-color; }
+    }
+  }
+}
+.setting-tips{
+  color: @global-color;
+}
+
+/*-------- Person portal --------*/
+.wh-personal-card-setting-show,
+.wh-personal-card-state{  
+  .per-wh-hd-user-state,
+  .per-wh-hd-guser-state,
+  .per-wh-hd-depart-state{
+    a{
+      &.current{
+        color:@global-color;
+      }
+    }
+  }
+  i{
+    &.fa-angle-down{
+      color: @wh-no-hover-text;
+    }
+  }
+  ul{
+    li{
+      color: @wh-no-hover-text;
+      &:hover,&.current{ 
+        color: @global-color;
+      }
+    }
+  }
+}
+/*-------- Login portal ---------*/
+
+.wh-portal-login{
+  h4{
+    color:@global-color;
+  }
+  .wh-portal-login-ipt{
+    .wh-portal-l-usrname,
+    .wh-portal-l-pwd{
+      border-color:@global-color;
+    }
+  }
+  .wh-portal-l-btn{
+    a{        
+      background-color:@global-color;
+      color:@global-color-white;
+    }
+  }
+}
+.wh-portal-l-check{
+  .wh-portal-l-select{
+    border-color:@global-color-gray;
+    .lang-list{
+      border-color:@global-color-gray;
+      li{
+        &:hover{
+          background-color:@global-color;
+          color:@global-color-white;
+        }
+      }
+    }
+  }
+}
+/* Quick enter portal simple */
+.wh-sim-quick-title{
+  background: @global-color;
+  color:@global-color-white;
+}
+
+/*分页样式*/
+.wh-pager {
+  background:@global-color-white;;
+  a{
+    color: @global-color-black;
+    background: @global-color-light-gray;
+    &:hover {
+      background: @global-color;
+    }
+  }
+
+  .wh-pager-size {
+    select {
+      border:1px solid @global-color-gray;
+    }
+  }
+
+  .wh-pager-list {
+    a {
+      border:1px solid @global-color-gray;
+      &.wh-pager-current,
+      &.wh-pager-current{
+        color: @important-color;
+        &:hover{
+          border:1px solid @global-color;
+          background-color: @global-color;
+          color:@global-color-white;
+        }
+      }
+      &:hover{
+        border:1px solid @global-color;
+        background-color: @global-color;
+        color:@global-color-white;
+      }
+      &.jp-current{
+        border:1px solid @global-color;
+        background-color: @global-color;
+        color:@global-color-white;
+      }
+      &.jp-disabled{
+        border:1px solid @global-color-gray;
+        background-color: @global-color-gray;
+        color:@global-color-white;
+        &:hover {
+          border:1px solid @global-color-gray;
+          background-color: @global-color-gray;
+          color:@global-color-white;
+        }
+      }
+    }
+  }
+  .wh-pager-desc{
+    em.current{
+      color:@important-color;
+    }
+  }
+  .wh-pager-btn{
+    input{
+      border:1px solid @global-color-gray;
+      &:hover{
+
+      }
+    }
+    input[type=button]{
+      border:1px solid @global-color;
+      background-color: @global-color;
+      color:@global-color-white;
+    }
+  }
+}
+
+
+//文库对应的外问HTML
+.wh-portal-doc-search{
+  .doc-search-input{
+    input.d-s-input-text{
+      border:1px solid @global-color;
+    }
+    a.d-s-input-btn-seh,
+    a.d-s-input-btn-uld{
+      border:1px solid @global-color;
+      background-color:@global-color;
+      color:@global-color-white;
+    }
+  }
+  .doc-search-radio{
+    ul.doc-s-r-list{
+      li{
+        i,span{
+          color: @global-color-gray;
+        }
+        &.active{
+          i,span{
+            color: @global-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+//知道详情页
+//全局
+.wh-q2a-list,
+.wh-q2a-relate,
+.wh-q2a-hot{
+  h2{
+    strong{
+      border-bottom:2px solid @global-color;
+    }
+  }
+}
+//添加、附件
+.wh-q2a-ques-att{
+  >ul{
+    padding:0;
+    >li{
+      i.fa,a{
+        color: @global-color;
+      }
+    }
+  }
+}
+
+//右上角相关
+.wh-q2a-tip{
+  .wh-q2a-tip-btn{
+    a,span{
+      color: @global-color-white;
+      background-color: @global-color;
+    }
+  }
+  .wh-q2a-tip-btn-two{
+    a,span{
+      color: @global-color;
+      border:1px solid @global-color;
+    }
+  }
+  .wh-q2a-tip-vote{
+    span{
+      i.fa{
+        color: @global-color;
+      }
+    }
+  }
+}
+.wh-q2a-ques-add{
+  .wh-q2a-ques-add-con{
+    a{
+      color: @global-color-white;
+      background-color: @global-color;
+    }
+  }
+}
+.wh-q2a-q-meta{
+  span{
+    &.q-meta-author{
+      color: @global-color;
+    }
+  }
+}
+.wh-q2a-a-comipt{
+  a.a-com-btn{
+    color:@global-color-white;
+    background-color: @global-color;
+  }
+}
+//知道专家库
+input.wh-zh-zixun{
+  background: @global-color-white;
+  color: @global-color;
+  border: 1px solid @global-color;
+  &:hover{
+    background:@global-color;
+    color: @global-color-white;
+  }
+}
+.wh-personal-info{
+  ul{
+    border-bottom: 1px solid @global-color-gray;
+  }
+}
+//知道搜索框 按钮
+input.wh-zd-search,input.wh-zd-ans,input.wh-zd-ask,input.sub-answer-btn{
+    background: @global-color;
+    color: @global-color-white;
+}
+input.wh-zd-search-text{
+  border: 1px solid @global-color;
+}
+//督办任务
+.wh-portal-supervisor-color {
+  em.supervisor-color-mark-grey{
+    color: @global-color-gray;
+  }
+  em.supervisor-color-mark-red{
+    color: @important-color;
+  }
+}
+//微博hover个人信息弹出框样式
+.user_card { 
+  .right_aboutinfo{ 
+    span{ 
+      border-right: 1px solid @global-color;
+      color: @global-color;
+    }
+  }
+  .gz_box{ 
+    a{
+      background-color: @global-color; 
+      color: @global-color-white;
+      border: 1px solid @global-color;
+    }  
+  }
+}
+//微博输入框字数限制
+.wh-portal-blog-form{
+  p{
+    span{
+      color: @wh-no-hover-text;
+    }
+  }
+}
+//知识文库hover
+.wh-portal-doc-list{
+  li{
+    a:hover{
+      color:@global-color;
+    }
+  }
+}

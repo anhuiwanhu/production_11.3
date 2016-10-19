@@ -1,0 +1,96 @@
+/*-----end------*/
+.wh-main {
+  margin: 0 auto;
+}
+/* html */
+html {
+  font-size: 62.5%;
+}
+@media (min-width: 992px) {
+  html {
+    font-size: 75%;
+    /*0.75x16=12px*/
+  }
+}
+@media (min-width: 1200px) {
+  html {
+    font-size: 87.5%;
+    /*0.875x16=14px*/
+  }
+}
+body {
+  font-size: 12px;
+}
+html,
+body {
+  font-family: Microsoft YaHei;
+  text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  color: #484848;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+a {
+  color: #666;
+}
+a:visited {
+  color: #666;
+}
+a:hover,
+a:active {
+  color: #4283c5;
+}
+input,
+button,
+select,
+textarea {
+  outline: none;
+}
+/*head title*/
+h1 {
+  font-size: 26px;
+  line-height: 30px;
+}
+h2 {
+  font-size: 0.75em;
+}
+h3 {
+  font-size: 1.6em;
+}
+h4,
+h5 {
+  font-size: 1.6em;
+}
+h1,
+h2,
+h3 {
+  font-weight: normal;
+}
+strong {
+  font-weight: normal;
+}
+/*---color---*/
+/* --- wh-header ---*/
+.wh-header {
+  height: 108px;
+  border-bottom: 1px solid #d1cfd0;
+}
+.wh-header .wh-header-left {
+  padding: 33px 23px 0 0 ;
+  float: right;
+}
+.wh-header .wh-header-left strong {
+  display: inline;
+  margin: 0 0 0 5px ;
+  color: #4283c5;
+  text-decoration: underline;
+}
+.wh-header .wh-header-right {
+  float: left;
+}
+.wh-header .wh-header-right li {
+  width: 119px;
+}

@@ -1,0 +1,710 @@
+/* 上翻动画 */
+@keyframes moveFromTop {
+  0% {
+    .opacity(1);
+    .translate(0;0);
+  }
+  25%{
+    .opacity(0);
+    .translate(0;100%);
+  }
+  50%{
+    .opacity(0);
+    .translate(0;-100%);
+  }
+  100% {
+    .opacity(1);
+    .translate(0;0);
+  }
+}
+@-webkit-keyframes moveFromTop {
+  0% {
+    .opacity(1);
+    .translate(0;0);
+  }
+  25%{
+    .opacity(0);
+    .translate(0;100%);
+  }
+  50%{
+    .opacity(0);
+    .translate(0;-100%);
+  }
+  100% {
+    .opacity(1);
+    .translate(0;0);
+  }
+}
+/* 下翻动画 */
+@keyframes moveFromBottom {
+  0% {
+    .opacity(1);
+    .translate(0;0);
+  }
+  25%{
+    .opacity(0);
+    .translate(0;-100%);
+  }
+  50%{
+    .opacity(0);
+    .translate(0;100%);
+  }
+  100% {
+    .opacity(1);
+    .translate(0;0);
+  }
+}
+@-webkit-keyframes moveFromBottom {
+  0% {
+    .opacity(1);
+    .translate(0;0);
+  }
+  25%{
+    .opacity(0);
+    .translate(0;-100%);
+  }
+  50%{
+    .opacity(0);
+    .translate(0;100%);
+  }
+  100% {
+    .opacity(1);
+    .translate(0;0);
+  }
+}
+/* 左翻动画 */
+@keyframes moveFromLeft {
+  from {
+    .opacity(0);
+    .translate(30px;0);
+  }
+  to {
+    .opacity(1);
+    .translate(0;0);
+  }
+}
+@-webkit-keyframes moveFromLeft {
+  from {
+    .opacity(0);
+    .translate(30px;0);
+  }
+  to {
+    .opacity(1);
+    .translate(0;0);
+  }
+}
+/* 右翻动画 */
+@keyframes moveFromRight {
+  from {
+    .translate(-100%;0);
+  }
+  to {
+    .translate(0;0);
+  }
+}
+@-webkit-keyframes moveFromRight {
+  from {
+    .translate(-100%;0);
+  }
+  to {
+    .translate(0;0);
+  }
+}
+/* 360度顺时针旋转 */
+@keyframes rotate360 {
+  from {
+    .rotate(0deg);
+  }
+  to {
+    .rotate(360deg);
+  }
+}
+@-webkit-keyframes rotate360 {
+  from {
+    .rotate(0deg);
+  }
+  to {
+    .rotate(360deg);
+  }
+}
+/* 360度逆时针旋转 */
+@keyframes rotater360 {
+  from {
+    .rotate(0deg);
+  }
+  to {
+    .rotate(-360deg);
+  }
+}
+@-webkit-keyframes rotater360 {
+  from {
+    .rotate(0deg);
+  }
+  to {
+    .rotate(-360deg);
+  }
+}
+/* 0到90度逆时针旋转 */
+@keyframes rotate090 {
+  from {
+    .rotate(0deg);
+  }
+  to {
+    .rotate(90deg);
+  }
+}
+@-webkit-keyframes rotate090 {
+  from {
+    .rotate(0deg);
+  }
+  to {
+    .rotate(90deg);
+  }
+}
+/* 0到负90度顺时针旋转 */
+@keyframes rotater090 {
+  from {
+    .rotate(0deg);
+  }
+  to {
+    .rotate(-90deg);
+  }
+}
+@-webkit-keyframes rotater090 {
+  from {
+    .rotate(0deg);
+  }
+  to {
+    .rotate(-90deg);
+  }
+}
+/* 90到180度逆时针旋转 */
+@keyframes rotate90180 {
+  from {
+    .rotate(90deg);
+  }
+  to {
+    .rotate(180deg);
+  }
+}
+@-webkit-keyframes rotate90180 {
+  from {
+    .rotate(90deg);
+  }
+  to {
+    .rotate(180deg);
+  }
+}
+/* 负90到负180度顺时针旋转 */
+@keyframes rotater90180 {
+  from {
+    .rotate(-90deg);
+  }
+  to {
+    .rotate(-180deg);
+  }
+}
+@-webkit-keyframes rotater90180 {
+  from {
+    .rotate(90deg);
+  }
+  to {
+    .rotate(180deg);
+  }
+}
+/* 180度（负180度）到270度（负90度）逆时针旋转 */
+@keyframes rotater18090 {
+  from {
+    .rotate(-180deg);
+  }
+  to {
+    .rotate(-90deg);
+  }
+}
+@-webkit-keyframes rotater18090 {
+  from {
+    .rotate(-180deg);
+  }
+  to {
+    .rotate(-90deg);
+  }
+}
+/* 负180度（180度）到负270度度（90度）顺时针旋转 */
+@keyframes rotate18090 {
+  from {
+    .rotate(180deg);
+  }
+  to {
+    .rotate(90deg);
+  }
+}
+@-webkit-keyframes rotate18090 {
+  from {
+    .rotate(180deg);
+  }
+  to {
+    .rotate(90deg);
+  }
+}
+/* 270度（负90度）到360度（0）逆时针旋转 */
+@keyframes rotater900 {
+  from {
+    .rotate(-90deg);
+  }
+  to {
+    .rotate(0deg);
+  }
+}
+@-webkit-keyframes rotater900 {
+  from {
+    .rotate(-90deg);
+  }
+  to {
+    .rotate(0deg);
+  }
+}
+/* 负270度（90度）到负360度（0）顺时针旋转 */
+@keyframes rotate900 {
+  from {
+    .rotate(90deg);
+  }
+  to {
+    .rotate(0deg);
+  }
+}
+@-webkit-keyframes rotate900 {
+  from {
+    .rotate(90deg);
+  }
+  to {
+    .rotate(0deg);
+  }
+}
+
+/* 0到180度 逆时针旋转 */
+@keyframes rotate0180 {
+  from {
+    .rotate(0deg);
+  }
+  to {
+    .rotate(180deg);
+  }
+}
+@-webkit-keyframes rotate0180 {
+  from {
+    .rotate(0deg);
+  }
+  to {
+    .rotate(180deg);
+  }
+}
+
+/* 180度到0 逆时针旋转 */
+@keyframes rotate1800 {
+  from {
+    .rotate(180deg);
+  }
+  to {
+    .rotate(0deg);
+  }
+}
+@-webkit-keyframes rotate1800 {
+  from {
+    .rotate(180deg);
+  }
+  to {
+    .rotate(0deg);
+  }
+}
+
+/* 0到负180度 顺时针旋转 */
+@keyframes rotate0r180 {
+  from {
+    .rotate(0deg);
+  }
+  to {
+    .rotate(-180deg);
+  }
+}
+@-webkit-keyframes rotate0r180 {
+  from {
+    .rotate(0deg);
+  }
+  to {
+    .rotate(-180deg);
+  }
+}
+
+/* 负180度到0 顺时针旋转*/
+@keyframes rotater1800 {
+  from {
+    .rotate(-180deg);
+  }
+  to {
+    .rotate(0deg);
+  }
+}
+@-webkit-keyframes rotater1800 {
+  from {
+    .rotate(-180deg);
+  }
+  to {
+    .rotate(0deg);
+  }
+}
+
+/* 轻度左移动画 */
+@keyframes moveLeftlittle {
+  0% {
+    .translate(0,0);
+  }
+  25% {
+    .translate(10%,0);
+  }
+  100% {
+    .translate(-20%,0);
+  }
+}
+@-webkit-keyframes moveLeftlittle {
+  0% {
+    .translate(0,0);
+  }
+  25% {
+    .translate(10%,0);
+  }
+  100% {
+    .translate(-20%,0);
+  }
+}
+
+/* 左移动画，并逆时针翻转90度 */
+@keyframes moveLeftr90deg {
+  0% {
+    transform: translate(0,0) rotate(180deg);
+  }
+  100% {
+    transform:translate(-2px,0) rotate(0deg);
+  }
+}
+@-webkit-keyframes moveLeftr90deg {
+  0% {
+    transform: translate(0,0) rotate(180deg);
+  }
+  100% {
+    transform:translate(-2px,0) rotate(0deg);
+  }
+}
+
+
+/* 轻度右移动画 */
+@keyframes moveRightlittle {
+  0% {
+    .translate(0,0);
+  }
+  100% {
+    .translate(5px,0);
+  }
+}
+@-webkit-keyframes moveRightlittle {
+  0% {
+    .translate(0,0);
+  }
+  100% {
+    .translate(5px,0);
+  }
+}
+
+//帮助中心、换肤图标动画
+
+a.welcome-help-btn,
+a.welcome-skin-btn{
+  &:hover{    
+    i.fa{
+      .animation(moveFromTop .5s ease-in-out);
+    }
+  }
+}
+
+.wh-hd-user-info,
+.wh-r-nav-a{
+  .box-shadow(0 0 0 20px transparent);
+  .translate3d(0,0,0);
+  .transition(all .4s linear);
+  &:hover{
+    .box-shadow(0 0 0 0 rgba(@webkit-scroll-color-r,@webkit-scroll-color-g,@webkit-scroll-color-b,0.5));
+    .transition(all .4s linear);
+  }
+}
+
+/* 顶部左侧主菜单 */
+.wh-hd-l-nav dd{
+  //主导航菜单下划线动画
+  border-bottom-color: @global-color-white;
+  &:hover{
+    .transition(border-bottom-color .3s linear)
+  }
+  //主导航菜单常规入场动画
+  a{
+    &:hover{
+      i.fa:first-child{
+        .animation(moveFromTop .5s ease-in-out);
+      }
+      span{
+        .animation(moveFromLeft .4s ease-in-out);
+      }
+    }
+    &.wh-hd-menu-btn-a{
+      &:hover{
+        i.fa.fa-th-large{
+          .animation(rotate360 .4s ease-in-out);
+        }
+      }
+    }
+  }
+
+  //左侧按钮进出场动画
+  &.wh-hd-l-gateway{
+    a{
+      &:hover{
+        i.fa.fa-angle-down{
+          .animation(rotater1800 .3s ease-in-out forwards);
+        }
+      }
+      i.fa.fa-angle-down{
+        //.animation(rotate0180 .3s ease-in-out forwards);
+        .animation(none);
+      }
+      i.fa.fa-angle-up{
+        .animation(rotate1800 .3s ease-in-out forwards);
+      }
+    }
+    .wh-hd-l-gateway-info{
+      a.current{
+        i.fa.fa-home-select{
+          .animation(moveLeftr90deg .4s ease-in-out forwards);
+        }
+      }
+      &:hover{
+        i.fa.fa-home-select{
+          .animation(none);
+        }
+      }
+    }
+  }
+  //背景、关闭、增加 动画
+  .wh-hd-custom-menu-d{
+    .transition(background-color .3s linear);
+    &:hover{
+      .transition(background-color .3s linear);
+      i.fa.fa-times,
+      i.fa.fa-plus{
+        .animation(rotate090 .3s ease-in-out);
+      }
+    }
+  }
+  //移除相关继承的动画
+  .wh-hd-menu-add-cut{
+    .wh-hd-custom-menu-d{
+      a{
+        &:hover{
+          .animation(none);
+          i.fa{
+            &:first-child{
+              .animation(none);
+            }
+          }
+          span{
+            .animation(none);
+          }
+        }
+      }
+    }
+  }
+  a.wh-hd-custom-menu-btn{
+    i.fa,i.fa:first-child,span{
+      .animation(none);
+    }
+  }
+
+  //返回左移动画
+  .wh-hd-menu-cut{
+    a.prev{
+      i.fa{
+      }
+      &:hover{
+        i.fa{
+          .animation(moveLeftlittle .4s ease-in-out forwards);
+        }
+      }
+    }
+  }
+}
+
+/* 顶部右侧主菜单 */
+.wh-hd-r-nav{
+  li{
+    //箭头展开动画
+    a{
+      i.fa.fa-angle-right.fa-angle-down{
+        .animation(rotater900 .4s ease-in-out forwards);
+      }
+    }
+    //单选框动画
+    .wh-hd-state{
+      a.current{
+        i.fa{
+          .animation(moveLeftr90deg .4s ease-in-out both);
+        }
+      }
+    }
+    //通知下拉相关动画
+    .wh-sys-notice-list,.wh-sys-quicksetting-list {
+      p{
+        &:hover{
+          i.fa{
+            .animation(moveFromTop .5s ease-in-out);
+          }/*
+          a,span{
+            .animation(moveFromLeft .5s ease-in-out);
+          }*/
+        }
+      }
+    }
+  }
+}
+
+/* 顶部弹出框相关动画 */
+/*.wh-sys-notice{
+  i.fa{
+    overflow: hidden;
+      display: block;
+    &:before{
+    }
+    &:hover{
+      .animation(moveFromBottom .4s linear);
+      &:before{
+      }
+    }
+  }
+}*/
+/*　Header Skins Setting */
+.wh-sys-skin-model{
+  .wh-sys-setting-skinlist{
+    p{
+      span{
+        .transition(all .3s ease-in-out);
+        i{
+          .transition(all .3s ease-in-out);
+        }
+      }
+    }
+  }
+}
+
+/* 左侧菜单相关动画 */
+
+//切换左屏显示与否的按钮
+.btn-switch-hide,
+.btn-switch-show{
+  .transition(opacity .3s linear)
+}
+//Ztree动画
+/* .ztree{
+  li{
+    基本菜单备份
+    a:hover,
+    a.curSelectedNode{
+      .transition(all .3s linear);
+    }
+    a:hover{
+      span.button{
+        .animation(moveFromTop .3s ease-in-out);
+      }
+      span{
+        .animation(moveFromLeft .3s ease-in-out);
+      }
+    }
+    span.switch{
+      &.roots_open,
+      &.center_open,
+      &.bottom_open{
+        .animation(rotate360 .5s ease-in-out);
+      }
+      &.roots_close,
+      &.center_close,
+      &.bottom_close{
+        .animation(rotater360 .5s ease-in-out);
+      }
+    }
+  }
+}*/
+
+/* Portal 常规动画 */
+//常用流程
+ul.wh-system-warn li,
+ul.wh-quick-entry-list li,
+ul.wh-sim-quick-entry-list li,
+.wh-common-process-li{
+  a{
+    &:hover{        
+      i.fa{
+        .animation(moveFromTop .5s ease-in-out);
+      }
+      span.wh-sys-warn-num{
+        .animation(moveLeftlittle .3s ease-in-out forwards);
+      }
+    }
+  }
+}
+
+//文件办理提醒
+.wh-file-handle{
+  li{
+    &:hover{      
+      .wh-file-list-box{
+        .wh-file-type{
+          i.fa{
+            .animation(moveFromTop .5s ease-in-out);
+          }
+        }
+      }
+    }
+  }
+}
+//我的便签
+.wh-my-notes-box{
+  .wh-my-notes-plus,
+  .wh-my-notes-minus{
+    &:hover{
+      i.fa{        
+        .animation(rotater360 .5s ease-in-out);
+      }
+    }
+  }
+}
+//知识标签交互
+.wh-portal-k-ul{
+  .bgcolor-acd598,
+  .bgcolor-8f82bc,
+  .bgcolor-84ccc9,
+  .bgcolor-c989be,
+  .bgcolor-f29c9f,
+  .bgcolor-facd89,
+  .bgcolor-d5b798,
+  .bgcolor-7ecef4,
+  .bgcolor-82bc90,
+  .bgcolor-c6c1ba{
+    &:hover{
+      background-color: @global-color-gray;
+      .opacity(.6);
+      .transition(all .2s linear);
+    }
+  }
+}
+
+.wh-my-notes-box{
+  &:hover{
+    background-color: @global-color-white ;
+    .transition(all 500ms cubic-bezier(0.1, 0.1, 0.41, 0.99));
+  }
+}

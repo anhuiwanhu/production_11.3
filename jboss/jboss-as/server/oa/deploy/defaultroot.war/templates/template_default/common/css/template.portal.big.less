@@ -1,0 +1,479 @@
+@import "../../../../less/template.global.less";
+@portal-tools-index:100;
+@pt-font-size18: 18px;
+@pt-font-size16: 16px;
+@pt-font-size14: 14px;
+@pt-font-size12: 12px;
+.wh-main{
+  margin:0 auto;
+}
+/* html */
+html,body{    
+  font-size: @pt-font-size14;
+  line-height: 30px;
+}
+
+/*head title*/
+h1 {
+  font-size:24px;
+  line-height: 24px;
+}
+h2 {
+  font-size: 18px;
+}
+h3{
+  font-size: 16px;
+}
+h4,h5{
+  font-size: 14px
+}
+/*-----------------portal--------------*/
+.wh-portaler{
+  min-width: 750px;
+}
+/*-----------------infoColumn--------------*/
+/* Portal title */
+.wh-portal-i-title{
+  .wh-portal-i-title-left{
+    .wh-portal-title-li{
+      font-size: @pt-font-size14;
+      a{
+        i.fa{
+          font-size: @pt-font-size14;
+        }
+      }
+    }
+  }
+  h3{
+    font-size: @pt-font-size12;
+  }
+}
+
+.wh-portal-info-content{
+  .wh-portal-info-title{
+    .wh-portal-infotitle{
+      p{
+        font-size: @pt-font-size14;
+      }
+    }
+    .wh-portal-infocon{
+      p{
+        font-size: @pt-font-size12;
+      }
+    }
+  }
+}
+.wh-portal-i-item{
+  .wh-pending-em{
+    font-size: @pt-font-size12;
+  }
+  .wh-pending-time{
+    font-size: @pt-font-size12;
+  }
+  em{
+    font-size: @pt-font-size12;
+  }
+  i.fa.fa-new{
+    font-size: @pt-font-size12;
+  }
+  a{
+    font-size: @pt-font-size14;
+    .fa-history{
+      font-size: @pt-font-size14;
+    }
+    span{
+      font-size: @pt-font-size14;
+    }
+  }
+}
+
+/*----------图片 portal ----------*/
+.wh-portal-pic-slide-box{
+  .wh-portal-pic-slide-text{
+    font-size: @pt-font-size14;
+  }
+  .wh-portal-pic-slide-txt{
+    font-size: @pt-font-size14;
+  }
+}
+.wh-portal-pic-slide-circle{
+  li{
+    width: 10px;
+    height: 10px;
+  }
+}
+/*----------֪知识标签 portal ----------*/
+.wh-portal-k-ul{
+  li{
+    font-size: @pt-font-size18;
+  }
+}
+/*----------系统 portal ----------*/
+.wh-system-warn{
+  li{
+    font-size: @pt-font-size16;
+  }
+}
+/*----------�ļ��������� portal ----------*/
+.wh-file-handle{
+  margin:0 -5px;
+  li{
+    .wh-file-num{
+      font-size: 38px;
+    }
+    .wh-file-num-small{
+      font-size: 28px;
+    } 
+    .wh-file-type{ 
+      em{
+        font-size:@pt-font-size14;
+      }
+    }
+  }
+}
+/*----------�������� portal ----------*/
+.wh-human-remind-title{
+  span{
+    font-size: @pt-font-size14;
+  }
+  p{
+    font-size: @pt-font-size14;
+  }
+}
+.wh-human-remind-tab{
+  font-size: @pt-font-size14;
+  tr{
+    td{
+      font-size: @pt-font-size14;
+    }
+  }
+}
+/*----------�����㱨 portal ----------*/
+.wh-work-report-name{
+  font-size: @pt-font-size14;
+}
+/*----------������Ϣ portal----------*/
+.wh-portal-personal-info{
+  .wh-p-person-header{
+    .wh-p-person-job{
+      font-size: @pt-font-size14;
+    }
+  }
+  .wh-p-person-info{
+    em{
+      font-size: @pt-font-size14;
+    }
+    h3{
+      a{
+        font-size: @pt-font-size16;
+      }
+    }
+  }
+}
+/*----------������Ϣ2 portal----------*/
+.wh-portal-know-notice{
+  .wh-p-person-info{
+    em{
+      font-size: @pt-font-size14;
+    }
+  }
+}
+.wh-my-notes-dl{
+  font-size: @pt-font-size14;
+}
+/*----------WEB Search portal----------*/
+.wh-web-search-list{
+  li{
+    font-size: @pt-font-size14;
+  }
+}
+.wh-web-search-address{
+  font-size: @pt-font-size14;
+}
+/*----------��Ʊ portal----------*/
+.wh-p-shares-list{
+  li{
+    .wh-p-shares-detail{
+      table{
+        td{
+          font-size: @pt-font-size14;
+        }
+      }
+    }
+    .wh-p-shares-title{
+      font-size: @pt-font-size14;
+      h3{
+        font-size: @pt-font-size16;
+      }
+    }
+  }
+}/*----------������Ϣ��Ƭ portal----------*/
+.wh-personal-card-content{
+  .wh-personal-card-state{
+    .wh-card-department,.wh-card-state{
+      font-size: @pt-font-size16;
+    }
+    .per-wh-hd-user-state,.per-wh-hd-depart-state{
+      a{
+        font-size: @pt-font-size14;
+        i.fa{
+          font-size: @pt-font-size14;
+        }
+      }
+    }
+    .wh-card-department,.wh-card-state{
+      span{
+        font-size: @pt-font-size14;
+      }
+    }
+  }
+  .wh-personal-date{
+    font-size: @pt-font-size14;
+  }
+  .wh-personal-card-pos{
+    font-size: @pt-font-size14;
+    a{
+      font-size: @pt-font-size14;
+    }
+  }
+}
+.wh-personal-card-btn{
+  .wh-personal-card-btn-a{
+    font-size: @pt-font-size16;
+  }
+}
+.wh-personal-card-setting{
+  .wh-personal-card-namesign{
+    p{
+      &.wh-personal-date{
+        font-size: @pt-font-size14;
+      }
+
+    }
+    span{
+      font-size: @pt-font-size14;
+    }
+    a {
+      font-size: @pt-font-size18;
+    }
+    input.sign{
+      font-size: @pt-font-size14;
+    }
+  }
+
+}
+.wh-personal-card-setting-show{
+  dl{
+    font-size: @pt-font-size14;
+    ul.wh-pcard-down-list{
+      li{
+        .fa{
+          font-size: @pt-font-size14;
+        }
+      }
+    }
+  }
+  .per-wh-hd-guser-state{
+    a{
+      i.fa{
+        font-size: @pt-font-size14;
+      }
+    }
+  }
+}
+.wh-personal-card-setting-btn{
+  .wh-personal-card-btn-a{
+    font-size: @pt-font-size16;
+  }
+}
+
+
+/*----------�ҵ��ճ� portal----------*/
+.wh-my-s-date-list{
+  .flex-direction-nav{
+    .flex-prev,.flex-next{
+      font-size: @pt-font-size16;
+    }
+  }
+  .wh-my-s-date-li{
+    li{
+      font-size: @pt-font-size18;
+    }
+  }
+}
+.wh-my-s-meeting-day{
+  .flex-next{
+    font-size: 40px;
+  }
+}
+.wh-my-meeting-content{
+  .wh-my-meeting-theme{
+    font-size: @pt-font-size14;
+  }
+  .wh-my-meeting-address-time{
+    table{
+      td{
+        font-size: @pt-font-size14;
+      }
+    }
+  }
+}
+.wh-schedule-time-box{
+  .wh-schedule-time-slide{
+    li{
+      font-size: @pt-font-size14;
+    }
+  }
+  .flex-next,.flex-prev{
+    font-size: @pt-font-size14;
+  }
+
+}
+/*----------image slider portal----------*/
+.wh-slide-consult-box{
+  .wh-slide-look{
+    font-size: @pt-font-size14;
+  }
+  .wh-slide-name{
+    font-size: @pt-font-size16;
+  }
+}
+.wh-slide-sim-consult-box{
+  a{
+    b{
+      font-size: @pt-font-size16;
+    }
+  }
+}
+/*----------��������portal----------*/
+.wh-common-process-li{
+  .wh-common-p-text{
+    span{
+      font-size: @pt-font-size16;
+    }
+    i{
+      font-size: @pt-font-size14;
+    }
+  }
+  .wh-common-p-file{
+    width: 40%;
+  }
+}
+
+.wh-portal-blog-form{
+  .wh-portal-blog-text{
+    font-size: @pt-font-size14;
+  }
+}
+
+.wh-portal-blog-look{
+  a{
+    font-size: @pt-font-size14;
+  }
+}
+.wh-blog-user-text{
+  font-size:@pt-font-size14;
+}
+.wh-portal-blog-repeat{
+  ul{
+    li{
+      font-size:@pt-font-size14;
+    }
+  }
+}
+/*-------- Login portal ---------*/
+.wh-portal-login{
+  h4{
+    font-size:@pt-font-size16;
+  }
+  .wh-portal-l-btn{
+    a{
+      font-size:@pt-font-size16;
+    }
+  }
+}
+.wh-portal-l-check{
+  .wh-portal-l-select{
+    font-size:@pt-font-size14;
+  }
+}
+
+
+.wh-protal-tab-rush{
+  div{
+    font-size: @pt-font-size14;
+  }
+}
+.wh-portal-supervisor-tab{
+  p{
+    width: 100%;
+    font-size: @pt-font-size14;
+  }
+}
+.wh-portal-supervisor{
+  table{
+    font-size: @pt-font-size14;
+  }
+}
+.wh-online-vote{
+  .wh-vote-btn{
+    font-size: @pt-font-size16;
+  }
+  h3{
+    font-size: @pt-font-size16;
+  }
+}
+.wh-vote-ques-li{
+  li{
+    font-size: @pt-font-size14;
+  }
+}
+
+.wh-portal-know-list{
+  li{
+    width: 264px;
+  }
+}
+
+.wh-p-person-header{
+  .wh-p-person-ask{
+    font-size: @pt-font-size14;
+  }
+}
+.wh-quick-entry-list{
+  font-size: 0;
+  li{
+    span{
+      height:26px;
+      line-height: 26px;
+      font-size: @pt-font-size14;
+    }
+    .fa{
+      font-size: @pt-font-size14;
+    }
+  }
+}
+.wh-sim-quick-entry-list{
+  li{
+    span{
+      font-size: @pt-font-size14;
+    }
+    .fa{
+      font-size: @pt-font-size14;
+    }
+  }
+}
+
+//文库对应的外问HTML
+.wh-portal-doc-search,.wh-portal-zd-search{
+  font-size: @pt-font-size14;
+}
+
+.user_card {
+  h1{
+    font-size: @pt-font-size14;
+  }
+  .right_aboutinfo{
+    font-size: @pt-font-size14;
+  }
+}
