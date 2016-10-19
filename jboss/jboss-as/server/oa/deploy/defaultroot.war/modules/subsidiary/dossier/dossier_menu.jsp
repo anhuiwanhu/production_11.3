@@ -33,6 +33,8 @@
 	com.whir.ezoffice.bpm.bd.BPMProcessBD bpmbd = new com.whir.ezoffice.bpm.bd.BPMProcessBD();
 	String workflowType = com.whir.common.util.CommonUtils
 			.getWorkflowType(domainId);
+	com.whir.org.manager.bd.ManagerBD  managerBD = new com.whir.org.manager.bd.ManagerBD ();
+	boolean isSelRight=managerBD.hasRight(userId, "07*99*02");	
 %>
 <script>
 	  var zNodes =[
@@ -148,6 +150,9 @@
 						+ sLevelOneHasSubCategorySQL
 						+ " ) or (po.level <> 1 and (";
 				whereSQL += tempSQL2 + ")))";
+				if(isSelRight){
+					whereSQL = "showAll";
+				}
 				java.util.List lists2 = dossierBD.getDossierCategoryList(
 						new Long(userId), new Long(orgId), new Long(domainId),
 						null, null, whereSQL);
