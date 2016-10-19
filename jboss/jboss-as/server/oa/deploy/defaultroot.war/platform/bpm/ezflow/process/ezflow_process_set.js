@@ -1343,10 +1343,12 @@ function changeFormKey(){
 			//会议转批新建新流程不需要
 			if($("#moduleId").val()=="16"){
 			}else{
-			    // field1Select[0].add(newOpt); 
-				//field1Select2[0].add(newOpt2); 
-				field1Select.append("<option value='"+fieldid+"'>"+fieldtext+"</option>");
-				field1Select2.append("<option value='"+fieldid+"'>"+fieldtext+"</option>");
+				if(fieldtype != 401){//批示意见字段不显示
+					//field1Select[0].add(newOpt); 
+					//field1Select2[0].add(newOpt2); 
+					field1Select.append("<option value='"+fieldid+"'>"+fieldtext+"</option>");
+					field1Select2.append("<option value='"+fieldid+"'>"+fieldtext+"</option>");
+				}
 			}
 
 			//密码输入102、word编辑116、excel编辑117、115附件上传、118wps编辑  不可选

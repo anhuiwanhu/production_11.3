@@ -1,0 +1,51 @@
+.noteDiv_auto{
+	position:absolute;
+	width:400px;
+	height:200px;
+	z-index:1;
+	overflow:auto;
+	border:1px solid #829FBB;
+	display:none;
+	background-color:#ffffff; 
+}
+.noteDiv_field{
+	position:absolute;
+	width:400px;
+	height:200px;
+	z-index:1;
+	overflow:auto;
+	border:1px solid #829FBB;
+	display:none;
+	background-color:#ffffff; 
+}
+#noteDiv1 {
+	position:absolute;
+	width:220px;
+	height:126px;
+	z-index:1;
+	overflow:auto;
+	border:1px solid #829FBB;
+	display:none;
+}
+.divOver{
+    background-color:#003399;
+	color:#FFFFFF;
+	border-bottom:1px dashed #cccccc;
+    width:98%;
+	height:20px;
+	line-height:20px;
+	cursor:default;
+	padding-left:5px;
+	white-space:nowrap;
+}
+.divOut{
+    background-color:#ffffff;
+	color:#000000;
+	border-bottom:1px dashed #cccccc;
+    width:98%;
+	height:20px;
+	line-height:20px;
+	cursor:default;
+	padding-left:5px;
+	white-space:nowrap;
+}

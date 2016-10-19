@@ -216,3 +216,38 @@ insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) va
 go
 
 
+
+
+
+
+CREATE TABLE user_org_syn_errlog(
+	id numeric(20) IDENTITY(1,1) NOT NULL primary key,
+	create_date nvarchar(20) NULL,
+	empid nvarchar(30) NULL,
+	username nvarchar(20) NULL,
+	orgid nvarchar(30) NULL,
+	orgname nvarchar(100) NULL,
+	event nvarchar(20) NULL,
+	result nvarchar(100) NULL,
+	user_org_flag nvarchar(1) NULL,
+	phonenum nvarchar(11) NULL
+	);
+go
+CREATE TABLE SYS_CORP_SET_APP(id numeric(20) IDENTITY(1,1) NOT NULL primary key,
+	corpid nvarchar(50) NULL,
+	appname nvarchar(50) NULL,
+	appid nvarchar(50) NULL
+	);
+go
+
+CREATE TABLE EZOFFICE.SYS_CORP_SET(id numeric(20) IDENTITY(1,1) NOT NULL primary key,
+	corpid nvarchar(50) NULL,
+	corpsecret nvarchar(500) NULL,
+	token nvarchar(500) NULL,
+	encodingaeskey nvarchar(500) NULL
+	);
+go
+insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) values('Wanhu ezOFFICE','11.3.0.11_SP_20160111','11.3.0.11',getdate());
+go
+
+

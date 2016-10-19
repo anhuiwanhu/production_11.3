@@ -6,31 +6,26 @@
 <s:hidden id="yiboCreatedEmpName" name="yiboChannel.yiboCreatedEmpName" />
 <s:hidden id="yiboCreatedOrgId" name="yiboChannel.yiboCreatedOrgId" />
 <s:hidden id="yiboCreatedTime" name="yiboChannel.yiboCreatedTime" />
-
+<s:if test="yiboChannel.yiboChannelId != null">
+<s:hidden id="channel" name="channel" value="%{#request.channel}"/>
+</s:if>
 <table width="100%" border="0" cellpadding="2" cellspacing="0" class="Table_bottomline">
 	<tr>  
 		<td for="<s:text name='info.columnname'/>" width="10%" class="td_lefttitle" nowrap>  
 			<s:text name="info.columnname"/><span class="MustFillColor">*</span>：  
 		</td>
 		<td colspan="3">
-			<s:textfield name="yiboChannel.yiboChannelName" id="yiboChannelName" cssClass="inputText" whir-options="vtype:['notempty',{'maxLength':25}],'promptText':'%{getText('info.entercolumname')}'" cssStyle="width:94%;" />  
+			<s:textfield name="yiboChannel.yiboChannelName" id="yiboChannelName" cssClass="inputText" whir-options="vtype:['notempty','spechar3',{'maxLength':25}],'promptText':'%{getText('info.entercolumname')}'" cssStyle="width:94%;" />  
 		</td>
 	</tr>
 	<tr>
-		<td for="<s:text name='info.viewcolumn'/>" width="10%" class="td_lefttitle" nowrap>  
-			<s:text name="info.viewcolumn"/><span class="MustFillColor">*</span>：  
+		<td for="对应信息栏目" width="10%" class="td_lefttitle" nowrap>  
+			对应信息栏目<span class="MustFillColor">*</span>：  
 		</td>  
 		<td colspan="3">  
-		    <select id="channelId" name="yiboChannel.channelId" class="" style="width:763px;" whir-options="vtype:['notempty']"
+		    <select id="channelId" name="channelId" class="" style="width:763px;" whir-options="vtype:['notempty']"
 			data-options="forceSelection:true,panelHeight:'150'">
-				<option value="-1">===<s:text name="info.pselectcolumn"/>===</option>
-				<%
-				List list = (List)request.getAttribute("allChannelList");
-				for(int i=0;i<list.size();i++){
-					Object[] obj = (Object[])list.get(i);
-				%>
-				<option value='<%=obj[0]%>'><%=obj[1].toString()%></option>
-				<%}%>
+				
 		    </select>
 		</td>
 	</tr>

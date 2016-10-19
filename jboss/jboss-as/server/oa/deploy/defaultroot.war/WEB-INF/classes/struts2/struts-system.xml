@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" 
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="com.whir.org.sys.actionsupport" extends="whir">
+        <action name="SysSetup!*" method="{1}" class="com.whir.org.sys.actionsupport.SysSetupAction">
+            <result name="init">/platform/system/system_manager/systemmanager_syssetup.jsp</result>
+            <result name="security" type="redirect">/Log!initList.action</result>
+        </action>
+        
+        <action name="SysInterface!*" method="{1}" class="com.whir.org.sys.actionsupport.SysInterfaceAction">
+        	<result name="initList">/platform/system/system_manager/sysinterface_list.jsp</result>
+        </action>
+    </package>
+    
+    <package name="com.whir.component.remind.actionsupport" extends="whir">
+        <action name="SystemRemind!*" method="{1}" class="com.whir.component.remind.actionsupport.SystemRemindAction">
+        </action>
+    </package>
+    
+	<package name="com.whir.org.actionsupport.usermanager" extends="whir">
+        <action name="User!*" method="{1}" class="com.whir.org.actionsupport.usermanager.UserAction">
+            <result name="initList">/platform/system/system_manager/systemmanager_user_list.jsp</result>
+            <result name="addUser">/platform/system/system_manager/systemmanager_user_add.jsp</result>
+        	<result name="loadUser">/platform/system/system_manager/systemmanager_user_modify.jsp</result>
+        	<result name="addBatchUser">/platform/system/system_manager/systemmanager_user_addbatch.jsp</result>
+        	<result name="modiBatchUser">/platform/system/system_manager/systemmanager_user_modifybatch.jsp</result>
+        	<result name="getRights">/platform/system/system_manager/systemmanager_user_rights_get_html.jsp</result>
+        </action>
+        
+        <action name="MobileUser!*" method="{1}" class="com.whir.org.actionsupport.usermanager.MobileUserAction">
+            <result name="initMobileList">/platform/system/system_manager/systemmanager_mobile_list.jsp</result>
+            <result name="initBindMobileInfoList">/platform/system/system_manager/systemmanager_mobile_info_list.jsp</result>
+        </action>
+        
+        <action name="BrowseScope!*" method="{1}" class="com.whir.org.actionsupport.usermanager.BrowseScopeAction">
+            <result name="initList">/platform/system/system_manager/systemmanager_browsescope_list.jsp</result>
+            <result name="addBrowseScope">/platform/system/system_manager/systemmanager_browsescope_add.jsp</result>
+        	<result name="loadBrowseScope">/platform/system/system_manager/systemmanager_browsescope_modify.jsp</result>
+        </action>
+    </package>
+    
+    <package name="com.whir.org.actionsupport.organizationmanager" extends="whir">
+        <action name="Organization!*" method="{1}" class="com.whir.org.actionsupport.organizationmanager.OrganizationAction">
+        	<result name="initList">/platform/system/system_manager/systemmanager_organization_list.jsp</result>
+        	<result name="addOrg">/platform/system/system_manager/systemmanager_organization_add.jsp</result>
+        	<result name="loadOrg">/platform/system/system_manager/systemmanager_organization_modify.jsp</result>
+        </action>
+    </package>
+    
+    <package name="com.whir.org.actionsupport.groupmanager" extends="whir">
+        <action name="GroupClass!*" method="{1}" class="com.whir.org.actionsupport.groupmanager.GroupClassAction">
+        	<result name="initList">/platform/system/system_manager/groupclass_list.jsp</result>
+        	<result name="addGroupClass">/platform/system/system_manager/groupclass_add.jsp</result>
+        	<result name="loadGroupClass">/platform/system/system_manager/groupclass_modify.jsp</result>
+        </action>
+        
+        <action name="Group!*" method="{1}" class="com.whir.org.actionsupport.groupmanager.GroupAction">
+        	<result name="initList">/platform/system/system_manager/group_list.jsp</result>
+        	<result name="addGroup">/platform/system/system_manager/group_add.jsp</result>
+        	<result name="loadGroup">/platform/system/system_manager/group_modify.jsp</result>
+        </action>
+    </package>
+    
+    <package name="com.whir.org.actionsupport.rolemanager" extends="whir">
+        <action name="RoleClass!*" method="{1}" class="com.whir.org.actionsupport.rolemanager.RoleClassAction">
+        	<result name="initList">/platform/system/system_manager/roleclass_list.jsp</result>
+        	<result name="addRoleClass">/platform/system/system_manager/roleclass_add.jsp</result>
+        	<result name="loadRoleClass">/platform/system/system_manager/roleclass_modify.jsp</result>
+        </action>
+        
+        <action name="Role!*" method="{1}" class="com.whir.org.actionsupport.rolemanager.RoleAction">
+        	<result name="initList">/platform/system/system_manager/role_list.jsp</result>
+        	<result name="addRole">/platform/system/system_manager/role_add.jsp</result>
+        	<result name="loadRole">/platform/system/system_manager/role_modify.jsp</result>
+        </action>
+    </package>
+    
+    <package name="com.whir.org.actionsupport.rightmanager" extends="whir">
+        <action name="Right!*" method="{1}" class="com.whir.org.actionsupport.rightmanager.RightAction">
+        	<result name="initList">/platform/system/system_manager/right_list.jsp</result>
+        	<result name="loadRight">/platform/system/system_manager/right_modify.jsp</result>
+        	<result name="initRightScopeList">/platform/system/system_manager/right_scope_list.jsp</result>
+        </action>
+    </package>
+    
+    <package name="com.whir.ezoffice.security" extends="whir">
+        <action name="Ip!*" method="{1}" class="com.whir.ezoffice.security.ip.actionsupport.IpAction">
+        	<result name="initList">/platform/system/system_manager/systemmanager_ip_list.jsp</result>
+        	<result name="addIp">/platform/system/system_manager/systemmanager_ip_add.jsp</result>
+        	<result name="loadIp">/platform/system/system_manager/systemmanager_ip_modify.jsp</result>
+        </action>
+        
+        <action name="LogSet!*" method="{1}" class="com.whir.ezoffice.security.log.actionsupport.LogSetAction">
+        	<result name="initSet">/platform/system/system_manager/systemmanager_log_set.jsp</result>
+        </action>
+        
+        <action name="Log!*" method="{1}" class="com.whir.ezoffice.security.log.actionsupport.LogAction">
+        	<result name="initList">/platform/system/system_manager/systemmanager_log_list.jsp</result>
+        </action>
+        
+        <action name="LogHistory!*" method="{1}" class="com.whir.ezoffice.security.log.actionsupport.LogHistoryAction">
+        	<result name="initList">/platform/system/system_manager/systemmanager_log_history_list.jsp</result>
+        </action>
+    </package>
+    
+    <package name="com.whir.ezoffice.sso.actionsupport" extends="whir">
+        <action name="LdapSet!*" method="{1}" class="com.whir.ezoffice.sso.actionsupport.LdapSetAction">
+        	<result name="initLdapSetList">/platform/system/ssologin/ldap_set_list.jsp</result>
+        	<result name="addLdapSet">/platform/system/ssologin/ldap_set_add.jsp</result>
+        	<result name="loadLdapSet">/platform/system/ssologin/ldap_set_modify.jsp</result>
+        </action>
+        
+        <action name="Ldap!*" method="{1}" class="com.whir.ezoffice.sso.actionsupport.LdapAction">
+        	<result name="initLdap">/platform/system/ssologin/ldap.jsp</result>
+        	<result name="jump">/platform/system/ssologin/jump.jsp</result>
+        </action>
+    </package>
+
+    <package name="com.whir.org.imp.actionsupport" extends="whir">
+        <action name="ImportOrgUser!*" method="{1}" class="com.whir.org.imp.actionsupport.ImportOrgUserAction">
+        	<result name="importOrg">/platform/system/imp/imp_orguser.jsp</result>
+        	<result name="importUser">/platform/system/imp/imp_orguser.jsp</result>
+        </action>
+    </package>
+
+    <package name="com.whir.ezoffice.popwin.actionsupport" extends="whir">
+        <action name="Popwin!*" method="{1}" class="com.whir.ezoffice.popwin.actionsupport.PopwinAction">
+        	<result name="initList">/platform/system/popwin/popwin_list.jsp</result>
+            <result name="addPopwin">/platform/system/popwin/popwin_add.jsp</result>
+        	<result name="loadPopwin">/platform/system/popwin/popwin_modify.jsp</result>
+            <result name="popwin">/platform/system/popwin/popwin.jsp</result>
+        </action>
+    </package>
+	<package name="com.whir.org.actionsupport.MoveOAmanager" extends="whir">
+        <action name="MoveOAmanager!*" method="{1}" class="com.whir.org.actionsupport.MoveOAmanager.MoveOAmanagerAction">
+        	<result name="wxmanager">/platform/system/system_manager/wxmanager.jsp</result>
+			<result name="user_syn_errlog_list">/platform/system/system_manager/user_syn_errlog_list.jsp</result>
+        	<result name="org_syn_errlog_list">/platform/system/system_manager/org_syn_errlog_list.jsp</result>
+        	<result name="selectAPP">/platform/system/system_manager/selectAPP.jsp</result>
+        </action>
+    </package>
+</struts>

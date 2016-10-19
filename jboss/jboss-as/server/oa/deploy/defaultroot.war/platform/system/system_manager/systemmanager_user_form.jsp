@@ -187,7 +187,6 @@ OnRemove();
             </span>
         </td>
     </tr>
-	
     <tr>
         <td for="特权" class="td_lefttitle">特&nbsp;&nbsp;&nbsp;&nbsp;权：</td>
         <td>
@@ -202,6 +201,12 @@ OnRemove();
             <span id="mobileSpan" <s:if test="userPO.mobileUserFlag != 1">style="display:none"</s:if>>
                 <s:radio id="securitypolicy" name="userPO.securitypolicy" list="#{'0':'低安全策略','1':'高安全策略'}"></s:radio>&nbsp;<img src="images/helpuser.gif" width=14 height=16 title="安全策略目前仅对于Android、iPhone手机版有效，如果对该用户设置的是“高安全策略”，则首次登录时系统记录该用户登录时使用的手机设备ID、手机号码等但不允许其登录，直到该设备ID开通，由系统管理员通过用户管理列表中“绑定”操作为该用户的该手机设备ID开通访问权限，授权该用户使用已绑定的手机能够访问移动办公系统。"/>
             </span>
+        </td>
+    </tr>
+    <tr <s:if test="userPO.mobileUserFlag != 1">style="display:none"</s:if> id="empMobilePhoneTR">
+        <td for="手机号" class="td_lefttitle">手机号：</td>
+        <td>
+            <s:textfield name="userPO.empMobilePhone" id="empMobilePhone" cssClass="inputText" whir-options="vtype:[{'maxLength':11},'spechar3']" cssStyle="width:20%;"  />
         </td>
     </tr>
     <tr>
@@ -224,13 +229,12 @@ OnRemove();
     <tr>
         <td for="所属组织" class="td_lefttitle">所属组织<span class="MustFillColor">*</span>：</td>
          <td>
-          <s:hidden name="orgIds" id="orgIds" />
+          <s:hidden name="orgIds" id="orgIds"/>
 			<input type="hidden" name="pastOrgId" id="pastOrgId" value="<%=pastOrgId%>"/>
 			<input type="hidden" id="_orgId" value="<%=orgId%>"/>
             <input type="hidden" name="orgId" id="orgIds" value="<%=orgId%>"/>
-            <input type="text" name="orgName" id="orgName" style="width:92%;" class="inputText" readonly="readonly" whir-options="vtype:['notempty']" value="<%=orgName%>" /><a href="javascript:void(0);" class="selectIco" style="cursor:pointer" onclick="openSelect({allowId:'orgIds', allowName:'orgName', select:'org', single:'yes', show:'org', range:'<%=managerScope%>',limited:'1',callbackOK:'getFillLeader'});" ></a>							
+            <input type="text" name="orgName" id="orgName" style="width:92%;" class="inputText" readonly="readonly" whir-options="vtype:['notempty']" value="<%=orgName%>" /><a href="javascript:void(0);" class="selectIco" style="cursor:pointer" onclick="openSelect({allowId:'orgIds', allowName:'orgName', select:'org', single:'yes', show:'org', range:'<%=managerScope%>',callbackOK:'getFillLeader'});" ></a>							
          </td>
-		  
         
     </tr>
 

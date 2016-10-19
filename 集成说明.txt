@@ -210,3 +210,28 @@
 5、清服务端缓存，启动OA服务
 
 6、验证系统功能
+
+
+
+
+
+1、停OA服务
+
+2、备份生产环境程序、数据库
+
+3、覆盖产品补丁包到OA安装目录d:\jboss
+
+4、修改文件..\defaultroot.war\WEB-INF\config\hibernate\hibernate.cfg.xml,增加如下内容（注意位置）：
+
+<mapping resource="com/whir/org/vo/MoveOAmanager/CorpSetPO.hbm.xml"/>
+<mapping resource="com/whir/org/vo/MoveOAmanager/CorpSetAppPO.hbm.xml"/>
+
+5、修改文件..\defaultroot.war/WEB-INF/classes/ServiceParse.xml,在标签<service id="c11"></service>中添加如下内容（注意位置）：
+<method>getReceiveDocument_new</method>
+<method>getSendDocument_new</method>
+
+6、执行数据库升级脚本（分oralce、sqlserver两种类型库）
+
+7、清服务端缓存，启动OA服务
+
+8、验证系统功能

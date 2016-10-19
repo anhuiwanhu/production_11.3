@@ -119,7 +119,7 @@ function deleteYiBoChannel(url,obj){
 //渲染标题
 function yiboTitle(po,i){
 	var html = "", channelName="";
-	channelName = "<a onclick='location_href(\"InfoList!allList.action?channelId="+po.channelId+"&channelName="+po.channelName+"&checkdepart="+$('#checkdepart').val()+"&channelType="+$('#channelType').val()+"&userChannelName="+$('#userChannelName').val()+"&userDefine="+$('#userDefine').val()+"\");' style='cursor:pointer'>"+po.yiboChannelName+"</a>";
+	channelName = "<a onclick='location_href(\"InfoList!allList.action?channelId="+po.channelId+"&channelName="+po.channelName+"&checkdepart="+$('#checkdepart').val()+"&channelType="+po.channelType+"&userChannelName="+$('#userChannelName').val()+"&userDefine="+po.userDefine+"\");' style='cursor:pointer'>"+po.yiboChannelName+"</a>";
 	html = channelName;
 	return html;
 }

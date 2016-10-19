@@ -80,7 +80,6 @@ function changeInfoType(val){
 		$("#ppt").show();
 	}
 }
-
 //选择栏目
 function changeChannel(val){
 	var channelId = val.substring(0,val.indexOf(","));
@@ -109,15 +108,12 @@ function changeChannel(val){
 		}
 	});
 }
-
 function fileLink(json){
 	$("#fileLinkContent").val(json.file.name);
 }
-
 function uploadSuccess(json){
 	$("#fileLinkContentHidd").val(json.save_name+json.file_type);
 }
-
 function selectReader(){
 	var channelReader_ = $("#informationReaderId_").val();
 	if(channelReader_!=""){
@@ -126,7 +122,6 @@ function selectReader(){
 		openSelect({allowId:'informationReaderId', allowName:'informationReaderName', select:'userorggroup', single:'no', show:'orgusergroup', range:'*0*'});
 	}
 }
-
 function selectPrinter(){
 	var channelPrinter_ = $("#informationPrinterId_").val();
 	if(channelPrinter_!=""){
@@ -135,7 +130,6 @@ function selectPrinter(){
 		openSelect({allowId:'informationPrinterId', allowName:'informationPrinterName', select:'userorggroup', single:'no', show:'orgusergroup', range:'*0*'});
 	}
 }
-
 function selectDownLoader(){
 	var channelDownLoader_ = $("#informationDownLoaderId_").val();
 	if(channelDownLoader_!=""){
@@ -144,7 +138,6 @@ function selectDownLoader(){
 		openSelect({allowId:'informationDownLoaderId', allowName:'informationDownLoaderName', select:'userorggroup', single:'no', show:'orgusergroup', range:'*0*'});
 	}
 }
-
 //加载网站同步信息
 function initOutSiteSynDiv(){
     var _channel = whirExtCombobox.getValue("channelId");//whirCombobox.getValue("selectChannel");
@@ -158,4 +151,41 @@ function initOutSiteSynDiv(){
 	var url=whirRootPath+"/modules/kms/information_manager/informationmanager_info_synsite_div.jsp?channelId="+_channelId+"&informationId="+$("#informationId").val();
 	var html = $.ajax({url: url,async: false}).responseText;
 	$("#outSiteSynDiv").html(html);
+}
+//页面初始化方法
+function initfunction(yiboflag,modifyflag){
+    if($("#textContent").val().indexOf("<br>")){
+		$("#textContent").val($("#textContent").val().replace(/<br>/ig,"\n"));
+	}
+	$(":radio[name='information.informationValidType']").change(function(){
+		if(this.value==1){
+			$("#validBeginTime").val(getFormatDate(new Date(),"yyyy-MM-dd"));
+			$("#validEndTime").val(getFormatDate(new Date(),"yyyy-MM-dd"));
+			$("#validTime").show();
+		}else{
+			$("#validBeginTime").val('');
+			$("#validEndTime").val('');
+			$("#validTime").hide();
+		}
+	});
+	var valid = $(":radio[name='information.informationValidType']:checked").val();
+	if(valid==1){
+		$("#validTime").show();
+	}
+	changeInfoType($("#informationType").val());
+	//初始进入易播栏目信息的修改页面，部分页面元素隐藏处理等
+	var isYiBoChannel = yiboflag;
+	if(isYiBoChannel == "1"){
+		$(document).attr("title","修改易播信息");//修改title
+		//针对办理查阅进入页面，不展示详细信息页签（20160108 -by jqq）
+		if(modifyflag == "1"){
+			$("#info_add_center_1").hide();
+		}else{
+			$("#Panle1").hide();
+		}
+		$("#info_add_1").hide();
+		$("#temp").hide();
+		$("#info_add_2").hide();
+		$("#selectAppend").hide();
+	}
 }

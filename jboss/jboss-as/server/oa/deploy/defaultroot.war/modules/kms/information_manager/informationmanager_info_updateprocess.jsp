@@ -26,6 +26,7 @@ boolean modify = p_wf_openType.equals("reStart");
 String canIssueChannel = request.getAttribute("canIssueChannel")!=null ? request.getAttribute("canIssueChannel").toString() :"[]";
 String otherChannel = request.getAttribute("otherChannel")!=null ? request.getAttribute("otherChannel").toString() :"[]";
 String isYiBoChannel = request.getAttribute("isYiBoChannel")!=null ? request.getAttribute("isYiBoChannel").toString() :"0";
+String modifyFlag = request.getParameter("modifyFlag")!=null?request.getParameter("modifyFlag"):"0";
 %>
 <body class="docBodyStyle" scroll="no" onload="initBody();">
     <!--包含头部--->
@@ -59,7 +60,6 @@ String isYiBoChannel = request.getAttribute("isYiBoChannel")!=null ? request.get
 									<%@ include file="/public/include/form_detail.jsp"%>
 									<%@ include file="information_form.jsp"%>
 								</div>
-							
 							</div>
 							<%if(!modify){%>
 							<div id="docinfo2" class="doc_Content"  style="display:none;"></div>
@@ -74,7 +74,7 @@ String isYiBoChannel = request.getAttribute("isYiBoChannel")!=null ? request.get
 		</s:form>
     </div>
     <div class="docbody_margin"></div>
-    <%@ include file="/platform/bpm/work_flow/operate/wf_include_form_end.jsp"%>
+    <%@ include file="/platform/bpm/pool/pool_include_form_end.jsp"%>
 </body>
 <script src="<%=rootPath%>/scripts/main/whir.ready.js" type="text/javascript"></script>
 <script src="<%=rootPath%>/modules/kms/information_manager/informationmanager_info_updateprocess.js" type="text/javascript"></script>
@@ -84,7 +84,6 @@ Ext.onReady(function() {
 	<s:if test="#request.curModifyField==null || #request.curModifyField.indexOf('$information.otherChannel$') > -1">
 		readonly = false;
 	</s:if>
-
 	var tp = Ext.create('Ext.XTemplate',
 		'<tpl for=".">',
 			'<tpl if="first == 1">',  
@@ -99,12 +98,10 @@ Ext.onReady(function() {
 			'<div class="x-boundlist-item">{name}</div>',
 		'</tpl>'
 	);
-
 	var states = Ext.create('Ext.data.Store', {
 		fields: ['id', 'name', 'first'],
 		data : <%=canIssueChannel%>
 	});
-
 	Ext.create('Ext.form.ComboBox', {
 		store: states,
 		queryMode: 'local',
@@ -126,12 +123,10 @@ Ext.onReady(function() {
 		readOnly: true,
 		tpl: tp
 	});
-
 	var states1 = Ext.create('Ext.data.Store', {
 		fields: ['id', 'name', 'first'],
 		data : <%=otherChannel%>
 	});
-
 	Ext.create('Ext.form.ComboBox', {
 		store: states1,
 		queryMode: 'local',
@@ -148,13 +143,11 @@ Ext.onReady(function() {
 		readOnly: readonly,
 		tpl: tp
 	});
-
 	whirExtCombobox.setValue('channelId',$("#channel").val());
 	whirExtCombobox.setValue('otherchannelId',$("#other").val().substring(1,$("#other").val().length-1));
 	//初始化网站同步
 	initOutSiteSynDiv();
 });
-
 //切换页签
 var divNum = 6;
 <%if(modify){%>
@@ -192,46 +185,13 @@ function  changePanle(flag){
     }
 	<%}%>
 }
-
 //初始化信息
 function initBody(){
     ezFlowinit();
 }
-
 $(document).ready(function(){
-	if($("#textContent").val().indexOf("<br>")){
-		$("#textContent").val($("#textContent").val().replace(/<br>/ig,"\n"));
-	}
-	
-	$(":radio[name='information.informationValidType']").change(function(){
-		if(this.value==1){
-			$("#validBeginTime").val(getFormatDate(new Date(),"yyyy-MM-dd"));
-			$("#validEndTime").val(getFormatDate(new Date(),"yyyy-MM-dd"));
-			$("#validTime").show();
-		}else{
-			$("#validBeginTime").val('');
-			$("#validEndTime").val('');
-			$("#validTime").hide();
-		}
-	});
-	var valid = $(":radio[name='information.informationValidType']:checked").val();
-	if(valid==1){
-		$("#validTime").show();
-	}
-	changeInfoType($("#informationType").val());
-	
-	//初始进入易播栏目信息的修改页面，部分页面元素隐藏处理等
-	var isYiBoChannel = "<%=isYiBoChannel%>";
-	if(isYiBoChannel == "1"){
-		$(document).attr("title","修改易播信息");//修改title
-		$("#info_add_center_1").hide();
-		$("#info_add_1").hide();
-		$("#temp").hide();
-		$("#info_add_2").hide();
-		$("#selectAppend").hide();
-	}
+	initfunction("<%=isYiBoChannel%>","<%=modifyFlag%>");
 });
-
 function initPara(){
 	var informationType = $("#informationType").val();//$(':radio[name="information.informationType"]:checked').val();
 	if(informationType == 1){
@@ -306,19 +266,16 @@ function initPara(){
 		return true;
 	}
 }
-
 function wordEdit(editType){
 	var content = $("#content").val();
 	var userName = '<%=session.getAttribute("userName")%>';
 	openWin({url:'public/iWebOfficeSign/DocumentEdit.jsp?RecordID='+content+'&EditType='+editType+'&UserName='+userName+'&ShowSign=0&CanSave='+editType+'&moduleType=information&saveHtmlImage=0&saveDocFile='+editType+'&FileType=.doc&showSignButton=1&showEditButton='+editType+'&saveHtml=0&showTempSign=-1&showTempHead=-1&initRecordId=1259293647344',isFull:true,winName:'editContent'});
 }
-
 function excelEdit(editType){
 	var content = $("#content").val();
 	var userName = '<%=session.getAttribute("userName")%>';
 	openWin({url:'public/iWebOfficeSign/DocumentEdit.jsp?RecordID='+content+'&EditType='+editType+'&UserName='+userName+'&ShowSign=0&CanSave='+editType+'&moduleType=information&saveHtmlImage=0&saveDocFile='+editType+'&FileType=.xls&showSignButton=1&showEditButton='+editType+'&saveHtml=0&showTempSign=-1&showTempHead=-1',isFull:true,winName:'editContent'});
 }
-
 function pptEdit(editType){
 	var content = $("#content").val();
 	var userName = '<%=session.getAttribute("userName")%>';

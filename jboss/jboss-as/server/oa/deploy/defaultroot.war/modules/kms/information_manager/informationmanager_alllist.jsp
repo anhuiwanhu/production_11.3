@@ -303,7 +303,7 @@ function myOperate(po,i){
 			}else{
 				<s:if test="channelId!='' && channelId!=null && (#request.channelManager||#request.allRight)">
 				if(po.channelNeedCheckup =='1' && po.channelNeedCheckupForModi=='1'){
-					html += '<a href="javascript:void(0)" onclick="openWin({url:\'Information!restart.action?p_wf_recordId='+po.informationId+'&p_wf_moduleId=4&p_wf_openType=reStart\',isFull:true,winName:\'infoModi\'});"><img border="0" src="<%=rootPath%>/images/modi.gif" title="<s:text name="info.allmodify"/>"></a>';
+					html += '<a href="javascript:void(0)" onclick="openWin({url:\'Information!restart.action?p_wf_recordId='+po.informationId+'&p_wf_moduleId=4&p_wf_openType=reStart&modifyFlag=1\',isFull:true,winName:\'infoModi\'});"><img border="0" src="<%=rootPath%>/images/modi.gif" title="<s:text name="info.allmodify"/>"></a>';
 				} else {
 					html += '<a href="javascript:void(0)" onclick="openWin({url:\'Information!load.action?informationId='+po.informationId+'&channelType='+$("#channelType").val()+'&userDefine='+$("#userDefine").val()+'&userChannelName='+$("#userChannelName").val()+'\',isFull:true,winName:\'infoModi\'});"><img border="0" src="<%=rootPath%>/images/modi.gif" title="<s:text name="info.allmodify"/>"></a>';
 				}

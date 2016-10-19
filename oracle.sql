@@ -209,3 +209,139 @@ commit;
 
 insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.10_SP_20160104','11.3.0.10',sysdate);
 commit;
+
+
+
+
+
+
+-- Create table
+create table USER_ORG_SYN_ERRLOG
+(id            NUMBER(20) not null,
+  create_date   VARCHAR2(20),
+  username      VARCHAR2(20),
+  phonenum      VARCHAR2(11),
+  orgid         VARCHAR2(30),
+  empid         VARCHAR2(30),
+  orgname       VARCHAR2(100),
+  result        VARCHAR2(100),
+  event         VARCHAR2(20),
+  user_org_flag VARCHAR2(1)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the columns 
+comment on column USER_ORG_SYN_ERRLOG.create_date
+  is '创建时间';
+comment on column USER_ORG_SYN_ERRLOG.username
+  is '姓名';
+comment on column USER_ORG_SYN_ERRLOG.phonenum
+  is '手机号码';
+comment on column USER_ORG_SYN_ERRLOG.orgid
+  is '组织ID';
+comment on column USER_ORG_SYN_ERRLOG.empid
+  is '用户ID';
+comment on column USER_ORG_SYN_ERRLOG.orgname
+  is '组织名称';
+comment on column USER_ORG_SYN_ERRLOG.result
+  is '结果';
+comment on column USER_ORG_SYN_ERRLOG.event
+  is '事件';
+comment on column USER_ORG_SYN_ERRLOG.user_org_flag
+  is '标记 0-用户，1-组织';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table USER_ORG_SYN_ERRLOG
+  add constraint PK_USER_ORG_SYN_ERRLOG primary key (ID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+commit;
+-- Create table
+create table SYS_CORP_SET_APP
+(id      NUMBER(20) not null,
+  appname VARCHAR2(50),
+  appid   VARCHAR2(50),
+  corpid  VARCHAR2(50)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SYS_CORP_SET_APP
+  add primary key (ID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+commit;
+-- Create table
+create table SYS_CORP_SET
+( id             NUMBER(20) not null,
+  corpid         VARCHAR2(50),
+  corpsecret     VARCHAR2(500),
+  token          VARCHAR2(500),
+  encodingaeskey VARCHAR2(500)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SYS_CORP_SET
+  add primary key (ID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+commit;
+insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.11_SP_20160111','11.3.0.11',sysdate);
+commit;

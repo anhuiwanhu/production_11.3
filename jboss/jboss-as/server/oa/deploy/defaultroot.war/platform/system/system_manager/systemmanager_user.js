@@ -315,8 +315,11 @@ function checkMobile(obj){
     if(obj.checked){
         $('#mobileSpan').show();
         document.getElementById("mobileSpan").style.display="";
+        $('#empMobilePhoneTR').show();
+        document.getElementById("empMobilePhoneTR").style.display="";
     }else{
         $('#mobileSpan').hide();
+        $('#empMobilePhoneTR').hide();
     }
 }
 
@@ -677,7 +680,16 @@ function checkInput(){
         $('#netDiskSize').focus();
         return false;
     }
-
+    /*var dis = document.getElementById("empMobilePhoneTR").style.display;
+    if(dis!="none"){
+			var empMobilePhone = $.trim($('#empMobilePhone').val());
+			if(empMobilePhone.length<11){
+			   
+				whir_poshytip($('#empMobilePhone'), "手机号码输入不正确");
+				$('#empMobilePhone').focus();
+				return false;
+			}
+		}*/
     return true;
 }
 

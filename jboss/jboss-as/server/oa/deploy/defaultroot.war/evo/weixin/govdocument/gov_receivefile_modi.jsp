@@ -101,10 +101,10 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 		            			</td>
 		            		</tr>
 	            		</x:if>
-						<x:if select="$govDoc//realFile/file">
-							<tr>
-								<th>附件</th>
-								<td>
+						<tr>
+							<th>附件</th>
+							<td>
+								<x:if select="$govDoc//realFile/file">
 									<%
 									StringBuilder saveFiles = new StringBuilder();
 									StringBuilder realFiles = new StringBuilder();
@@ -126,9 +126,9 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 										<jsp:param name="saveFileNames" value="<%=saveFiles.toString() %>" />
 										<jsp:param name="moduleName" value="govdocumentmanager" />
 									</jsp:include>
-								</td>
-							</tr>
-						</x:if> 
+								</x:if> 
+							</td>
+						</tr>
 						<x:if select="$govDoc//zjkySeq">
 						 	 <tr>
 						 	 	<th>
@@ -551,7 +551,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 								<x:out select="$govDoc//field7/@name"/>
 							</th>
 							<td> 
-								<c:set var="fieldtype"><x:out select="$govDoc//field/@fieldDisplayType" /></c:set> 
+								<c:set var="fieldtype"><x:out select="$govDoc//field7/@fieldDisplayType" /></c:set> 
 								<c:choose>
 									<c:when test="${fieldtype eq '13' }">
 									<x:if select="$govDoc//field7/text() != 'null'">
@@ -610,7 +610,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 								<x:out select="$govDoc//field8/@name"/>
 							</th>
 							<td> 
-								<c:set var="fieldtype"><x:out select="$govDoc//field/@fieldDisplayType" /></c:set> 
+								<c:set var="fieldtype"><x:out select="$govDoc//field8/@fieldDisplayType" /></c:set> 
 								<c:choose>
 									<c:when test="${fieldtype eq '13' }">
 									<x:if select="$govDoc//field8/text() != 'null'">
@@ -669,7 +669,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 								<x:out select="$govDoc//field9/@name"/>
 							</th>
 							<td> 
-								<c:set var="fieldtype"><x:out select="$govDoc//field/@fieldDisplayType" /></c:set> 
+								<c:set var="fieldtype"><x:out select="$govDoc//field9/@fieldDisplayType" /></c:set> 
 								<c:choose>
 									<c:when test="${fieldtype eq '13' }">
 									<x:if select="$govDoc//field9/text() != 'null'">
@@ -728,7 +728,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 								<x:out select="$govDoc//field10/@name"/>
 							</th>
 							<td> 
-								<c:set var="fieldtype"><x:out select="$govDoc//field/@fieldDisplayType" /></c:set> 
+								<c:set var="fieldtype"><x:out select="$govDoc//field10/@fieldDisplayType" /></c:set> 
 								<c:choose>
 									<c:when test="${fieldtype eq '13' }">
 									<x:if select="$govDoc//field10/text() != 'null'">
@@ -777,34 +777,129 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 									<c:otherwise>
 										<x:out select="$govDoc//field10/text()" />
 									</c:otherwise>
-									</c:choose>
+								</c:choose>
 							</td>
 							</tr>
 						</x:if>
+						<x:if select="$govDoc/output/data/baseData/custemFieldList">
+							<x:forEach select="$govDoc/output/data/baseData/custemFieldList/custemField" var="cf" >
+								<tr>
+									<th>
+										<x:out select="$cf/name/text()"/>
+									</th>
+									<td>
+										<c:set var="custemFieldtype"><x:out select="$cf/fieldDisplayType/text()" /></c:set> 
+										<c:choose>
+											<c:when test="${custemFieldtype eq '116' || custemFieldtype eq '118'}">
+											<x:if select="$cf/content/text() != 'null'">
+												<c:set var="appName"><x:out select="$cf/content/text()" /></c:set>
+												<c:set var="filename"><x:out select="$cf/content/text()" />.doc</c:set>
+												 <c:if test="${not empty filename}"> 
+													<jsp:include page="../common/include_download.jsp" flush="true">
+														<jsp:param name="realFileNames"	value="${appName}" />
+														<jsp:param name="saveFileNames" value="${filename}" />
+														<jsp:param name="moduleName" value="govdocumentmanager" />
+													</jsp:include>          			
+												 </c:if>
+												 </x:if>	
+											</c:when>
+											<c:when test="${custemFieldtype eq '117' }">
+											<x:if select="$cf/content/text() != 'null'">
+												<c:set var="appName"><x:out select="$cf/content/text()" /></c:set>
+												<c:set var="filename"><x:out select="$cf/content/text()" />.xls</c:set>
+												 <c:if test="${not empty filename}"> 
+													<jsp:include page="../common/include_download.jsp" flush="true">
+														<jsp:param name="realFileNames"	value="${appName}" />
+														<jsp:param name="saveFileNames" value="${filename}" />
+														<jsp:param name="moduleName" value="govdocumentmanager" />
+													</jsp:include>          			
+												 </c:if>	
+												 </x:if>
+											</c:when>
+											<c:when test="${custemFieldtype eq '115' }">
+											<x:if select="$cf/content/text() != 'null'">
+												<c:set var="sc_fujian"><x:out select="$cf/content/text()" /></c:set>
+					            					<%
+					            						String fujian_value=(String)pageContext.getAttribute("sc_fujian");
+					            						String[] fujian_array=fujian_value.split(",");
+					            					%>
+					            				 	<c:set var="appNames"><%=fujian_array[0] %></c:set>
+									            	<c:set var="filenames"><%=fujian_array[1] %></c:set>
+							           			 	<c:if test="${not empty filename}">
+							           			 		<jsp:include page="../common/include_download.jsp" flush="true">
+															<jsp:param name="realFileNames"	value="${appNames}" />
+															<jsp:param name="saveFileNames" value="${filenames}" />
+															<jsp:param name="moduleName" value="govdocumentmanager" />
+														</jsp:include>
+						                	 		</c:if>
+							                	 	</x:if>
+											</c:when>
+											<c:otherwise>
+												<x:out select="$cf/content/text()" />
+											</c:otherwise>
+										</c:choose>
+									</td>
+								</tr>
+							</x:forEach>
+						</x:if>
 						<c:set var="commentField"><x:out select="$doc//workInfo/commentField/text()"/></c:set>
-						<!-- TODO -->
+						<!-- 批示意见内容 
 						<x:forEach select="$govDoc//commentList/custemComment" var="ct" >
+							<c:set var="isCurrent"><x:out select="$ct//current/text()" /></c:set>
+							<c:set var="commentDate"><x:out select="$ct//date/text()"/></c:set>
 							<tr>
 								<th>
 									<x:out select="$ct//name/text()"/>
 								</th>
 								<td>
-									<x:out select="$ct//content/text()"/>&nbsp;&nbsp;<x:out select="$ct//person/text()"/>(<x:out select="$ct//date/text()"/>)
+									<c:choose>
+										<c:when test="${isCurrent eq 'true' && not empty commentField && '-1' ne commentField && 'nullCommentField' ne commentField && param.workStatus ne '102' && param.workStatus ne '101'}">
+											<textarea name='comment_input' class="edit-txta edit-txta-l" maxlength="300" placeholder="请输入文字"></textarea>
+											</br><x:out select="$ct//content/text()"/>&nbsp;&nbsp;<x:out select="$ct//person/text()"/><c:if test="${not empty commentDate}">(<x:out select="$ct//date/text()"/>)</c:if>
+										</c:when>
+										<c:otherwise>
+											<x:out select="$ct//content/text()"/>&nbsp;&nbsp;<x:out select="$ct//person/text()"/><c:if test="${not empty commentDate}">(<x:out select="$ct//date/text()"/>)</c:if>
+										</c:otherwise>
+									</c:choose>
 								</td>
 							</tr>
 						</x:forEach>
-						
+						-->
+						<x:forEach select="$govDoc//commentList/contentList" var="ct" >
+							<c:set var="isCurrent"><x:out select="$ct//current/text()" /></c:set>
+							<tr>
+								<th>
+									<x:out select="$ct//name/text()"/>
+								</th>
+								<td>
+									<c:choose>
+										<c:when test="${isCurrent eq 'true' && not empty commentField && '-1' ne commentField && 'nullCommentField' ne commentField && param.workStatus ne '102' && param.workStatus ne '101'}">
+											<textarea name='comment_input' class="edit-txta edit-txta-l" maxlength="300" placeholder="请输入文字"></textarea>
+											<x:forEach select="$ct/commentContent" var="cc">
+												<c:set var="commentDate"><x:out select="$cc//date/text()"/></c:set>
+												<x:out select="$cc//content/text()"/>&nbsp;&nbsp;<x:out select="$cc//person/text()"/><c:if test="${not empty commentDate}">(${commentDate})</c:if></br>
+											</x:forEach>
+										</c:when>
+										<c:otherwise>
+											<x:forEach select="$ct/commentContent" var="cc">
+												<c:set var="commentDate"><x:out select="$cc//date/text()"/></c:set>
+												<x:out select="$cc//content/text()"/>&nbsp;&nbsp;<x:out select="$cc//person/text()"/><c:if test="${not empty commentDate}">(${commentDate})</c:if></br>
+											</x:forEach>
+										</c:otherwise>
+									</c:choose>
+								</td>
+							</tr>
+						</x:forEach>
 						<!-- nullCommentField -->
+						<%--
 						<c:if test="${not empty commentField && '-1' ne commentField && 'nullCommentField' ne commentField && param.workStatus ne '102' && param.workStatus ne '101'}">
 							<tr>
 								<th>批示意见</th>
 								<td> 
-									<textarea name='comment_input' class="edit-txta edit-txta-l" maxlength="300" placeholder="请输入文字"></textarea>
 								</td>
 							</tr>
 						</c:if>
-						
-						
+						--%>
 						<%--
 						<x:if select="$govDoc//comment/receiveFileLeaderComment">
 						 <c:set var="content" ><x:out select="$govDoc//comment/receiveFileLeaderComment/text()"/></c:set>

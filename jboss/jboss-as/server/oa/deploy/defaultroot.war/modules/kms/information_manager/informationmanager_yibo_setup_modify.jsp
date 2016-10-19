@@ -9,7 +9,10 @@
 	<%@ include file="/public/include/meta_detail.jsp"%>
 	<!--这里可以追加导入模块内私有的js文件或css文件-->
 </head>
-<%String sortChannelId = request.getAttribute("sortChannelId")!=null?request.getAttribute("sortChannelId").toString():"";%>
+<%
+String sortChannelId = request.getAttribute("sortChannelId")!=null?request.getAttribute("sortChannelId").toString():"";
+String allChannelList = request.getAttribute("allChannelList")!=null ? request.getAttribute("allChannelList").toString() :"[]";
+%>
 <body class="Pupwin">
 	<div class="BodyMargin_10">  
 		<div class="docBoxNoPanel">
@@ -45,10 +48,54 @@ $(document).ready(function(){
 });
 
 initDataFormToAjax({"dataForm":'dataForm',"queryForm":'queryForm',"tip":'<s:text name="info.newinfosave"/>'});
+Ext.onReady(function() {
+	var tp = Ext.create('Ext.XTemplate',
+		'<tpl for=".">',
+			'<tpl if="first == 1">',  
+				'<div style="font-size:12px;font-weight:bold;">信息管理</div>',  
+			'</tpl>',
+			'<tpl if="first == 2">',  
+				'<div style="font-size:12px;font-weight:bold;">单位主页</div>',  
+			'</tpl>',
+			'<tpl if="first == 3">',  
+				'<div style="font-size:12px;font-weight:bold;">自定义信息频道</div>',  
+			'</tpl>',
+			'<div class="x-boundlist-item">{name}</div>',
+		'</tpl>'
+	);
+
+	var states = Ext.create('Ext.data.Store', {
+		fields: ['id', 'name', 'first'],
+		data : <%=allChannelList%>
+	});
+
+	Ext.create('Ext.form.ComboBox', {
+		store: states,
+		queryMode: 'local',
+		valueField: 'id',
+		displayField: 'name',
+		typeAhead: true,
+		id: 'channelId',
+		transform: 'channelId',
+		hiddenName: 'selectedChannel',
+		width:804,
+		forceSelection: true,
+		renderTo: Ext.getBody(),
+		emptyText: '<s:text name="info.searchcolumn"/>',
+		tpl: tp
+	});
+    
+	whirExtCombobox.setValue('channelId',$("#channel").val());
+});
 
 function save(flag,obj){
 	var result = "";
-	var channelId = $("#channelId").val();
+	var selectedChannel = whirExtCombobox.getValue('channelId');
+	if(selectedChannel==null || selectedChannel=="" || selectedChannel=="0"){
+		whir_alert('<s:text name="info.PleaseSelectColumn"/>');
+		return;
+	}
+	var channelId =selectedChannel.substring(0,selectedChannel.indexOf(","));
 	var yiboChannelId = '<s:property value="yiboChannel.yiboChannelId"/>';
 	if(channelId==""||channelId=="-1"){
 		whir_alert('<s:text name="info.PleaseSelectColumn"/>');

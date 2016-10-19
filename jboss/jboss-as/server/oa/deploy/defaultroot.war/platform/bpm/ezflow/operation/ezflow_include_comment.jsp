@@ -16,65 +16,9 @@ String  whir_commentRangeId=request.getAttribute("whir_commentRangeId")==null?""
 String  localcom_comment = session.getAttribute("org.apache.struts.action.LOCALE").toString();  
 String include_p_wf_moduleId=request.getAttribute("p_wf_moduleId")+""; 
 %>
-<style type="text/css">
-<!-- 
-.noteDiv_auto{
-	position:absolute;
-	width:400px;
-	height:200px;
-	z-index:1;
-	overflow:auto;
-	border:1px solid #829FBB;
-	display:none;
-	background-color:#ffffff; 
-}
-.noteDiv_field{
-	position:absolute;
-	width:400px;
-	height:200px;
-	z-index:1;
-	overflow:auto;
-	border:1px solid #829FBB;
-	display:none;
-	background-color:#ffffff; 
-}
-#noteDiv1 {
-	position:absolute;
-	width:220px;
-	height:126px;
-	z-index:1;
-	overflow:auto;
-	border:1px solid #829FBB;
-	display:none;
-}
-.divOver{
-    background-color:#003399;
-	color:#FFFFFF;
-	border-bottom:1px dashed #cccccc;
-    width:98%;
-	height:20px;
-	line-height:20px;
-	cursor:default;
-	padding-left:5px;
-	white-space:nowrap;
-}
-.divOut{
-    background-color:#ffffff;
-	color:#000000;
-	border-bottom:1px dashed #cccccc;
-    width:98%;
-	height:20px;
-	line-height:20px;
-	cursor:default;
-	padding-left:5px;
-	white-space:nowrap;
-}
- 
--->
-</style>
+<link rel="stylesheet" href="<%=rootPath%>/platform/bpm/ezflow/operation/ezflow_include_comment.css" />
 <input type="hidden" name="addDivContent" id="addDivContent" value=""> <!-- 在  常用语中用到-->
 <%
-
 int handSignInUse_w = 0;//是否使用了手写签名
 int signatureInUse_w = 0;//是否使用了电子签章
 java.util.Map include_sysMap = com.whir.org.common.util.SysSetupReader.getInstance().getSysSetupMap(session.getAttribute("domainId").toString());
@@ -84,7 +28,6 @@ if(include_sysMap != null && include_sysMap.get("使用手写意见") != null &&
 if(include_sysMap != null && include_sysMap.get("电子签章") != null && "1".equals(include_sysMap.get("电子签章").toString())){
 	signatureInUse_w = 1;//电子签章
 }
- 
  String userAgent = request.getHeader("User-Agent");
  //
  if(userAgent != null && userAgent.indexOf("IE") >= 0){
@@ -99,11 +42,8 @@ int smartInUse_w = 0;
 if(include_sysMap != null && include_sysMap.get("附件上传") != null){
 	smartInUse_w = Integer.parseInt(include_sysMap.get("附件上传").toString());
 }
-String include_fileServer = com.whir.component.config.ConfigReader.getFileServer(request.getRemoteAddr());//session.getAttribute("fileServer").toString();
-
-
-String workflow_accPath=(smartInUse_w==1?rootPath:include_fileServer)+"/upload/workflow_acc/";
- 
+String include_fileServer = com.whir.component.config.ConfigReader.getFileServer(request.getRemoteAddr()); 
+String workflow_accPath=(smartInUse_w==1?rootPath:include_fileServer)+"/upload/workflow_acc/"; 
 //当前审批人和日期
 String writeUser = session.getAttribute("userName").toString();
 String writeUserId = session.getAttribute("userId").toString();
@@ -201,13 +141,10 @@ String    curDraftAccName=request.getAttribute("curDraftAccName")==null?"":reque
 String    curDraftAccSName=request.getAttribute("curDraftAccSName")==null?"":request.getAttribute("curDraftAccSName").toString(); 
 String    gd=request.getParameter("gd")==null?"":request.getParameter("gd").toString();
 %>
-<!---------显示已经保存的批示意见内容---------->
 <table width="100%" border="0"   cellpadding="0" cellspacing="0" align="center" <%if(!gd.equals("1")){%>style="margin-top:-15px;"<%}%> >
   <%
     String activityId="";
-	String activityName="";
-
-	//是否是归档
+	String activityName=""; 
 	boolean isgd=false;
 	boolean inCommentRange=true;
     for(int j = 0; j < tmpList.size(); j ++){  
@@ -216,8 +153,6 @@ String    gd=request.getParameter("gd")==null?"":request.getParameter("gd").toSt
 	    inCommentRange=true;
 	    activityId=astr[0];
 	    activityName=astr[1];
-
-		//是否显示下面的自动追加的tr     当有一个批示意见内容是自动追加的时候 就应该显示自动批示意见tr 当前的table的tr td都是自动追加的批示意见
 		boolean displayTr=false;
 		//判断是否有自动追加的批示意见
 		for(int ni=0;ni<commentList_w.size();ni++){
@@ -261,19 +196,13 @@ String    gd=request.getParameter("gd")==null?"":request.getParameter("gd").toSt
                     String dealContent=cEntity.getDealContent()==null?"":cEntity.getDealContent();
                     Date   dealTime=cEntity.getDealTime();
 					String daalTimeStr=simpleDateFormat.format(dealTime);	
-                    String commentField=cEntity.getCommentField();
-
-		 
+                    String commentField=cEntity.getCommentField(); 
 					String s_orgId=	cEntity.getS_orgId();
-					String s_orgName=	cEntity.getS_orgName();
-
-					
+					String s_orgName=	cEntity.getS_orgName(); 
                     //组织名
-                    String dealOrgName="";
-
+                    String dealOrgName=""; 
 					String eachOrgName="";
-					String eachOrgName2=""; 
-
+					String eachOrgName2="";  
 					if(formCommentFields!=null){
 					    daalTimeStr=uibd.getCommentDateFormatStr(commentField, daalTimeStr, formCommentFields, ""); 
 						//if(s_orgId==null||s_orgId.equals("")||s_orgId.equals("null")){
@@ -286,9 +215,7 @@ String    gd=request.getParameter("gd")==null?"":request.getParameter("gd").toSt
                     int    isStandFor=cEntity.getIsStandFor();
                     String standForUserId=cEntity.getStandForUserId();
                     String standForUserName=cEntity.getStandForUserName();
-                    String recordId=cEntity.getRecordId();
-
-                    
+                    String recordId=cEntity.getRecordId(); 
        				//处理类型 是办件 还是阅件
        				String commentDealType="";
 					////默认1 表示正常    0：表示是草稿
@@ -488,9 +415,7 @@ String    gd=request.getParameter("gd")==null?"":request.getParameter("gd").toSt
 							 
 							 if($("div[id$='"+commentField_js+"']").length>0){
 								$("div[id$='"+commentField_js+"']").eq(0).append("<%=jsContent%>");
-							 }  
-
-
+							 }   
 							<% 
 							//手写批注
 							if(commentType.equals("1")){%>
@@ -525,8 +450,7 @@ String    gd=request.getParameter("gd")==null?"":request.getParameter("gd").toSt
  //待办 待阅 才显示输入批示意见
  if(openType.equals("waitingDeal")||openType.equals("waitingRead")){
 	 //如果当前是自动追加批示意见
-	 if("autoCommentField".equals(cur_commentField)){%>
-
+	 if("autoCommentField".equals(cur_commentField)){%> 
 	  <table width="100%" border="0" align="center" cellpadding="5" cellspacing="0" style="margin-top:5px;border:1px dashed #C6CCD2;;background-color:#F6F6F6;">
         <tr>
            <td width="122" align="left"><!-- 办理意见 --><%=Resource.getValue(localcom_comment,"workflow","workflow.ProcessComment")%>：</td>
@@ -547,9 +471,7 @@ String    gd=request.getParameter("gd")==null?"":request.getParameter("gd").toSt
 				attitudeTypeRadioStr="<input name=\"radio_commentAttitudeType\"     type=\"radio\"   value=\"3\">已阅 <input name=\"radio_commentAttitudeType\"     type=\"radio\"   value=\"1\">同意 <input value=\"2\" type=\"radio\" name=\"radio_commentAttitudeType\"  >不同意&nbsp;&nbsp;&nbsp;&nbsp;"; 
 			}
  
-		 %>
-			<!-- 填写意见框 -->
-			<!-- 普通 -->
+		 %> 
 	         <table id="signTb1" width="100%" border="0">
 				<tr>
 				   <td> 
@@ -571,12 +493,11 @@ String    gd=request.getParameter("gd")==null?"":request.getParameter("gd").toSt
 				  <tr>
 				    <td align="right"><button class="btnButton4font" onclick="if (!SendOut.OpenSignature()){alert(SendOut.Status);};return false;"><!-- 签章 --><%=Resource.getValue(localcom_comment,"workflow","workflow.Signature")%></button>
                       <input type="hidden" name="comment" id="comment" value="<%=SignatureId%>">
-					  <!-- <a href="javascript:" onclick="if (!SendOut.OpenSignature()){alert(SendOut.Status);}">打开签章</a> --></td>
+					  </td>
 			      </tr>
 				  <tr>
 				    <td height="120">
  			       <OBJECT name="SendOut" id="SendOut" classid="clsid:2294689C-9EDF-40BC-86AE-0438112CA439" codebase="<%=rootPath%>/public/iWebRevision.jsp/iWebRevision.cab#version=<%=public_comment_iWebVersion%>" width="100%" height="180" style=" z-index:-1;">  
-					<!--   <object id="SendOut" name="SendOut" TYPE="application/kg-activex" ALIGN="baseline" BORDER="0" WIDTH="100%" HEIGHT="180" clsid="{2294689C-9EDF-40BC-86AE-0438112CA439}" copyright="Jiang Xi KingGrid Technology Co., Ltd.[DEMO]" event_OnMenuClick="OnMenuClick" style=" z-index:-1;"> -->
 							<param name="weburl" value="<%=public_comment_iWebUrl%>">
 							<param name="recordid" value="<%=SignatureId%>">
 							<param name="fieldname" value="SendOut<%=SignatureId%>">
@@ -586,8 +507,7 @@ String    gd=request.getParameter("gd")==null?"":request.getParameter("gd").toSt
 							<param name="PenColor" value="00000000">
 							<param name="BorderStyle" value="0">
 							<param name="EditType" value="0">	
-							<param name="wmode" value="transparent">
-							<!-- <param name="wmode" value="opaque" /> -->
+							<param name="wmode" value="transparent"> 
 
 					  </OBJECT></td>
 					</tr>
@@ -881,9 +801,7 @@ var  attitudeTypeRadiohtml="";
  <%}%>
 <%
  //批示意见允许上传附件
- if(whir_processCommentAcc.equals("true")){%>
-     /*commentObj.innerHTML+='<div><iframe id="accessoryIframe"  name="accessoryIframe"  height="70" width="98%"  frameborder=0 scrolling=auto  src="<%=rootPath%>/work_flow/workflow_iframe_wfAccessory.jsp?accName=<%=curDraftAccName%>&accSName=<%=curDraftAccSName%>"></iframe></div>';*/
-
+ if(whir_processCommentAcc.equals("true")){%>  
 	 var ifrmaHtml='<input type="hidden" name="ezFlow_CommentAccessoryName" id="ezFlow_CommentAccessoryName"  value="<%=curDraftAccName%>" />'+  
 	               '<input type="hidden" name="ezFlow_CommentAccessorySaveName" id="ezFlow_CommentAccessorySaveName" value="<%=curDraftAccSName%>"/>'+ 
 	               '<iframe name="accessoryIframe" id="accessoryIframe" src="<%=rootPath%>/public/upload/uploadify/upload_include.jsp?accessType=iframe&dir=workflow_acc&uniqueId=accessoryIframe&realFileNameInputId=ezFlow_CommentAccessoryName&saveFileNameInputId=ezFlow_CommentAccessorySaveName&canModify=yes&style=body{background-color:%23F6F6F6;}"  scrolling=""  border="0" frameborder="0" width="100%" height="100%"></iframe>';

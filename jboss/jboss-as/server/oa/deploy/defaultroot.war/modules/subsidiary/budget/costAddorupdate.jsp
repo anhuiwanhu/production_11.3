@@ -321,7 +321,7 @@
 		 	whir_alert("请先选择预算部门!",null,null);
 		 }else{
 		 	//window.location.href="<%=rootPath%>/budgetCost!edit.action?viewType=<%=viewType%>&sectionid=<%=sectionid%>&costyear=<%=costyear%>&SearchSectionname=<%=sectionname%>&SearchCostyear=<%=costyear%>";
-            var url="<%=rootPath%>/budgetCost!edit.action?viewType=viewType=<%=viewType%>&sectionid=<%=sectionid%>&costyear=<%=costyear%>&SearchSectionname=<%=sectionname%>&SearchCostyear=<%=costyear%>";
+            var url="<%=rootPath%>/budgetCost!edit.action?viewType=<%=viewType%>&sectionid=<%=sectionid%>&costyear=<%=costyear%>&SearchSectionname=<%=sectionname%>&SearchCostyear=<%=costyear%>";
             location_href(url);
 		 }
 	}
