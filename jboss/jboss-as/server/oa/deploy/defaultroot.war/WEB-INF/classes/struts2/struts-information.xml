@@ -110,11 +110,16 @@
 			<result name="doc">/modules/kms/information_manager/iso_paper_getdoc.jsp</result>
         </action>
 
-		<action name="ISOBorrow!*" method="{1}" class="com.whir.ezoffice.information.infomanager.actionsupport.ISOBorrowAction">
+		     <action name="ISOBorrow!*" method="{1}" class="com.whir.ezoffice.information.infomanager.actionsupport.ISOBorrowAction">
             <result name="list">/modules/kms/information_manager/iso_borrow_list.jsp</result>
-			<result name="borrow">/modules/kms/information_manager/iso_chooseflow.jsp</result>
-			<result name="start">/modules/kms/information_manager/iso_borrow_add.jsp</result>
-			<result name="update">/modules/kms/information_manager/iso_borrow_update.jsp</result>
+			      <result name="borrow">/modules/kms/information_manager/iso_chooseflow.jsp</result>
+			      <result name="start">/modules/kms/information_manager/iso_borrow_add.jsp</result>
+			      <result name="update">/modules/kms/information_manager/iso_borrow_update.jsp</result>
+         </action>
+         <action name="YiBoChannel!*" method="{1}" class="com.whir.ezoffice.information.channelmanager.actionsupport.YiBoChannelAction">
+            <result name="yiboChannelList">/modules/kms/information_manager/informationmanager_yibo_setup.jsp</result>
+			      <result name="add">/modules/kms/information_manager/informationmanager_yibo_setup_add.jsp</result>
+			      <result name="load">/modules/kms/information_manager/informationmanager_yibo_setup_modify.jsp</result>
         </action>
     </package>
 </struts>

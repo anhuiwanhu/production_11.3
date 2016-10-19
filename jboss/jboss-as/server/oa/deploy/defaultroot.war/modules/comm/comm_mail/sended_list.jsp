@@ -71,7 +71,8 @@
 				</span>
             </td>
             <td align="right">
-				<select name="boxName" id="boxName" class="easyui-combobox111" data-options="panelHeight:'auto',onSelect: function(record){moveMails(record);}">
+				<!--select name="boxName" id="boxName" class="easyui-combobox111" data-options="panelHeight:'auto',onSelect: function(record){moveMails(record);}"-->
+				<select name="boxName" id="boxName" onchange="moveMails(this);">
                     <option selected value="0" ><%=Resource.getValue(whir_locale,"mail","mail.transferto")%> </option>
                     <option  value="toReceiveBox"><%=Resource.getValue(whir_locale,"mail","mail.inbox")%></option>
                     <option  value="toDesertedBox"><%=Resource.getValue(whir_locale,"mail","mail.trashbox")%></option>
@@ -230,7 +231,7 @@
 	}
 	function moveMails(obj) {
 	     ajaxBatchOperate({url:"innerMail!moveMails.action?boxId="+obj.value,checkbox_name:"mailuserid",attr_name:"mailuserid",isconfirm:false,formId:"queryForm",callbackfunction:null});
-		 $('#boxName').combobox('setValue', 0);
+		 //$('#boxName').combobox('setValue', 0);
 	}
 	function callBackMail(mailId) {
 		var json = ajaxForSync("<%=rootPath%>/innerMail!checkBackMail.action","mailId="+mailId);

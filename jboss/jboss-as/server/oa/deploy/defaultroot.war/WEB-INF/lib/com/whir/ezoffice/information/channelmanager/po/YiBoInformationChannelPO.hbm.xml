@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+<hibernate-mapping>
+    <class name="com.whir.ezoffice.information.channelmanager.po.YiBoInformationChannelPO"
+        table="OA_INFORMATIONCHANNEL_YIBO"
+        schema="EZOFFICE">
+        <id name="yiboChannelId" column="YIBOCHANNEL_ID" type="long">
+            <generator class="native"/>
+        </id>
+        <property name="yiboChannelName" column="YIBOCHANNELNAME" />
+        <property name="domainId" column="DOMAIN_ID" />
+        <property name="yiboChannelsort" column="YIBOCHANNELSORT" />
+        <property name="channelId" column="CHANNEL_ID" />
+        <property name="yiboCreatedEmp" column="YIBOCREATEDEMP" />
+        <property name="yiboCreatedEmpName" column="YIBOCREATEDEMPNAME" />
+        <property name="yiboCreatedOrgId" column="YIBOCREATEDORGID" />
+        <property name="yiboCreatedTime" column="YIBOCREATEDTIME" />
+        <property name="yiboPlayNum" column="YIBOPLAYNUM" />
+        <property name="yiboChannelPosition" column="YIBOCHANNELPOSITION" />
+        <property name="positonUpDown" column="POSITONUPDOWN" />
+	</class>
+</hibernate-mapping>

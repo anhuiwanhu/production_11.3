@@ -43,7 +43,8 @@
 				</span>
             </td>
             <td align="right">
-				<select name="boxName" id="boxName" class="easyui-combobox111" data-options="panelHeight:'auto',onSelect: function(record){moveMails(record);}">
+				<!--select name="boxName" id="boxName" class="easyui-combobox111" data-options="panelHeight:'auto',onSelect: function(record){moveMails(record);}"-->
+				<select name="boxName" id="boxName" onchange="moveMails(this);">
                     <option selected value="-1" ><bean:message bundle="mail" key="mail.transferto"/></option>
 				    <option  value="0"><bean:message bundle="mail" key="mail.original"/></option>
 				    <option  value="toReceiveBox"><bean:message bundle="mail" key="mail.inbox" /></option>
@@ -234,7 +235,7 @@
 	}
 	function moveMails(obj) {
 	     ajaxBatchOperate({url:"innerMail!moveMails.action?boxId="+obj.value,checkbox_name:"mailuserid",attr_name:"mailuserid",isconfirm:false,formId:"queryForm",callbackfunction:null});
-		 whirCombobox.setValue('boxName', '-1');
+		 //whirCombobox.setValue('boxName', '-1');
 	}
 	
    </script>

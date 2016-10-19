@@ -157,3 +157,55 @@ go
 
 insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) values('Wanhu ezOFFICE','11.3.0.08_SP_20151218','11.3.0.08',getdate());
 go
+
+
+
+
+
+--新增 信息管理-易播频道信息表
+create table oa_informationchannel_yibo  (
+   YiBoChannel_Id                NUMERIC(20) IDENTITY(1,1)  not null  primary key,
+   YiBoChannelName               NVARCHAR(40),
+   Domain_Id                     NUMERIC(20) ,
+   YiBoChannelSort                NUMERIC(6) ,
+   Channel_Id                    NUMERIC(20) ,
+   YiBoCreatedEmp                NUMERIC(20) ,
+   YiBoCreatedEmpName            NVARCHAR (60),
+   YiBoCreatedOrgId               NUMERIC(20),
+   YiBoCreatedTime               DATETIME,
+   YiBoPlayNum                   NUMERIC(8),
+   YiBoChannelPosition            INT ,
+   PositonUpDown                  INT 
+);
+go
+-- 信息频道表增加 是否是易播栏目标识 字段，初始赋值‘0’
+alter table oa_informationchannel add IsYiBoChannel  NVARCHAR (1)  default '0';
+go
+
+alter table Org_domain add yibo_flag varchar(1) default 0;
+go
+update Org_domain set yibo_flag = '0';
+go
+insert into org_right
+  (rightname,
+   righttype,
+   rightclass,
+   righthasscope,
+   rightselectrange,
+   rightdescription,
+   rightcode,
+   domain_id)
+values
+  ('维护',
+   '易播栏目',
+   '信息管理',
+   1,
+   '11111',
+   '全部/本人/本组织及下属组织/本组织/自定义',
+   'yibo*01*01',
+   0);
+go
+insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) values('Wanhu ezOFFICE','11.3.0.09_SP_20151229','11.3.0.09',getdate());
+go
+
+

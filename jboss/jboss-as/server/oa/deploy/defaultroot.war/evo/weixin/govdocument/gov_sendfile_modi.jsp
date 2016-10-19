@@ -313,7 +313,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</td>
 							</tr>
 						</x:if> 
-						<x:if select="$govDoc//field1">
+						<x:if select="$govDoc/output/data/baseData/field1">
 							<tr>
 								<th>
 									<x:out select="$govDoc//field1/@name"/>
@@ -372,7 +372,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 								</td>
 							</tr>
 						</x:if>
-						<x:if select="$govDoc//field2">
+						<x:if select="$govDoc/output/data/baseData/field2">
 							<tr>
 								<th>
 									<x:out select="$govDoc//field2/@name"/>
@@ -432,7 +432,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 								</td>
 							</tr>
 						</x:if>
-						<x:if select="$govDoc//field3">
+						<x:if select="$govDoc/output/data/baseData/field3">
 						<tr>
 							<th>
 								<x:out select="$govDoc//field3/@name"/>
@@ -491,7 +491,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</td>
 						</tr>
 					</x:if>
-					<x:if select="$govDoc//field4">
+					<x:if select="$govDoc/output/data/baseData/field4">
 						<tr>
 							<th>
 								<x:out select="$govDoc//field4/@name"/>
@@ -550,7 +550,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 								</td>
 							</tr>
 						</x:if>
-						<x:if select="$govDoc//field5">
+						<x:if select="$govDoc/output/data/baseData/field5">
 						<tr>
 							<th>
 								<x:out select="$govDoc//field5/@name"/>
@@ -609,7 +609,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 								</td>
 							</tr>
 						</x:if>
-						<x:if select="$govDoc//field6">
+						<x:if select="$govDoc/output/data/baseData/field6">
 						<tr>
 							<th>
 								<x:out select="$govDoc//field6/@name"/>
@@ -668,7 +668,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</td>
 							</tr>
 						</x:if>
-						<x:if select="$govDoc//field7">
+						<x:if select="$govDoc/output/data/baseData/field7">
 						<tr>
 							<th>
 								<x:out select="$govDoc//field7/@name"/>
@@ -727,7 +727,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</td>
 							</tr>
 						</x:if>
-						<x:if select="$govDoc//field8">
+						<x:if select="$govDoc/output/data/baseData/field8">
 						<tr>
 							<th>
 								<x:out select="$govDoc//field8/@name"/>
@@ -786,7 +786,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</td>
 							</tr>
 						</x:if>
-						<x:if select="$govDoc//field9">
+						<x:if select="$govDoc/output/data/baseData/field9">
 						<tr>
 							<th>
 								<x:out select="$govDoc//field9/@name"/>
@@ -845,7 +845,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</td>
 							</tr>
 						</x:if>
-						<x:if select="$govDoc//field10">
+						<x:if select="$govDoc/output/data/baseData/field10">
 						<tr>
 							<th>
 								<x:out select="$govDoc//field10/@name"/>
@@ -898,12 +898,22 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 					                	 	</x:if>
 									</c:when>
 									<c:otherwise>
-										<x:out select="$govDoc//field9/text()" />
+										<x:out select="$govDoc//field10/text()" />
 									</c:otherwise>
 									</c:choose>
 							</td>
 							</tr>
 						</x:if>
+						<x:forEach select="$govDoc//commentList/custemComment" var="ct" >
+							<tr>
+								<th>
+									<x:out select="$ct//name/text()"/>
+								</th>
+								<td>
+									<x:out select="$ct//content/text()"/>&nbsp;&nbsp;<x:out select="$ct//person/text()"/>(<x:out select="$ct//date/text()"/>)
+								</td>
+							</tr>
+						</x:forEach>
 						<c:set var="commentField"><x:out select="$doc//workInfo/commentField/text()"/></c:set>
 						<c:if test="${not empty commentField && '-1' ne commentField && 'nullCommentField' ne commentField}">
 							<tr>
@@ -913,6 +923,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 								</td>
 							</tr>
 						</c:if>
+						<%--
 						<x:if select="$govDoc//comment/documentSendFileAssumeUnit">
 						 <c:set var="content" ><x:out select="$govDoc//comment/documentSendFileAssumeUnit/text()"/></c:set>
 						<tr>
@@ -1045,6 +1056,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</td>
 						 </tr>
 					 </x:if>
+					 --%>
 					 <x:if select="$govDoc//backComment/text != ''">
 					 	<tr>
 					 		<c:set var="content" ><x:out select="$govDoc//backComment/text()" /></c:set>

@@ -148,7 +148,8 @@ if(trigSet!=null && trigSet.size()>0){
             var target = window.event?window.event.srcElement:evt.target;
             if(_old_field.length>1){
                 for(var i=0;i< _old_field.length;i++){
-                    if(target.offsetParent == _old_field[i].parentElement){
+                	if(target.parentNode == _old_field[i].parentElement){
+                    //if(target.offsetParent == _old_field[i].parentElement){
                         indexNO = i;
                         break;
                     } 

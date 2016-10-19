@@ -194,7 +194,7 @@ function runUcstar(username,sessionkey) {
 <html>
  <body>
   <script type="text/javascript">
-    window.location.href="thunisoft://cocall/login?uid=<%=logmap.get("Uid")%>&token=<%=logmap.get("Token")%>&server=<%=logmap.get("LoginServer")%>&port=5222";
+    window.location.href="thunisoft://cocall/login?uid=<%=logmap.get("Uid")%>&token=<%=logmap.get("Token")%>&server=<%=logmap.get("CocallServer")%>&port=5222";
   </script>
  </body>
 </html>

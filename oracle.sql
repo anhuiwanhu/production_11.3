@@ -147,3 +147,58 @@ commit;
 
 insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.08_SP_20151218','11.3.0.08',sysdate);
 commit;
+
+
+
+
+
+create table oa_informationchannel_yibo  (
+   YiBoChannel_Id                NUMBER(20)         not null,
+   YiBoChannelName              VARCHAR2(40),
+   Domain_Id                    NUMBER(20),
+   YiBoChannelSort                NUMBER(6),
+   Channel_Id                    NUMBER(20),
+   YiBoCreatedEmp                NUMBER(20),
+   YiBoCreatedEmpName           VARCHAR2(60),
+   YiBoCreatedOrgId               NUMBER(20),
+   YiBoCreatedTime               DATE,
+   YiBoPlayNum                  NUMBER(8),
+   YiBoChannelPosition            NUMBER(2),
+   PositonUpDown                NUMBER(1),
+   constraint pk_oa_informationchannel_yibo primary key (YiBoChannel_Id)
+);
+commit;
+
+-- 信息频道表增加 是否是易播栏目标识 字段，初始赋值‘0’
+alter table oa_informationchannel add IsYiBoChannel  VARCHAR2(1)  default '0';
+commit;
+
+alter table Org_domain add yibo_flag varchar2(1) default 0;
+commit;
+update Org_domain set yibo_flag = '0';
+commit;
+
+--新增易播栏目设置的维护权限
+insert into org_right
+  (right_id,
+   rightname,
+   righttype,
+   rightclass,
+   righthasscope,
+   rightselectrange,
+   rightdescription,
+   rightcode,
+   domain_id)
+values
+  (hibernate_sequence.nextval,
+   '维护',
+   '易播栏目',
+   '信息管理',
+   1,
+   '11111',
+   '全部/本人/本组织及下属组织/本组织/自定义',
+   'yibo*01*01',
+   0);
+commit;
+insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.09_SP_20151229','11.3.0.09',sysdate);
+commit;

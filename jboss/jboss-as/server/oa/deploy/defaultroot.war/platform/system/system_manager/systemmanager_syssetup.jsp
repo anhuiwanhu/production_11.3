@@ -33,6 +33,8 @@ String wordlimitsize = (String)sysSetupMap.get("wordlimitsize");
 String workflowType = (String)sysSetupMap.get("workflowType");
 String usemail = (String)sysSetupMap.get("usemail");
 String attachPreview = (String)sysSetupMap.get("attachPreview");
+String pageFontSize = (String)sysSetupMap.get("pageFontSize");
+String yibo_flag = (String)sysSetupMap.get("yibo_flag");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -287,7 +289,7 @@ String attachPreview = (String)sysSetupMap.get("attachPreview");
                         <option value="Wide Latin" <%if(htmlFontType.equals("Wide Latin"))out.print("selected");%>>Wide Latin</option>
                         <option value="Wingdings" <%if(htmlFontType.equals("Wingdings"))out.print("selected");%>>Wingdings</option>
                     </select>
-                    <select id="wordSize" name="wordSize" class="easyui-combobox" style="width:50px;">
+                    <select id="wordSize" name="wordSize" class="easyui-combobox" style="width:60px;">
                         <option value="26pt" <%if(htmlWordSize.equals("26pt"))out.print("selected");%>>1号</option>
                         <option value="22pt" <%if(htmlWordSize.equals("22pt"))out.print("selected");%>>2号</option>
                         <option value="16pt" <%if(htmlWordSize.equals("16pt"))out.print("selected");%>>3号</option>
@@ -309,11 +311,19 @@ String attachPreview = (String)sysSetupMap.get("attachPreview");
                     </select>
                 </td>
             </tr>
+            <tr style="display:none;">
+                <td>&nbsp;</td>
+                <td>界面字体：</td>
+                <td>
+                    <input type="radio" value="14" id="pageFontSize0" name="pageFontSize" <%if("14".equals(pageFontSize)){%>checked<%}%>>大号(14)&nbsp;
+                    <input type="radio" value="12" id="pageFontSize1" name="pageFontSize" <%if("12".equals(pageFontSize)){%>checked<%}%>>小号(12)
+                </td>
+            </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>与ezSITE结合：</td>
                 <td>
-                    <input type="radio" value="0" id="ezsite0" name="ezsite" checked>否&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="0" id="ezsite0" name="ezsite" checked>否&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="radio" value="1" id="ezsite1" name="ezsite" <%if(options.length()>6 && options.charAt(6)=='1'){%>checked<%}%>>是
                 </td>
             </tr>
@@ -412,6 +422,14 @@ String attachPreview = (String)sysSetupMap.get("attachPreview");
                     <%}%>
                     </select>分
                     </span>
+                </td>
+            </tr>
+             <tr>
+                <td>&nbsp;</td>
+                <td>易播栏目：</td>
+                <td>
+                    <input type="radio" value="0" id="yibo_flag1" name="yibo_flag" checked <%if("0".equals(yibo_flag)){%>checked<%}%>>不使用&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="1" id="yibo_flag2" name="yibo_flag" <%if("1".equals(yibo_flag)){%>checked<%}%>>使用
                 </td>
             </tr>
             <tr>
@@ -717,6 +735,7 @@ function setWorkDate() {
         $('#wordSizeSpan').show();
     }
 }*/
+
 function chgWord1(obj){
 	if(obj.checked){
 		$(obj).val("1");

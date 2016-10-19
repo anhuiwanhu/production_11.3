@@ -16,6 +16,11 @@
 	int menuIndex=0;
     String workflowType = com.whir.org.common.util.SysSetupReader.getInstance().getSysValueByName("workflowType", session.getAttribute("domainId")+"");
     String expNodeCode = request.getParameter("expNodeCode");
+	//20151209 -by jqq 易播栏目：系统设置开关
+	boolean isyiboflag =  com.whir.org.common.util.SysSetupReader.getInstance().hasYibo_flag(session.getAttribute("domainId").toString());
+	//易播栏目的维护权限
+	com.whir.org.manager.bd.ManagerBD  managerBD2 = new com.whir.org.manager.bd.ManagerBD();
+	boolean hasyiboright = managerBD2.hasRight(session.getAttribute("userId").toString(), "yibo*01*01");
 %>
 
 <script type="text/javascript">
@@ -134,6 +139,9 @@
 	  		,{id:204,pId:'d-<%=menuIndex%>',name:'<bean:message bundle="information" key="info.templatesetup" />',url:'Template!templateList.action',target:'mainFrame', iconSkin:"fa fa"}
 	  		,{id:205,pId:'d-<%=menuIndex%>',name:'<bean:message bundle="information" key="info.LabelSettings" />',url:'Template!loadTag.action',target:'mainFrame', iconSkin:"fa fa"}
 	  		<%}%>
+	  		<%if(isyiboflag && hasyiboright && "0".equals(channelType)){%>
+			,{id:206,pId:'d-<%=menuIndex%>',name:'易播栏目设置',url:'YiBoChannel!channelList.action?channelType=<%=channelType%>&userChannelName=<%=userChannelName%>&userDefine=<%=userDefine%>',target:'mainFrame', iconSkin:"fa fa"}
+			<%}%>
 	      	<%menuIndex++;%>
 	  			<%
 	  			String menutype = "";

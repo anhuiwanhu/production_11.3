@@ -43,6 +43,13 @@
 </s:else>
 <s:hidden id="relationNew" name="relationNew" value="%{#request.relationNew}"/>
 <s:hidden id="modifyToProcess" name="modifyToProcess" value="%{#request.modifyToProcess}"/>
+<%
+String _isyiboflag=request.getParameter("_isyiboflag")==null?"0":request.getParameter("_isyiboflag").toString();
+if(!_isyiboflag.equals("1")){
+	_isyiboflag=request.getParameter("isyiboflag")==null?"0":request.getParameter("isyiboflag").toString();
+}
+%>
+<input type="hidden" id="isyiboflag" name="isyiboflag" value="<%=_isyiboflag%>"/>
 <div id="docinfo0" style="display:;">
 	<table width="100%" border="0" cellpadding="2" cellspacing="0" class="Table_bottomline">
 		<tr>  
@@ -67,6 +74,7 @@
 			<td nowrap>
 			<s:if test="#request.curModifyField==null || #request.curModifyField.indexOf('$information.informationTitle$') > -1">
 				<s:textfield name="information.informationTitle" id="informationTitle" cssClass="inputText" whir-options="vtype:['notempty',{'maxLength':150}]" cssStyle="width:76%;" />
+				<span id="info_add_1">
 				<s:if test="#request.curModifyField==null || #request.curModifyField.indexOf('$information.displayTitle$') > -1">
 					<s:checkboxlist name="information.displayTitle" list="#{'1':getText('info.newinfodetailnotdisplay')}"/>
 				</s:if>
@@ -81,9 +89,11 @@
 					<s:checkboxlist name="information.titleColor" list="#{'1':getText('info.newinforeddisplay')}" disabled="true"/>
 					<s:hidden id="titleColor" name="information.titleColor"/>
 				</s:else>
+				</span>
 			</s:if>
 			<s:else>
 				<s:textfield name="information.informationTitle" id="informationTitle" cssClass="inputText" readonly="true" whir-options="vtype:['notempty',{'maxLength':150}]" cssStyle="width:76%;" />
+				<span id="info_add_1">
 				<s:if test="#request.curModifyField==null || #request.curModifyField.indexOf('$information.displayTitle$') > -1">
 					<s:checkboxlist name="information.displayTitle" list="#{'1':getText('info.newinfodetailnotdisplay')}"/>
 				</s:if>
@@ -98,6 +108,7 @@
 					<s:checkboxlist name="information.titleColor" list="#{'1':getText('info.newinforeddisplay')}" disabled="true"/>
 					<s:hidden id="titleColor" name="information.titleColor"/>
 				</s:else>
+				</span>
 			</s:else>
 			</td>  
 		</tr>
@@ -123,14 +134,17 @@
 		</s:if>
 		
 		<s:if test="informationId == null">
-		<tr>
+		<tr id="info_add_tr1">
 			<td width="8%" class="td_lefttitle" nowrap> 
 				<s:text name="info.editMode" />：
 			</td>
-			<td>
+			<td id="">
 			<%
 			boolean wordEidt = com.whir.org.common.util.SysSetupReader.getInstance().hasWordEdit(session.getAttribute("domainId").toString());
             boolean isCOSClient = com.whir.component.util.SystemUtils.isCOS4Firefox4(request);//true-是 false-否
+            //String isyibo_flag = request.getAttribute("isYiBoChannel")!=null?request.getAttribute("isYiBoChannel").toString():"";
+            %>
+			<%
 			if(wordEidt && !isCOSClient){%>
 				<s:radio name="information.informationType" list="%{#{'1':getText('info.newinfohtml'),'0':getText('info.newinfocommon'),'2':getText('info.newinfoaddlink'),'3':getText('info.newinfofilelink'),'4':getText('info.newinfowordedit'),'5':getText('info.newinfoexceledit'),'6':getText('info.pptedite')}}" value="1" theme="simple"></s:radio>
 			<%}else{%>
@@ -138,6 +152,7 @@
 			<%}%>
 			</td>
 		</tr>
+		
 		</s:if>
 		<s:else>
 			<s:hidden name="information.informationType" id="informationType"/>
@@ -193,6 +208,7 @@
 				</s:else>
 				</div>
 				<div style="float:left;display:inline;padding-left:10px;">
+				<span id="info_add_2">
 				<s:if test="#request.curModifyField==null || #request.curModifyField.indexOf('$information.displayColor$') > -1">
 					<s:checkboxlist name="information.displayImage" list="#{'1':getText('info.newinfodetailnotdisplay')}"/>
 				</s:if>
@@ -200,6 +216,7 @@
 					<s:checkboxlist name="information.displayImage" list="#{'1':getText('info.newinfodetailnotdisplay')}"/>
 					<s:hidden id="displayImage" name="information.displayImage" disabled="true"/>
 				</s:else>
+				</span>
 				</div>
 			</td>
 		</tr>
@@ -333,7 +350,7 @@
 		</tr>
 		
 		<tr id="url" style="display:none">
-			<td><s:text name="info.newinfoaddlink" /><span class="MustFillColor">*</span>：</td>
+			<td id="urlcolumn"><s:text name="info.newinfoaddlink" /><span class="MustFillColor">*</span>：</td>
 			<td>
 			<s:if test="#request.curModifyField==null || #request.curModifyField.indexOf('$information.informationContent$') > -1">
 				<s:textfield id="URLContent" name="URLContent" cssClass="inputText" cssStyle="width:76%" value="%{#request.urlContent}"/>
@@ -344,7 +361,7 @@
 			</td>
 		</tr>
 		<tr id="file" <s:if test="information.informationType==3">style="display:;"</s:if><s:else>style="display:none;"</s:else>>
-			<td><s:text name="info.newinfofilelink" /><span class="MustFillColor">*</span>：</td>
+			<td id="filecolumn"><s:text name="info.newinfofilelink" /><span class="MustFillColor">*</span>：</td>
 			<td>
 				<div style="float:left;display:inline;width:76%">
 				<s:textfield id="fileLinkContent" name="fileLinkContent" value="%{#request.fileLinkContent}" cssClass="inputText" cssStyle="width:100%" readonly="true"/>
@@ -401,10 +418,10 @@
 		</tr>
 		</s:if>
 	</table>
+	<input type="hidden"  name="xxxxxx"  value="<%=request.getAttribute("p_wf_recordId")==null?"0":request.getAttribute("p_wf_recordId")+"1"%>">
 	<s:if test="#request.p_wf_recordId != null && #request.p_wf_openType != 'restart'">
-	<!--批示意见包含页-->
 	<div>
-		<%@ include file="/platform/bpm/work_flow/operate/wf_include_comment.jsp"%>
+		<%@ include file="/platform/bpm/pool/pool_include_comment.jsp"%>
 	</div>
 	</s:if>
 </div>

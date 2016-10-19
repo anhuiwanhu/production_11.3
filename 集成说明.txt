@@ -142,3 +142,55 @@
 5、清服务端缓存，启动OA服务
 
 6、验证系统功能
+
+
+
+
+
+1、停OA服务
+
+2、备份生产环境程序、数据库
+
+3、覆盖产品补丁包到OA安装目录d:\jboss
+
+4、修改../defaultroot.war/WEB-INF/config/hibernate/hibernate.cfg.xml,增加如下内容（注意位置）：
+<mapping resource="com/whir/ezoffice/information/channelmanager/po/YiBoInformationChannelPO.hbm.xml"/>
+
+5、修改../defaultroot.war/WEB-INF/web.xml，增加如下内容（注意位置）：
+	<servlet>
+		<servlet-name>InformationHttpServlet</servlet-name>
+		<servlet-class>com.whir.service.http.InformationHttpService</servlet-class>
+	</servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>InformationHttpServlet</servlet-name>
+		<url-pattern>/informationServlet</url-pattern>
+	 </servlet-mapping>
+
+6、修改../defaultroot.war/WEB-INF/config/whconfig.xml，增加易播设置，替换原cocall配置方式（注意位置）
+        <!-- 易播接口配置 -->
+	<orginfo>
+		<Property name="companyId" value="ceshiid12345" />
+		<Property name="organization" value="测试企业名称1" />
+		<Property name="key" value="jiamikey" />
+		<Property name="fileurl" value="http://61.190.4.70:7113/defaultroot/upload/information/" />
+	</orginfo>
+
+     <!--COCALL，type 值为：cocall，同步添加的用户初始密码是888888-->
+     <COCALL>
+	<Property name="CocallServer" value="192.168.7.209"/>    <!--cocall服务地址-->
+        <Property name="CocallServerPort" value="5300"/>         <!--cocall服务端口-->
+        <Property name="InterfaceId" value="whir"/>              <!--接口id-->
+        <Property name="InterfacePassword" value="111111"/>      <!--接口密码-->
+        <Property name="CorpId" value="1005"/>                   <!--单位id-->
+        <Property name="LoginServer" value="192.168.7.209"/>     <!--oa访问地址-->
+     </COCALL>
+
+7、把../defaultroot.war/WEB-INF/lib/com文件夹拖入whir_common.jar中（不要解压）
+
+8、执行数据库升级脚本（分oralce、sqlserver两种类型库）
+
+9、清服务端缓存，启动OA服务
+
+10、验证系统功能

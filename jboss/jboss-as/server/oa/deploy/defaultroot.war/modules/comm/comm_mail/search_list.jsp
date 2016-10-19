@@ -88,7 +88,8 @@
 			<td align="left" width="55%">&nbsp;</td>
             <td align="right">
 			    <span id="span_boxName" style="display:none">
-				<input id="boxName" class="easyui-combobox111" name="boxName" data-options="valueField:'id',textField:'text',panelHeight:200,onSelect: function(record){moveMails(record);}" />  
+				  <select name="boxName" id="boxName" onchange="moveMails(this);">
+				  </select>
 				</span>
 				<input type="button" class="btnButton4font" onclick="delMailToDeserted();" value="<%=Resource.getValue(whir_locale,"mail","mail.delete")%>" />
 				<input type="button" class="btnButton4font" onclick="delMails();" value="<%=Resource.getValue(whir_locale,"mail","mail.deleteerase")%>" />
@@ -172,8 +173,20 @@
     //初始化列表页form表单,"queryForm"是表单id，可修改。  
     $(document).ready(function(){
         var searchtype = $('#searchtype').val();
+
 	    //initListFormToAjax({formId:"queryForm"});
-	    $("#boxName").combobox("reload", 'innerMail!getMovetoBox.action?searchtype='+searchtype);
+	    //$("#boxName").combobox("reload", 'innerMail!getMovetoBox.action?searchtype='+searchtype);
+
+		$.getJSON('innerMail!getMovetoBox.action?searchtype='+searchtype, function(data){
+			
+			$.each(data, function(i){
+				//alert(data[i].id+"-"+data[i].text);
+				//Option item = new Option(data[i].id, data[i].text);
+				$("#boxName").append("<option value=\""+data[i].id+"\">"+data[i].text+"</option>");
+			});
+		});
+
+
 		if(searchtype=="sendbox"){
 		   $('#poster').hide();
 		   $('#mailto').show();
@@ -367,9 +380,8 @@
 		 ajaxBatchOperate({url:"innerMail!delMails.action",checkbox_name:"mailuserid",attr_name:"mailuserid",tip:'<%=Resource.getValue(whir_locale,"mail","mail.deleteerase")%>',isconfirm:true,formId:"queryForm",callbackfunction:null});
 	}
 	function moveMails(obj) {
-		 var boxId = $('#boxName').combobox('getValue');
-	     ajaxBatchOperate({url:"innerMail!moveMails.action?boxId="+boxId,checkbox_name:"mailuserid",attr_name:"mailuserid",isconfirm:false,formId:"queryForm",callbackfunction:null});
-		 $('#boxName').combobox('setValue', 0);
+	     ajaxBatchOperate({url:"innerMail!moveMails.action?boxId="+obj.value,checkbox_name:"mailuserid",attr_name:"mailuserid",isconfirm:false,formId:"queryForm",callbackfunction:null});
+		 //$('#boxName').combobox('setValue', 0);
 	}
 
 	function changsearchtype(number){

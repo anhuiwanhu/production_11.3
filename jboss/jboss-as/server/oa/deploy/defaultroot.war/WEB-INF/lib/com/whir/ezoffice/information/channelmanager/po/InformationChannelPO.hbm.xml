@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+<hibernate-mapping>
+    <class name="com.whir.ezoffice.information.channelmanager.po.InformationChannelPO"
+        table="OA_INFORMATIONCHANNEL"
+        schema="EZOFFICE">
+        <id name="channelId" column="CHANNEL_ID" type="long">
+            <generator class="native"/>
+        </id>
+        <property name="channelName" column="CHANNELNAME" />
+        <property name="channelType" column="CHANNELTYPE" />
+        <property name="channelParentId" column="CHANNELPARENTID" />
+        <property name="channelLevel" column="CHANNELLEVEL" />
+        <property name="channelSort" column="CHANNELSORT" />
+        <property name="channelIdString" column="CHANNELIDSTRING" />
+        <property name="channelNeedCheckup" column="CHANNELNEEDCHECKUP" />
+        <property name="channelReader" column="CHANNELREADER" />
+        <property name="channelReaderOrg" column="CHANNELREADERORG" />
+        <property name="channelReaderGroup" column="CHANNELREADERGROUP" />
+        <property name="channelIssuer" column="CHANNELISSUER" />
+        <property name="channelIssuerOrg" column="CHANNELISSUERORG" />
+        <property name="channelIssuerGroup" column="CHANNELISSUERGROUP" />
+        <property name="channelIssuerName" column="CHANNELISSUERNAME" />
+        <property name="channelReaderName" column="CHANNELREADERNAME" />
+
+        <property name="channelManager" column="CHANNELMANAGER" />
+        <property name="channelManagerOrg" column="CHANNELMANAGERORG" />
+        <property name="channelManagerGroup" column="CHANNELMANAGERGROUP" />
+        <property name="channelManagerName" column="CHANNELMANAGERNAME" />
+
+        <property name="createdOrg" column="CREATEDORG" />
+        <property name="createdEmp" column="CREATEDEMP" />
+        <property name="createdEmpName" column="CREATEDEMPNAME" />
+        <property name="channelShowType" column="CHANNELSHOWTYPE" />
+        <property name="onDesktop" column="ONDESKTOP" />
+        <property name="isRollOnDesktop" column="ISROLLONDESKTOP" />
+        <property name="channelPosition" column="CHANNELPOSITION" />
+        <property name="positionUpDown" column="POSITIONUPDOWN" />
+        <property name="onDepaDesk" column="ONDEPADESK" />
+        <property name="userDefine" column="USERDEFINE" />
+        <property name="infoNum" column="INFONUM" />
+        <property name="desktopType" column="DESKTOPTYPE" />
+        <property name="includeChild" column="INCLUDECHILD" />
+        <property name="domainId" column="DOMAIN_ID" />
+        <property name="afficheChannelStatus" column="afficheChannelStatus" />
+        <property name="channelNeedCheckupForModi" column="channelNeedCheckupForModi" />
+        <property name="channelNameString" column="channelNameString" />
+		<property name="remindType" column="remindType" />
+		
+		<property name="channelPrinterName" column="channelPrinterName" />
+		<property name="channelPrinter" column="channelPrinter" />
+		<property name="channelPrinterGroup" column="channelPrinterGroup" />
+		<property name="channelPrinterOrg" column="channelPrinterOrg" />
+		<property name="printNum" column="printNum" />
+		<property name="channelDownLoaderName" column="channelDownLoaderName" />
+		<property name="channelDownLoader" column="channelDownLoader" />
+		<property name="channelDownLoaderGroup" column="channelDownLoaderGroup" />
+		<property name="channelDownLoaderOrg" column="channelDownLoaderOrg" />
+		<property name="downLoadNum" column="downLoadNum" />
+		<property name="deleteCtrl" column="deleteCtrl" />
+		<property name="channelPrivilegerName" column="channelPrivilegerName" />
+		<property name="channelPrivileger" column="channelPrivileger" />
+		<property name="channelPrivilegerGroup" column="channelPrivilegerGroup" />
+		<property name="channelPrivilegerOrg" column="channelPrivilegerOrg" />
+		<property name="newInfoDeadLine" column="newInfoDeadLine" />
+		<property name="isYiBoChannel" column="ISYIBOCHANNEL" />
+		
+        <!--与OA_INFORMATION表是一对多的关系-->
+        <set name="information"
+            schema="EZOFFICE"
+            table="OA_INFORMATION"
+            lazy="true"
+            inverse="true"
+            cascade="save-update"
+            sort="unsorted">
+            <key column="CHANNEL_ID" />
+            <one-to-many class="com.whir.ezoffice.information.infomanager.po.InformationPO" />
+        </set>
+
+         <set name="channelProcess"
+			schema="EZOFFICE"
+            table="WF_WORKFLOWCHANNEL"
+            lazy="true"
+            inverse="true"
+            cascade="none"
+            sort="unsorted">
+            <key column="CHANNELID" />
+            <one-to-many class="com.whir.ezoffice.workflow.po.WorkFlowChannelPO" />
+        </set>
+    </class>
+</hibernate-mapping>
