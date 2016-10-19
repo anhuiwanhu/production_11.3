@@ -496,25 +496,25 @@ if(whir_agent.indexOf("Firefox/4")>0){
 													      <tr>
 														       <td nowrap><s:text name="workflow.className"/><!--接口类名-->：</td>
 															   <td style="width:40%">
-															     <input type="text" 	class="inputText" name="participantClassName" id="participantClassName"  style="width:98%"   value="">
+															     <input type="text" class="inputText" name="participantClassName" id="participantClassName"  style="width:98%" value="">
 															   </td>
 															   <td nowrap><s:text name="workflow.methodName"/>：</td>
 															   <td style="width:40%">
-															     <input type="text" class="inputText"  name="participantMethodName" id="participantMethodName" style="width:98%"  value="">
+															     <input type="text" class="inputText" name="participantMethodName" id="participantMethodName" style="width:98%" value="">
 															   </td>
 															   <td>&nbsp;</td>
 														  </tr>
 														   <tr>
 														       <td nowrap><s:text name="workflow.parameterName"/><!-- 接口参数名 -->：</td>
 															   <td style="width:40%">
-															     <input type="text" class="inputText"  name="participantInPaNames" id="participantInPaNames"  style="width:98%"  	value="">
+															     <input type="text" class="inputText" name="participantInPaNames" id="participantInPaNames"  style="width:98%"  value="">
 															   </td style="width:40%">
 															   <td nowrap><s:text name="workflow.parameterValue"/><!-- 接口参数值 -->：</td>
 															   <td style="width:40%">
-															     <input 	type="text" class="inputText" 	name="participantInPavalues" id="participantInPavalues"  style="width:98%"  value="">
+															     <input type="text" class="inputText" name="participantInPavalues" id="participantInPavalues"  style="width:98%"  value="">
 															   </td>
 															    <td>
-																   <div style="margin-left:-1px;margin-top:10px;margin-bottom:9px">
+																   <%--<div style="margin-left:-1px;margin-top:10px;margin-bottom:9px">
 																	  <jsp:include page="/public/upload/uploadify/upload_include.jsp" flush="true">
 																	   <jsp:param name="onInit"             value="" /> 
 																	   <jsp:param name="onSelect"             value="" />  
@@ -529,12 +529,12 @@ if(whir_agent.indexOf("Firefox/4")>0){
 																	   <jsp:param name="height"       value="20" /> 
 																	   <jsp:param name="multi"        value="true" /> 
 																	   <jsp:param name="buttonClass" value="upload_btn" /> 
-																	   <jsp:param name="buttonText"       value="<%=comm_upload%>" /> 
+																	   <jsp:param name="buttonText"       value="" /> 
 																	   <jsp:param name="fileSizeLimit"        value="0" /> 
 																	   <jsp:param name="fileTypeExts"         value="*.class" /> 
 																	   <jsp:param name="uploadLimit"      value="0" /> 
 																	 </jsp:include>
-																  </div>
+																  </div>--%>
 																</td>
 														    </tr>
 													    </table>  
@@ -692,11 +692,11 @@ if(whir_agent.indexOf("Firefox/4")>0){
 						       <!--流转表单处理类-->
 							   <tr>
 									<td width="120" class="td_lefttitle"  for='<s:text name="workflow.newworkflowformclass"/>' ><s:text name="workflow.newworkflowformclass"/>：</td>
-									<td  valign="middle" class="table_linebottom">
-										 <input type="text" style="width:95%;"  name="formClassName" id="formClassName" class="inputText" maxlength="25" value="">                        
+									<td valign="middle" class="table_linebottom">
+										 <input type="text" style="width:95%;"  name="formClassName" id="formClassName" class="inputText" maxlength="25" value="">
 								    </td>							   
 								    <td width="210px"  valign="top">
-								       <div style="margin-left:-1px;">
+								       <%--<div style="margin-left:-1px;">
 										 <jsp:include page="/public/upload/uploadify/upload_include.jsp" flush="true">      
 										   <jsp:param name="onInit"             value="" /> 
 										   <jsp:param name="onSelect"             value="" />  
@@ -711,12 +711,12 @@ if(whir_agent.indexOf("Firefox/4")>0){
 										   <jsp:param name="height"       value="20" /> 
 										   <jsp:param name="multi"        value="true" /> 
 										   <jsp:param name="buttonClass" value="upload_btn" /> 
-										   <jsp:param name="buttonText"       value="<%=comm_upload%>" /> 
+										   <jsp:param name="buttonText"       value="" /> 
 										   <jsp:param name="fileSizeLimit"        value="0" /> 
 										   <jsp:param name="fileTypeExts"         value="*.class" /> 
 										   <jsp:param name="uploadLimit"      value="0" /> 
 										 </jsp:include>
-									  </div> 
+									  </div> --%>
 								  </td>
 								</tr>
 								<!--表单保存数据方法名：-->

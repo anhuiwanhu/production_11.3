@@ -366,3 +366,10 @@ alter table GOV_DOCUMENTSENDFILE modify sendtomyname varchar2(2000);
 commit;
 insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.13_SP_20160129','11.3.0.13',sysdate);
 commit;
+
+
+
+
+
+insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.14_SP_20160303','11.3.0.14',sysdate);
+commit;
