@@ -82,7 +82,8 @@ function init(json){
 						}
                         //if($.browser.msie || "ActiveXObject" in window){
                             if(',.doc,.docx,.xls,.xlsx,.ppt,.pptx,'.indexOf(_fileType)!=-1){
-                                _files_tr += '&nbsp;&nbsp;<a href="javascript:void(0);" onclick="window.open(\''+whirRootPath+'/public/iWebOfficeSign/AttachmentEdit.jsp?moduleType='+dir+'&docName='+s_arr[i]+'&showEditButton=1&code='+file_info.dlcode+'&isEncrypt='+isEncrypt+'\',\'oneditfile\',\'TOP=100,LEFT=100,scrollbars=yes,resizable=yes,width=800,height=600\')">在线编辑</a>';
+                                _files_tr += '<td nowrap>&nbsp;&nbsp;<a href="javascript:void(0);" onclick="window.open(\''+whirRootPath+'/public/iWebOfficeSign/AttachmentEdit.jsp?moduleType='+dir+'&docName='+s_arr[i]+'&showEditButton=1&code='+file_info.dlcode+'&isEncrypt='+isEncrypt+'\',\'oneditfile\',\'TOP=100,LEFT=100,scrollbars=yes,resizable=yes,width=800,height=600\')">在线编辑</a>';
+
                             }
                         //}
                         _files_tr += '</td>';

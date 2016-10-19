@@ -35,10 +35,11 @@
 			.getWorkflowType(domainId);
 	com.whir.org.manager.bd.ManagerBD  managerBD = new com.whir.org.manager.bd.ManagerBD ();
 	boolean isSelRight=managerBD.hasRight(userId, "07*99*02");	
+	boolean isright=managerBD.hasRight(userId, "07*99*03");
 %>
 <script>
 	  var zNodes =[
-        <%if (isDossierAdmin) {%>
+        <%if (isright) {%>
         <%menuIndex++;%>
          { id:"statusType<%=menuIndex%>", pId:-1, name:"文件著录", target:'mainFrame',iconSkin:"fa fa"},
        	 { id:1000000000, pId:"statusType<%=menuIndex%>", name:"本系统信息", url:"", target:'mainFrame',iconSkin:"fa fa"},
