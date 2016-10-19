@@ -165,22 +165,35 @@ String orgName = session.getAttribute("orgName").toString();
   var con = "";
   for(var i=0;i<content.length;i++){
 	var scontent =JSON.stringify(content[i]);
+	var leftUrl="/modules/personal/personal_menu.jsp?expNodeCode=myInfo";
+	var rightUrl = "MyInfoAction!modiMyInfo.action";
+	if(scontent=='\"我的提问\"'){
+		leftUrl = "/defaultroot/classSet!menu.action?portletSettingId=myQuestion";
+		rightUrl = "/defaultroot/question!myQuestionList.action";
+	}else if(scontent=='\"我的回答\"'){
+		leftUrl = "/defaultroot/classSet!menu.action?portletSettingId=myAnswer";
+		rightUrl = "/defaultroot/question!myAnswerList.action";
+	}else if(scontent=='\"他人求助\"'){
+		leftUrl = "/defaultroot/classSet!menu.action?portletSettingId=help";
+		rightUrl = "/defaultroot/question!otherHelpList.action";
+	}
 	if(i != content.length-1){
 		if(i == 0){
-			con += "{title:"+scontent+",url:'',onclick:'',defaultSelected:'on',liCss:'wh-portal-overflow'},";
+			con += '{title:'+scontent+',url:"",onclick:"",defaultSelected:"on",liCss:"wh-portal-overflow",morelink:"jumpnew(\''+leftUrl+'\',\''+rightUrl+'\')"},';
 		}else{
-			con += "{title:"+scontent+",url:'',onclick:'',defaultSelected:'',liCss:'wh-portal-overflow'},";
+			con += '{title:'+scontent+',url:"",onclick:"",defaultSelected:"",liCss:"wh-portal-overflow",morelink:"jumpnew(\''+leftUrl+'\',\''+rightUrl+'\')"},';
 		}
 	}else{
 	    if(i == 0){
-			con += "{title:"+scontent+",url:'',onclick:'',defaultSelected:'on',liCss:'wh-portal-overflow'}";
+			con += '{title:'+scontent+',url:"",onclick:"",defaultSelected:"on",liCss:"wh-portal-overflow",morelink:"jumpnew(\''+leftUrl+'\',\''+rightUrl+'\')"}';
 		}else{
-			con += "{title:"+scontent+",url:'',onclick:'',defaultSelected:'',liCss:'wh-portal-overflow'}";
+			con += '{title:'+scontent+',url:"",onclick:"",defaultSelected:"",liCss:"wh-portal-overflow",morelink:"jumpnew(\''+leftUrl+'\',\''+rightUrl+'\')"}';
 		}
 	}
   }
   var jsonDataStr ='[{ulCss:"wh-portal-title-slide02",data:['+con+']}]';
   var jsonData = eval('(' + jsonDataStr + ')');
   Portlet.setPortletDataTitle('<%=portletSettingId%>',jsonData);
+  Portlet.setMoreLink('<%=portletSettingId%>', {});
   slideTab('slide02');
 </script>

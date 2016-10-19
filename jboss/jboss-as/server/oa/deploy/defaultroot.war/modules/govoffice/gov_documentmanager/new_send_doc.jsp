@@ -588,9 +588,9 @@ if( $("*[name='sendFileDraft']").length >0){
 if( $("*[name='documentSendFileWriteOrg']").length >0){ 
 	$("*[name='documentSendFileWriteOrg']").val("<%=WriteOrg%>"); 
 }
-if( $("*[name='field9']").length >0){ 
-	$("*[name='field9']").val("<%=telephone%>"); 
-}
+//if( $("*[name='field9']").length >0){ 
+//	$("*[name='field9']").val("<%=telephone%>"); 
+//}
 
 
 </script>

@@ -538,17 +538,26 @@ function  checkSubmit(){
 	//先判断是否选了人
 	//选择的活动id
 	var temp_choosedActivityIdValuse="";
+	//判断选择的办理人总长度不能超过300
+	var all_choosedUserName ="";
 
 	$("input[name='chooseActivity']:checked").each(function(){  
 		  var aid=$(this).prop("value");
 		  if(checkUser(aid)){
 			   temp_choosedActivityIdValuse+=aid+",";
+			   all_choosedUserName += $("#"+aid+"_deal_userName").val();
 		  }else{
                result=false;
 			   return false;
 		  }
-		 
-	 });
+	});
+	
+	if(result){
+		if(all_choosedUserName !='undefined' && all_choosedUserName.length >300){
+			whir_alert('您选择的用户过多，请重新选择！',function(){});
+			result=false;
+		}
+	}
 
 	if(result){
 	   if(temp_choosedActivityIdValuse==""){

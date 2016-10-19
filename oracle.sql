@@ -373,3 +373,15 @@ commit;
 
 insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.14_SP_20160303','11.3.0.14',sysdate);
 commit;
+
+
+
+
+
+alter table EZ_FLOW_HI_PROCINST modify WHIR_DEALING_USERS varchar2(1000);
+commit;
+
+alter table gov_senddocumentword modify processname varchar2(2000);
+commit;
+insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.15_SP_20160314','11.3.0.15',sysdate);
+commit;

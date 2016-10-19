@@ -276,3 +276,12 @@ insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) va
 go
 
 
+
+
+
+alter table EZ_FLOW_HI_PROCINST alter column WHIR_DEALING_USERS nvarchar(1000);
+go
+insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) values('Wanhu ezOFFICE','11.3.0.15_SP_20160314','11.3.0.15',getdate());
+go
+
+
