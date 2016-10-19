@@ -20,6 +20,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
     <link rel="stylesheet" type="text/css" href="/defaultroot/evo/weixin/template/css/template.fa.css" />
     <link rel="stylesheet" type="text/css" href="/defaultroot/evo/weixin/template/css/template.style.css" />
     <link rel="stylesheet" type="text/css" href="/defaultroot/evo/weixin/template/css/alert/template.alert.css" />
+    <link rel="stylesheet" href="/defaultroot/evo/weixin/template/css/swiper/template.swiper.css" />
     <link rel="stylesheet" type="text/css" href="/defaultroot/evo/weixin/template/css/mobiscroll/mobiscroll.icons.css"/>
     <link rel="stylesheet" type="text/css" href="/defaultroot/evo/weixin/template/css/mobiscroll/mobiscroll.scroller.css"/>
     <link rel="stylesheet" type="text/css" href="/defaultroot/evo/weixin/template/css/mobiscroll/mobiscroll.scroller.ios7.css"/>
@@ -42,6 +43,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 <c:set var="workcurstep"><x:out select="$doc//workInfo/workcurstep/text()"/></c:set>
 <c:set var="worktitle"><x:out select="$doc//workInfo/worktitle/text()"/></c:set>
 <c:set var="worksubmittime"><x:out select="$doc//workInfo/worksubmittime/text()"/></c:set>
+<form id="sendForm" class="dialog" action="/defaultroot/workflow/sendnew.controller" method="post">
 <section class="wh-section wh-section-bottomfixed" id="mainContent">
     <article class="wh-edit wh-edit-document">
         <div class="wh-container">
@@ -58,7 +60,6 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
                     </li>
                 </ul>
             </div>
-            <form id="sendForm" class="dialog" action="/defaultroot/workflow/sendnew.controller" method="post">
             	<c:if test="${not empty docXml2}">
             		<x:parse xml="${docXml2}" var="doc2"/>
             		<table class="wh-table-edit" id="table_form">
@@ -352,22 +353,31 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 								</c:when>
 								<c:otherwise>
 									<x:out select="$fd/value/text()"/>
+<%--									<input type="text" readonly="readonly" id='_main_<x:out select="$fd/sysname/text()"/>'  name='_main_<x:out select="$fd/sysname/text()"/>' value='<x:out select="$fd/value/text()"/>' class="edit-ipt-r"/>--%>
 								</c:otherwise>
 							</c:choose>
 							</td>
 			                </tr>
 						</x:forEach>
 						<!--子表信息begin-->
-						<c:set var="subTable" ></c:set>
-						<x:forEach select="$doc2//subTableList/subTable/subFieldList" var="ct" varStatus="xh">
-							<c:set var="subTable" >${xh.index+1}</c:set>
+						<x:forEach select="$doc2//subTableList/subTable" var="st">
+							<c:set var="subTable"></c:set>
+							<x:forEach select="$st/subFieldList" var="ct" varStatus="xh">
+								<c:set var="subTable" >${xh.index+1}</c:set>
+							</x:forEach>
+							<c:set var="subName" ><x:out select="$st/name/text()"/></c:set>
+							<c:set var="subTableName" ><x:out select="$st/tableName/text()"/></c:set>
+							<input name="subTableName" value="${subTableName}" type="hidden" />
+							<input name="subName" value="${subName}" type="hidden" />
+							<tr>
+								<th>子表（${subName}）填写：</th>
+								<td>
+									<input id="subTableInput_${subTableName}" placeholder="添加子表" type="text" class="edit-ipt-r edit-ipt-arrow" 
+									<c:if test="${not empty subTable}">value="${subTable}条子表数据"</c:if>
+									 readonly="readonly" onclick="addSubTable('${subTableName}');"/>
+								</td>
+							</tr>
 						</x:forEach>
-						<c:if test="${ not empty subTable}">
-						<tr>
-							<th>子表填写<i class="fa fa-asterisk"></i>：</th>
-							<td><input type="text" readonly="readonly" class="edit-ipt-r" value="${subTable}条子表数据" onclick="addSubTable(${param.workId});"/></td>
-						</tr>
-						</c:if>
 						<!--子表信息end-->
 						<!--批示意见begin-->
 						<c:set var="commentField" ><x:out select="$doc//workInfo/commentField/text()"/></c:set>
@@ -456,42 +466,6 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 					<input type="hidden" name="worksubmittime" value="${worksubmittime}">
 					<input type="hidden" name="workStatus" value="0">
             	</c:if>
-            </form>
-			<!----------退回开始---------->
-			<form id="backForm" class="dialog" action="/defaultroot/workflow/back.controller" method="post">
-				<input type="hidden" name="workId" value="<%=workId%>">
-				<input type="hidden" name="empLivingPhoto" value="${EmpLivingPhoto}">
-				<input type="hidden" name="worktitle" value="${worktitle}">
-				<input type="hidden" name="workcurstep" value="${workcurstep}">
-				<input type="hidden" name="worksubmittime" value="${worksubmittime}">
-				<input type="hidden" name="workStatus" value="0">
-				<input type="hidden" name="tableId" value='<x:out select="$doc//workInfo/worktable_id/text()"/>'>
-				<input type="hidden" name="recordId" value='<x:out select="$doc//workInfo/workrecord_id/text()"/>'>
-				<input type="hidden" name="stepCount" value='<x:out select="$doc//workInfo/workstepcount/text()"/>'>
-				<input type="hidden" name="forkId" value='<x:out select="$doc//workInfo/forkId/text()"/>'>
-				<input type="hidden" name="forkStepCount" value='<x:out select="$doc//workInfo/forkStepCount/text()"/>'>
-				<input type="hidden" name="isForkTask" value='<x:out select="$doc//workInfo/isForkTask/text()"/>'>
-				<input type="hidden" name="curCommField" value='<x:out select="$doc//workInfo/commentField/text()"/>' />
-			</form>
-			<!----------退回结束---------->
-			<!----------转办开始---------->
-			<form id="tranInfoForm" class="dialog" action="/defaultroot/dealfile/tranInfo.controller?workId=${wfworkId}" method="post">
-				<input type="hidden" name="empLivingPhoto" value="${EmpLivingPhoto}">
-				<input type="hidden" name="worktitle" value="${worktitle}">
-				<input type="hidden" name="workcurstep" value="${workcurstep}">
-				<input type="hidden" name="worksubmittime" value="${worksubmittime}">
-				<input type="hidden" name="workStatus" value="0">
-			</form>
-			<!----------转办结束---------->
-			<!----------加签开始---------->
-			<form id="addSignForm" class="dialog" action="/defaultroot/dealfile/addSign.controller?workId=${wfworkId}" method="post">
-				<input type="hidden" name="empLivingPhoto" value="${EmpLivingPhoto}">
-				<input type="hidden" name="worktitle" value="${worktitle}">
-				<input type="hidden" name="workcurstep" value="${workcurstep}">
-				<input type="hidden" name="worksubmittime" value="${worksubmittime}">
-				<input type="hidden" name="workStatus" value="0">
-			</form>
-			<!----------加签结束---------->
         </div>
     </article>
 </section>
@@ -524,19 +498,59 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
         </div>
     </div>
 </footer>
+<jsp:include page="../common/include_workflow_subTable.jsp" flush="true">
+	<jsp:param name="docXml" value="${docXml2}" />
+	<jsp:param name="orgId" value="<%=orgId %>" />
+</jsp:include>
+</form>
 <section id="selectContent" style="display:none">
 </section>
-<section id="subtableContent" style="display:none">
-</section>
+<%--<section id="subtableContent" style="display:none">--%>
+<%--</section>--%>
+<!----------退回开始---------->
+<form id="backForm" class="dialog" action="/defaultroot/workflow/back.controller" method="post">
+	<input type="hidden" name="workId" value="<%=workId%>">
+	<input type="hidden" name="empLivingPhoto" value="${EmpLivingPhoto}">
+	<input type="hidden" name="worktitle" value="${worktitle}">
+	<input type="hidden" name="workcurstep" value="${workcurstep}">
+	<input type="hidden" name="worksubmittime" value="${worksubmittime}">
+	<input type="hidden" name="workStatus" value="0">
+	<input type="hidden" name="tableId" value='<x:out select="$doc//workInfo/worktable_id/text()"/>'>
+	<input type="hidden" name="recordId" value='<x:out select="$doc//workInfo/workrecord_id/text()"/>'>
+	<input type="hidden" name="stepCount" value='<x:out select="$doc//workInfo/workstepcount/text()"/>'>
+	<input type="hidden" name="forkId" value='<x:out select="$doc//workInfo/forkId/text()"/>'>
+	<input type="hidden" name="forkStepCount" value='<x:out select="$doc//workInfo/forkStepCount/text()"/>'>
+	<input type="hidden" name="isForkTask" value='<x:out select="$doc//workInfo/isForkTask/text()"/>'>
+	<input type="hidden" name="curCommField" value='<x:out select="$doc//workInfo/commentField/text()"/>' />
+</form>
+<!----------退回结束---------->
+<!----------转办开始---------->
+<form id="tranInfoForm" class="dialog" action="/defaultroot/dealfile/tranInfo.controller?workId=${wfworkId}" method="post">
+	<input type="hidden" name="empLivingPhoto" value="${EmpLivingPhoto}">
+	<input type="hidden" name="worktitle" value="${worktitle}">
+	<input type="hidden" name="workcurstep" value="${workcurstep}">
+	<input type="hidden" name="worksubmittime" value="${worksubmittime}">
+	<input type="hidden" name="workStatus" value="0">
+</form>
+<!----------转办结束---------->
+<!----------加签开始---------->
+<form id="addSignForm" class="dialog" action="/defaultroot/dealfile/addSign.controller?workId=${wfworkId}" method="post">
+	<input type="hidden" name="empLivingPhoto" value="${EmpLivingPhoto}">
+	<input type="hidden" name="worktitle" value="${worktitle}">
+	<input type="hidden" name="workcurstep" value="${workcurstep}">
+	<input type="hidden" name="worksubmittime" value="${worksubmittime}">
+	<input type="hidden" name="workStatus" value="0">
+</form>
+<!----------加签结束---------->
 </c:if>
 </body>
 </html>
 <script type="text/javascript" src="/defaultroot/evo/weixin/js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="/defaultroot/modules/comm/microblog/script/ajaxfileupload.js"></script>
-<script type="text/javascript" src="/defaultroot/evo/weixin/js/subClick.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/zepto.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/touch.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/fx.js"></script>
+<script type="text/javascript" src="/defaultroot/evo/weixin/template/js/swiper/swiper.min.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/selector.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/alert/zepto.alert.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/mobiscroll/mobiscroll.zepto.js"></script>
@@ -544,7 +558,9 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/mobiscroll/mobiscroll.scroller.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/mobiscroll/mobiscroll.datetime.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/mobiscroll/mobiscroll.select.js"></script>
+<script type="text/javascript" src="/defaultroot/evo/weixin/template/js/followskip/followskip.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/js/uploadPreview.min.js"></script>
+<script type="text/javascript" src="/defaultroot/evo/weixin/js/subClick.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/js/common.js"></script>
 <%--<script type="text/javascript" src="/defaultroot/evo/weixin/template/js/mobiscroll/mobiscroll.scroller.ios7.js"></script>--%>
 <script type="text/javascript">
@@ -727,7 +743,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
     //打开选择人员页面
 	function selectUser(selectType,selectName,selectId,range,listType){ 
 		pageLoading();
-		var selectIdVal = $('input[name="'+selectId+'"]').val();
+		var selectIdVal = $('input[id="'+selectId+'"]').val();
 		if( selectIdVal.indexOf(";") > 0 ){
 			var selectIdArray = selectIdVal.split(';');
 			selectIdVal = selectIdArray[1];
@@ -753,7 +769,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 			url : postUrl,
 			type : "post",
 			data : {'selectType':selectType,'selectName':selectName,'selectId':selectId,
-					'selectNameVal':$('input[name="'+selectName+'"]').val(),'selectIdVal':selectIdVal,'range':range},
+					'selectNameVal':$('input[id="'+selectName+'"]').val(),'selectIdVal':selectIdVal,'range':range},
 			success : function(data){
 				$("#selectContent").append(data);
 				hiddenContent(0);
@@ -766,14 +782,30 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
     	
 	//选人选组织代码-----开始
 	function hiddenContent(flag){
-		if(flag==0){
-			$("#mainContent").css("display","none");
-			$("#footerButton").css("display","none");
+		if(flag == 0){
+			if($('#mainContent').is(':hidden')){
+				$('[id="subHeader_'+subTableName+'"]').hide();
+				$('[id="subSection_'+subTableName+'"]').hide();
+				$('[id="subFooter_'+subTableName+'"]').hide();
+				$('[id="subHeader_'+subTableName+'"]').data('hide','1');
+			}else{
+				$("#mainContent").css("display","none");
+				$("#footerButton").css("display","none");
+			}
 			$("#selectContent").css("display","block");
-		}else if(flag==1){
-			$("#selectContent").css("display","none");
-			$("#mainContent").css("display","block");
-			$("#footerButton").css("display","block");
+		}else if(flag == 1){
+			if($('[id="subHeader_'+subTableName+'"]') && $('[id="subSection_'+subTableName+'"]').is(':hidden') 
+					&& $('[id="subHeader_'+subTableName+'"]').data('hide') == '1'){
+				$('[id="subHeader_'+subTableName+'"]').data('hide','0');
+				$('#selectContent').hide();
+				$('[id="subHeader_'+subTableName+'"]').show();
+				$('[id="subSection_'+subTableName+'"]').show();
+				$('[id="subFooter_'+subTableName+'"]').show();
+			}else{
+				$("#selectContent").css("display","none");
+				$("#mainContent").css("display","block");
+				$("#footerButton").css("display","block");
+			}
 			$("#selectContent").empty();
 		}else if(flag==2){//显示子表 
 			$("#mainContent").css("display","none");
@@ -836,14 +868,12 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 		});
 	}
     
-    
-    
     function selectCallBack(obj1,obj2){
 		obj2.val( obj1.val() + ";" + obj2.val());
 	}
 
     //打开子表 
-    function addSubTable(workId){
+    /*function addSubTable(workId){
 		pageLoading();
 		var postUrl = '/defaultroot/dealfile/subprocess.controller?workId='+workId;
 		$.ajax({
@@ -859,5 +889,5 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 			}
 		});
 		//window.open('/defaultroot/dealfile/subprocess.controller?workId='+workId);
-	}
+	}*/
 </script>

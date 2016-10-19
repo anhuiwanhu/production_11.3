@@ -95,11 +95,11 @@ location.href="login.jsp";
 <body>
 <div class="wh-wrapper">
     <div class="wh-header">
-        <div class="wh-container clearfix"> 
+        <div class="wh-container clearfix"  id="desktop_container_div"> 
 			<!-- <a href="#" class="wh-logo" style="background-image: url('<%=logoFile%>')"></a> --> 
-		    <a href="#" class="wh-logo"><img src="<%=logoFile%>" alt=""  id="desktop_logoFileImage"  data-pich="50" /></a>
+		    <a href="#" class="wh-logo" id="desktop_logo_a"><img src="<%=logoFile%>" alt=""  id="desktop_logoFileImage"  data-pich="50" /></a>
 			<%@ include file="/public/desktop/include_desktop_menu.jsp"%>   
-		    <ul class="wh-hd-r-nav clearfix">
+		    <ul class="wh-hd-r-nav clearfix" id="desktop_right_ul">
                 <li>
                     <a href="javascript:void(0)" class="wh-hd-user-info"  onclick="chooseDefaultMyLayout(); return false;" ><img src="<%=_userImage_small%>" alt=""/></a>
                     <div class="wh-hd-user-detail wh-hd-box-shadow" >
@@ -165,7 +165,7 @@ location.href="login.jsp";
 							 <p><i class="fa fa-comments-o"></i><a href="#" title="<%=Resource.getValue(local,"common","comm.newinfo")%>" onClick="javascript:openWin({url:'<%=rootPath%>/Information!add.action?channelType=0&userChannelName=信息管理&userDefine=0',isFull:true,winName:'newinfo'});"><%=Resource.getValue(local,"common","comm.newinfo")%></a> </p>
 							 <p><i class="fa fa-pencil"></i><a href="#"  title="<%=Resource.getValue(local,"common","comm.worklog")%>"onClick="javascript:openWin({url:'<%=rootPath%>/WorkLogAction!addMyWorkLog.action',isFull:true,winName:'worklog'});"><%=Resource.getValue(local,"common","comm.worklog")%></a> </p>
 							 <p><i class="fa fa-work-rep"></i><a href="#" title="<%=Resource.getValue(local,"common","comm.workreport")%>" onClick="javascript:openWin({url:'<%=rootPath%>/WorkReportAction!addWorkReport.action?isFromDesktop=1&reportType=week',isFull:true,winName:'workreport'});"><%=Resource.getValue(local,"common","comm.workreport")%></a> </p>
-							 <p><i class="fa fa-attendance-mana"></i><a href="#" title="<%=Resource.getValue(local,"common","comm.schedule")%>" onClick="javascript:openWin({url:'<%=rootPath%>/EventAction!addMyEvent.action?flagChangeEventType=1',width:810,height:640,winName:'taskcenter'});"><%=Resource.getValue(local,"common","comm.schedule")%></a> </p>   
+							 <p><i class="fa fa-attendance-mana"></i><a href="#" title="<%=Resource.getValue(local,"common","comm.schedule")%>" onClick="javascript:openWin({url:'<%=rootPath%>/EventAction!addMyEvent.action?flagChangeEventType=1',isFull:true,winName:'taskcenter'});"><%=Resource.getValue(local,"common","comm.schedule")%></a> </p>   
 						</div>
 					</div>
 				</li>

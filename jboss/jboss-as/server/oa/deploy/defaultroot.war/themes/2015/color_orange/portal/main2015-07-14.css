@@ -1,0 +1,219 @@
+/*a,a:link, a:visited{
+	color: #00007f;
+	text-decoration: none;
+	border-bottom: 1px solid #DDD;
+}
+
+a:hover{
+	color: #FF6600;
+	border-bottom: 1px solid #FF6600;
+}
+
+*html a:hover{
+	border-bottom: 1px solid #DDD;
+}*/
+
+.rssItemList{
+	text-align:left;
+	padding:7px 10px 5px 12px;
+}
+
+.item{
+	line-height:28px;
+	height:28px;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	word-break:keep-all;
+	word-wrap:normal;
+	white-space:nowrap;
+	width:expression(this.width='95%');
+}
+
+.rssA{
+	font-size:14px;
+}
+
+/*.rssItemList a,.rssItemList a:link, .rssItemList a:visited{
+	text-decoration: none;
+	border-bottom: none;
+}
+
+.rssItemList a:hover{
+	border-bottom: none;
+}*/
+
+.postItFrame{
+	padding: 5px;	
+}
+
+.postItFrame a, .postItFrame a:visited{
+	border-bottom: 1px solid #888;
+}
+.postItFrame a:hover{
+	color: #36C;
+	border-bottom: 1px solid #36C;
+}
+
+.modTd{
+	vertical-align:top;
+}
+.portal-column-td{
+	vertical-align:top;
+}
+.ctrlPanel{
+	border:1px solid #A6CEF9;
+	font-size:82%;
+}
+.separator{
+	margin: 5px 6px 0px 6px;
+	border-top: 1px solid #C6CCD2;
+}
+.itemLineMain{
+	height: 16px;
+	overflow: hidden;
+	/*font-weight: bold;*/
+	background: #EFF5FF;
+}
+.modbox{
+	margin:0px 2px 15px 20px;
+	background-color:white;
+	border:0px solid #3366cc;
+}
+.module{
+	border: 0px solid #EEE;
+	background: #FFF;
+	margin: 5px;
+}
+.moduleFrame{
+	overflow: hidden;
+}
+.moduleHeader{
+	cursor: default;
+	background:#fff;
+	height: 35px;
+	float: none;
+	overflow: hidden;
+	line-height:35px;
+	border:1px solid #e5e5e7;
+}
+.moduleHeader .topLeft{
+	cursor: default;
+	height: 31px;
+	float: left;
+	overflow: hidden; display:none;
+}
+.moduleHeader .topRight{
+	cursor: default;
+	height: 31px;
+	float: right;
+	overflow: hidden; display:none;
+}
+.bottom{
+	height: 8px;
+	cursor: default;
+	background-image: url(./main06.jpg);
+	float: none;
+	overflow: hidden; display:none;
+}
+.bottom .bottomLeft{
+	height: 8px;
+	cursor: default;
+	float: left;
+	overflow: hidden;
+}
+.bottom .bottomRight{
+	height: 8px;
+	cursor: default;
+	float: right;
+	overflow: hidden;
+}
+.moduleHeader .coin{
+	width: 15px;
+	cursor: default;
+	float: left;
+	padding: 10px 5px 2px 0px;
+}
+.moduleHeader .showHide{
+	cursor: pointer;
+	float: right;
+	padding:10px 8px;
+}
+.moduleHeader .title{
+	font-size:14px;
+	color: #3c3c3c; height:35px; line-height:35px;
+}
+.moduleHeader .title .topCenter{height:35px; line-height:35px;display:block;padding-left:15px;color:#3c3c3c;}
+.moduleHeader .edit{
+	float: right;
+	padding:10px 0px;
+	cursor: pointer;line-height:1em;
+}
+.moduleHeader .edit a{
+	color: #858585;
+	text-decoration: underline;
+	border-bottom: none;
+}
+
+.moduleHeader .edit a:hover{
+	color: #F60;	
+}
+.moduleHeader .close{
+	float: right;
+	padding:10px 0px;
+	cursor: pointer;line-height:1em;
+}
+.moduleHeader .refresh{
+	float: right;
+	padding:10px 2px;
+	cursor: pointer;
+}
+.moduleContents{
+	clear: both;
+	background: #FFF;
+	padding-top: 0px;
+	border: 1px solid #e5e5e7;
+	border-top:0;
+}
+.moduleContent{
+	clear: both;
+	padding: 0px 0px 0px 0px;
+	background: #FFF;
+	overflow:auto;
+	/*font-size:82%;*/
+}
+.moduleContentTop{
+	border-top: 1px solid #DEDFDE;
+}
+.moduleContentBottom{
+	border-bottom: 1px solid #DEDFDE;
+}
+.moduleContentTop2{
+	border-top: 1px solid #FFF;
+}
+
+
+
+
+
+.move_bg{ height:27px;background:#f1f4f7;}
+.move_bg span{ float:left; display:block; color:#6f6f6f; cursor:pointer;}
+.move_bg .aon{ height:27px; line-height:27px;background:#fff; padding:0px 11px; font-weight:bold;color:#000;}
+.move_bg .aoff{ height:27px; line-height:27px;background:none; padding:0px 11px;}
+.move_boxline{ border:0px; border-top:0px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

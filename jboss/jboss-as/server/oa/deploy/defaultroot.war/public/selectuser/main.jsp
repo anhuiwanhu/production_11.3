@@ -69,6 +69,8 @@ String showShortcut = request.getParameter("showShortcut")!=null?request.getPara
     //-->
     </SCRIPT>
     <style type="text/css">
+        html,body{height:100%;}
+
         .bodyMainFrameBox{
             height:100%; 
             overflow:hidden;
@@ -89,7 +91,7 @@ String showShortcut = request.getParameter("showShortcut")!=null?request.getPara
     <!--[if lte IE 7]>
     <style type="text/css">
         .bodyMainFrameBox table{width:99%; *width:99%; margin:0 auto;}
-        .textareaInput {position:absolute; bottom:20px;margin-left:3px;}
+        .textareaInput {position:absolute; bottom:35px;margin-left:3px;}
         .bottomBtn {position:absolute; bottom:0px;padding-left:6px;}
     </style>
     <![endif]-->
@@ -216,7 +218,7 @@ String showShortcut = request.getParameter("showShortcut")!=null?request.getPara
 <%if(isShowOrg){%><!--组织-->
                 <div id="tab0" class="grayline">
                     <div style="width:230px;height:<%=dialogHeight-210%>px;overflow-x:auto;overflow-y:auto;" class="hdiv">
-                    <div style="padding:3px;height:30px;"><input type="text" name="searchOrgNameTree" maxlength="16" value="" id="searchOrgNameTree" class="inputText" style="width:88%;"/><img id="searchOrgNameTreeImg" src="<%=rootPath%>/images/look.gif" style="vertical-align: middle;cursor:pointer;padding-left:3px;"></div>
+                    <div style="padding:3px;height:30px;"><input type="text" name="searchOrgNameTree" maxlength="16" value="" id="searchOrgNameTree" class="inputText" style="width:82%;"/><img id="searchOrgNameTreeImg" src="<%=rootPath%>/images/look.gif" style="vertical-align: middle;cursor:pointer;padding-left:3px;"></div>
                     <div style="border:1px;padding:5px 0 0 10px;display:inline;"><a href="javascript:void(0);" onclick="loadAllOrg(false);"><s:text name="obj.allorg"/></a></div>
                     <ul id="treeOrg" class="ztree"></ul>
                     <SCRIPT type="text/javascript">
@@ -414,7 +416,7 @@ String showShortcut = request.getParameter("showShortcut")!=null?request.getPara
 <%if(isShowGroup){%><!--群组-->
                 <div id="tab1" class="grayline" style="display:<%="group".equals(show)||!isShowOrg?"":"none"%>">
                     <div style="width:230px;height:<%=dialogHeight-210%>px;overflow-x:auto;overflow-y:auto;" class="hdiv">
-                    <div style="padding:3px;height:30px;"><input type="text" name="searchGroupNameTree" maxlength="16" value="" id="searchGroupNameTree" class="inputText" style="width:88%;"/><img id="searchGroupNameTreeImg" src="<%=rootPath%>/images/look.gif" style="vertical-align: middle;cursor:pointer;padding-left:3px;"></div>
+                    <div style="padding:3px;height:30px;"><input type="text" name="searchGroupNameTree" maxlength="16" value="" id="searchGroupNameTree" class="inputText" style="width:82%;"/><img id="searchGroupNameTreeImg" src="<%=rootPath%>/images/look.gif" style="vertical-align: middle;cursor:pointer;padding-left:3px;"></div>
                     <ul id="treeGroup" class="ztree"></ul>
                     <SCRIPT type="text/javascript">
                         <!--

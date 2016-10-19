@@ -163,7 +163,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 						</x:forEach>
 						<!--主表信息end-->
 						<!--子表信息begin-->
-						<c:set var="subTable" ></c:set>
+						<%--<c:set var="subTable" ></c:set>
 						<x:forEach select="$doc2//subTableList/subTable/subFieldList" var="ct" varStatus="xh">
 							<c:set var="subTable" >${xh.index+1}</c:set>
 						</x:forEach>
@@ -175,6 +175,25 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</td>
 						</tr>
 						</c:if>
+						--%>
+						<x:forEach select="$doc2//subTableList/subTable" var="st">
+							<c:set var="subTable"></c:set>
+							<x:forEach select="$st/subFieldList" var="ct" varStatus="xh">
+								<c:set var="subTable" >${xh.index+1}</c:set>
+							</x:forEach>
+							<c:set var="subName" ><x:out select="$st/name/text()"/></c:set>
+							<c:set var="subTableName" ><x:out select="$st/tableName/text()"/></c:set>
+							<input name="subTableName" value="${subTableName}" type="hidden" />
+							<input name="subName" value="${subName}" type="hidden" />
+							<tr>
+								<th>子表填写：</th>
+								<td>
+									<input id="subTableInput" placeholder="添加子表" type="text" class="edit-ipt-r edit-ipt-arrow" 
+									<c:if test="${not empty subTable}">value="${subTable}条子表数据"</c:if>
+									 readonly="readonly" onclick="addSubTable('${subTableName}');"/>
+								</td>
+							</tr>
+						</x:forEach>
 						<!--子表信息end-->
 	
 						<!--批示意见begin-->
@@ -205,173 +224,20 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 		</article>
 	</section>
 </c:if><!--1-->
+<jsp:include page="../common/include_workflow_subTable_view.jsp" flush="true">
+	<jsp:param name="docXml" value="${docXml2}" />
+	<jsp:param name="orgId" value="<%=orgId %>" />
+</jsp:include>
 </body>
 </html>
-	<%--
-	<nav class="Step1">
-		<c:if test="${empLivingPhoto ==''}"><img src="/defaultroot/evo/weixin/images/p2.jpg" /></c:if><c:if test="${empLivingPhoto !=''}"><img src="/defaultroot/upload/peopleinfo/${empLivingPhoto}"/></c:if>
-		<a>${worktitle}当前环节为${workcurstep}<span>（${worksubmittime}）</span></a>
-	</nav>
-	
-	<c:if test="${not empty docXml2}"><!--2-->
-		<x:parse xml="${docXml2}" var="doc2"/>
-		<section class="Contain">
-			<div class="DyForm">
-				<dl>
-					<!--主表信息begin-->
-					<x:forEach select="$doc2//fieldList/field" var="fd" >
-						<c:set var="showtype"><x:out select="$fd/showtype/text()"/></c:set>
-						<c:set var="readwrite"><x:out select="$fd/readwrite/text()"/></c:set>
-						<c:set var="fieldtype"><x:out select="$fd/fieldtype/text()"/></c:set>
-						<c:set var="mustfilled"><x:out select="$fd/mustfilled/text()"/></c:set>
-
-						<dt>
-							<c:if test="${mustfilled == 1}"><span class="erro"></span></c:if><em class="tt"><x:out select="$fd/name/text()"/>：</em>
-							<c:choose>
-								附件上传 115
-								<c:when test="${showtype =='115'}">
-									<c:set var="values"><x:out select="$fd/value/text()"/></c:set>
-									<c:if test="${not empty values}">
-										<%
-										String realFileNames ="";
-										String saveFileNames ="";
-										String moduleName ="customform";
-										String aValues =(String)pageContext.getAttribute("values");
-										String[] aval  = aValues.split(";");
-										String[] aval0=new String[0];
-										String[] aval1=new String[0];
-										if(aval[0] != null && aval[0].endsWith(",")) {
-											saveFileNames =aval[0].substring(0, aval[0].length() -1);
-											saveFileNames =saveFileNames.replaceAll(",","|");
-										}
-										if(aval[1] != null && aval[1].endsWith(",")) {
-											realFileNames =aval[1].substring(0, aval[1].length() -1);
-											realFileNames =realFileNames.replaceAll(",","|");
-										}
-										%>
-										<jsp:include page="../common/include_download.jsp" flush="true">
-											<jsp:param name="realFileNames"	value="<%=realFileNames%>" />
-											<jsp:param name="saveFileNames" value="<%=saveFileNames%>" />
-											<jsp:param name="moduleName" value="<%=moduleName%>" />
-										</jsp:include>
-									</c:if>
-								</c:when>
-
-								Word编辑 116
-								<c:when test="${showtype =='116'}">
-									<c:set var="filename"><x:out select="$fd/value/text()"/></c:set>
-									<c:if test="${not empty filename}">
-										<%
-										String realFileNames ="";
-										String saveFileNames ="";
-										String moduleName ="information";
-										realFileNames =(String)pageContext.getAttribute("filename")+".doc";
-										saveFileNames =(String)pageContext.getAttribute("filename")+".doc";
-										%>
-										<jsp:include page="../common/include_download.jsp" flush="true">
-											<jsp:param name="realFileNames"	value="<%=realFileNames%>" />
-											<jsp:param name="saveFileNames" value="<%=saveFileNames%>" />
-											<jsp:param name="moduleName" value="<%=moduleName%>" />
-										</jsp:include>
-									</c:if>
-								</c:when>
-
-								Excel编辑 117
-								<c:when test="${showtype =='117'}">
-									<c:set var="filename"><x:out select="$fd/value/text()"/></c:set>
-									<c:if test="${not empty filename}">
-										<%
-										String realFileNames ="";
-										String saveFileNames ="";
-										String moduleName ="information";
-										realFileNames =(String)pageContext.getAttribute("filename")+".xls";
-										saveFileNames =(String)pageContext.getAttribute("filename")+".xls";
-										%>
-										<jsp:include page="../common/include_download.jsp" flush="true">
-											<jsp:param name="realFileNames"	value="<%=realFileNames%>" />
-											<jsp:param name="saveFileNames" value="<%=saveFileNames%>" />
-											<jsp:param name="moduleName" value="<%=moduleName%>" />
-										</jsp:include>
-									</c:if>
-								</c:when>
-
-								WPS编辑 118
-								<c:when test="${showtype =='118'}">
-									<c:set var="filename"><x:out select="$fd/value/text()"/></c:set>
-									<c:if test="${not empty filename}">
-										<%
-										String realFileNames ="";
-										String saveFileNames ="";
-										String moduleName ="information";
-										realFileNames =(String)pageContext.getAttribute("filename")+".wps";
-										saveFileNames =(String)pageContext.getAttribute("filename")+".wps";
-										%>
-										<jsp:include page="../common/include_download.jsp" flush="true">
-											<jsp:param name="realFileNames"	value="<%=realFileNames%>" />
-											<jsp:param name="saveFileNames" value="<%=saveFileNames%>" />
-											<jsp:param name="moduleName" value="<%=moduleName%>" />
-										</jsp:include>
-									</c:if>
-								</c:when>
-
-								批示意见 401
-								<c:when test="${showtype =='401' }">
-									<x:forEach select="$fd//dataList/comment" var="ct" >
-										<x:out select="$ct//content/text()"/>&nbsp;&nbsp;<x:out select="$ct//person/text()"/>(<x:out select="$ct//date/text()"/>)
-									</x:forEach>
-								</c:when>
-
-								<c:otherwise>
-									<x:out select="$fd/value/text()"/>
-								</c:otherwise>
-							</c:choose>
-						</dt>
-					</x:forEach>
-					<!--主表信息end-->
-
-					<!--子表信息begin-->
-					<c:set var="subTable" ></c:set>
-					<x:forEach select="$doc2//subTableList/subTable/subFieldList" var="ct" varStatus="xh">
-						<c:set var="subTable" >${xh.index+1}</c:set>
-					</x:forEach>
-					<c:if test="${ not empty subTable}">
-					<dt>
-						<span class="erro"></span><em class="tt">子表填写：</em><input type="text" class="txt txt1" value="${subTable}条子表数据" onclick="addSubTable(${param.workId});"/>
-					</dt>
-					</c:if>
-					<!--子表信息end-->
-
-					<!--批示意见begin-->
-					<x:forEach select="$doc2//commentList/comment" var="ct" >
-						<c:set var="commentType"><x:out select="$ct//type/text()"/></c:set>
-						<c:set var="commentContent"><x:out select="$ct//content/text()"/></c:set>
-						<dt>
-							<em class="tt"><x:out select="$ct//step/text()"/>：</em><x:out select="$ct//content/text()"/>&nbsp;&nbsp;<x:out select="$ct//person/text()"/>(<x:out select="$ct//date/text()"/>)
-						</dt>
-					</x:forEach>
-					<!--批示意见end-->
-
-					<!--退回意见begin-->
-					<c:set var="backcomment" ><x:out select="$doc2//backComment/text()"/></c:set>
-					<c:if test="${not empty backcomment}">
-						<dt>
-							<em class="tt">退回意见：</em>${backcomment}
-						</dt>
-					</c:if>
-					<!--退回意见end-->
-					<dt><br/><br/><br/></dt>
-				</dl>
-			</div>
-		</section>
-	</c:if><!--2-->
-	--%>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/zepto.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/touch.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/fx.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/selector.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/alert/zepto.alert.js"></script>
+<script type="text/javascript" src="/defaultroot/evo/weixin/template/js/swiper/swiper.min.js"></script>
 <script type="text/javascript">
-	function addSubTable(workId){
+	/*function addSubTable(workId){
 		window.open('/defaultroot/dealfile/subprocess.controller?workId='+workId);
-	}
+	}*/
 </script>

@@ -161,7 +161,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 								</td>
 							</tr>
 						</x:forEach>
-						<!--子表信息begin-->
+						<!--子表信息begin--><%--
 						<c:set var="subTable" ></c:set>
 						<x:forEach select="$doc2//subTableList/subTable/subFieldList" var="ct" varStatus="xh">
 							<c:set var="subTable" >${xh.index+1}</c:set>
@@ -170,10 +170,30 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 						<tr>
 							<th>子表填写：</th>
 							<td>
-								<input type="text" class="edit-ipt-r" readonly="readonly" value="${subTable}条子表数据" onclick="addSubTable(${param.workId});"/>
+								<input type="text" class="edit-ipt-r" readonly="readonly" value="${subTable}条子表数据" 
+								onclick="addSubTable(${param.workId});"/>
 							</td>
 						</tr>
 						</c:if>
+						--%>
+						<x:forEach select="$doc2//subTableList/subTable" var="st">
+							<c:set var="subTable"></c:set>
+							<x:forEach select="$st/subFieldList" var="ct" varStatus="xh">
+								<c:set var="subTable" >${xh.index+1}</c:set>
+							</x:forEach>
+							<c:set var="subName" ><x:out select="$st/name/text()"/></c:set>
+							<c:set var="subTableName" ><x:out select="$st/tableName/text()"/></c:set>
+							<input name="subTableName" value="${subTableName}" type="hidden" />
+							<input name="subName" value="${subName}" type="hidden" />
+							<tr>
+								<th>子表填写：</th>
+								<td>
+									<input id="subTableInput" placeholder="添加子表" type="text" class="edit-ipt-r edit-ipt-arrow" 
+									<c:if test="${not empty subTable}">value="${subTable}条子表数据"</c:if>
+									 readonly="readonly" onclick="addSubTable('${subTableName}');"/>
+								</td>
+							</tr>
+						</x:forEach>
 						<!--子表信息end-->
 						<!--批示意见begin-->
 						<x:forEach select="$doc2//commentList/comment" var="ct" >
@@ -232,8 +252,12 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 		<input type="hidden" name="workStatus" value="101">
 	</form>
 </c:if>
-<section id="subtableContent" style="display:none">
-</section>
+<jsp:include page="../common/include_workflow_subTable_view.jsp" flush="true">
+	<jsp:param name="docXml" value="${docXml2}" />
+	<jsp:param name="orgId" value="<%=orgId %>" />
+</jsp:include>
+<%--<section id="subtableContent" style="display:none">
+</section>--%>
 </body>
 </html>
 <script type="text/javascript" src="/defaultroot/evo/weixin/js/jquery-1.8.2.min.js"></script>
@@ -243,6 +267,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/selector.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/alert/zepto.alert.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/js/subClick.js"></script>
+<script type="text/javascript" src="/defaultroot/evo/weixin/template/js/swiper/swiper.min.js"></script>
 <script type="text/javascript">
 	var dialog = null;
     function pageLoading(){
@@ -283,7 +308,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 	}
 
 	//打开子表 
-    function addSubTable(workId){
+    /*function addSubTable(workId){
 		pageLoading();
 		var postUrl = '/defaultroot/dealfile/subprocess.controller?workId='+workId;
 		$.ajax({
@@ -299,7 +324,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 			}
 		});
 		//window.open('/defaultroot/dealfile/subprocess.controller?workId='+workId);
-	}
+	}*/
 
 	function workfolwUndo(workId){
 		var status = confirm('是否撤回该流程到您的待办文件中重新办理？');

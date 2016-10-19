@@ -85,8 +85,8 @@
 			                           
 			                        </strong>
 			                        <p>
-			                            <a>${forumTitle}</a><span><%=authName %></span>
-			                            <span>${fn:substring(time,0,16)}</span>
+			                            <a><%=authName %>&nbsp;&nbsp;${forumTitle}</a>
+			                            <span>&nbsp;${fn:substring(time,0,16)}</span>
 			                        </p>
 			                        <em <c:if test="${forumRevertNum eq '0'}">class="rate-zero"</c:if>>${forumRevertNum}</em>
 			                    </li>

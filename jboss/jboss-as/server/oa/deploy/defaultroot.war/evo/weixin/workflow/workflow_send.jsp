@@ -226,9 +226,7 @@ String workStatus = request.getParameter("workStatus")==null?"":request.getParam
 										<c:if test="${nextActivityListNum == 1}">
 											<x:forEach select="$doc//nextActivityList" var="n" varStatus="statusc">
 												<x:if select="$n/scopeType/text() = 'default_users' ">
-													
 														<c:set var="isdefaultusers" value="1"/>
-													
 												</x:if>
 												<option selected="true" value='<x:out select="$n/id/text()"/>'><x:out select="$n/name/text()"/></option>
 											</x:forEach>
@@ -254,7 +252,7 @@ String workStatus = request.getParameter("workStatus")==null?"":request.getParam
 									<input type="hidden" id='scopeId' name='scopeId' value='' />
 									<input type="hidden" id="userId"  name="userId"  value=""/>
 									<span class="fr" onclick="$(this).next('input').click()"></span>
-			           				<input type="text" placeholder="请选择" id='userName' name='userName' value='' class="edit-ipt-r" readonly="readonly" <c:if test="${isdefaultusers != 1}"> onclick='selectUser("1","userName","userId",$("#scopeId").val());' </c:if>/>
+			           				<input type="text" placeholder="请选择" id='userName' name='userName' value='' class="edit-ipt-r" readonly="readonly" onclick='selectUser("1","userName","userId",$("#scopeId").val());'/>
 		           				</td>
 							</tr>
 						</c:otherwise>
@@ -311,6 +309,7 @@ String workStatus = request.getParameter("workStatus")==null?"":request.getParam
           	 			$('#scopeId').val('<x:out select="$n/scopeId/text()"/>');
 						$('#userName').unbind("click");
 					}else if('<x:out select="$n/scopeType/text()"/>' == 'scopes_user'){
+						$('#userName').show();
 						<%
 						int scopeIdLength =0;
 						%>
@@ -334,21 +333,25 @@ String workStatus = request.getParameter("workStatus")==null?"":request.getParam
 							<c:if test="${scopeIdLength =='1'}">
 								$('#userId').val('<x:out select="$n/scopeId/text()"/>');
 								$('#userName').val('<x:out select="$n/scopeName/text()"/>');
+								$('#userName').prev('span').html('<x:out select="$n/scopeName/text()"/>');
 							</c:if>
 							<c:if test="${scopeIdLength !='1'}">
 								$('#userId').val('');
 								$('#userName').val('');
+								$('#userName').prev('span').html('');
 							</c:if>
 						</c:if>
 						<c:if test="${scopeId ==null || scopeId ==''}">
 							$('#userId').val('');
 							$('#userName').val('');
+							$('#userName').prev('span').html('');
 						</c:if>
 						$('#scopeId').val('<x:out select="$n/scopeId/text()"/>');
 					}else{
 						$('#userId').val('');
           	 			$('#userName').val('');
           	 			$('#scopeId').val('<x:out select="$n/scopeId/text()"/>');
+          	 			$('#userName').prev('span').html('');
 					}
 				}
 			</x:forEach>

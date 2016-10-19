@@ -18,18 +18,19 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
     <link rel="stylesheet" href="/defaultroot/evo/weixin/template/css/template.fa.css" />
     <link rel="stylesheet" href="/defaultroot/evo/weixin/template/css/template.style.css" /> 
     <link rel="stylesheet" href="/defaultroot/evo/weixin/template/css/alert/template.alert.css" />
+    <link rel="stylesheet" href="/defaultroot/evo/weixin/template/css/swiper/template.swiper.css" />
     <link rel="stylesheet" type="text/css" href="/defaultroot/evo/weixin/template/css/mobiscroll/mobiscroll.icons.css"/>
     <link rel="stylesheet" type="text/css" href="/defaultroot/evo/weixin/template/css/mobiscroll/mobiscroll.scroller.css"/>
     <link rel="stylesheet" type="text/css" href="/defaultroot/evo/weixin/template/css/mobiscroll/mobiscroll.scroller.ios7.css"/>
     <link rel="stylesheet" type="text/css" href="/defaultroot/evo/weixin/template/css/mobiscroll/mobiscroll.animation.css"/>
 </head>
 <body>
+<form id="sendForm" class="dialog" action="/defaultroot/workflow/firstezflowsend.controller" method="post">
 <section class="wh-section wh-section-bottomfixed" id="mainContent">
     <article class="wh-edit wh-edit-document">
         <div class="wh-container">
             <c:if test="${not empty docXml}">
 				<x:parse xml="${docXml}" var="doc2"/>
-				<form id="sendForm" class="dialog" action="/defaultroot/workflow/firstezflowsend.controller" method="post">
 				<input  id="__sys_pageId" type="hidden"  name="__sys_pageId" value="<%=pageId%>" />
 				<input  id="processId" type="hidden"  name="processId" value="<%=processId%>" />
 				<input  id="__main_tableName" type="hidden"  name="__main_tableName" value='<x:out select="$doc2//fieldList/tableName/text()"/>' />
@@ -365,23 +366,33 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 							</td>
 						</tr>
 	            	</x:forEach>
-					<tr>
-						<!--子表信息begin-->
-						<c:set var="subTable" ></c:set>
-						<x:forEach select="$doc2//subTableList/subTable/subFieldList" var="ct" varStatus="xh">
-							<c:set var="subTable" >${xh.index+1}</c:set>
-						</x:forEach>
-						<c:if test="${ not empty subTable}">
-							<th>子表填写<c:if test="${mustfilled == 1}"><i class="fa fa-asterisk"></c:if>：</th>
+	            	<x:forEach select="$doc2//subTableList/subTable" var="st">
+						<c:set var="subName" ><x:out select="$st/name/text()"/></c:set>
+						<c:set var="subTableName" ><x:out select="$st/tableName/text()"/></c:set>
+						<input name="subTableName" value="${subTableName}" type="hidden" />
+						<input name="subName" value="${subName}" type="hidden" />
+						<tr>
+							<!--子表信息begin-->
+							<%--<c:set var="subTable" ></c:set>
+							<x:forEach select="$doc2//subTableList/subTable/subFieldList" var="ct" varStatus="xh">
+								<c:set var="subTable" >${xh.index+1}</c:set>
+							</x:forEach>
+							<c:if test="${not empty subTable}">
+								<th>子表填写<c:if test="${mustfilled == 1}"><i class="fa fa-asterisk"></c:if>：</th>
+								<td>
+									<input id="subTableInput" placeholder="添加子表" type="text" class="edit-ipt-r edit-ipt-arrow" value="" readonly="readonly" onclick="addSubTable();"/>
+								</td>
+							</c:if>
+							--%><!--子表信息end-->
+							<th>子表（${subName}）填写：</th>
 							<td>
-								<input type="text" class="edit-ipt-r" value="" readonly="readonly" onclick="" placeholder=""/>
+								<input id="subTableInput_${subTableName}" placeholder="添加子表" type="text" class="edit-ipt-r edit-ipt-arrow" 
+								value="" readonly="readonly" onclick="addSubTable('${subTableName}');"/>
 							</td>
-						</c:if>
-						<!--子表信息end-->
-					</tr>	  
-					<!-- ----------------------不华丽的分界线-------------------------- -->  
+						</tr>
+					</x:forEach>	  
+					<!-- ----------------------华丽的分界线-------------------------- -->  
 	            </table>
-	            </form>
             </c:if>
         </div>
     </article>
@@ -398,6 +409,11 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 </footer>
 <section id="selectContent" style="display:none">
 </section>
+<jsp:include page="../common/include_workflow_subTable.jsp" flush="true">
+	<jsp:param name="docXml" value="${docXml}" />
+	<jsp:param name="orgId" value="<%=orgId %>" />
+</jsp:include>
+</form>
 </body>
 </html>
 <script type="text/javascript" src="/defaultroot/evo/weixin/js/jquery-1.8.2.min.js"></script>
@@ -405,6 +421,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/zepto.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/touch.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/fx.js"></script>
+<script type="text/javascript" src="/defaultroot/evo/weixin/template/js/swiper/swiper.min.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/selector.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/alert/zepto.alert.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/mobiscroll/mobiscroll.zepto.js"></script>
@@ -412,6 +429,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/mobiscroll/mobiscroll.scroller.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/mobiscroll/mobiscroll.datetime.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/mobiscroll/mobiscroll.select.js"></script>
+<script type="text/javascript" src="/defaultroot/evo/weixin/template/js/followskip/followskip.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/js/uploadPreview.min.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/js/subClick.js"></script>
 <script type="text/javascript" src="/defaultroot/evo/weixin/js/common.js"></script>
@@ -433,19 +451,11 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
     }
 
     $(function(){
-        //单选
-        var radioList = $(".edit-radio li");
-        radioList.click(function(){
-            radioList.eq($(this).index()).addClass('radio-active').siblings().removeClass('radio-active')
-        })
         selectDateTime();
-
 		$("textarea").each(function(){
-
 			$(this).change(function(){ 
 				$(this).next('.edit-txta-num').html($(this).attr('maxlength')-$(this).val().length );
 			});
-
 		});
     });
     
@@ -526,6 +536,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
     //发送
 	function sendFlow(){
 		if(confirmForm()){
+			//$('#sendForm table').append('<div style="display:none">' + $('[id^="subTableForm"] table tbody').html() + '</div>');
 			$('#sendForm').submit();
 		}
 	}
@@ -540,7 +551,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 	//打开选择人员页面
 	function selectUser(selectType,selectName,selectId,range,listType){ 
 		pageLoading();
-		var selectIdVal = $('input[name="'+selectId+'"]').val();
+		var selectIdVal = $('input[id="'+selectId+'"]').val();
 		if( selectIdVal.indexOf(";") > 0 ){
 			var selectIdArray = selectIdVal.split(';');
 			selectIdVal = selectIdArray[1];
@@ -566,7 +577,7 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 			url : postUrl,
 			type : "post",
 			data : {'selectType':selectType,'selectName':selectName,'selectId':selectId,
-					'selectNameVal':$('input[name="'+selectName+'"]').val(),'selectIdVal':selectIdVal,'range':range},
+					'selectNameVal':$('input[id="'+selectName+'"]').val(),'selectIdVal':selectIdVal,'range':range},
 			success : function(data){
 				$("#selectContent").append(data);
 				hiddenContent(0);
@@ -579,14 +590,30 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
     	
 	//选人选组织代码-----开始
 	function hiddenContent(flag){
-		if(flag==0){
-			$("#mainContent").css("display","none");
-			$("#footerButton").css("display","none");
+		if(flag == 0){
+			if($('#mainContent').is(':hidden')){
+				$('[id="subHeader_'+subTableName+'"]').hide();
+				$('[id="subSection_'+subTableName+'"]').hide();
+				$('[id="subFooter_'+subTableName+'"]').hide();
+				$('[id="subHeader_'+subTableName+'"]').data('hide','1');
+			}else{
+				$("#mainContent").css("display","none");
+				$("#footerButton").css("display","none");
+			}
 			$("#selectContent").css("display","block");
-		}else if(flag==1){
-			$("#selectContent").css("display","none");
-			$("#mainContent").css("display","block");
-			$("#footerButton").css("display","block");
+		}else if(flag == 1){
+			if($('[id="subHeader_'+subTableName+'"]') && $('[id="subSection_'+subTableName+'"]').is(':hidden') 
+					&& $('[id="subHeader_'+subTableName+'"]').data('hide') == '1'){
+				$('[id="subHeader_'+subTableName+'"]').data('hide','0');
+				$('#selectContent').hide();
+				$('[id="subHeader_'+subTableName+'"]').show();
+				$('[id="subSection_'+subTableName+'"]').show();
+				$('[id="subFooter_'+subTableName+'"]').show();
+			}else{
+				$("#selectContent").css("display","none");
+				$("#mainContent").css("display","block");
+				$("#footerButton").css("display","block");
+			}
 			$("#selectContent").empty();
 		}
 	}
@@ -661,3 +688,5 @@ String orgId = session.getAttribute("orgId")==null?"":session.getAttribute("orgI
 		$(obj).parent().find('div>span').html(selectVal);
 	} 
 </script>
+
+

@@ -1,0 +1,65 @@
+@charset "utf-8";
+html,body{height:100%; margin:0px; padding:0px;}
+ body{
+	margin:0px;
+	font-family:"宋体",Arial, Helvetica, sans-serif;
+	background-color:#ffffff;
+	background-repeat:repeat;
+	background-position: left top;
+	height:100%;
+}
+
+td,div{ text-align:left;} 
+ul,li{ list-style:none; margin:0px; padding:0px;}
+.list_nav { list-style:none; margin:0px; padding:0px; }
+/*  background-color:#ff0;border:solid 1px #909aa6; */
+.list_nav li      {list-style:none; float:left; font-size:12px; margin:0px 3px; height:26px; line-height:26px;  padding:0px 1px;}
+.list_nav li.aoff {list-style:none; float:left; font-size:12px; margin:0px 3px; height:26px; line-height:26px;  padding:0px 1px; }
+.list_nav li.aon  {cursor:pointer;background-color:#CFDCFB;border:solid 1px #909aa6;padding:0px; height:26px; line-height:26px; }
+
+.list_nav li  .nav_font{ float:left; padding:0px 4px;margin:3px;}
+.list_nav li  .nav_ico{ float:left; padding:2px 0px 0px 0px; }
+
+#more_list{ border:1px solid #a6d27b;min-width:120px;  width:auto !important;   width:120px; background-image:url(ezflowImages/more_list_bg.gif); background-position:center; background-repeat:repeat-y; background-color:#cbecab; padding:5px 0px;}
+.list_nav_sub { list-style:none; margin:0px; padding:0px; }
+.list_nav_sub li        { list-style:none;  font-size:12px; height:24px; line-height:24px;  padding:0px 1px 0px 0px; clear:both;}
+.list_nav_sub li.subaoff{ list-style:none;  font-size:12px; height:24px; line-height:24px;  padding:0px 1px 0px 0px; border:0px;  }
+.list_nav_sub li.subaon {padding:0px; height:22px; line-height:22px;  background-color:#fcfffa;   border:solid 1px #a6d27b; border-left:0px; border-right:0px;  cursor:pointer;}
+
+.list_nav_sub  li  .nav_font{ float:left; padding:0px 4px;margin:5px;}
+.list_nav_sub  li  .nav_ico{  float:left;  padding:0px 0px 0px 4px;  border:0px; width:24px;}
+
+
+.list_worknav{}
+.list_worknav ul {border-right:1px solid #d7d5d3; float:left; margin:0px; padding:0px; clear:both;}
+.list_worknav ul li{ list-style:none; float:left; padding:0px 12px; font-weight:bold; background-image:url(ezflowImages/list_worknav_aoff.gif); background-position:top; background-repeat:repeat-x; height:30px;line-height:30px; border-left:1px solid #d7d5d3; }
+.list_worknav ul li.aon{ background-image:url(ezflowImages/list_worknav_aon.gif); background-position:top; background-repeat:repeat-x;   }
+.list_worknav ul li a{ color:#7b7a7a; font-weight:normal;}
+.list_worknav ul li.aon a{ color:#333; font-weight:bold;}
+
+
+
+
+
+/**弹出页**/
+.clear{ clear:both; padding:0px; margin:0px; height:0px;}
+
+#hd_bodybg{ background-color:#fff; background-image:none; }
+.hd_mainbox{  background-image:url(ezflowImages/hd_bodybg.jpg); background-position:top; background-repeat:repeat-x; padding:10px;}
+.hd_mainnr{ padding:10px;}
+.hd_mainnr .work_leftbox{ width:20%; float:left;}
+.hd_mainnr .work_rightbox{ width:80%; float:left;}
+.hd_mainnr .work_rightbox ul li{ list-style:none;}
+
+.work_textarea{ width:80%; border:1px solid #bad3e2;background-image:url(ezflowImages/work_textareabg.gif); background-position:top; background-repeat:repeat-x; background-color:#f3f3f3;}
+
+.work_cconentbox{ border:1px solid #04c5fb; background-color:#fff; }
+.work_tabmenu{border-top:0px solid #93d4ec;   line-height:27px;}
+.work_tabmenu ul li{ list-style:none; display:inline; float:left; margin-right:4px; padding:0px 15px; height:25px; line-height:25px; font-size:13px; font-weight:bold;background-image:url(ezflowImages/work_aonbg.gif);border:1px solid #d2d2d2; border-bottom:0px;}
+.work_tabmenu ul li.aon{background-image:url(ezflowImages/work_aoffbg.gif);border:1px solid #93d4ec;border-bottom:0px; }
+.work_tabmenu ul li a{ font-size:13px; color:#666;}
+.work_tabmenu .font_orange{line-height:25px; color:#f60; padding-left:6px; font-weight:bold; float:left;  height:25px; }
+.work_formbox{ padding:8px 8px 0px 8px;  min-height:250px;  height:auto !important;   height:250px; width:600px;}
+
+.work_butbox{  background-color:#ebfafe; padding:10px 0px 10px 14px; font-size:13px; font-weight:bold;}
+.work_butbox a{ color:#0cf;}

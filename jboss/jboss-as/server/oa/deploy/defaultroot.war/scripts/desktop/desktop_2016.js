@@ -509,7 +509,7 @@ function initIframe(usedPortal){
 */
 function modiMySkinSC(){
     var url = whirRootPath + "/MyInfoAction!modiMySkin.action?fromDesktop=1&date="+new Date();
-    popup({content:'url:'+url, title:comm.skin_set, width:'624px', height:'200px', lock:true, resize: false, min: false, max: false});
+    popup({content:'url:'+url, title:comm.skin_set, width:'624px', height:'250px', lock:true, resize: false, min: false, max: false});
   
 
 	/*var wh_hd_skin_dialog =  $.dialog({
@@ -994,7 +994,17 @@ function addMenuTop(obj){
  
     //最多加5个
     var length=$("#desktop_edit_ul >li >div.wh-hd-custom-menu-d-del").length; 
-	if(length==4){
+
+
+	var  allw=$("#desktop_container_div").width();//$("#desktop_container_div").width();
+	var  aw=$("#desktop_logo_a").outerWidth();
+	var  dlw=$("#show_menu_top_dl").width();
+	var  ulw=$("#desktop_right_ul").width();
+
+	var kw=allw-aw-dlw-ulw;
+
+    if(kw<140){
+	//if(length==4){
 	    var firstMenu=$("#desktop_edit_ul >li >div.wh-hd-custom-menu-d-del").eq(0);
 		var firstMenu_a=firstMenu.find("a");
 	    var first_a_menu_Id=firstMenu_a.attr("id");

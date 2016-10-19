@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" 
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="com.whir.ezoffice.information.channelmanager.actionsupport" extends="whir">
+        <action name="Channel!*" method="{1}" class="com.whir.ezoffice.information.channelmanager.actionsupport.ChannelAction">
+            <result name="channelList">/modules/kms/information_manager/informationmanager_setup.jsp</result>
+			<result name="add">/modules/kms/information_manager/informationmanager_setup_add.jsp</result>
+			<result name="load">/modules/kms/information_manager/informationmanager_setup_modify.jsp</result>
+        </action>
+
+        <action name="ChannelMenu!*" method="{1}" class="com.whir.ezoffice.information.channelmanager.actionsupport.ChannelMenuAction">
+            <result name="menu">/modules/kms/information_manager/informationmanager_menu.jsp</result>
+            <result name="transcenter_menu">/modules/kms/information_manager/informationmanager_menu_transcenter.jsp</result>
+        </action>
+
+		<action name="UserChannel!*" method="{1}" class="com.whir.ezoffice.information.channelmanager.actionsupport.UserChannelAction">
+            <result name="list">/modules/kms/information_manager/userchannel_list.jsp</result>
+			<result name="add">/modules/kms/information_manager/userchannel_add.jsp</result>
+			<result name="load">/modules/kms/information_manager/userchannel_modify.jsp</result>
+        </action>
+
+		<action name="ISOMenu!*" method="{1}" class="com.whir.ezoffice.information.channelmanager.actionsupport.ISOChannelMenuAction">
+            <result name="menu">/modules/kms/information_manager/isoDoc_menu.jsp</result>
+        </action>
+
+		<action name="ISOChannel!*" method="{1}" class="com.whir.ezoffice.information.channelmanager.actionsupport.ISOChannelAction">
+            <result name="list">/modules/kms/information_manager/isoDoc_channel_list.jsp</result>
+			<result name="add">/modules/kms/information_manager/isoDoc_channel_add.jsp</result>
+			<result name="load">/modules/kms/information_manager/isoDoc_channel_modify.jsp</result>
+        </action>
+
+		<action name="Define!*" method="{1}" class="com.whir.ezoffice.information.channelmanager.actionsupport.DefineSkinAction">
+            <result name="list">/modules/kms/information_department/department_skin_list.jsp</result>
+			<result name="add">/modules/kms/information_department/department_skin_add.jsp</result>
+			<result name="load">/modules/kms/information_department/department_skin_modify.jsp</result>
+        </action>
+    </package>
+
+	<package name="com.whir.ezoffice.information.templatemanager.actionsupport" extends="whir">
+        <action name="Template!*" method="{1}" class="com.whir.ezoffice.information.templatemanager.actionsupport.TemplateAction">
+            <result name="templateList">/modules/kms/information_manager/informationmanager_setupmodule.jsp</result>
+			<result name="add">/modules/kms/information_manager/informationmanager_setupmodule_add.jsp</result>
+			<result name="load">/modules/kms/information_manager/informationmanager_setupmodule_modi.jsp</result>
+			<result name="loadTag">/modules/kms/information_manager/information_tagsetup.jsp</result>
+        </action>
+    </package>
+
+	<package name="com.whir.ezoffice.information.infomanager.actionsupport" extends="whir">
+        <action name="InfoList!*" method="{1}" class="com.whir.ezoffice.information.infomanager.actionsupport.InfoListAction">
+            <result name="allList">/modules/kms/information_manager/informationmanager_alllist.jsp</result>
+			<result name="allInfo">/modules/kms/information_manager/informationmanager_allinfo.jsp</result>
+			<result name="allThumb">/modules/kms/information_manager/informationmanager_allthumb.jsp</result>
+			<result name="myIssue">/modules/kms/information_manager/informationmanager_myIssue.jsp</result>
+			<result name="alldeal">/modules/kms/information_manager/informationmanager_alldeal.jsp</result>
+			<result name="retrieval">/modules/kms/information_manager/informationmanager_ezLucene.jsp</result>
+			<result name="myDraft">/modules/kms/information_manager/informationmanager_myDraft.jsp</result>
+        </action>
+
+		<action name="Information!*" method="{1}" class="com.whir.ezoffice.information.infomanager.actionsupport.InformationAction">
+            <result name="add">/modules/kms/information_manager/informationmanager_info_add.jsp</result>
+			<result name="view">/modules/kms/information_manager/informationmanager_info_view.jsp</result>
+			<result name="url">/modules/kms/information_manager/informationmanager_mid.jsp</result>
+			<result name="sort">/modules/kms/information_manager/informationmanager_sort.jsp</result>
+			<result name="load">/modules/kms/information_manager/informationmanager_info_modify.jsp</result>
+			<result name="transfer">/modules/kms/information_manager/informationmanager_info_transfer.jsp</result>
+			<result name="addprocess">/modules/kms/information_manager/informationmanager_info_addprocess.jsp</result>
+			<result name="updateprocess">/modules/kms/information_manager/informationmanager_info_updateprocess.jsp</result>
+			<result name="isoaddprocess">/modules/kms/information_manager/isoDoc_info_addprocess.jsp</result>
+			<result name="isoupdateprocess">/modules/kms/information_manager/isoDoc_info_updateprocess.jsp</result>
+			<result name="isoprintprocess">/modules/kms/information_manager/isoDoc_info_printprocess.jsp</result>
+			<result name="file">/modules/kms/information_manager/informationmanager_dossier.jsp</result>
+			<result name="addOther">/modules/kms/information_manager/informationmanager_info_addother.jsp</result>
+			<result name="noInfo">/modules/kms/information_manager/informationmanager_info_noinfo.jsp</result>
+        </action>
+
+		<action name="InfoStat!*" method="{1}" class="com.whir.ezoffice.information.infomanager.actionsupport.InfoStatisticsAction">
+			<result name="browser">/modules/kms/information_manager/informationmanager_info_browser.jsp</result>
+            <result name="set">/modules/kms/information_manager/informationmanager_stat_set.jsp</result>
+			<result name="orgStat">/modules/kms/information_manager/informationmanager_stat_orgStat.jsp</result>
+			<result name="userStat">/modules/kms/information_manager/informationmanager_stat_userStat.jsp</result>
+			<result name="authorStat">/modules/kms/information_manager/informationmanager_stat_authorStat.jsp</result>
+			<result name="channelStat">/modules/kms/information_manager/informationmanager_stat_channelStat.jsp</result>
+			<result name="infoStat">/modules/kms/information_manager/informationmanager_stat_infoStat.jsp</result>
+			<result name="orgStatGraph">/modules/kms/information_manager/informationmanager_stat_orgStatGraph.jsp</result>
+			<result name="infoStatGraph">/modules/kms/information_manager/informationmanager_stat_infoStatGraph.jsp</result>
+			<result name="rightList">/modules/kms/information_manager/informationmanager_rightList.jsp</result>
+        </action>
+
+		<action name="ISOList!*" method="{1}" class="com.whir.ezoffice.information.infomanager.actionsupport.ISOInfoListAction">
+            <result name="list">/modules/kms/information_manager/isoDoc_list.jsp</result>
+			<result name="deal">/modules/kms/information_manager/isoDoc_deal_list.jsp</result>
+			<result name="stat">/modules/kms/information_manager/isoDoc_stat_list.jsp</result>
+        </action>
+
+		<action name="ISO!*" method="{1}" class="com.whir.ezoffice.information.infomanager.actionsupport.ISOInfoAction">
+            <result name="add">/modules/kms/information_manager/isoDoc_info_add.jsp</result>
+			<result name="load">/modules/kms/information_manager/isoDoc_info_modify.jsp</result>
+			<result name="view">/modules/kms/information_manager/isoDoc_info_view.jsp</result>
+			<result name="chooseflow">/modules/kms/information_manager/iso_destory_chooseflow.jsp</result>
+			<result name="print">/modules/kms/information_manager/isoDoc_info_print.jsp</result>
+        </action>
+
+		<action name="ISOPaper!*" method="{1}" class="com.whir.ezoffice.information.infomanager.actionsupport.ISOPaperAction">
+            <result name="paper">/modules/kms/information_manager/iso_paper_list.jsp</result>
+			<result name="add">/modules/kms/information_manager/iso_paper_add.jsp</result>
+			<result name="load">/modules/kms/information_manager/iso_paper_view.jsp</result>
+			<result name="doc">/modules/kms/information_manager/iso_paper_getdoc.jsp</result>
+        </action>
+
+		<action name="ISOBorrow!*" method="{1}" class="com.whir.ezoffice.information.infomanager.actionsupport.ISOBorrowAction">
+            <result name="list">/modules/kms/information_manager/iso_borrow_list.jsp</result>
+			<result name="borrow">/modules/kms/information_manager/iso_chooseflow.jsp</result>
+			<result name="start">/modules/kms/information_manager/iso_borrow_add.jsp</result>
+			<result name="update">/modules/kms/information_manager/iso_borrow_update.jsp</result>
+        </action>
+    </package>
+</struts>

@@ -1,0 +1,35 @@
+.blk_29 { clear:both; padding:0px;   ZOOM: 1; POSITION: relative; height:145px; overflow:hidden; }
+.blk_29 .LeftBotton {BACKGROUND: url(images/left_bar.gif) no-repeat 0px 0px; LEFT: 0px; FLOAT: left; WIDTH: 18px; CURSOR: pointer; POSITION: absolute; TOP: 42px; HEIGHT: 33px; left:5px;}
+.blk_29 .RightBotton {	RIGHT: 0px; BACKGROUND: url(images/right_bar.gif) no-repeat 0px 0px; FLOAT: right; WIDTH: 18px; CURSOR: pointer; POSITION: absolute; TOP: 42px; HEIGHT: 33px; right:5px;}
+.blk_29 .Cont {	MARGIN: 0px 29px;  padding:5px 0px 0px 0px; }
+.blk_29 .box {	FLOAT: left; WIDTH: 150px; TEXT-ALIGN: center; margin-right:12px;}
+.blk_29 .box .box_imgbg { DISPLAY: block;  width:140px; height:110px; padding:5px; background-color:#E7E7E7;}	
+.blk_29 .box img { width:140px; height:110px;}	
+.blk_29 .box a{ color:#666; text-decoration:none; border:0px; line-height:22px;}
+.blk_29 .box a:hover{ border:0px; text-decoration:underline;}
+
+.move_bg{ height:37px;background:#fff;  border-bottom: 1px solid #b7b7b7;}
+.move_bg span{ float:left; display:block; color:#3d3d3d; cursor:pointer;font-size: 14px;background:url(images/border099.jpg) no-repeat right center;}
+.move_bg span i{display:block;font-style:normal;margin:0px 20px;}
+.move_bg .aon{ height:36px; line-height:36px; padding:0px;margin:0;}
+.move_bg .aon i{border-bottom: 2px solid #cd2500;}
+.move_bg .aoff{ height:36px; line-height:36px;padding:0px;}
+.move_boxline{ border:0px; border-top:0px;}
+
+.move_boxheight{padding:5px 0 5px 10px;line-height:25px;}
+
+.c_pt{zoom:1;overflow:hidden}
+.c_pt .Pic{float:left;padding:10px 0 0 10px;height:75px}
+.c_pt .Pic img{border:1px solid #b5b5b5;background:#fefefe;padding:2px}
+.c_pt .Pic a:hover img{border:1px solid #2862b7}
+
+.c_pt .Txt{padding:7px 6px 0 3px;_padding:7px 6px 0 0;line-height:19px;}
+.c_pt .Txt p{color:#666}
+
+.c_ul{padding:3px 0 3px 10px;line-height:21px;}
+.c_ulList{line-height:25px;height:25px;}
+.c_ulList a:link {color:#555}
+
+.c_ulList1{line-height:25px;height:25px;}
+.c_ulList1 a:link {color:#555}
+.c_ulList1 a:visited {color:#AFBDCF}
