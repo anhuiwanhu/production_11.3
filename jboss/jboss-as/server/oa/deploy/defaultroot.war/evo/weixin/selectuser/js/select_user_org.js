@@ -177,7 +177,7 @@ function loadNextOrgData(){
 		$(".wh-load-tap").html("正在加载...");
 		$.ajax({
 			url : '/defaultroot/person/searchOrg.controller',
-			data : {'pageSize' : orgOffset,'nomore' : orgNomore,'title' : searchTitle},
+			data : {'pageSize' : orgOffset,'nomore' : orgNomore,'title' : searchTitle,'range' : range},
 			type : 'post',
 			success : function(data){
 				orgOffset = $($(data)[12]).val();
@@ -218,6 +218,7 @@ function loadNextOrgAndSubEmp(parentOrgId,obj){
 	loadNextOrgAndSubEmpFlag = '1';
 	$.ajax({
 	    type: 'post',
+	    data : {'range' : range},
 	    url: '/defaultroot/person/getUserAndOrg.controller?orgId='+parentOrgId,
 	    dataType: 'text',
 	    success: function(data){
@@ -337,11 +338,11 @@ function searchEmpData(searchTitle){
 	$(".wh-load-tap").html("正在加载...");
 	$.ajax({
 		url : '/defaultroot/person/searchUser.controller',
-		data : {'pageSize' : '0','title' : searchTitle},
+		data : {'pageSize' : '0','title' : searchTitle,'range' : range},
 		type : 'post',
 		success : function(data){
-			offset = $($(data)[7]).val();
-			nomore = $($(data)[11]).val();
+			offset = $($(data)[10]).val();
+			nomore = $($(data)[14]).val();
 			var $add_li = $("ul[name='all_user_list'] li",data);
 			if($add_li[0]){
 				$('#all_user_list').append($("ul[name='all_user_list'] li",data));

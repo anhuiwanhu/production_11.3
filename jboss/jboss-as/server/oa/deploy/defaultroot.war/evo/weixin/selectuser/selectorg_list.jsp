@@ -124,6 +124,7 @@
 	var selectOrgMore = '${nomore1}';
 	var idValArray = selectIdVal.split(',');
 	var nomore = $('#nomore1').val();
+	var range = $("#range").val();
 	$(function(){
 		bindOrgSelect();
 		//判断是否显示下拉加载区域
@@ -270,7 +271,7 @@
 			$.ajax({
 				url : '/defaultroot/person/getOrg.controller',
 				type : 'post',
-				data : {'orgId' : orgId},
+				data : {'orgId' : orgId,'range' : range},
 				success : function(data){
 					if(data){
 						var jsonData = eval('('+data+')');
@@ -465,7 +466,7 @@ function setSelectVal(obj,curEmpId){
 		$(".wh-load-tap").html("正在加载...");
 		$.ajax({
 			url : '/defaultroot/person/searchOrg.controller',
-			data : {'pageSize' : '0','title' : searchTitle,'flag' : 'org'},
+			data : {'pageSize' : '0','title' : searchTitle,'flag' : 'org','range' : range},
 			type : 'post',
 			success : function(data){
 				var $data = $(data);

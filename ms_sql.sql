@@ -209,3 +209,10 @@ insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) va
 go
 
 
+
+
+
+insert into oa_patchinfo (patch_editinfo,patch_name,patch_version,patch_time) values('Wanhu ezOFFICE','11.3.0.10_SP_20160104','11.3.0.10',getdate());
+go
+
+

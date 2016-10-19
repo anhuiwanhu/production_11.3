@@ -915,7 +915,7 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 							</tr>
 						</x:forEach>
 						<c:set var="commentField"><x:out select="$doc//workInfo/commentField/text()"/></c:set>
-						<c:if test="${not empty commentField && '-1' ne commentField && 'nullCommentField' ne commentField}">
+						<c:if test="${not empty commentField && '-1' ne commentField && 'nullCommentField' ne commentField && param.workStatus ne '102' && param.workStatus ne '101'}">
 							<tr>
 								<th>批示意见</th>
 								<td> 
@@ -1149,51 +1149,75 @@ String empLivingPhoto = request.getParameter("empLivingPhoto")==null?"":request.
 </c:if>
 --%>
 <c:if test="${param.workStatus ne '102'}">
-<footer class="wh-footer wh-footer-forum">
-    <div class="wh-wrapper">
-        <div class="wh-container">
+	<c:choose>
+		<c:when test="${param.workStatus eq '0'}">
+			<footer class="wh-footer wh-footer-forum">
+		    <div class="wh-wrapper">
+	        <div class="wh-container">
             <div class="wh-footer-btn">
-				<c:choose>
-					<c:when test="${param.workStatus eq '0'}">
-		                <c:choose>
-			                <c:when test="${hasbackbutton == 'true' }">
-				               	<a href="javascript:$('#backForm').submit();" class="fbtn-cancel col-xs-6"><i class="fa fa-arrow-left"></i>退回</a>
-				                <a href="javascript:$('#sendForm').submit();" class="fbtn-matter col-xs-6"><i class="fa fa-check-square"></i>发送</a>
-			                </c:when>
-			                <c:otherwise>
-				                <a href="javascript:$('#sendForm').submit();" class="fbtn-matter col-xs-12"><i class="fa fa-check-square"></i>发送</a>
-			                </c:otherwise>
-		                </c:choose>
-					</c:when>
-					<c:when test="${param.workStatus eq '2'}">
-						<a href="javascript:workfolwSend('${wfworkId}');" class="fbtn-matter col-xs-6 fbtn-single"><i class="fa fa-check-square"></i>发送</a>
-					</c:when>
-					<c:when test="${param.workStatus eq '101'}">
-						<c:if test="${fn:indexOf(workcurstep,'办理完毕') == '-1'}">
-		            	<c:choose>
-		            		<c:when test="${fn:indexOf(modibutton,'Undo') >0 && fn:indexOf(modibutton,'Wait') >0}">
-		            			<a href="javascript:workfolwUndo('${wfworkId}');" class="fbtn-cancel col-xs-6"><i class="fa fa-retweet"></i>撤办</a>
-		            			<a href="javascript:document.getElementById('sendFormAgain').submit();" class="fbtn-matter col-xs-6"><i class="fa fa-thumb-tack"></i>催办</a>
-		            		</c:when>
-		            		<c:when test="${fn:indexOf(modibutton,'Undo') >0 && fn:indexOf(modibutton,'Wait') <=0}">
-		            			<a href="javascript:workfolwUndo('${wfworkId}');" class="fbtn-cancel col-xs-6 fbtn-single"><i class="fa fa-retweet"></i>撤办</a>
-		            		</c:when>
-		            		<c:when test="${fn:indexOf(modibutton,'Undo') <=0 && fn:indexOf(modibutton,'Wait') >0}">
-		            			<a href="javascript:document.getElementById('sendFormAgain').submit();" class="fbtn-matter col-xs-6 fbtn-single"><i class="fa fa-thumb-tack"></i>催办</a>
-		            		</c:when>
-		            	</c:choose>
-						</c:if>
-					</c:when>
-					<c:when test="${param.workStatus eq '1100'}">
-						<c:if test="${fn:indexOf(modibutton,'Wait') >0}">
-							<a href="javascript:document.getElementById('sendFormAgain').submit();" class="fbtn-matter col-xs-6 fbtn-single"><i class="fa fa-check-square"></i>催办</a>
-						</c:if>
-					</c:when>
-				</c:choose>
+               <c:choose>
+                <c:when test="${hasbackbutton == 'true' }">
+	               	<a href="javascript:$('#backForm').submit();" class="fbtn-cancel col-xs-6"><i class="fa fa-arrow-left"></i>退回</a>
+	                <a href="javascript:$('#sendForm').submit();" class="fbtn-matter col-xs-6"><i class="fa fa-check-square"></i>发送</a>
+                </c:when>
+                <c:otherwise>
+	                <a href="javascript:$('#sendForm').submit();" class="fbtn-matter col-xs-12"><i class="fa fa-check-square"></i>发送</a>
+                </c:otherwise>
+               </c:choose>
             </div>
-        </div>
-    </div>
-</footer>
+	        </div>
+		    </div>
+			</footer>
+		</c:when>
+		<c:when test="${param.workStatus eq '2'}">
+			<footer class="wh-footer wh-footer-forum">
+			    <div class="wh-wrapper">
+			        <div class="wh-container">
+			            <div class="wh-footer-btn">
+							<a href="javascript:workfolwSend('${wfworkId}');" class="fbtn-matter col-xs-6 fbtn-single"><i class="fa fa-check-square"></i>发送</a>
+			            </div>
+			        </div>
+			    </div>
+			</footer>
+		</c:when>
+		<c:when test="${param.workStatus eq '101'}">
+			<c:if test="${fn:indexOf(workcurstep,'办理完毕') == '-1'}">
+			<footer class="wh-footer wh-footer-forum">
+		    <div class="wh-wrapper">
+	        <div class="wh-container">
+            <div class="wh-footer-btn">
+           	<c:choose>
+           		<c:when test="${fn:indexOf(modibutton,'Undo') >0 && fn:indexOf(modibutton,'Wait') >0}">
+           			<a href="javascript:workfolwUndo('${wfworkId}');" class="fbtn-cancel col-xs-6"><i class="fa fa-retweet"></i>撤办</a>
+           			<a href="javascript:document.getElementById('sendFormAgain').submit();" class="fbtn-matter col-xs-6"><i class="fa fa-thumb-tack"></i>催办</a>
+           		</c:when>
+           		<c:when test="${fn:indexOf(modibutton,'Undo') >0 && fn:indexOf(modibutton,'Wait') <=0}">
+           			<a href="javascript:workfolwUndo('${wfworkId}');" class="fbtn-cancel col-xs-6 fbtn-single"><i class="fa fa-retweet"></i>撤办</a>
+           		</c:when>
+           		<c:when test="${fn:indexOf(modibutton,'Undo') <=0 && fn:indexOf(modibutton,'Wait') >0}">
+           			<a href="javascript:document.getElementById('sendFormAgain').submit();" class="fbtn-matter col-xs-6 fbtn-single"><i class="fa fa-thumb-tack"></i>催办</a>
+           		</c:when>
+           	</c:choose>
+            </div>
+	        </div>
+		    </div>
+			</footer>
+			</c:if>
+		</c:when>
+		<c:when test="${param.workStatus eq '1100'}">
+			<c:if test="${fn:indexOf(modibutton,'Wait') >0}">
+			<footer class="wh-footer wh-footer-forum">
+		    	<div class="wh-wrapper">
+		        <div class="wh-container">
+	            <div class="wh-footer-btn">
+				<a href="javascript:document.getElementById('sendFormAgain').submit();" class="fbtn-matter col-xs-6 fbtn-single"><i class="fa fa-check-square"></i>催办</a>
+	            </div>
+		        </div>
+			    </div>
+			</footer>
+			</c:if>
+		</c:when>
+	</c:choose>
 </c:if>
 <form id="sendFormAgain" action="/defaultroot/dealfile/pressInfo.controller?workId=${wfworkId}&amp;smsRight=${wfsmsRight }" method="post">
 	<input type="hidden" name="empLivingPhoto" value="${EmpLivingPhoto}">

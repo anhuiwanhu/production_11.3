@@ -73,6 +73,10 @@
 <script type="text/javascript" src="/defaultroot/evo/weixin/template/js/alert/zepto.alert.js"></script>
 <script language="javascript">
 	$(document).ready(function(){
+		var optionLen = $('#activity option').length;
+		if(optionLen == 2){
+			$('#activity option:eq(1)').attr('selected','selected');			
+		}
 		hiddenEnd();
 	});
 
@@ -90,17 +94,20 @@
 						$('#userId').val('<x:out select="$n/scopeId/text()"/>');
 						$('#userName').val('<x:out select="$n/scopeName/text()"/>');
 						$('#scopeId').val('<x:out select="$n/scopeId/text()"/>');
-						$('#bottonselect').hide();
 					}else if( '<x:out select="$n/scopeType/text()"/>' == 'scopes_user' ){
-						$('#userId').val('');
-          	 			$('#userName').val('');
+						var scopeName = '<x:out select="$n/scopeName/text()"/>';
+						if(scopeName.split(',').length == 1){
+							$('#userId').val('<x:out select="$n/scopeId/text()"/>');
+							$('#userName').val('<x:out select="$n/scopeName/text()"/>');
+						}else{
+							$('#userId').val('');
+	          	 			$('#userName').val('');
+						}
           	 			$('#scopeId').val('<x:out select="$n/scopeId/text()"/>');
-						$('#bottonselect').show();
 					}else{
 						$('#userId').val('');
 						$('#userName').val('');
 						$('#scopeId').val('<x:out select="$n/scopeId/text()"/>');
-						$('#bottonselect').show();
 					}
 				}
 			</x:forEach>

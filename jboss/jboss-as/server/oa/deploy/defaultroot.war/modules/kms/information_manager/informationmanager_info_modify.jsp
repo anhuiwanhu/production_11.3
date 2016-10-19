@@ -143,6 +143,7 @@ Ext.onReady(function() {
 });
 var editUserId = '<s:property value="information.editUserId"/>';
 var editUserName = '<s:property value="information.editUserName"/>';
+var infotype_old = '<s:property value="information.informationType"/>';
 $(document).ready(function(){
 	if(editUserId!=null && editUserId!="" && editUserId!='<%=userId%>'){
 		whir_alert("用户"+editUserName+"正在编辑该信息，您暂时不能编辑！");
@@ -195,13 +196,6 @@ $(document).ready(function(){
 		$("#temp").hide();
 		$("#info_add_2").hide();
 		$("#selectAppend").hide();
-	}else{
-		$(document).attr("title",'<s:text name="info.modifyinfo"/>');
-		$("#info_add_center_1").show();
-		$("#info_add_1").show();
-		$("#temp").show();
-		$("#info_add_2").show();
-		$("#selectAppend").show();
 	}
 });
 
@@ -337,7 +331,11 @@ function changeChannel(val){
 					$("#info_add_1").show();
 					$("#temp").show();
 					$("#info_add_2").show();
+					if(infotype_old == '2' || infotype_old == '3'){
+						$("#selectAppend").hide();
+					}else{
 					$("#selectAppend").show();
+					}
 				}
 
 				if(data.processId=="0"){

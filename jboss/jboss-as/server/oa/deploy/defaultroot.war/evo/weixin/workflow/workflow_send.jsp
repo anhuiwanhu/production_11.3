@@ -248,7 +248,6 @@ String workStatus = request.getParameter("workStatus")==null?"":request.getParam
 							<tr id="person" style="display:none;">
 								<th>下一办理人<i class="fa fa-asterisk"></i>：</th>
 								<td>
-
 									<input type="hidden" id='scopeId' name='scopeId' value='' />
 									<input type="hidden" id="userId"  name="userId"  value=""/>
 									<span class="fr" onclick="$(this).next('input').click()"></span>
@@ -333,7 +332,7 @@ String workStatus = request.getParameter("workStatus")==null?"":request.getParam
 							<c:if test="${scopeIdLength =='1'}">
 								$('#userId').val('<x:out select="$n/scopeId/text()"/>');
 								$('#userName').val('<x:out select="$n/scopeName/text()"/>');
-								$('#userName').prev('span').html('<x:out select="$n/scopeName/text()"/>');
+<%--								$('#userName').prev('span').html('<x:out select="$n/scopeName/text()"/>');--%>
 							</c:if>
 							<c:if test="${scopeIdLength !='1'}">
 								$('#userId').val('');
