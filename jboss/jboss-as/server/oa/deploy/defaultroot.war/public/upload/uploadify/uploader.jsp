@@ -37,7 +37,7 @@ if(session.getAttribute("userName")!=null){
     String month = str_date.substring(5,7);
     // 绝对路径
     //如果dir以/开头，则不放在upload下，属于自定义上传目录
-    if("/".equals(dir)){
+    if("/".equals(dir)||dir.indexOf("/..")>-1){
         response.sendRedirect(rootPath+"/public/messages/noright.jsp");
         return;
     }else if(dir.length() > 0 && dir.indexOf("/") == 0){
@@ -106,6 +106,15 @@ if(session.getAttribute("userName")!=null){
                 }
                 String checkExtName = ("" + extName).toLowerCase();
                 //System.out.println("extName:"+checkExtName);
+				 //合法后缀
+				String s1="|.doc|.txt|.png|.jpeg|.gif|.bmp|.jpg|.docx|.xls|.xlsx|.xlsm|.ppt|.pptx|.pps|.wps|.mpp|" +
+				".odt|.ods|.odp|.rar|.zip|.7z|.pdf|.xml|.dwg|.vsd|.eml|.msg|.ceb|.tif|" +
+				".tiff|.key|.iso|.ofd|.asf|.wmv|.wav|.swf|.flv|.mp3|.mp4|.rm|.rmvb|.avi|.caf|.amr|";
+				boolean b= s1.indexOf("|" + checkExtName + "|") > -1;
+				  if(!b){
+					 response.sendRedirect(rootPath+"/public/messages/noright.jsp");
+					 return;	
+				  }
                 //if(",innerMailbox,information,peopleinfo,weibo,taskCenter,taskcentermodel,boardroom,govdocumentmanager,contract,forum,dossier,project,projectmodel,ptrain,workreport,goodspic,netdisk,".indexOf(","+dir+",") != -1){
                 //if(dir.indexOf("/custom/ezform/ext/") == -1 && dir.indexOf("/modulesext/devform/customize/") == -1 && dir.indexOf("/modulesext/devform/workflow/") == -1 && dir.indexOf("/ezoffice/form/") == -1 && dir.indexOf("/ezoffice/formhandler/") == -1){
                     if(",.jsp,.jspx,.asp,.aspx,.bat,.cmd,.exe,.ocx,.cab,.dll,.js,.html,.htm,.php,.action,.msi,.scr,.com,.class,.jsp::$data,.eee,.wooyun".indexOf(checkExtName)!=-1){

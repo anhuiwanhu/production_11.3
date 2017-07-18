@@ -436,3 +436,11 @@ delete from  ez_secu_pagelist  where    list_type=3  and   secu_url='/officeserv
 commit;
 insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.22_SP_20160529','11.3.0.22',sysdate);
 commit;
+
+
+
+
+
+
+insert into oa_patchinfo (patch_id,patch_editinfo,patch_name,patch_version,patch_time) values(hibernate_sequence.nextval,'Wanhu ezOFFICE','11.3.0.23_SP_20160714','11.3.0.23',sysdate);
+commit;

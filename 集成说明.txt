@@ -427,3 +427,41 @@
 8、清服务端缓存，启动OA服务
 
 9、验证系统功能
+
+
+
+
+
+
+
+
+
+1、停OA服务
+
+2、备份生产环境程序、数据库
+
+3、覆盖产品补丁包到OA安装目录d:\jboss
+
+4、修改..\defaultroot.war\WEB-INF\config\whconfig.xml文件，
+在 <Weixin> </Weixin>节点下增加：
+	<!-- 同步组织用户secret-->	
+	<Property name="syncSecret" value="xxxx"/>
+	<!-- 文件办理应用secret-->
+	<Property name="workflowSecret" value="xxxx" />
+	<!-- 通讯录应用secret-->
+	<Property name="addresSecret" value="xxxx" />
+	<!-- 邮件应用secret-->
+	<Property name="mailSecret" value="xxxx" />
+	<!-- 信息应用secret-->
+	<Property name="informationSecret" value="xxxx" />
+	<!-- 论坛应用secret-->
+	<Property name="forumSecret" value="xxxx" />
+	<!-- 公文应用secret-->
+	<Property name="govdocumentSecret" value="xxxx" />
+注：value值为对应企业微信secret值
+
+5、执行数据库升级脚本（分oralce、sqlserver两种类型库）
+
+6、清服务端缓存，启动OA服务
+
+7、验证系统功能
